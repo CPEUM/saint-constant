@@ -7,7 +7,7 @@
 		
 		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === page.path);
 		if (queriedExercice) {
-			routes.setIdeation(basedPath);
+			routes.setIdeation(page.path);
 			return {
 				props: {
 					exercice: queriedExercice
@@ -17,7 +17,7 @@
 		else {
 			return {
 				status: 308,
-				redirect: exerciceRoutes[0].path
+				redirect: debasePath(exerciceRoutes[0].path)
 			}
 		}
 	}
