@@ -3,8 +3,9 @@
 
 	export async function load({page}) {
 		console.log(`page.path value in load function is : ${page.path}`);
-		const basedPath = base + page.path
-		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === basedPath);
+		console.log(`paths.base value in load function is : ${base}`);
+		
+		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === page.path);
 		if (queriedExercice) {
 			routes.setIdeation(basedPath);
 			return {
