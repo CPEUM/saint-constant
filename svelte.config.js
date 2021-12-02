@@ -1,6 +1,8 @@
 import path from 'path';
 import staticAdapter from '@sveltejs/adapter-static';
 
+const pathPrefix = process.env.PUBLIC_BASE_PATH ? process.env.PUBLIC_BASE_PATH : '';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: [
@@ -20,7 +22,8 @@ const config = {
 			}
 		},
 		paths: {
-			base: process.env.PUBLIC_BASE_PATH ? process.env.PUBLIC_BASE_PATH : ''
+			base: pathPrefix,
+			assets: pathPrefix
 		},
 	}
 };
