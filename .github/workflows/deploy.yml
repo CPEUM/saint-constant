@@ -1,0 +1,29 @@
+# Ce workflow sert à lancer un build de l'applications svelte-kit qui uitilisera l'adaptateur statique pour ensuite déployer le résultat sur la page _Github Pages_ du repo actuel.
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build static and deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Install and Build
+        env:
+          PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: page # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
