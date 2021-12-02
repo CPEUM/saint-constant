@@ -1,27 +1,28 @@
+import { base } from '$app/paths';
 import { writable } from 'svelte/store'
 
 function createRoutes() {
 	const {subscribe, update} = writable([
 		{
 				title: 'Accueil',
-				path: '/',
+				path: `${base}/`,
 		},
 		{
 				title: 'Équipe & partenaires',
-				path: '/equipe-partenaires',
+				path: `${base}/equipe-partenaires`,
 		},
 		{
 				title: 'Exercices d’idéation',
-				path: '/ideation/agroparc',
+				path: `${base}/ideation/agroparc`,
 				dynamic: true
 		},
 		{
 				title: 'Principes directeurs',
-				path: '/principes-directeurs',
+				path: `${base}/principes-directeurs`,
 		},
 		{
 			title: 'Conclusion',
-			path: '/conclusion',
+			path: `${base}/conclusion`,
 		},
 	]);
 
@@ -36,7 +37,7 @@ export const routes = createRoutes();
 export const exerciceRoutes = [
 		{
 				title: 'Agroparc',
-				path: '/ideation/agroparc',
+				path: `${base}/ideation/agroparc`,
 				heading: 'L’agroparc de Saint-Constant',
 				description: 'Revitaliser le noyau villageois par le développement d’un pôle d’interconnexion entre le milieu urbain et rural',
 				accent1: 'rgb(235 134 115)',
@@ -45,7 +46,7 @@ export const exerciceRoutes = [
 		},
 		{
 				title: 'Promenades citoyennes',
-				path: '/ideation/promenades-citoyennes',
+				path: `${base}/ideation/promenades-citoyennes`,
 				heading: 'Les promenades citoyennes de Saint-Constant',
 				description: 'Aménager des parcours de mobilité active afin de faire la promotion de la qualité du cadre de vie et des milieux naturels de Saint-Constant',
 				accent1: 'rgb(59 181 108)',
@@ -54,7 +55,7 @@ export const exerciceRoutes = [
 		},
 		{
 				title: 'Pôles de mixité & de densification',
-				path: '/ideation/poles-mixite-densification',
+				path: `${base}/ideation/poles-mixite-densification`,
 				heading: 'Les pôles de mixité et de densification',
 				description: 'Concevoir des aires de densification du territoire qui s’intègrent au paysage actuel',
 				accent1: 'rgb(118 111 230)',

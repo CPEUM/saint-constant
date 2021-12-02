@@ -23,8 +23,7 @@ const config = {
 			}
 		},
 		paths: {
-			base: pathPrefix,
-			assets: pathPrefix
+			base: pathPrefix
 		},
 	}
 };
