@@ -1,7 +1,6 @@
 <script>
 	import objectives from '$utils/objectives.json';
 
-	console.log(objectives);
 </script>
 
 
