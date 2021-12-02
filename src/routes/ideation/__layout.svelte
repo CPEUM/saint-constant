@@ -15,8 +15,7 @@
 		}
 		else {
 			return {
-				status: 308,
-				redirect: exerciceRoutes[0].path
+				props: {}
 			}
 		}
 	}
