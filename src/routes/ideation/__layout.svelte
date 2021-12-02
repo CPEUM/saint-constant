@@ -1,14 +1,12 @@
 <script context="module">
-	import { debasePath } from '$utils/path';
 	import { base } from '$app/paths';
+	import { debasePath } from '$utils/path';
 
 	export async function load({page}) {
-		console.log(`page.path value in load function is : ${page.path}`);
-		console.log(`paths.base value in load function is : ${base}`);
-		
-		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === page.path);
+		const normalizedPath = base + debasePath(page.path)
+		let queriedExercice = exerciceRoutes.find(exercice => exercice.path == normalizedPath);
 		if (queriedExercice) {
-			routes.setIdeation(page.path);
+			routes.setIdeation(normalizedPath);
 			return {
 				props: {
 					exercice: queriedExercice
@@ -18,7 +16,7 @@
 		else {
 			return {
 				status: 308,
-				redirect: debasePath(exerciceRoutes[0].path)
+				redirect: exerciceRoutes[0].path
 			}
 		}
 	}
@@ -35,7 +33,7 @@
 
 <NavIdeation></NavIdeation>
 <header>
-	<h2>{exercice.title}</h2>
+	Title from layout: <h2>{exercice?.title}</h2>
 </header>
 <article>
 	<slot></slot>
