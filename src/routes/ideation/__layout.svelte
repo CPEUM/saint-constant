@@ -15,7 +15,8 @@
 		}
 		else {
 			return {
-				props: {}
+				status: 308,
+				redirect: base && page.path.indexOf(base) === 0 ? exerciceRoutes[0].path : debasePath(exerciceRoutes[0].path)
 			}
 		}
 	}
