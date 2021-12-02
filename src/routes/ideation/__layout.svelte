@@ -1,9 +1,12 @@
 <script context="module">
+	import { base } from '$app/paths';
+
 	export async function load({page}) {
 		console.log(`page.path value in load function is : ${page.path}`);
-		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === page.path);
+		const basedPath = base + page.path
+		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === basedPath);
 		if (queriedExercice) {
-			routes.setIdeation(page.path);
+			routes.setIdeation(basedPath);
 			return {
 				props: {
 					exercice: queriedExercice
