@@ -1,4 +1,5 @@
 <script context="module">
+	import { debasePath } from '$utils/path';
 	import { base } from '$app/paths';
 
 	export async function load({page}) {
