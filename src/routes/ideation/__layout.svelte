@@ -1,11 +1,12 @@
 <script context="module">
 	export async function load({page}) {
+		console.log(`page.path value in load function is : ${page.path}`);
 		let queriedExercice = exerciceRoutes.find(exercice => exercice.path === page.path);
 		if (queriedExercice) {
 			routes.setIdeation(page.path);
 			return {
 				props: {
-					exercice: exerciceRoutes.find(ex => ex.path === page.path)
+					exercice: queriedExercice
 				}
 			}
 		}
