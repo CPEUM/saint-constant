@@ -1,39 +1,6 @@
 import { base } from '$app/paths';
 import { writable } from 'svelte/store'
 
-function createRoutes() {
-	const {subscribe, update} = writable([
-		{
-				title: 'Accueil',
-				path: `${base}/`,
-		},
-		{
-				title: 'Équipe & partenaires',
-				path: `${base}/equipe-partenaires`,
-		},
-		{
-				title: 'Exercices d’idéation',
-				path: `${base}/ideation/agroparc`,
-				dynamic: true
-		},
-		{
-				title: 'Principes directeurs',
-				path: `${base}/principes-directeurs`,
-		},
-		{
-			title: 'Conclusion',
-			path: `${base}/conclusion`,
-		},
-	]);
-
-	return {
-		subscribe,
-		setIdeation: (path) => update(rs => rs.map(r => r.dynamic ? {...r, path} : r))
-	}
-}
-
-export const routes = createRoutes();
-
 export const exerciceRoutes = [
 		{
 				title: 'Agroparc',
@@ -63,3 +30,37 @@ export const exerciceRoutes = [
 				accent3: 'rgb(180 190 245)'
 		},
 ]
+
+
+function createRoutes() {
+	const {subscribe, update} = writable([
+		{
+				title: 'Accueil',
+				path: `${base}/`,
+		},
+		{
+				title: 'Équipe & partenaires',
+				path: `${base}/equipe-partenaires`,
+		},
+		{
+				title: 'Exercices d’idéation',
+				path: exerciceRoutes[0].path,
+				dynamic: true
+		},
+		{
+				title: 'Principes directeurs',
+				path: `${base}/principes-directeurs`,
+		},
+		{
+			title: 'Conclusion',
+			path: `${base}/conclusion`,
+		},
+	]);
+
+	return {
+		subscribe,
+		setIdeation: (path) => update(rs => rs.map(r => r.dynamic ? {...r, path} : r))
+	}
+}
+
+export const routes = createRoutes();

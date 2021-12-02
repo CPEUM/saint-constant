@@ -23,13 +23,13 @@
 	import NavIdeation from '$components/NavIdeation.svelte';
 	import { exerciceRoutes, routes } from '$utils/routes';
 
-	export let exercice;
+	// export let exercice;
 </script>
 
 
 <NavIdeation></NavIdeation>
 <header>
-	<h2>{exercice.title}</h2>
+	<!-- <h2>{exercice.title}</h2> -->
 </header>
 <article>
 	<slot></slot>
