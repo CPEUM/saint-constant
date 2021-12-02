@@ -1,4 +1,3 @@
-import { base } from '$app/paths';
 import { writable } from 'svelte/store'
 
 function createRoutes() {
