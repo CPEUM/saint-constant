@@ -13,11 +13,10 @@
 				}
 			}
 		}
-		else {
-			return {
-				status: 308,
-				redirect: base && page.path.indexOf(base) === 0 ? exerciceRoutes[0].path : debasePath(exerciceRoutes[0].path)
-			}
+		routes.setIdeation(exerciceRoutes[0].path);
+		return {
+			status: 308,
+			redirect: base && page.path.indexOf(base) === 0 ? exerciceRoutes[0].path : debasePath(exerciceRoutes[0].path)
 		}
 	}
 </script>
@@ -33,7 +32,7 @@
 
 <NavIdeation></NavIdeation>
 <header>
-	Title from layout: <h2>{exercice?.title}</h2>
+	Title from layout: <h2>{exercice.title}</h2>
 </header>
 <article>
 	<slot></slot>
