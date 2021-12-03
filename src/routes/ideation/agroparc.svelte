@@ -1,1 +1,9 @@
-<h2>agroparc</h2>
+<script>
+	import Proposition from '$components/exercice/Proposition.svelte';
+
+</script>
+
+
+<Proposition>
+	Test
+</Proposition>

@@ -5,12 +5,12 @@
 
 
 <nav>
-	{#each exerciceRoutes as e}
+	{#each exerciceRoutes as ex}
 		<a
-			href={e.path}
+			href={ex.path}
 			sveltekit:prefetch
 		>
-			Test {e.title}
+			Test {ex.title}
 		</a>
 	{/each}
 </nav>

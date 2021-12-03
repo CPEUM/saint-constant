@@ -1,5 +1,5 @@
 import { base } from '$app/paths';
-
+import { page } from '$app/stores';
 
 /**
  * Normalize the passed path, taking into consideration if a `kit.paths.base` is defined and if the passed path contains or not the specified base.
@@ -12,3 +12,17 @@ export function debasePath(path) {
 	}
 	return path
 }
+
+/**
+ * Take a path and return its segments as an array of strings
+ * @param {string} path
+ * @returns {string[]}
+ */
+export function getSegments(path = page.path) {
+	const normalizedPath = debasePath(path);
+	return normalizedPath
+		.replace(/#.*$/,'')
+		.replace(/^\/+/, '')
+		.split('/')
+		.map((segment, i) => `${(i === 0 && path.indexOf(base) === 0 ? base : '' )}/${segment}`);
+};

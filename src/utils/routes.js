@@ -45,7 +45,7 @@ function createRoutes() {
 		{
 				title: 'Exercices d’idéation',
 				path: exerciceRoutes[0].path,
-				dynamic: true
+				exercices: true
 		},
 		{
 				title: 'Principes directeurs',
@@ -59,7 +59,7 @@ function createRoutes() {
 
 	return {
 		subscribe,
-		setIdeation: (path) => update(rs => rs.map(r => r.dynamic ? {...r, path} : r))
+		setExercice: (path) => update(rs => rs.map(r => r.exercices ? {...r, path} : r))
 	}
 }
 

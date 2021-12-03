@@ -1,5 +1,5 @@
 <script>
-	import Table from '$components/Table.svelte';
+	import Table from '$components/table/Table.svelte';
 
 </script>
 

@@ -1,5 +1,5 @@
 <script>
-	import Link from '$components/Link.svelte';
+	import Link from '$components/primitives/Link.svelte';
 	import LogoBanner from '$components/LogoBanner.svelte';
 
 </script>

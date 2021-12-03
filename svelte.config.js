@@ -1,5 +1,6 @@
 import path from 'path';
 import staticAdapter from '@sveltejs/adapter-static';
+import preprocess from 'svelte-preprocess';
 
 const pathPrefix = process.env.PUBLIC_BASE_PATH ? process.env.PUBLIC_BASE_PATH : '';
 
@@ -8,6 +9,9 @@ const config = {
 	extensions: [
 		'.svelte',
 	],
+	preprocess: preprocess({
+		postcss: true
+	}),
 	kit: {
 		adapter: staticAdapter(),
 		target: '#saint-constant',
