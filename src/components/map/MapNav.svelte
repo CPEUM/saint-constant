@@ -1,5 +1,15 @@
 <script>
+	import { onMount } from 'svelte';
 
+	async function getData(filepath) {
+		const res = await fetch(filepath);
+		const data = await res.json();
+		console.log(data);
+	}
+
+	onMount(async () => {
+		getData('data/test.json');
+	});
 </script>
 
 

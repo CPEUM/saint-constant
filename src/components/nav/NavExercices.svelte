@@ -10,7 +10,7 @@
 			href={ex.path}
 			sveltekit:prefetch
 		>
-			Test {ex.title}
+			{ex.title}
 		</a>
 	{/each}
 </nav>

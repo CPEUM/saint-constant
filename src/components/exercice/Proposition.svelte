@@ -1,10 +1,15 @@
 <script>
-
+	export let title;
+	export let subtitle;
+	export let key;
 </script>
 
 
 <section>
-	<header></header>
+	<header>
+		<h3>{title}</h3>
+		<span>{subtitle}</span>
+	</header>
 	<div>
 		<slot></slot>
 	</div>

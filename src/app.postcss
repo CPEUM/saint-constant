@@ -9,9 +9,11 @@
 	--xl: 32px;
 	--xxl: 48px;
 	--xxxl: 72px;
+
 	/* Layout */
 	--text-width: 620px;
-	--content-width: 1000px;
+	--content-width: 1200px;
+
 	/* Colors values */
 	--rgb-light1: 248, 250, 255;
 	--rgb-light2: 240, 242, 252;
@@ -19,6 +21,9 @@
 	--rgb-dark1: 29, 30, 34;
 	--rgb-dark2: 39, 41, 35;
 	--rgb-dark3: 46, 48, 52;
+	--rgb-accent1: ;
+	--rgb-accent1: ;
+	--rgb-accent1: ;
 
 	/* Colors */
 	--light1: rgb(var(--rgb-light1));
@@ -27,6 +32,9 @@
 	--dark1: rgb(var(--rgb-dark1));
 	--dark2: rgb(var(--rgb-dark2));
 	--dark3: rgb(var(--rgb-dark3));
+	--accent1: rgb(var(--rgb-accent1));
+	--accent2: rgb(var(--rgb-accent2));
+	--accent3: rgb(var(--rgb-accent3));
 
 	width: 100%;
 	height: 100%;
@@ -49,8 +57,16 @@ body {
 	background-color: var(--light1);
 }
 
-p, ul, ol {
-	margin: 0rem 3rem 4rem 3rem;
+.center {
+	width: 100%;
+	max-width: var(--text-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p {
+	margin: 0rem auto 4rem auto;
+	width: 100%;
 	max-width: var(--text-width);
 }
 
@@ -84,6 +100,10 @@ h4 {
 	font-size: var(--lg);
 	font-weight: 600;
 	line-height: 1.2;
+}
+
+h5 {
+
 }
 
 * {

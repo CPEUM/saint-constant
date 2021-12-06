@@ -24,13 +24,20 @@
 
 <script>
 	import { exerciceRoutes, routes } from '$utils/routes';
+	import Image from '$components/primitives/Image.svelte';
+	import { fly } from 'svelte/transition';
 
 	export let exercice;
+
 </script>
 
 
 <header>
-	Title from layout: <h2>{exercice.title}</h2>
+	<img src="/media/agroparc/3-1-6.jpg" alt="">
+	<img src="/media/agroparc/3-1-8.jpg" alt="">
+	{#key exercice}
+		<h1 transition:fly>Title from layout: {exercice?.title}</h1>
+	{/key}
 </header>
 <section>
 	<slot></slot>
@@ -38,5 +45,26 @@
 
 
 <style>
+	header {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+		background-color: pink;
+	}
 
+	section {
+		width: 100%;
+	}
+
+	h1 {
+		z-index: 1;
+	}
+
+	img {
+		position: absolute;
+		width: 500px;
+	}
 </style>

@@ -1,6 +1,7 @@
 <script>
 	import Link from '$components/primitives/Link.svelte';
 	import LogoBanner from '$components/LogoBanner.svelte';
+	import Image from '$components/primitives/Image.svelte';
 
 </script>
 
@@ -31,5 +32,16 @@
 
 
 <style>
+	header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+		background-color: var(--light1);
+	}
 
+	h1 {
+		font-size: 120px;
+	}
 </style>
