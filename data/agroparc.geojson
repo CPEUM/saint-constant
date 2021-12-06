@@ -1,0 +1,56 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "key": "a",
+        "type": "site",
+        "title": "Le secteur agricole du bassin de rétention de la rue Chantal ",
+        "radius": 50
+      },
+      "geometry": {
+        "coordinates": [
+          -73.569019,
+          45.360456
+        ],
+        "type": "Point"
+      },
+      "id": "521bb270f983251723d61f022f88fa17"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Le parc des Citoyens",
+        "type": "site",
+        "key": "b",
+        "radius": 50
+      },
+      "geometry": {
+        "coordinates": [
+          -73.561163,
+          45.360027
+        ],
+        "type": "Point"
+      },
+      "id": "5284138335a08a770b5f896ed630a6c0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "key": "c",
+        "radius": 50,
+        "type": "site",
+        "title": "Le secteur paroissial"
+      },
+      "geometry": {
+        "coordinates": [
+          -73.569592,
+          45.363393
+        ],
+        "type": "Point"
+      },
+      "id": "c6d2e3cbd2d2f878da440b16a8f57ea3"
+    }
+  ],
+  "type": "FeatureCollection"
+}
