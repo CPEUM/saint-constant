@@ -1,29 +1,37 @@
 <script>
 	import '/src/app.postcss';
-	import MapNav from '$components/map/MapNav.svelte';
+	import MapOverview from '$components/map/MapOverview.svelte';
 	import Nav from '$components/nav/Nav.svelte';
 	import Footer from '$components/Footer.svelte';
-	import { navigating } from '$app/stores';
+	import Loading from '$components/Loading.svelte';
 
 	let content;
-	$:	$navigating || content?.scrollTo({
-				top:0,
-				left: 0,
-				// behavior: 'smooth'
-			});
+
+	function resetScroll() {
+		content?.scrollTo({
+			top:0,
+			left: 0,
+			// behavior: 'smooth'
+		});
+	}
 </script>
 
 
-<MapNav></MapNav>
-<article bind:this={content}>
-	<slot></slot>
+<svelte:window on:sveltekit:navigation-start={resetScroll} />
+
+<MapOverview />
+<div bind:this={content}>
+	<main>
+		<slot/>
+	</main>
 	<Footer></Footer>
-</article>
-<Nav></Nav>
+</div>
+<Loading />
+<Nav />
 
 
 <style>
-	article {
+	div {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -32,5 +40,10 @@
 		margin: 0;
 		padding: 0;
 		overflow: hidden scroll;
+	}
+
+	main {
+		width: 100%;
+		background-color: red;
 	}
 </style>

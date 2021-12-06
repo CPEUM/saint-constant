@@ -33,5 +33,8 @@
     "svelte-preprocess": "^4.9.8"
   },
   "type": "module",
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "dependencies": {
+    "maplibre-gl": "^1.15.2"
+  }
 }

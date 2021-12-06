@@ -1,6 +1,11 @@
 <script>
-	import objectives from '$utils/objectives.json';
+	import { onMount } from 'svelte';
 
+	let objectives;
+
+	onMount(() => {
+		objectives = fetch('/objectives.json').then(res => res.json());
+	});
 </script>
 
 
