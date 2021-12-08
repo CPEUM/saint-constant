@@ -1,55 +1,92 @@
 <script>
-import { slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
-
-	const delay = 500;
-	let loading = false;
-	let promise;
-	let cancel;
-	
-	function start() {
-		if (cancel) cancel();
-		loading = true
-		promise = new Promise((resolve, reject) => {
-			cancel = reject;
-			setTimeout(() => resolve(true), delay);
-		});
-	}
-	
-	function end() {
-		if (promise) {
-			promise.then(valid => {
-				if (valid) {
-					loading = false;
-					cancel = null;
-				}
-			})
-		}
-	}
+	export let size = 50;
+	export let color = 'var(--dark3)';
+	export let background = 'transparent'
 </script>
 
 
-<svelte:window
-	on:sveltekit:navigation-start={start}
-	on:sveltekit:navigation-end={end}
-/>
-
-
-{#if loading}
-	<div transition:slide={{}}>
-		Loading!
-	</div>
-{/if}
+<div
+out:fade={{duration: 250}}
+class="loading-wrapper"
+style="font-size: {size}px; background-color: {background}"
+>
+	<svg
+		class="loading"
+		viewBox="0 0 100 100"
+	>
+		<circle
+			cx="50" cy="50" r="50"
+			fill="none"
+			stroke={color}
+			stroke-width="2"
+			stroke-linecap="round"
+			vector-effect="non-scaling-stroke"
+		>
+		</circle>
+	</svg>
+</div>
 
 
 <style>
-	div {
-		position: absolute;
-		z-index: 1000;
+	.loading-wrapper {
+		--pi: 3.1416;
 		top: 0;
 		left: 0;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		height: 100%;
-		background-color: white;
+	}
+
+	svg {
+		animation: rotate 2s linear infinite;
+		overflow: visible;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		width: 1em;
+		height: 1em;
+	}
+
+	@keyframes rotate {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	circle {
+		transform-origin: 50% 50%;
+		animation: dash 1.5s cubic-bezier(.3, 0, .8, 1) infinite;
+	}
+
+	@keyframes dash {
+		/* 0% {
+			stroke-dasharray: 1, 150;
+			stroke-dashoffset: 0;
+		}
+		50% {
+			stroke-dasharray: 90, 150;
+			stroke-dashoffset: -35;
+		}
+		100% {
+			stroke-dasharray: 90, 150;
+			stroke-dashoffset: -125;
+		} */
+		0% {
+			stroke-dasharray: 1, calc(1em * var(--pi));
+			stroke-dashoffset: 0;
+		}
+		50% {
+			stroke-dasharray: calc(.65em * var(--pi)), calc(1em * var(--pi));
+			stroke-dashoffset: calc(-.35em * var(--pi));
+		}
+		100% {
+			stroke-dasharray: calc(.25em * var(--pi)), calc(1em * var(--pi));
+			stroke-dashoffset: calc(-.99em * var(--pi));
+		}
 	}
 </style>

@@ -38,10 +38,12 @@
 		align-items: center;
 		width: 100%;
 		height: 100vh;
-		background-color: var(--light1);
+		background: url(/grain.svg);
+		background-repeat: repeat;
 	}
 
 	h1 {
 		font-size: 120px;
+		z-index: 100;
 	}
 </style>

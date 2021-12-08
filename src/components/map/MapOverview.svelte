@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { Map as M } from 'maplibre-gl';
+	import { isMapOverview } from '$stores/map';
 
 	let map;
 	let container;
@@ -24,30 +25,37 @@
 </script>
 
 
-<div>
-	<figure bind:this={container}>
-
-	</figure>
+<div class:overview={$isMapOverview}>
+	<figure bind:this={container}></figure>
 </div>
 
 
-<style>
+<style lang="postcss">
 	div {
-		position: absolute;
-		padding: 0;
+		position: fixed;
 		margin: 0;
 		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: grey;
+		right: 0;
+		bottom: 0;
+		left: 100%;
+		overflow: hidden;
+		transition: all .5s;
+
+		&.overview {
+			left: 0%;
+		}
+
+		&.proposition {
+
+		}
 	}
 
 	figure {
-		position: relative;
+		position: absolute;
+		right: 0;
 		padding: 0;
 		margin: 0;
-		width: 100%;
-		height: 100%;
+		width: 100vw;
+		height: 100vh;
 	}
 </style>
