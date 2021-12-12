@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { Map as M } from 'maplibre-gl';
-	import { isMapOverview } from '$stores/map';
+	import { isMapFull, mapViewMode } from '$stores/map';
 
 	let map;
 	let container;
@@ -25,24 +25,31 @@
 </script>
 
 
-<div class:overview={$isMapOverview}>
-	<figure bind:this={container}></figure>
+<div
+	class:full={$isMapFull}
+	class={$mapViewMode ? $mapViewMode : ''}
+>
+		<figure bind:this={container}></figure>
 </div>
 
 
 <style lang="postcss">
 	div {
+		pointer-events: none;
 		position: fixed;
-		margin: 0;
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		top: 0;
 		right: 0;
-		bottom: 0;
-		left: 100%;
+		width: 0%;
+		height: 100%;
 		overflow: hidden;
-		transition: all .5s;
+		transition: all .5s cubic-bezier(.8, 0, .2, 1);
 
-		&.overview {
-			left: 0%;
+		&.full {
+			width: 100vw;
 		}
 
 		&.proposition {
@@ -51,8 +58,8 @@
 	}
 
 	figure {
+		pointer-events: auto;
 		position: absolute;
-		right: 0;
 		padding: 0;
 		margin: 0;
 		width: 100vw;

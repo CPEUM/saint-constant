@@ -24,21 +24,21 @@
 
 <script>
 	import { exerciceRoutes, routes } from '$utils/routes';
-	import Image from '$components/primitives/Image.svelte';
 	import { fly } from 'svelte/transition';
 
-	export let exercice;
+	import Image from '$components/primitives/Image.svelte';
 
+	export let exercice;
 </script>
 
 
-<header>
+<!-- <header>
 	<img src="/media/agroparc/3-1-6.jpg" alt="">
 	<img src="/media/agroparc/3-1-8.jpg" alt="">
 	{#key exercice}
 		<h1 transition:fly>Title from layout: {exercice?.title}</h1>
 	{/key}
-</header>
+</header> -->
 <section>
 	<slot></slot>
 </section>

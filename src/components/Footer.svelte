@@ -2,6 +2,13 @@
 	import { routes } from '$utils/routes';
 	import Link from './primitives/Link.svelte';
 
+	const extLinks = [
+		{title: 'Chaire en paysage et environnement de l’Université de Montréal (CPEUM)', href: 'https://paysage.umontreal.ca'},
+		{title: 'Chaire UNESCO en paysage urbain (CUPUM)', href: 'https://unesco-paysage.umontreal.ca'},
+		{title: 'Ville de Saint-Constant', href: 'https://saint-constant.ca'},
+		{title: 'MRC de Roussillon', href: 'https://roussillon.ca'},
+		{title: 'Ministère de l’Économie et de l’Innovation du Québec', href: 'https://www.economie.gouv.qc.ca/accueil/'}
+	]
 </script>
 
 
@@ -9,11 +16,9 @@
 	<div>
 		<section>
 			<ul>
-				<li><Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link></li>
-				<li><Link href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain (CUPUM)</Link></li>
-				<li><Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link></li>
-				<li><Link href="https://roussillon.ca/">MRC de Roussillon</Link></li>
-				<li><Link href="https://www.economie.gouv.qc.ca/accueil/">Ministère de l’Économie et de l’Innovation du Québec</Link></li>
+				{#each extLinks as l}
+					<li><Link href={l.href}>{l.title}</Link></li>
+				{/each}
 			</ul>
 		</section>
 		<section>

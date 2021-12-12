@@ -6,11 +6,11 @@
 	import FigureMap from '$components/figure/FigureMap.svelte';
 	import FigureMarker from '$components/figure/FigureMarker.svelte';
 	import FigureLegendItem from '$components/figure/FigureLegendItem.svelte';
-import BarChart from '$components/chart/BarChart.svelte';
+	import BarChart from '$components/chart/BarChart.svelte';
 </script>
 
 
-<h2>Le concept</h2>
+<!-- <h2>Le concept</h2>
 <p>Le concept d'agroparc est né dans une perspective de reconnaissance des valeurs environnementales et récréatives du territoire agricole de Saint-Constant.</p>
 <p>L’agroparc vise à&nbsp;:</p>
 <ul>
@@ -85,8 +85,7 @@ import BarChart from '$components/chart/BarChart.svelte';
 <h4>Sous-secteur 2&nbsp;: Site de l’église <span>et</span> Secteur 3&nbsp;: Site de la chandellerie&nbsp;:</h4>
 <p>Implantation d’activités commerciales et de récréation.</p>
 <h4>Sous-secteur 1&nbsp;: Parc Leblanc <span>et</span> Secteur 4&nbsp;: Site des travaux publics&nbsp;:</h4>
-<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
-
+<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p> -->
 
 <h2>Propositions</h2>
 <p>Le travail d’idéation sur la proposition de l’agroparc de Saint-Constant a été effectué à deux échelles&nbsp;:</p>
@@ -112,23 +111,22 @@ import BarChart from '$components/chart/BarChart.svelte';
 	<li>De conservation</li>
 	<li>Commerciales</li>
 </ul>
-
 <Proposition
 	title="Site A"
 	subtitle="Le secteur agricole du bassin de rétention de la rue Chantal"
 	key="a"
 >
-		<p>Le secteur du bassin de rétention est actuellement une friche agricole à proximité du noyau villageois, d’un quartier résidentiel et bordé au sud par l’autoroute 30. Ce lieu a le potentiel de pouvoir se transformer en un lieu aux activités hybrides.</p>
-		<p>Le projet propose d’aménager&nbsp;:</p>
-		<h4>Des activités de productions agricoles</h4>
-		<p>Ce secteur vise à fournir un espace d’expérimentation et de développement en <strong>agriculture bio-intensive</strong> sur 8 hectares. Des pratiques de productions similaires se développent de plus en plus au Québec et démontrent la productivité et la rentabilité de ces méthodes plus respectueuses de l’environnement. Ces terres pourront être divisées et se répartir entre plusieurs producteurs pour une plus grande variété de production. Chaque exploitation est dotée d’un kiosque qui sert à la fois de point de vente direct et de hangar de rangement du matériel. Des haies brises vents sont suggérées afin de structurer chacune des exploitations, favoriser la biodiversité, la qualité des sols, protéger les cultures des vents et augmenter la qualité paysagère.</p>
-		<p>L’implantation de ce type d’agriculture dans le secteur du bassin de rétention est stratégique. Par sa proximité au noyau villageois et du tissu urbain résidentiel cela permet à la fois d’offrir une visibilité aux producteurs et de sensibiliser le public aux nouvelles pratiques innovantes, favoriser les circuits courts (proximité entre les lieux de production, distribution et consommation) et transformer ces espaces en milieux de vie mixte.</p>
-		<h4>Des activités récréatives</h4>
-		<p>À la périphérie nord des jardins de production alimentaire, une allée de promenade multifonctionnelle offre un accès public à ce secteur maraîcher et invite à venir s’y balader. Un grand soin est porté sur les accès vers ce secteur et les liens avec le noyau villageois. La connexion principale est faite avec la place de l’église par l’aménagement d’en sentier en diagonal, en direction du clocher. De plus il y a des accès à l’est pour relier le parc des Citoyens, et à l’ouest avec la rue Saint-Pierre.</p>
-		<p>Cet axe diagonal traverse également une forêt nourricière, qui consolide la présence actuelle d’une friche arbustive, où les visiteurs seraient invités à cueillir les fruits produits pour les déguster directement durant leur balade. Cette forêt a la capacité d’être ponctuée d’activités récréatives comme les labyrinthes de maïs, formant des clairières dans la forêt. Cette intervention a l’opportunité de devenir un véritable terrain de jeu pour les familles à proximité tout en répondant à des enjeux de développement durable.</p>
-		<h4>Des activités de conservation</h4>
-		<p>Au nord des exploitations, le sentier multifonctionnel est doublé d’une bande végétalisée. Celle-ci prend la forme d’une noue paysagère capable de récupérer les eaux de ruissellement. Des végétaux d’espèces indigènes adaptés aux milieux humides, capables d’attirer les pollinisateurs, et ce, durant une longue période (printemps, été, automne), y seront favorisés. Ce système de captation permettra de filtrer les eaux avant d’être déversés dans le cours d’eau de la rivière Saint-Pierre.</p>
-		<p>Une plantation d’arbres est suggérée au sud pour faire le tampon entre la zone de cultures et l’autoroute. Cela permettra de réduire les nuisances visuelles et l’exposition au vent, tout en favorisant une plus grande biodiversité et permettant de connecter <strong>les boisés existants à conserver</strong>.</p>
+	<p>Le secteur du bassin de rétention est actuellement une friche agricole à proximité du noyau villageois, d’un quartier résidentiel et bordé au sud par l’autoroute 30. Ce lieu a le potentiel de pouvoir se transformer en un lieu aux activités hybrides.</p>
+	<p>Le projet propose d’aménager&nbsp;:</p>
+	<h4>Des activités de productions agricoles</h4>
+	<p>Ce secteur vise à fournir un espace d’expérimentation et de développement en <strong>agriculture bio-intensive</strong> sur 8 hectares. Des pratiques de productions similaires se développent de plus en plus au Québec et démontrent la productivité et la rentabilité de ces méthodes plus respectueuses de l’environnement. Ces terres pourront être divisées et se répartir entre plusieurs producteurs pour une plus grande variété de production. Chaque exploitation est dotée d’un kiosque qui sert à la fois de point de vente direct et de hangar de rangement du matériel. Des haies brises vents sont suggérées afin de structurer chacune des exploitations, favoriser la biodiversité, la qualité des sols, protéger les cultures des vents et augmenter la qualité paysagère.</p>
+	<p>L’implantation de ce type d’agriculture dans le secteur du bassin de rétention est stratégique. Par sa proximité au noyau villageois et du tissu urbain résidentiel cela permet à la fois d’offrir une visibilité aux producteurs et de sensibiliser le public aux nouvelles pratiques innovantes, favoriser les circuits courts (proximité entre les lieux de production, distribution et consommation) et transformer ces espaces en milieux de vie mixte.</p>
+	<h4>Des activités récréatives</h4>
+	<p>À la périphérie nord des jardins de production alimentaire, une allée de promenade multifonctionnelle offre un accès public à ce secteur maraîcher et invite à venir s’y balader. Un grand soin est porté sur les accès vers ce secteur et les liens avec le noyau villageois. La connexion principale est faite avec la place de l’église par l’aménagement d’en sentier en diagonal, en direction du clocher. De plus il y a des accès à l’est pour relier le parc des Citoyens, et à l’ouest avec la rue Saint-Pierre.</p>
+	<p>Cet axe diagonal traverse également une forêt nourricière, qui consolide la présence actuelle d’une friche arbustive, où les visiteurs seraient invités à cueillir les fruits produits pour les déguster directement durant leur balade. Cette forêt a la capacité d’être ponctuée d’activités récréatives comme les labyrinthes de maïs, formant des clairières dans la forêt. Cette intervention a l’opportunité de devenir un véritable terrain de jeu pour les familles à proximité tout en répondant à des enjeux de développement durable.</p>
+	<h4>Des activités de conservation</h4>
+	<p>Au nord des exploitations, le sentier multifonctionnel est doublé d’une bande végétalisée. Celle-ci prend la forme d’une noue paysagère capable de récupérer les eaux de ruissellement. Des végétaux d’espèces indigènes adaptés aux milieux humides, capables d’attirer les pollinisateurs, et ce, durant une longue période (printemps, été, automne), y seront favorisés. Ce système de captation permettra de filtrer les eaux avant d’être déversés dans le cours d’eau de la rivière Saint-Pierre.</p>
+	<p>Une plantation d’arbres est suggérée au sud pour faire le tampon entre la zone de cultures et l’autoroute. Cela permettra de réduire les nuisances visuelles et l’exposition au vent, tout en favorisant une plus grande biodiversité et permettant de connecter <strong>les boisés existants à conserver</strong>.</p>
 </Proposition>
 <Proposition
 	title="Site B"

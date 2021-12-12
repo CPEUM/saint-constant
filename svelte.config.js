@@ -14,7 +14,7 @@ const config = {
 	}),
 	kit: {
 		adapter: staticAdapter(),
-		target: '#saint-constant',
+		target: 'body',
 		vite: {
 			resolve: {
 				alias: {

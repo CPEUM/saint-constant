@@ -1,7 +1,7 @@
 <script>
 	import Link from '$components/primitives/Link.svelte';
 	import LogoBanner from '$components/LogoBanner.svelte';
-	import Image from '$components/primitives/Image.svelte';
+	import OrientationsBanner from '$components/OrientationsBanner.svelte';
 
 </script>
 
@@ -24,26 +24,17 @@
 		<li>Assurer un dialogue inclusif entre les milieux preneurs (Ville de Saint-Constant, MRC de Roussillon) et le public interpellé, ainsi que valoriser et diffuser le processus et les résultats de la démarche.</li>
 	</ul>
 	<p><strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations, soit&nbsp;:</p>
-	<section>
-		Orientations ici
-	</section>
+	<OrientationsBanner />
 	<p>Ces orientations reposent sur la lecture des attraits du territoire, des préoccupations et des aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de diagnostic du projet. De même, elles découlent des propositions d’aménagement formulées au cours de la phase d’idéation. Les propositions d’aménagement présentées sont assorties d’une <strong>charte de principes directeurs susceptibles d’assurer, à terme, la cohérence des actions en vue de la préservation, de la mise en valeur et du développement des attraits des paysages de la Ville de Saint-Constant</strong>.</p>
 </section>
 
 
-<style>
+<style lang="postcss">
 	header {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
 		height: 100vh;
-		background: url(/grain.svg);
-		background-repeat: repeat;
-	}
-
-	h1 {
-		font-size: 120px;
-		z-index: 100;
 	}
 </style>
