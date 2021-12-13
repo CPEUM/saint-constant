@@ -2,6 +2,7 @@
 	import Link from '$components/primitives/Link.svelte';
 	import LogoBanner from '$components/LogoBanner.svelte';
 	import OrientationsBanner from '$components/OrientationsBanner.svelte';
+	import { parallax } from '$actions/parallax';
 
 </script>
 
@@ -15,6 +16,9 @@
 	<p>Dans le cadre d’un appel à projets en innovation sociale financé par le <Link href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et en appui avec la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link> et la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>, l’expertise de la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> et de la <Link href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain (CUPUM)</Link> de la même institution a été mise à profit pour développer de <strong>nouveaux outils et de nouvelles approches de planification territoriale plus sensibles aux valorisations sociales et culturelles des paysages</strong>.</p>
 	<LogoBanner></LogoBanner>
 </section>
+
+<h2 use:parallax>Test</h2>
+
 <section>
 	<h2>Objectifs du projet</h2>
 	<p>Ce projet vise trois principaux objectifs&nbsp;:</p>

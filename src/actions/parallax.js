@@ -1,10 +1,19 @@
-const observers = [];
+import { browser } from '$app/env';
 
-const defaultOptions = {
-	root: null,
-	rootMargin: '0% 0px 0% 0px',
-	threshold: 0,
-}
+const observer = browser ? new IntersectionObserver(
+	entries => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				// do parallax stuff
+			}
+		})
+	},
+	{
+		root: null,
+		rootMargin: '0% 0px 0% 0px',
+		threshold: 0,
+	}
+) : null;
 
 /**
  * 
@@ -12,20 +21,26 @@ const defaultOptions = {
  * @param {{scrollparent: HTMLElement, factor: number}} options
  */
 export function parallax(element, options = {scrollParent: null, factor: .5}) {
-	
-
-	// if (!options.scrollParent) options.scrollParent = document.body;
+	// observer.observe(element);
+	if (!options.scrollParent) options.scrollParent = document.body;
 	// const baseStyle = window.getComputedStyle(element);
-	// function handleScroll() {
-	// 	const rect = element.getBoundingClientRect();
-	// 	if (rect.top > 0) {
-	// 		console.log(baseStyle.transform);
-	// 	}
-	// }
-	// options.scrollParent.addEventListener('scroll', handleScroll);
+
+	function handleScroll() {
+		const rect = element.getBoundingClientRect();
+		
+	}
+
+	function handleResize() {
+		
+	}
+
+	options.scrollParent.addEventListener('scroll', handleScroll);
+	window.addEventListener('resize', handleResize);
 	return {
 		destroy() {
-			// options.scrollParent.removeEventListener('scroll', handleScroll);
+			// observer.unobserve(element);
+			options.scrollParent.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('resize', handleResize);
 		}
 	};
 }
