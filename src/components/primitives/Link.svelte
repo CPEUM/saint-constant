@@ -27,7 +27,7 @@
 
 		&:hover {
 			color: var(--dark3);
-			background-color: rgb(var(--rgb-accent3), .2);
+			background-color: rgb(0,0,0, .07);
 		}
 	}
 </style>

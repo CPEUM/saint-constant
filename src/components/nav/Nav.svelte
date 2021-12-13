@@ -74,17 +74,16 @@
 		z-index: 10;
 		pointer-events: none;
 		user-select: none;
+		font-family: var(--font-display);
+		font-size: 16px;
 		background-color: transparent;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		padding: 1rem 2rem;
+		padding: 0 2em;
 		top: 0rem;
 		margin: 0;
 		width: 100%;
-
-		font-family: var(--font-display);
-		font-size: 16px;
 	}
 
 	div {
@@ -101,16 +100,36 @@
 		gap: 0px;
 
 		& #main-routes {
+			position: relative;
 			display: flex;
 			flex-direction: row;
-			padding: 3px;
+			padding: 1em;
 			gap: 10px;
-			border-radius: 1em;
 			background-color: transparent;
 			transition: all .3s;
 
+			&::after {
+				pointer-events: none;
+				user-select: none;
+				z-index: 1;
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+				background: url(/grain.svg);
+				opacity: 0;
+				transition: all .3s;
+			}
+
 			&.pinned {
-				background-color: var(--light2);
+				background-color: var(--light1);
+
+				&::after {
+					opacity: .3;
+				}
 			}
 		}
 
@@ -133,7 +152,7 @@
 		align-items: center;
 		justify-content: center;
 		height: 3em;
-		border-radius: 1em;
+		border-radius: 1.3em;
 		padding: 1.5em;
 		letter-spacing: .03em;
 		color: var(--dark3);
@@ -169,7 +188,7 @@
 		border-radius: 50%;
 		cursor: pointer;
 		padding: 10px;
-		margin: 0;
+		margin: 1em 0 0 0;
 		background-color: var(--light1);
 		border: none;
 		appearance: none;
