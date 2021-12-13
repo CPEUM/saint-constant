@@ -17,7 +17,7 @@ function setObserver(options) {
 	const observerIdx = observers.findIndex(obs => matchOptions(obs, options));
 	if (observerIdx > -1) return observers[observerIdx];
 	const obs = new IntersectionObserver(
-		(entries) => {
+		entries => {
 			entries.forEach(entry => {
 				const eventName = entry.isIntersecting ? 'enter' : 'leave';
 				entry.target.dispatchEvent(new CustomEvent(eventName));
