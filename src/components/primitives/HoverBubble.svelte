@@ -11,21 +11,21 @@
 	export let initY;
 
 	const springOptions = {
-		stiffness: .35,
-		damping: .4
+		stiffness: .3,
+		damping: .42
 	}
 
 	const x = spring(initX, springOptions);
 	const y = spring(initY, springOptions);
 
-	function place(e) {
+	function setPosition(e) {
 		x.set(e.clientX);
 		y.set(e.clientY);
 	}
 </script>
 
 
-<svelte:window on:mousemove={place} />
+<svelte:window on:mousemove={setPosition} />
 
 
 <div

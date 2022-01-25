@@ -1,0 +1,59 @@
+@import 'overlayscrollbars/css/OverlayScrollbars.css';
+
+/* ::-webkit-scrollbar{
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-track{
+	background: var(--light1);
+}
+::-webkit-scrollbar-thumb{
+	background: var(--dark3);
+	border-radius: 0px;
+	width: 1px;
+	border: 2px solid var(--light1);
+}
+::-webkit-scrollbar-thumb:hover{
+	background: var(--accent1);
+} */
+
+
+body.os-host {
+
+	> .os-scrollbar-vertical {
+		width: 1rem;
+		background-color: transparent;
+
+		> .os-scrollbar-track {
+			top: 1rem;
+			height: calc(100% - 2rem);
+			background-color: transparent;
+			cursor: pointer;
+
+			&:hover, &:active {
+				> .os-scrollbar-handle::after {
+					background-color: rgba(0,0,0, .1);
+				}
+			}
+
+			> .os-scrollbar-handle {
+				left: 50%;
+				width: 2px;
+				background-color: rgba(0,0,0, .45);
+				transition: background-color .3s ease !important;
+
+				&::after {
+					content: '';
+					position: absolute;
+					width: 10px;
+					top: -4px;
+					bottom: -4px;
+					left: -4px;
+					border-radius: 2px;
+					background-color: transparent;
+					transition: background-color .3s ease !important;
+				}
+			}
+		}
+	}
+}

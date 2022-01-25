@@ -1,46 +1,31 @@
-import { browser } from '$app/env';
-
-const observer = browser ? new IntersectionObserver(
-	entries => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				// do parallax stuff
-			}
-		})
-	},
-	{
-		root: null,
-		rootMargin: '0% 0px 0% 0px',
-		threshold: 0,
-	}
-) : null;
-
 /**
- * 
+ * Svelte action to add parallax effect using a translateY transformation
  * @param {HTMLElement} element
  * @param {{scrollparent: HTMLElement, factor: number}} options
+ * 
  */
-export function parallax(element, options = {scrollParent: null, factor: .5}) {
-	// observer.observe(element);
-	if (!options.scrollParent) options.scrollParent = document.body;
-	// const baseStyle = window.getComputedStyle(element);
+export function parallax(element, {scrollParent = null, factor = .8} = {}) {
 
-	function handleScroll() {
+	if (!scrollParent) scrollParent = document.body;
+
+	let TY = 0;
+
+	function updateTransform() {
 		const rect = element.getBoundingClientRect();
-		
+		const boundedTop = Math.min(window.innerHeight, Math.max(-rect.height, rect.top - TY));
+		TY = (boundedTop + rect.height / 2 - window.innerHeight / 2) * (factor - 1);
+		element.style.transform = `translateY(${TY}px)`;
 	}
 
-	function handleResize() {
-		
-	}
-
-	options.scrollParent.addEventListener('scroll', handleScroll);
-	window.addEventListener('resize', handleResize);
+	updateTransform();
+	scrollParent.addEventListener('scroll', updateTransform);
+	// window.getComputedStyle(element);
+	
 	return {
 		destroy() {
 			// observer.unobserve(element);
-			options.scrollParent.removeEventListener('scroll', handleScroll);
-			window.removeEventListener('resize', handleResize);
+			scrollParent.removeEventListener('scroll', updateTransform);
+			// window.removeEventListener('resize', handleResize);
 		}
 	};
 }

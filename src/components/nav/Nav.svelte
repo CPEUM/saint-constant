@@ -1,5 +1,7 @@
 <script>
 	import NavExercices from '$components/nav/NavExercices.svelte';
+	import NavMapToggle from './NavMapToggle.svelte';
+
 	import { currentRoute } from '$stores/currentRoute';
 	import { routes } from '$utils/routes';
 	import { draw, fly } from 'svelte/transition';
@@ -7,6 +9,13 @@
 	import { isMapFull } from '$stores/map';
 	import { mainScroll } from '$stores/scroll';
 	import { spring } from 'svelte/motion';
+	import { onMount } from 'svelte';
+
+	let mounted = false;
+
+	onMount(() => {
+		mounted = true;
+	})
 
 	const limit = 50;
 	let factor;
@@ -15,7 +24,11 @@
 </script>
 
 
-<header style="top: {factor * 50}px">
+{#if mounted}
+	<header
+		in:fly={{ opacity: 0, y: -20, duration: 800, easing: expoOut, delay: 1000 }}
+		style="top: {factor * 50}px"
+	>
 	<div>
 		<!-- Top nav -->
 		<nav
@@ -41,31 +54,11 @@
 				<NavExercices />
 			{/if}
 		</nav>
-		<!-- Map toggle -->
-		<label
-			id="map-toggle"
-			for="map-toggle-input"
-			class:active={$isMapFull}
-		>
-			<input
-				id="map-toggle-input"
-				type="checkbox"
-				bind:checked={$isMapFull}
-				in:fly={{x: -40, easing: expoOut, duration: 500, delay: 1500}}
-			>
-			<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision">
-				{#if !$isMapFull}
-					<path in:draw={{}} d="M46,88.3L25.8,50.5c-5.7-10.7-3.8-23.9,4.8-32.4l0,0c10.7-10.7,28.2-10.7,38.9,0l0,0
-					c8.6,8.6,10.5,21.7,4.8,32.4L54.1,88.3C52.4,91.5,47.7,91.5,46,88.3z" vector-effect="non-scaling-stroke"/>
-					<circle in:draw={{delay: 150}} cx="50.5" cy="37.4" r="11.1" vector-effect="non-scaling-stroke"/>
-				{:else}
-					<line in:draw={{}} x1="30" y1="30" x2="70" y2="70" vector-effect="non-scaling-stroke"/>
-					<line in:draw={{delay: 150}} x1="30" y1="70" x2="70" y2="30" vector-effect="non-scaling-stroke"/>
-				{/if}
-			</svg>
-		</label>
+		<NavMapToggle />
 	</div>
-</header>
+	</header>
+{/if}
+
 
 
 <style lang="postcss">
@@ -107,30 +100,6 @@
 			gap: 10px;
 			background-color: transparent;
 			transition: all .3s;
-
-			&::after {
-				pointer-events: none;
-				user-select: none;
-				z-index: 1;
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				background-color: transparent;
-				background: url(/grain.svg);
-				opacity: 0;
-				transition: all .3s;
-			}
-
-			&.pinned {
-				background-color: var(--light1);
-
-				&::after {
-					opacity: .3;
-				}
-			}
 		}
 
 		&.hidden {
@@ -143,6 +112,7 @@
 	}
 
 	a {
+		z-index: 1;
 		position: relative;
 		pointer-events: auto;
 		line-height: 1.2;
@@ -152,16 +122,22 @@
 		align-items: center;
 		justify-content: center;
 		height: 3em;
-		border-radius: 1.3em;
+		border-radius: 2em;
 		padding: 1.5em;
 		letter-spacing: .03em;
 		color: var(--dark3);
 		overflow: hidden;
-		transition: transform .3s var(--delay) ease-out, opacity .3s var(--delay) ease, box-shadow .3s ease-in-out;
+		/* background-color: var(--light1); */
+		transition:
+			transform .3s var(--delay) ease-out,
+			opacity .3s var(--delay) ease,
+			box-shadow .35s ease-in-out,
+			border-radius .3s ease-in-out;
 
 		&:hover:not(.current) {
-			background-color: var(--light3);
-			box-shadow: 0px 20px 20px -10px rgb(var(--rgb-dark3),.5);
+			border-radius: 1.2em;
+			background-color: white;
+			box-shadow: 0px 0px 0px 4px var(--light1);
 		}
 
 		&.current {
@@ -175,52 +151,5 @@
 	@keyframes fly {
 		from {left: 0px;}
 		to {left: 200px;}
-	}
-
-	label {
-		pointer-events: initial;
-		position: relative;
-		display: flex;
-		align-content: center;
-		justify-content: center;
-		width: 3em;
-		height: 3em;
-		border-radius: 50%;
-		cursor: pointer;
-		padding: 10px;
-		margin: 1em 0 0 0;
-		background-color: var(--light1);
-		border: none;
-		appearance: none;
-		transition: all .2s ease-in-out;
-
-		&:hover {
-			background-color: var(--light3);
-			background-color: white;
-			border-radius: 40%;
-		}
-
-		&.active {
-			background-color: var(--light1);
-
-			&:hover {
-				background-color: white;
-			}
-
-			& svg {
-				stroke: rgb(223, 84, 66);
-			}
-		}
-
-		& svg {
-			fill: none;
-			stroke: var(--dark3);
-			stroke-width: 2px;
-			shape-rendering: geometricPrecision;
-		}
-
-		& input[type='checkbox'] {
-			display: none;
-		}
 	}
 </style>

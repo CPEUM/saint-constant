@@ -1,14 +1,14 @@
 <script>
 	import { intersection } from '$actions/intersect';
 	import { mapViewMode, mapFocus } from '$stores/map';
-	import { parallax } from '$actions/parallax';
+	import { mainScroll } from '$stores/scroll';
 
 	export let title;
 	export let subtitle;
 	export let key;
 
-	let clientHeight;
 	let header;
+	let offset = 0;
 
 	function setFocus() {
 		mapFocus.set(key);
@@ -26,25 +26,29 @@
 		mapViewMode.unset('proposition')
 	}
 
-	function handleScroll() {
+	function updateParallax() {
+		if (header) {
+			const rect = header.getBoundingClientRect();
+			offset = rect.top + (rect.bottom - rect.top) / 2;
+			console.log(offset);
+		}
 	}
+
+	$: 	$mainScroll, updateParallax();
 </script>
-
-
-<svelte:window on:scroll={handleScroll} />
 
 
 <section
 	use:intersection
 	on:enter={setFocus}
 	on:leave={clearFocus}
+	style="--offset: {offset}px"
 >
 	<header
 		use:intersection
 		on:enter={showMap}
 		on:leave={hideMap}
 		bind:this={header}
-		use:parallax
 	>
 		<hgroup>
 			<h3>{title}</h3>
@@ -68,10 +72,12 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		overflow: hidden;
+		background-color: grey;
 	}
 
 	hgroup {
-		transition: all .5s ease;
+		transform: translateY(calc(var(--offset) * -0.5));
 	}
 
 	div {

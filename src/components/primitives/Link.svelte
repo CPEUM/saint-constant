@@ -21,13 +21,14 @@
 		top: 0;
 		left: 0;
 		position: relative;
+		z-index: 1;
 		text-decoration: none;
-		border-radius: 5px;
+		border-radius: 3px;
 		transition: all .25s;
 
 		&:hover {
-			color: var(--dark3);
-			background-color: rgb(0,0,0, .07);
+			background-color: rgb(0,0,0, .05);
+			box-shadow: 0px 0px 0px 4px rgb(0,0,0, .05);
 		}
 	}
 </style>

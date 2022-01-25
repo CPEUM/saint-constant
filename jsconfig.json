@@ -2,14 +2,12 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"$components": ["src/components"],
 			"$components/*": ["src/components/*"],
-			"$utils": ["src/utils"],
 			"$utils/*": ["src/utils/*"],
-			"$stores": ["src/stores"],
 			"$stores/*": ["src/stores/*"],
-			"$actions": ["src/actions"],
-			"$actions/*": ["src/actions/*"]
+			"$actions/*": ["src/actions/*"],
+			"$styles/*": ["src/styles/*"],
+			"$data/*": ["static/data/*"]
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"]
