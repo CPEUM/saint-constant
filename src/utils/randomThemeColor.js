@@ -11,6 +11,5 @@ export function getRandomThemeColor(levels = [1, 2, 3], themeKeys = ['accent', '
 		levels = [levels]
 	}
 	const colorKey = `${themeKeys[Math.floor(Math.random() * themeKeys.length)]}${levels[Math.floor(Math.random() * levels.length)]}`;
-	console.log(colorKey);
 	return colors[colorKey];
 }

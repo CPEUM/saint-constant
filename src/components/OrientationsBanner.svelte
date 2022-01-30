@@ -39,7 +39,6 @@
 		flex-direction: row;
 		align-items: stretch;
 		justify-content: center;
-		width: var(--content-width);
 		gap: 0;
 		/* background-color: var(--light1); */
 	}

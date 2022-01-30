@@ -1,6 +1,4 @@
 import { base } from '$app/paths';
-import { page } from '$app/stores';
-import { get } from 'svelte/store';
 
 /**
  * Normalize the passed path, taking into consideration if a `kit.paths.base` is defined and if the passed path contains or not the specified base.
@@ -8,25 +6,22 @@ import { get } from 'svelte/store';
  * of the runner's build environement.
  */
 export function debasePath(path) {
-	if (base && path.indexOf(base) === 0) {
+	if (base && path.startsWith(base)) {
+		console.log('Theres a base', base);
 		return path.slice(base.length);
 	}
-	return path
+	return path;
 }
 
 /**
- * Take a path and return its segments as an array of strings
+ * Take a path, debases it if needed, and return its segments as an array of strings
  * @param {string} path
  * @returns {string[]}
  */
-export function getSegments(path = null) {
-	if (path === null) {
-		path = get(page.url.pathname);
-	}
-	const normalizedPath = debasePath(path);
-	return normalizedPath
-		.replace(/#.*$/,'')
+export function getSegments(path) {
+	return debasePath(path)
+		.replace(/#.*$/, '')
 		.replace(/^\/+/, '')
 		.split('/')
-		.map((segment, i) => `${(i === 0 && path.indexOf(base) === 0 ? base : '' )}/${segment}`);
-};
+		.map((segment) => `/${segment}`);
+}

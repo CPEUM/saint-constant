@@ -1,65 +1,69 @@
 <script>
 	import NavExercices from '$components/nav/NavExercices.svelte';
 	import NavMapToggle from './NavMapToggle.svelte';
-
-	import { currentRoute } from '$stores/currentRoute';
+	import { currentRoute } from '$stores/route';
 	import { routes } from '$utils/routes';
 	import { draw, fly } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
 	import { isMapFull } from '$stores/map';
 	import { mainScroll } from '$stores/scroll';
-	import { spring } from 'svelte/motion';
 	import { onMount } from 'svelte';
 
 	let mounted = false;
 
 	onMount(() => {
 		mounted = true;
-	})
+	});
 
-	const limit = 50;
-	let factor;
-	$:	factor = Math.max(limit - $mainScroll.y / 4, 0) / limit;
+	const yLimit = 120;
 
+	function generateLines() {
+		const n = Math.round(8 + Math.random() * 4);
+		const ypad = 10;
+		const xpad = 0;
+		return [...Array(n)].map(e => (
+			{
+				x1: xpad + Math.random() * (100 - 2 * xpad) + '%',
+				y1: ypad + Math.random() * (100 - 2 * ypad) + '%',
+				x2: xpad + Math.random() * (100 - 2 * xpad) + '%',
+				y2: ypad + Math.random() * (100 - 2 * ypad) + '%',
+				stroke: `hsl(${20 + Math.random() * 180}, 50%, 65%)`,
+			}
+		));
+	}
 </script>
 
-
 {#if mounted}
-	<header
-		in:fly={{ opacity: 0, y: -20, duration: 800, easing: expoOut, delay: 1000 }}
-		style="top: {factor * 50}px"
-	>
-	<div>
-		<!-- Top nav -->
-		<nav
-			class:hidden={$mainScroll.direction == 'down' && !factor}
-		>
-			<section
-				class:pinned={$mainScroll.direction == 'up' && !factor}
-				id="main-routes"
-			>
+	<header in:fly={{ opacity: 0, y: -20, duration: 800, easing: expoOut, delay: 1000 }}>
+		<div>
+			<nav class:hidden={$mainScroll.direction == 'down' && $mainScroll.y > yLimit}>
 				{#each $routes as r, i}
 					<a
 						href={r.path}
 						sveltekit:prefetch
 						class:current={r == $currentRoute}
-						style="--delay: {i * 60}ms"
+						style:--delay="{i * 60}ms"
 					>
-						<span>{r.title}</span>
+						<svg>
+							{#if r === $currentRoute}
+								{#each generateLines() as line, i}
+									<line {...line}
+										in:draw="{{duration: 200, delay: i * 20}}"
+										out:draw="{{duration: 350, delay: i * 20}}"
+										vector-effect="non-scaling-stroke"
+									/>
+								{/each}
+							{/if}
+						</svg>
+						<span class="text">{r.title}</span>
+						<span class="hover-text">{r.title}</span>
 					</a>
 				{/each}
-			</section>
-			{#if $currentRoute?.exercices}
-				<!-- Sub nav -->
-				<NavExercices />
-			{/if}
-		</nav>
-		<NavMapToggle />
-	</div>
+			</nav>
+			<NavMapToggle />
+		</div>
 	</header>
 {/if}
-
-
 
 <style lang="postcss">
 	header {
@@ -73,15 +77,16 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		padding: 0 2em;
+		padding: 2em;
 		top: 0rem;
 		margin: 0;
 		width: 100%;
+		height: auto;
 	}
 
 	div {
 		width: 100%;
-		max-width: var(--content-width);
+		max-width: var(--width-md);
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -89,67 +94,92 @@
 
 	nav {
 		display: flex;
-		flex-direction: column;
-		gap: 0px;
-
-		& #main-routes {
-			position: relative;
-			display: flex;
-			flex-direction: row;
-			padding: 1em;
-			gap: 10px;
-			background-color: transparent;
-			transition: all .3s;
-		}
-
-		&.hidden {
-			& a {
-				pointer-events: none;
-				opacity: 0;
-				transform: translateY(-10px);
-			}
-		}
+		flex-direction: row;
+		gap: 0.5em;
+		align-items: center;
 	}
 
 	a {
-		z-index: 1;
 		position: relative;
-		pointer-events: auto;
-		line-height: 1.2;
-		text-decoration: none;
-		font-weight: 600;
-		display: inline-flex;
-		align-items: center;
+		display: flex;
+		flex-direction: row;
 		justify-content: center;
-		height: 3em;
+		align-items: center;
+		pointer-events: initial;
+		padding-block: 0.5em;
+		padding-inline: 1em;
+		background-color: transparent;
 		border-radius: 2em;
-		padding: 1.5em;
-		letter-spacing: .03em;
-		color: var(--dark3);
+		text-decoration: none;
+		box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+		color: var(--dark1);
+		font-weight: 500;
+		letter-spacing: .2px;
 		overflow: hidden;
-		/* background-color: var(--light1); */
-		transition:
-			transform .3s var(--delay) ease-out,
-			opacity .3s var(--delay) ease,
-			box-shadow .35s ease-in-out,
-			border-radius .3s ease-in-out;
+		transition: transform 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1),
+			opacity 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1),
+			box-shadow 0.3s ease-in-out;
 
-		&:hover:not(.current) {
-			border-radius: 1.2em;
-			background-color: white;
-			box-shadow: 0px 0px 0px 4px var(--light1);
+		& .text {
+			z-index: 1;
+			transform: skewY(0deg) translateY(0);
+			opacity: 1;
+			transition: all .3s cubic-bezier(.5, 0, .3, 1);
+		}
+
+		& .hover-text {
+			z-index: 1;
+			position: absolute;
+			transform: skewY(8deg) translateY(2em);
+			opacity: 0;
+			transition: all .3s cubic-bezier(.5, 0, .3, 1);
+		}
+
+		&:hover {
+			color: var(--dark3);
+			box-shadow: 0 1em 2em -0.4em rgba(0, 0, 0, 0.2);
+		}
+
+		&:hover, &.current {
+			& .text {
+				transform: skewY(8deg) translateY(-2em);
+				opacity: 0;
+			}
+
+			& .hover-text {
+				transform: skewY(0) translateY(0);
+				opacity: 1;
+			}
 		}
 
 		&.current {
 			pointer-events: none;
-			cursor: default;
-			background-color: var(--light1);
-			box-shadow: 0px 20px 20px -10px rgb(var(--rgb-dark3),.5);
+			color: var(--light1);
+			/* background-color: var(--dark1); */
+			box-shadow: 0 .8em 2em -0.2em rgba(0, 0, 0, 0.3);
 		}
 	}
 
-	@keyframes fly {
-		from {left: 0px;}
-		to {left: 200px;}
+	svg {
+		position: absolute;
+		z-index: 0;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+
+		& line {
+			stroke-width: 10px;
+			stroke-linecap: square;
+		}
+	}
+
+	.hidden {
+		a {
+			pointer-events: none;
+			transform: translateY(-50px);
+			opacity: 0;
+		}
 	}
 </style>

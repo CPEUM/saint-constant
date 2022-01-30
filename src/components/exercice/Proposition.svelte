@@ -30,7 +30,6 @@
 		if (header) {
 			const rect = header.getBoundingClientRect();
 			offset = rect.top + (rect.bottom - rect.top) / 2;
-			console.log(offset);
 		}
 	}
 

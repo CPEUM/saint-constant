@@ -52,7 +52,7 @@
 		display: flex;
 		gap: 2rem;
 		width: 100%;
-		max-width: var(--content-width);
+		max-width: var(--width-md);
 	}
 
 	section {

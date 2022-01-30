@@ -1,24 +1,12 @@
-<script context="module">
-	export async function load() {
-		return {
-			props: {
-				sfiles: Object.values(import.meta.glob('/static/media/decorations/shapes/*.svg'))
-			}
-		};
-	}
-</script>
-
 <script>
 	import Link from '$components/primitives/Link.svelte';
 	import OrientationsBanner from '$components/OrientationsBanner.svelte';
 	import H2 from '$components/primitives/H2.svelte';
 	import logos from '$data/logos.json';
 	import Splash from '$components/Splash.svelte';
-
-	export let sfiles;
 </script>
 
-<Splash {sfiles} />
+<Splash />
 <section>
 	<h2>Contexte</h2>
 	<p>
