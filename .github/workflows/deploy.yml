@@ -19,7 +19,7 @@ jobs:
         env:
           PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Deploy

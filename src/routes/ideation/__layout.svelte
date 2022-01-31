@@ -2,6 +2,9 @@
 	import { base } from '$app/paths';
 	import { debasePath } from '$utils/path';
 
+	/**
+	 * @type {import('@sveltejs/kit').Load}
+	 */
 	export async function load({ url }) {
 		const normalizedPath = base + debasePath(url.pathname);
 		let queriedExercice = exerciceRoutes.find((exercice) => exercice.path == normalizedPath);
