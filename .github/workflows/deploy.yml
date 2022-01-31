@@ -12,6 +12,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
@@ -19,8 +22,8 @@ jobs:
         env:
           PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
         run: |
-          npm ci
-          npm run build
+          pnpm install
+          pnpm build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
