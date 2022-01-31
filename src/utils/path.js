@@ -7,7 +7,7 @@ import { base } from '$app/paths';
  */
 export function debasePath(path) {
 	if (base && path.startsWith(base)) {
-		console.log('Theres a base', base);
+		// console.log('Theres a base in this path!', base);
 		return path.slice(base.length);
 	}
 	return path;
