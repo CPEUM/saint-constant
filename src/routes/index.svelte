@@ -10,17 +10,12 @@
 <section>
 	<h2>Contexte</h2>
 	<p>
-		Localisée sur la Rive-Sud de Montréal, la <Link href="https://saint-constant.ca/"
-			>Ville de Saint-Constant</Link
-		> est en grande transformation en raison de sa croissance démographique et de la réalisation, au
+		Localisée sur la Rive-Sud de Montréal, la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
+		est en grande transformation en raison de sa croissance démographique et de la réalisation, au
 		cours des prochaines années, de plusieurs projets d’infrastructures et de développement urbain. Afin
 		d’alimenter la planification de ces projets, la Ville de Saint-Constant s’interroge sur la portée
 		de ses interventions sur ses paysages, autant du point de vue de ses résidents que des visiteurs.
-		À cette fin, la ville désire se doter d’outils pour
-		<strong
-			>améliorer sa connaissance des enjeux de paysage et pour assurer la cohérence des
-			interventions sur l’ensemble du territoire municipal</strong
-		>.
+		À cette fin, la ville désire se doter d’outils pour <strong>améliorer sa connaissance des enjeux de paysage et pour assurer la cohérence des interventions sur l’ensemble du territoire municipal</strong>.
 	</p>
 	<p>
 		Dans le cadre d’un appel à projets en innovation sociale financé par le <Link

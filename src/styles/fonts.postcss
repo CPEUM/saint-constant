@@ -1,4 +1,4 @@
- @font-face {
+@font-face {
 	font-family: 'Anthony';
 	src: url('/fonts/anthony/anthony.eot');
 	src: url('/fonts/anthony/anthony.woff2') format('woff2'),
@@ -6,9 +6,21 @@
 		url('/fonts/anthony/anthony.otf') format('opentype');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Ductus';
+	src: url('/fonts/ductus/ductus.eot');
+	src: url('/fonts/ductus/ductus.woff2') format('woff2'),
+		url('/fonts/ductus/ductus.woff') format('woff'),
+		url('/fonts/ductus/ductus.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
 
 :root {
 	--font-main: 'Outfit', sans-serif;
-	--font-misc: 'Anthony', serif;
+	--font-misc: 'Ductus', sans-serif;
 }

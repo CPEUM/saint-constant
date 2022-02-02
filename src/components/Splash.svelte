@@ -2,39 +2,77 @@
 	import InlineSvg from 'svelte-inline-svg';
 	import { mainScroll } from '$stores/scroll';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
+	import { decorations } from '$utils/decorations';
+	import { fade } from 'svelte/transition';
+	import { generateSvgPaths } from '$utils/generateSvgPaths';
+	import { reveal } from '$actions/reveal';
 
-	const sfiles = Object.values(import.meta.glob('/static/media/decorations/shapes/*.svg'));
-	console.log(sfiles);
-	const hlines = ['LA CO-CRÉATION', 'DES PAYSAGES URBAINS', 'DE LA VILLE DE SAINT-CONSTANT'];
-	const shapes = sfiles
-		.map((path) => ({
-			path: path.name.replace('/static', ''),
-			parallaxFactor: Math.random() * 1 - 0.5,
-			offsetY: Math.random() * 200,
-			offsetX: Math.random() * 100,
+	function generateParallaxFactor(range = 0.5) {
+		return Math.random() * range - 0.5 * range;
+	}
+
+	const svgs = decorations.map(deco => ({
+		svgProps: {
+			width: deco.width,
+			height: deco.height,
+			viewBox: `0 0 ${deco.width} ${deco.height}`
+		},
+		pathProps: {
+			d: deco.d,
+			fill: deco.fill ? getRandomThemeColor([1, 2]) : 'none',
+			stroke: deco.stroke ? getRandomThemeColor([1, 2]) : 'none',
+		},
+		parallax: generateParallaxFactor(),
+		offset: {
+			x: Math.random() * 100,
+			y: Math.random() * 100
+		}
+	}))
+
+	const bgSvgsViewBox = {width: 1000, height: 1500}
+	const bgSvgs = generateSvgPaths(2).map(svgPath => ({
+		svgProps: {
+			viewBox: '0 0 1000 1000'
+		},
+		pathProps: {
+			d: svgPath,
 			fill: getRandomThemeColor([1, 2])
-		}))
-		.sort((a, b) => 0.5 - Math.random());
+		},
+		parallax: generateParallaxFactor(1)
+	}))
 </script>
 
 <header>
-	<svg />
-	{#each shapes as s}
-		<InlineSvg
-			src={s.path}
-			class="shape"
-			fill={s.fill}
-			filter="url(#grain)"
-			vector-effect="non-scaling-stroke"
-			style="top: {-$mainScroll.y * s.parallaxFactor - s.offsetY}px; left: {s.offsetX}%"
-		/>
+	{#each bgSvgs as bgSvg}
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			{...bgSvg.svgProps}
+			preserveAspectRatio="none"
+			style="top: {$mainScroll.y * bgSvg.parallax}px; left: 0px; width: 100%; min-width: 1000px; height: 150vh;"
+		>
+			<path {...bgSvg.pathProps} filter="url(#grain)" />
+		</svg>
+	{/each}
+	{#each svgs as svg, i}
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			{...svg.svgProps}
+			style:left="{svg.offset.x}%"
+			style="top: {$mainScroll.y * svg.parallax}px"
+			style:transform="translate(-50%, {svg.offset.y - 50}%)"
+			preserveAspectRatio="xMidYMin"
+			in:fade={{delay: i * 50, duration: 150}}
+		>
+			<path
+				filter="url(#grain)"
+				{...svg.pathProps}
+				vector-effect="non-scaling-stroke"
+			/>
+		</svg>
 	{/each}
 	<hgroup>
-		<h1>
-			<span style:top="{$mainScroll.y * .05}px">LA CO-CRÉATION</span>
-			<span style:top="{$mainScroll.y * .1}px">DES PAYSAGES URBAINS</span>
-			<span style:top="{$mainScroll.y * .2}px">DE LA VILLE</span>
-			<span style:top="{$mainScroll.y * .3}px">DE SAINT-CONSTANT</span>
+		<h1 style="transform: translateY({$mainScroll.y / 2}px)">
+			<span use:reveal={{stagger: true}}>LA CO-CRÉATION DES PAYSAGES URBAINS DE LA VILLE DE SAINT-CONSTANT</span>
 		</h1>
 	</hgroup>
 </header>
@@ -47,28 +85,42 @@
 		align-items: center;
 		margin: 0;
 		padding-inline: 6rem;
+		padding-bottom: 100vh;
 		width: 100%;
 		height: 200vh;
+		overflow: visible;
+	}
 
-		:global(.shape) {
-			padding: 0;
-			margin: 0;
-			position: absolute;
-			z-index: 0;
-			transform: translateX(-50%);
-		}
+	svg {
+		overflow: visible;
+		position: absolute;
+		/* transition: all .08s; */
 	}
 
 	hgroup {
 		width: 100%;
-		max-width: var(--content-width);
+		max-width: var(--width-lg);
 		z-index: 1;
+		text-align: center;
 	}
 
 	h1 {
-		font-size: 92px;
+		text-align: left;
+		display: inline-block;
+		font-size: 72px;
+		font-weight: 400;
+		max-width: 100%;
+		width: auto;
+		color: var(--dark2);
+		/* white-space: nowrap; */
+		line-height: 1.5em;
+		padding: 0;
+		margin: 0;
 		font-family: var(--font-misc);
-		/* font-feature-settings: 'ss01'; */
+
+		& .misc {
+			font-family: var(--font-misc);
+		}
 	}
 
 	span {

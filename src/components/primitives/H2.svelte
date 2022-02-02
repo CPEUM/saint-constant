@@ -4,9 +4,9 @@
 </script>
 
 
-<h2 use:parallax use:reveal={{stagger: true}}>
+<!-- <h2 use:parallax use:reveal={{stagger: true}}> -->
 	<slot />
-</h2>
+<!-- </h2> -->
 
 
 <style>

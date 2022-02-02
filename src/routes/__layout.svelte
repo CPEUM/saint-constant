@@ -15,7 +15,7 @@
 </script>
 
 <svg width="0" height="0">
-	<filter id="grain" height="100%" width="100%">
+	<filter id="grain" x="-100%" y="-100%" height="300%" width="300%">
 		<feTurbulence type="fractalNoise" baseFrequency="5.5" numOctaves="3" stitchTiles="stitch" />
 		<feColorMatrix type="saturate" values=".3" />
 		<feComponentTransfer>
@@ -51,7 +51,7 @@
 		width: 100%;
 		height: 100%;
 		background: url(/grain.svg);
-		opacity: .25;
+		opacity: .3;
 		background-repeat: repeat;
 		background-size: 900px;
 	}
@@ -67,5 +67,6 @@
 		height: 0;
 		width: 0;
 		position: absolute;
+		overflow: visible;
 	}
 </style>
