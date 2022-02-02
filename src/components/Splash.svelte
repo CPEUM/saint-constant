@@ -62,7 +62,8 @@
 			style="top: {$mainScroll.y *
 				bgSvg.parallax}px; left: 0px; width: 100%; min-width: 1000px; height: 150vh;"
 		>
-			<path {...bgSvg.pathProps} filter="url(#grain)" />
+			<path {...bgSvg.pathProps} />
+			<!-- filter="url(#grain)" -->
 		</svg>
 	{/each}
 	{#each svgs as svg, i}
@@ -75,7 +76,8 @@
 			preserveAspectRatio="xMidYMin"
 			in:fade={{ delay: i * 50, duration: 150 }}
 		>
-			<path filter="url(#grain)" {...svg.pathProps} vector-effect="non-scaling-stroke" />
+			<path {...svg.pathProps} vector-effect="non-scaling-stroke" filter="url(#grain)" />
+			<!-- filter="url(#grain)" -->
 		</svg>
 	{/each}
 	<hgroup>
@@ -84,10 +86,16 @@
 			use:intersection
 			on:enter={() => (reveal = true)}
 		>
-			{#each 'LA CO-CRÉATION DES PAYSAGES URBAINS DE LA VILLE DE SAINT-CONSTANT'.split(' ') as word}
+			{#each 'LA CO-CRÉATION DES PAYSAGES URBAINS DE LA VILLE DE SAINT-CONSTANT'.split(' ') as word, wi}
 				<span class="word">
-					{#each word.split('') as char}
-						<span class="char" class:hidden={!mounted || !reveal}>{char}</span>
+					{#each word.split('') as char, ci}
+						<span
+							class="char"
+							class:hidden={!mounted || !reveal}
+							style="--delay: {ci * 40}ms"
+						>
+							{char}
+						</span>
 					{/each}
 				</span>
 			{/each}
@@ -143,13 +151,22 @@
 	}
 
 	.word {
-
+		position: relative;
+		clip-path: circle(40%);
+		overflow: hidden;
 	}
 
 	.char {
-		transition: all .5s;
+		position: relative;
+		opacity: 1;
+		top: 50px;
+		transition-property: all;
+		transition-duration: .5s;
+		transition-delay: var(--delay);
+
 		&.hidden {
 			opacity: 0;
+			top: 40px;
 		}
 	}
 </style>

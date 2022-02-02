@@ -14,15 +14,15 @@
 	});
 </script>
 
-<svg width="0" height="0">
-	<filter id="grain" x="-100%" y="-100%" height="300%" width="300%">
-		<feTurbulence type="fractalNoise" baseFrequency="5.5" numOctaves="3" stitchTiles="stitch" />
-		<feColorMatrix type="saturate" values=".3" />
+<svg xmlns="http://www.w3.org/2000/svg">
+	<filter id="grain" x="0%" y="0%" height="100%" width="100%">
+		<feTurbulence type="fractalNoise" baseFrequency="2.5" numOctaves="2" stitchTiles="stitch" />
+		<!-- <feColorMatrix type="saturate" values=".3" />
 		<feComponentTransfer>
 			<feFuncA type="linear" slope=".4" />
-		</feComponentTransfer>
-		<feComposite operator="in" in2="SourceGraphic" result="masked" />
-		<feBlend in="SourceGraphic" in2="masked" mode="overlay" />
+		</feComponentTransfer> -->
+		<!-- <feComposite operator="in" in2="SourceGraphic" result="masked" /> -->
+		<!-- <feBlend in="SourceGraphic" in2="masked" mode="overlay" /> -->
 	</filter>
 </svg>
 
