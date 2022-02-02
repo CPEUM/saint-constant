@@ -1,17 +1,17 @@
 <script>
-	import InlineSvg from 'svelte-inline-svg';
 	import { mainScroll } from '$stores/scroll';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
 	import { decorations } from '$utils/decorations';
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
-	import { reveal } from '$actions/reveal';
+	import { intersection } from '$actions/intersect';
+	import { onMount } from 'svelte';
 
 	function generateParallaxFactor(range = 0.5) {
 		return Math.random() * range - 0.5 * range;
 	}
 
-	const svgs = decorations.map(deco => ({
+	const svgs = decorations.map((deco) => ({
 		svgProps: {
 			width: deco.width,
 			height: deco.height,
@@ -20,17 +20,18 @@
 		pathProps: {
 			d: deco.d,
 			fill: deco.fill ? getRandomThemeColor([1, 2]) : 'none',
-			stroke: deco.stroke ? getRandomThemeColor([1, 2]) : 'none',
+			stroke: deco.stroke ? getRandomThemeColor([1, 2]) : 'none'
 		},
 		parallax: generateParallaxFactor(),
 		offset: {
 			x: Math.random() * 100,
 			y: Math.random() * 100
 		}
-	}))
+	}));
 
-	const bgSvgsViewBox = {width: 1000, height: 1500}
-	const bgSvgs = generateSvgPaths(2).map(svgPath => ({
+	const bgSvgsViewBox = { width: 1000, height: 1500 };
+
+	const bgSvgs = generateSvgPaths(2).map((svgPath) => ({
 		svgProps: {
 			viewBox: '0 0 1000 1000'
 		},
@@ -39,7 +40,17 @@
 			fill: getRandomThemeColor([1, 2])
 		},
 		parallax: generateParallaxFactor(1)
-	}))
+	}));
+
+	let mounted = false;
+
+	let reveal = false;
+
+	onMount(() => {
+		setTimeout(() => {
+			mounted = true;
+		}, 1000);
+	});
 </script>
 
 <header>
@@ -48,7 +59,8 @@
 			xmlns="http://www.w3.org/2000/svg"
 			{...bgSvg.svgProps}
 			preserveAspectRatio="none"
-			style="top: {$mainScroll.y * bgSvg.parallax}px; left: 0px; width: 100%; min-width: 1000px; height: 150vh;"
+			style="top: {$mainScroll.y *
+				bgSvg.parallax}px; left: 0px; width: 100%; min-width: 1000px; height: 150vh;"
 		>
 			<path {...bgSvg.pathProps} filter="url(#grain)" />
 		</svg>
@@ -61,18 +73,24 @@
 			style="top: {$mainScroll.y * svg.parallax}px"
 			style:transform="translate(-50%, {svg.offset.y - 50}%)"
 			preserveAspectRatio="xMidYMin"
-			in:fade={{delay: i * 50, duration: 150}}
+			in:fade={{ delay: i * 50, duration: 150 }}
 		>
-			<path
-				filter="url(#grain)"
-				{...svg.pathProps}
-				vector-effect="non-scaling-stroke"
-			/>
+			<path filter="url(#grain)" {...svg.pathProps} vector-effect="non-scaling-stroke" />
 		</svg>
 	{/each}
 	<hgroup>
-		<h1 style="transform: translateY({$mainScroll.y / 2}px)">
-			<span use:reveal={{stagger: true}}>LA CO-CRÉATION DES PAYSAGES URBAINS DE LA VILLE DE SAINT-CONSTANT</span>
+		<h1
+			style="transform: translateY({$mainScroll.y / 2}px)"
+			use:intersection
+			on:enter={() => (reveal = true)}
+		>
+			{#each 'LA CO-CRÉATION DES PAYSAGES URBAINS DE LA VILLE DE SAINT-CONSTANT'.split(' ') as word}
+				<span class="word">
+					{#each word.split('') as char}
+						<span class="char" class:hidden={!mounted || !reveal}>{char}</span>
+					{/each}
+				</span>
+			{/each}
 		</h1>
 	</hgroup>
 </header>
@@ -89,6 +107,7 @@
 		width: 100%;
 		height: 200vh;
 		overflow: visible;
+		user-select: none;
 	}
 
 	svg {
@@ -123,8 +142,14 @@
 		}
 	}
 
-	span {
-		display: block;
-		position: relative;
+	.word {
+
+	}
+
+	.char {
+		transition: all .5s;
+		&.hidden {
+			opacity: 0;
+		}
 	}
 </style>
