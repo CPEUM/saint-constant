@@ -1,10 +1,12 @@
 import path from 'path';
-import staticAdapter from '@sveltejs/adapter-static';
+import adapter_static from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
-const pathPrefix = process.env.PUBLIC_BASE_PATH ? process.env.PUBLIC_BASE_PATH : '';
+const BASE_PATH = process.env.PUBLIC_BASE_PATH ? process.env.PUBLIC_BASE_PATH : '';
 
-/** @type {import('@sveltejs/kit').Config} */
+/**
+ * @type {import('@sveltejs/kit').Config}
+ */
 const config = {
 	extensions: [
 		'.svelte',
@@ -13,23 +15,27 @@ const config = {
 		postcss: true
 	}),
 	kit: {
-		adapter: staticAdapter(),
-		target: 'body',
+		adapter: adapter_static(),
+		// target: 'body',
 		vite: {
 			resolve: {
 				alias: {
-					$components: path.resolve('./src/components'),
-					$utils: path.resolve('./src/utils'),
-					$stores: path.resolve('./src/stores'),
 					$actions: path.resolve('./src/actions'),
+					$components: path.resolve('./src/components'),
+					$data: path.resolve('./src/data'),
+					$stores: path.resolve('./src/stores'),
 					$styles: path.resolve('./src/styles'),
-					$data: path.resolve('./static/data')
+					$transitions: path.resolve('./src/transitions'),
+					$utils: path.resolve('./src/utils')
 				}
 			}
 		},
 		paths: {
-			base: pathPrefix
+			base: BASE_PATH
 		},
+	},
+	compilerOptions: {
+		cssHash: ({ hash, css, /* name, filename */ }) => `${hash(css)}`
 	}
 };
 

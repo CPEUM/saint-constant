@@ -5,11 +5,16 @@
 	<filter id="grain">
 		<feTurbulence
 			type="fractalNoise"
-			baseFrequency="5.5"
+			baseFrequency="8"
 			numOctaves="2"
 			stitchTiles="stitch"
 		/>
-		<feColorMatrix type="saturate" values=".2"/>
+		<feColorMatrix type="saturate" values=".25"/>
+		<feComponentTransfer>
+			<feFuncR type="linear" slope=".7" />
+			<feFuncG type="linear" slope=".7" />
+			<feFuncB type="linear" slope=".7" />
+		</feComponentTransfer>
 	</filter>
 	<rect
 		width="100%"

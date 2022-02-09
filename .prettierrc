@@ -1,6 +1,15 @@
 {
 	"useTabs": true,
+	"tabWidth": 4,
+	"semi": true,
+	"bracketSpacing": true,
+	"bracketSameLine": false,
 	"singleQuote": true,
 	"trailingComma": "none",
-	"printWidth": 100
+	"printWidth": 100,
+	"arrowParens": "always",
+	"svelteIndentScriptAndStyle": true,
+	"svelteAllowShorthand": true,
+	"jsdocPrintWidth": 100,
+	"quoteProps": "consistent"
 }

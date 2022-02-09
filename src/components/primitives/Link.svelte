@@ -8,8 +8,8 @@
 
 <a
 	{href}
-	use:hoverbubble={{color: 'var(--accent3)'}}
 >
+<!-- use:hoverbubble={{color: 'var(--accent1)'}} -->
 	<slot></slot>
 </a>
 
@@ -17,7 +17,7 @@
 <style lang="postcss">
 	a {
 		font-weight: 500;
-		color: var(--accent1);
+		color: var(--accent3);
 		top: 0;
 		left: 0;
 		position: relative;
@@ -25,10 +25,12 @@
 		text-decoration: none;
 		border-radius: 3px;
 		transition: all .25s;
+		--hover-color: rgba(0, 0, 0, 0.05);
 
 		&:hover {
-			background-color: rgb(0,0,0, .05);
-			box-shadow: 0px 0px 0px 4px rgb(0,0,0, .05);
+			color: var(--dark3);
+			background-color: var(--hover-color);
+			box-shadow: 0px 0px 0px 4px var(--hover-color);
 		}
 	}
 </style>

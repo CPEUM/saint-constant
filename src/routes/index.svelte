@@ -1,13 +1,14 @@
 <script>
 	import Link from '$components/primitives/Link.svelte';
 	import OrientationsBanner from '$components/OrientationsBanner.svelte';
-	import H2 from '$components/primitives/H2.svelte';
 	import logos from '$data/logos.json';
 	import Splash from '$components/Splash.svelte';
+	import { revealText } from '$actions/revealText';
 </script>
 
 <Splash />
 <section>
+	<h1 use:revealText={{stagger: true, hideOnLeave: true}}>Ceci est un test</h1>
 	<h2>Contexte</h2>
 	<p>
 		Localisée sur la Rive-Sud de Montréal, la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
@@ -42,7 +43,7 @@
 	{/each}
 </section>
 <section>
-	<H2>Objectifs <em>du</em> <i>projet</i></H2>
+	<h2>Objectifs <em>du</em> <i>projet</i></h2>
 	<p>Ce projet vise trois principaux objectifs&nbsp;:</p>
 	<ul>
 		<li>

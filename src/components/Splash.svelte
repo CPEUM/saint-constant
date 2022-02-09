@@ -4,8 +4,8 @@
 	import { decorations } from '$utils/decorations';
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
-	import { intersection } from '$actions/intersect';
 	import { onMount } from 'svelte';
+	import { revealText } from '$actions/revealText';
 
 	function generateParallaxFactor(range = 0.5) {
 		return Math.random() * range - 0.5 * range;
@@ -30,7 +30,6 @@
 	}));
 
 	const bgSvgsViewBox = { width: 1000, height: 1500 };
-
 	const bgSvgs = generateSvgPaths(2).map((svgPath) => ({
 		svgProps: {
 			viewBox: '0 0 1000 1000'
@@ -44,17 +43,15 @@
 
 	let mounted = false;
 
-	let reveal = false;
-
 	onMount(() => {
 		setTimeout(() => {
 			mounted = true;
-		}, 1000);
+		}, 0);
 	});
 </script>
 
 <header>
-	{#each bgSvgs as bgSvg}
+	<!-- {#each bgSvgs as bgSvg}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			{...bgSvg.svgProps}
@@ -62,79 +59,86 @@
 			style="top: {$mainScroll.y *
 				bgSvg.parallax}px; left: 0px; width: 100%; min-width: 1000px; height: 150vh;"
 		>
-			<path {...bgSvg.pathProps} filter="url(#grain)" />
+			<path {...bgSvg.pathProps} />
 		</svg>
 	{/each}
+	<div id="mask" style="clip-path: path('{generateSvgPaths(1, {relative: true})}')">
+		{#each svgs as svg, i}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				{...svg.svgProps}
+				style:left="{svg.offset.x}%"
+				style="top: {$mainScroll.y * svg.parallax}px"
+				style:transform="translate(-50%, {svg.offset.y - 50}%)"
+				preserveAspectRatio="xMidYMin"
+				in:fade={{ delay: i * 50, duration: 150 }}
+			>
+				<g transform="rotate({Math.random() * 90})">
+					<path {...svg.pathProps} vector-effect="non-scaling-stroke" />
+				</g>
+			</svg>
+		{/each}
+	</div> -->
 	{#each svgs as svg, i}
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			{...svg.svgProps}
-			style:left="{svg.offset.x}%"
-			style="top: {$mainScroll.y * svg.parallax}px"
-			style:transform="translate(-50%, {svg.offset.y - 50}%)"
-			preserveAspectRatio="xMidYMin"
-			in:fade={{ delay: i * 50, duration: 150 }}
-		>
-			<path filter="url(#grain)" {...svg.pathProps} vector-effect="non-scaling-stroke" />
-		</svg>
+		<img
+			src="data:image/svg+xml;utf8,<svg width='{svg.svgProps.width}' height='{svg.svgProps.height}' viewBox='{svg.svgProps.viewBox}' xmlns='http://www.w3.org/2000/svg'><path fill='{svg.pathProps.fill}' d='{svg.pathProps.d}' /></svg>"
+			alt="background-shape-{i}"
+		/>
 	{/each}
+	<svg>
+
+	</svg>
 	<hgroup>
-		<h1
-			style="transform: translateY({$mainScroll.y / 2}px)"
-			use:intersection
-			on:enter={() => (reveal = true)}
-		>
-			{#each 'LA CO-CRÉATION DES PAYSAGES URBAINS DE LA VILLE DE SAINT-CONSTANT'.split(' ') as word}
-				<span class="word">
-					{#each word.split('') as char}
-						<span class="char" class:hidden={!mounted || !reveal}>{char}</span>
-					{/each}
-				</span>
-			{/each}
+		<h1 use:revealText={{stagger: true, transformOrigin: '0 80%', rotateX: 60, y: 50, staggerDelay: 12, mask: true}}>
+			LA CO-CREATION DES PAYSaGES URBaINS DE LA VILLE DE SAINT-CONSTANT
 		</h1>
 	</hgroup>
 </header>
 
 <style lang="postcss">
 	header {
+		--color: red;
 		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		margin: 0;
 		padding-inline: 6rem;
-		padding-bottom: 100vh;
+		padding-bottom: 50vh;
 		width: 100%;
-		height: 200vh;
+		min-height: 150vh;
 		overflow: visible;
 		user-select: none;
+		margin-bottom: 200px;
+	}
+
+	img {
+		z-index: -1;
+		position: absolute;
 	}
 
 	svg {
-		overflow: visible;
+		z-index: -1;
 		position: absolute;
-		/* transition: all .08s; */
+		overflow: visible;
 	}
 
 	hgroup {
 		width: 100%;
+		min-height: 100vh;
 		max-width: var(--width-lg);
 		z-index: 1;
-		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	h1 {
 		text-align: left;
 		display: inline-block;
-		font-size: 72px;
-		font-weight: 400;
-		max-width: 100%;
-		width: auto;
+		font-size: 8vw;
+		font-weight: 800;
 		color: var(--dark2);
-		/* white-space: nowrap; */
-		line-height: 1.5em;
+		line-height: 1em;
 		padding: 0;
-		margin: 0;
+		margin: 0 auto;
 		font-family: var(--font-misc);
 
 		& .misc {
@@ -142,14 +146,18 @@
 		}
 	}
 
-	.word {
-
+	#bg {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
 	}
 
-	.char {
-		transition: all .5s;
-		&.hidden {
-			opacity: 0;
-		}
+	.path {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: red;
 	}
 </style>
