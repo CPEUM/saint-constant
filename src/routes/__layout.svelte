@@ -54,7 +54,7 @@
 		width: 100%;
 		height: 100%;
 		background: url(/grain.svg);
-		opacity: .3;
+		opacity: .35;
 		background-repeat: repeat;
 		background-size: 1000px;
 	}

@@ -1,15 +1,27 @@
-<script>
+<script context="module" lang="ts">
+	export function load() {
+		const shapefiles = Object.keys(import.meta.globEager("/static/media/decorations/shapes/*.svg"));
+		return {
+			props: {
+				shapefiles
+			}
+		}
+	};
+</script>
+
+<script lang="ts">
 	import Link from '$components/primitives/Link.svelte';
 	import OrientationsBanner from '$components/OrientationsBanner.svelte';
 	import logos from '$data/logos.json';
 	import Splash from '$components/Splash.svelte';
-	import { revealText } from '$actions/revealText';
+	import { reveal } from '$actions/revealText';
+
+	export let shapefiles;
 </script>
 
-<Splash />
-<section>
-	<h1 use:revealText={{stagger: true, hideOnLeave: true}}>Ceci est un test</h1>
-	<h2>Contexte</h2>
+<Splash {shapefiles} />
+<section class="content">
+	<h2 use:reveal={{}}>Contexte</h2>
 	<p>
 		Localisée sur la Rive-Sud de Montréal, la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
 		est en grande transformation en raison de sa croissance démographique et de la réalisation, au

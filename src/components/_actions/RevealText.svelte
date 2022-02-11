@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let is_intersecting: boolean = false;
-	export let text: string;
+	export let nodes: NodeListOf<ChildNode>;
+	// export let text: string;
 	export let duration = 500;
 	export let staggerDelay = 20;
 	export let y = 0;
@@ -12,18 +13,20 @@
 	export let stagger = true;
 	export let mask = false;
 
-	function splitText() {
-		let charIndex = 0;
-		return text.split(' ').map((word) =>
-			word.split('').map((glyph) => ({
-				glyph,
-				index: charIndex++
-			}))
-		);
-	}
+	// function splitText() {
+	// 	let charIndex = 0;
+	// 	return text.split(' ').map((word) =>
+	// 		word.split('').map((glyph) => ({
+	// 			glyph,
+	// 			index: charIndex++
+	// 		}))
+	// 	);
+	// }
+
+	const nodesArray = Array.from(nodes);
 </script>
 
-{#if stagger}
+<!-- {#if stagger}
 	{#each splitText() as word}
 		<span class="word" class:mask style:clip-path="rect()">
 			{#each word as char}
@@ -49,7 +52,7 @@
 	<span class:hidden={!is_intersecting}>
 		{text}
 	</span>
-{/if}
+{/if} -->
 
 <style>
 	.word {
