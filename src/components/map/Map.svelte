@@ -8,8 +8,12 @@
 
 	async function getData(filepath) {
 		const res = await fetch(filepath);
-		const data = await res.json();
-		console.log(data);
+		if (res.ok) {
+			return await res.json();
+		}
+		else {
+			throw new Error('Couldn\'t get data fetched from map component');
+		}
 	}
 
 	onMount(async () => {

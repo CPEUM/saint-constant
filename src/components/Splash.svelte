@@ -53,7 +53,7 @@
 </script>
 
 <header>
-	{#each shapes as shape}
+	<!-- {#each shapes as shape}
 		<div
 			class="shape"
 			style:top="{-$mainScroll.y * shape.parallax}px"
@@ -64,10 +64,9 @@
 		>
 			<div class="grain"></div>
 		</div>
-	{/each}
+	{/each} -->
 	<hgroup>
 		<h1 use:reveal={{
-				hideOnLeave: false,
 				duration: 600,
 				staggerDelay: 15,
 				transformOrigin: '0% 20%',

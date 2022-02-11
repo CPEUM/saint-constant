@@ -1,6 +1,5 @@
+import { mergeObjects } from '$utils/mergeObjects';
 import { intersection } from './intersect';
-import { merge } from 'lodash-es';
-// import RevealTextComponent from '$components/_actions/RevealText.svelte';
 
 interface InitialStyle {
 	opacity?: number;
@@ -26,6 +25,7 @@ interface Options {
 	stagger?: boolean;
 	hideOnLeave?: boolean;
 	mask?: boolean;
+	maskPadding?: string;
 	easing?: string;
 	observerOptions?: IntersectionObserverInit;
 }
@@ -47,11 +47,12 @@ const defaultOptions: Options = {
 			z: 0
 		}
 	},
-	transformOrigin: '0 80%',
+	transformOrigin: '0% 90%',
 	perspective: 1000,
 	stagger: true,
-	hideOnLeave: true,
-	mask: true,
+	hideOnLeave: false,
+	mask: false,
+	maskPadding: '0.5em',
 	easing: 'cubic-bezier(0.35, 0, 0.25, 1)',
 	observerOptions: {
 		rootMargin: '-200px 0px -200px'
@@ -59,15 +60,19 @@ const defaultOptions: Options = {
 };
 
 export function reveal(element: HTMLElement, options?: Options) {
-	options = merge(defaultOptions, options);
+	options = mergeObjects({ ...defaultOptions }, options);
 	element.style.perspective = options.perspective + 'px';
 	element.style.transformStyle = 'preserve-3d';
 
 	function initMaskStyle(el: HTMLElement) {
-		// set styles depending on options.mask value
 		el.style.position = 'relative';
 		el.style.display = 'inline-block';
 		el.style.transformStyle = 'preserve-3d';
+		if (options.mask) {
+			el.style.overflow = 'hidden';
+			el.style.padding = options.maskPadding;
+			el.style.margin = '-' + options.maskPadding; // `calc( -1 * ${options.maskPadding})`;
+		}
 	}
 
 	function initTargetStyle(el: HTMLElement, index: number) {
@@ -83,7 +88,6 @@ export function reveal(element: HTMLElement, options?: Options) {
 	}
 
 	function hideTarget(el: HTMLElement, index: number) {
-		// console.log('hiding target el', index);
 		el.style.opacity = options.start.opacity + '';
 		el.style.transform = `rotateX(${options.start.rotate.x}deg) rotateY(${options.start.rotate.y}deg) rotateZ(${options.start.rotate.z}deg) scale(${options.start.scale.x}, ${options.start.scale.y})`;
 		el.style.top = options.start.y + 'px';
@@ -91,7 +95,6 @@ export function reveal(element: HTMLElement, options?: Options) {
 	}
 
 	function showTarget(el: HTMLElement, index: number) {
-		// console.log('showing target el', index);
 		el.style.opacity = '1';
 		el.style.transform = 'initial';
 		el.style.top = '0';
@@ -101,7 +104,7 @@ export function reveal(element: HTMLElement, options?: Options) {
 	/**
 	 * Parsing child nodes recursively, splitting and wrapping content.
 	 */
-	 function parseElement(element: HTMLElement, rootIndex = 0) {
+	function parseElement(element: HTMLElement, rootIndex = 0) {
 		const targetNodes: HTMLElement[] = [];
 		const maskNodes: HTMLElement[] = [];
 		(Array.from(element.childNodes) as HTMLElement[]).forEach((node) => {
@@ -111,21 +114,24 @@ export function reveal(element: HTMLElement, options?: Options) {
 				maskNodes.push(...nested.masks);
 			} else {
 				node.replaceWith(
-					...node.textContent.trim().split(/\s\b/).map((word) => {
-						const wordspan = document.createElement('span');
-						maskNodes.push(wordspan);
-						initMaskStyle(wordspan);
-						word.split('').forEach((char) => {
-							const charspan = document.createElement('span');
-							charspan.textContent = char.replace(' ', '\u00A0');
-							wordspan.appendChild(charspan);
-							targetNodes.push(charspan);
-							initTargetStyle(charspan, rootIndex + targetNodes.length);
-						});
-						const spacespan = document.createTextNode('\u00A0');
-						wordspan.appendChild(spacespan);
-						return wordspan;
-					})
+					...node.textContent
+						.trim()
+						.split(/\s\b/)
+						.map((word) => {
+							const wordspan = document.createElement('span');
+							maskNodes.push(wordspan);
+							initMaskStyle(wordspan);
+							word.split('').forEach((char) => {
+								const charspan = document.createElement('span');
+								charspan.textContent = char.replace(' ', '\u00A0');
+								wordspan.appendChild(charspan);
+								targetNodes.push(charspan);
+								initTargetStyle(charspan, rootIndex + targetNodes.length);
+							});
+							const spacespan = document.createTextNode('\u00A0');
+							wordspan.appendChild(spacespan);
+							return wordspan;
+						})
 				);
 			}
 		});
@@ -158,7 +164,7 @@ export function reveal(element: HTMLElement, options?: Options) {
 
 	return {
 		update(updatedOptions: Options) {
-			console.log("updated reveal action's options");
+			// Update targets' and masks' styles accordingly
 		},
 		destroy() {
 			intersect.destroy();
@@ -169,46 +175,3 @@ export function reveal(element: HTMLElement, options?: Options) {
 		}
 	};
 }
-
-// Previous version
-// export function revealText(element: HTMLElement, options?: Options) {
-
-// 	const text = element.textContent;
-
-// 	element.style.perspective = '900px';
-
-// 	const contentComponent = new RevealTextComponent({
-// 		props: {
-// 			text,
-// 			...options
-// 		},
-// 		target: element,
-// 		hydrate: true
-// 	});
-
-// 	const observer = intersection(element, {rootMargin: '-200px 0px -200px'});
-// 	function enter() {
-// 		contentComponent.$set({ is_intersecting: true });
-// 	}
-// 	function leave() {
-// 		contentComponent.$set({ is_intersecting: false });
-// 	}
-// 	element.addEventListener('enter', enter);
-// 	if (options?.hideOnLeave) {
-// 		element.addEventListener('leave', leave);
-// 	}
-
-// 	return {
-// 		update(updatedOptions: Options) {
-// 			console.log("updated reveal action's options");
-// 		},
-// 		destroy() {
-// 			observer.destroy();
-// 			element.removeEventListener('enter', enter);
-// 			if (options?.hideOnLeave) {
-// 				element.removeEventListener('leave', leave);
-// 			}
-// 			contentComponent.$destroy();
-// 		}
-// 	};
-// }

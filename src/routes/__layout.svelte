@@ -30,15 +30,15 @@
 <Nav />
 {#if mounted && !$navigating}
 	<main in:fade={{}} class:is-map-full={$isMapFull}>
-		<div class="grain" />
+		<!-- <div class="grain" /> -->
 		<article>
 			<slot />
 		</article>
 		<Footer />
 	</main>
 {/if}
+<Map />
 
-<!-- <Map /> -->
 <style lang="postcss">
 	main {
 		position: relative;

@@ -21,7 +21,7 @@
 
 <Splash {shapefiles} />
 <section class="content">
-	<h2 use:reveal={{}}>Contexte</h2>
+	<h2 use:reveal>Contexte</h2>
 	<p>
 		Localisée sur la Rive-Sud de Montréal, la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
 		est en grande transformation en raison de sa croissance démographique et de la réalisation, au
