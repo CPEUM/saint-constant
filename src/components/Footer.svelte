@@ -3,8 +3,8 @@
 	import Link from './primitives/Link.svelte';
 
 	const extLinks = [
-		{title: 'Chaire en paysage et environnement de l’Université de Montréal', href: 'https://paysage.umontreal.ca'},
-		{title: 'Chaire UNESCO en paysage urbain', href: 'https://unesco-paysage.umontreal.ca'},
+		{title: 'CPEUM', href: 'https://paysage.umontreal.ca'},
+		{title: 'CUPUM', href: 'https://unesco-paysage.umontreal.ca'},
 		{title: 'Ville de Saint-Constant', href: 'https://saint-constant.ca'},
 		{title: 'MRC de Roussillon', href: 'https://roussillon.ca'},
 		{title: 'Ministère de l’Économie et de l’Innovation du Québec', href: 'https://www.economie.gouv.qc.ca/accueil/'}
@@ -14,6 +14,18 @@
 
 <footer>
 	<div>
+		Logos
+	</div>
+	<div>
+		<section>
+			<ul>
+				{#each extLinks as l}
+					<li>
+						<Link href={l.href} rel="external">{l.title}</Link>
+					</li>
+				{/each}
+			</ul>
+		</section>
 		<section>
 			<ul>
 				{#each $routes as route}
@@ -26,15 +38,6 @@
 		<section>
 			Copyright
 		</section>
-		<section>
-			<ul>
-				{#each extLinks as l}
-					<li>
-						<Link href={l.href} rel="external">{l.title}</Link>
-					</li>
-				{/each}
-			</ul>
-		</section>
 	</div>
 </footer>
 
@@ -42,11 +45,13 @@
 <style>
 	footer {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		padding: 2rem;
+		padding-inline: 2rem;
+		padding-top: 200px;
+		padding-bottom: 2rem;
 		font-size: var(--sm);
 		/* background-color: var(--light2); */
 	}
@@ -66,11 +71,11 @@
 	}
 
 	section:first-of-type {
-		text-align: right;
+		text-align: left;
 	}
 
 	section:last-of-type {
-		text-align: left;
+		text-align: right;
 	}
 
 	ul {

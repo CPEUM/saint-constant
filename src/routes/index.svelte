@@ -11,52 +11,39 @@
 
 <script lang="ts">
 	import Link from '$components/primitives/Link.svelte';
-	import OrientationsBanner from '$components/OrientationsBanner.svelte';
+	import Orientations from '$components/index/Orientations.svelte';
 	import logos from '$data/logos.json';
-	import Splash from '$components/Splash.svelte';
+	import Splash from '$components/index/Splash.svelte';
 	import { reveal } from '$actions/revealText';
 
 	export let shapefiles;
 </script>
 
 <Splash {shapefiles} />
-<section class="content">
+<div class="text-wrap">
 	<h2 use:reveal>Contexte</h2>
-	<p>
-		Localisée sur la Rive-Sud de Montréal, la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
+	<p class="left">
+		Localisée sur la Rive-Sud de Montréal, la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
 		est en grande transformation en raison de sa croissance démographique et de la réalisation, au
 		cours des prochaines années, de plusieurs projets d’infrastructures et de développement urbain. Afin
 		d’alimenter la planification de ces projets, la Ville de Saint-Constant s’interroge sur la portée
 		de ses interventions sur ses paysages, autant du point de vue de ses résidents que des visiteurs.
 		À cette fin, la ville désire se doter d’outils pour <strong>améliorer sa connaissance des enjeux de paysage et pour assurer la cohérence des interventions sur l’ensemble du territoire municipal</strong>.
 	</p>
-	<p>
-		Dans le cadre d’un appel à projets en innovation sociale financé par le <Link
-			href="https://www.economie.gouv.qc.ca/accueil/"
-			>ministère de l’Économie et de l’Innovation du Québec</Link
-		> et en appui avec la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link> et la
-		<Link href="https://roussillon.ca/">MRC de Roussillon</Link>, l’expertise de la <Link
-			href="https://paysage.umontreal.ca"
-			>Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link
-		> et de la <Link href="https://unesco-paysage.umontreal.ca"
-			>Chaire UNESCO en paysage urbain (CUPUM)</Link
-		> de la même institution a été mise à profit pour développer de
-		<strong
-			>nouveaux outils et de nouvelles approches de planification territoriale plus sensibles aux
-			valorisations sociales et culturelles des paysages</strong
-		>.
+	<p class="right">
+		Dans le cadre d’un appel à projets en innovation sociale financé par le <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et en appui avec la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link> et la <Link rel="external" href="https://roussillon.ca/">MRC de Roussillon</Link>, l’expertise de la <Link rel="external" href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> et de la <Link rel="external" href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain (CUPUM)</Link> de la même institution a été mise à profit pour développer de <strong>nouveaux outils et de nouvelles approches de planification territoriale plus sensibles aux valorisations sociales et culturelles des paysages</strong>.
 	</p>
-</section>
-<section>
+</div>
+<section class="logos">
 	{#each logos as logo}
-		<a href={logo.href} rel="external" target="_blank">
+		<a href={logo.href} rel="external" target="_blank" class="logo">
 			<img src="/media/logos/{logo.filename}" alt={logo.alt} />
 		</a>
 	{/each}
 </section>
-<section>
-	<h2>Objectifs <em>du</em> <i>projet</i></h2>
-	<p>Ce projet vise trois principaux objectifs&nbsp;:</p>
+<div class="text-wrap">
+	<h2 use:reveal>Objectifs du projet</h2>
+	<p class="left">Ce projet vise trois principaux objectifs&nbsp;:</p>
 	<ul>
 		<li>
 			Co-construire des outils de connaissance, d’intervention et de gestion des paysages et des
@@ -72,26 +59,33 @@
 			résultats de la démarche.
 		</li>
 	</ul>
-	<p>
-		<strong
-			>Le présent site vise à exposer les résultats de ce travail de co-construction. Il présente
-			ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de
-			Saint-Constant.</strong
-		> Celles-ci se déclinent selon trois grandes orientations, soit&nbsp;:
+	<p class="right">
+		<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations, soit&nbsp;:
 	</p>
-	<OrientationsBanner />
+</div>
+<Orientations />
+<div class="text-wrap">
 	<p>
-		Ces orientations reposent sur la lecture des attraits du territoire, des préoccupations et des
-		aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de
-		diagnostic du projet. De même, elles découlent des propositions d’aménagement formulées au cours
-		de la phase d’idéation. Les propositions d’aménagement présentées sont assorties d’une <strong
-			>charte de principes directeurs susceptibles d’assurer, à terme, la cohérence des actions en
-			vue de la préservation, de la mise en valeur et du développement des attraits des paysages de
-			la Ville de Saint-Constant</strong
-		>.
+		Ces orientations reposent sur la lecture des attraits du territoire, des préoccupations et des aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de diagnostic du projet. De même, elles découlent des propositions d’aménagement formulées au cours de la phase d’idéation. Les propositions d’aménagement présentées sont assorties d’une <strong>charte de principes directeurs susceptibles d’assurer, à terme, la cohérence des actions en vue de la préservation, de la mise en valeur et du développement des attraits des paysages de la Ville de Saint-Constant</strong>.
 	</p>
-</section>
+</div>
 
 <style lang="postcss">
+	.logos {
+		padding-block: 4rem;
+		width: 100%;
+		max-width: var(--width-lg);
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 
+		& .logo {
+			display: block;
+			flex: 1;
+			min-width: 200px;
+			margin: 2rem;
+			padding: 2rem;
+		}
+	}
 </style>

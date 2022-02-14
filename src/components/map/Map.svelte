@@ -1,10 +1,11 @@
-<script>
-	import { onMount } from 'svelte';
+<script lang="ts">
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { Map as M } from 'maplibre-gl';
-	import { isMapFull, mapViewMode } from '$stores/map';
+	import { mapState } from '$stores/map';
 
-	let map;
-	let container;
+	let map: M;
+	let container: HTMLElement;
+	const dispatch = createEventDispatcher<{load: null}>();
 
 	async function getData(filepath) {
 		const res = await fetch(filepath);
@@ -24,18 +25,20 @@
 			style: 'https://demotiles.maplibre.org/style.json', // style URL
 			center: [0, 0], // starting position [lng, lat]
 			zoom: 1 // starting zoom
+		});
+
+		map.once('load', () => {
+			console.log('map loaded');
+			dispatch('load');
 		})
 	});
-
-	// ajouter une règle du genre:
-	// $: if (browser) document.body.classList.toggle('noscroll', toggle);
-	// pour cacher la scrollbar lorsque la carte est ouverte
 </script>
 
 
 <figure
-	class:full={$isMapFull}
-	class={$mapViewMode ? $mapViewMode : ''}
+	class:full={$mapState.isfull}
+	class={$mapState.class}
+	style={$mapState.style}
 >
 	<div bind:this={container}></div>
 </figure>
@@ -50,21 +53,41 @@
 		justify-content: center;
 		align-items: center;
 		top: 0;
+		bottom: 0;
+		left: 100%;
 		right: 0;
-		width: 0%;
+		width: auto;
+		height: auto;
 		padding: 0;
 		margin: 0;
-		height: 100%;
 		overflow: hidden;
-		transition: all .5s cubic-bezier(.8, 0, .2, 1);
+		transition: all .5s cubic-bezier(.9, 0, .1, 1);
 
 		&.full {
-			height: 100% !important;
-			width: 100vw !important;
+			top: 0 !important;
+			bottom: 0 !important;
+			left: 0 !important;
+			right: 0 !important;
 		}
 
-		&.proposition {
+		&:global(.medium) {
+			--pad: 150px;
+			--offset: 33%;
+			--offset-width: calc(50vw - var(--width-md) / 2);
+			top: var(--pad);
+			bottom: var(--pad);
+			/* border-radius: var(--sm); */
+			box-shadow: 0px 100px 75px -25px rgba(0,0,0, .1);
+		}
 
+		&:global(.left) {
+			left: var(--offset);
+			right: var(--offset-width);
+		}
+
+		&:global(.right) {
+			right: var(--offset);
+			left: var(--offset-width);
 		}
 	}
 
@@ -75,4 +98,6 @@
 		width: 100vw;
 		height: 100vh;
 	}
+
+
 </style>

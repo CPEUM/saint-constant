@@ -15,11 +15,17 @@
 	style:--color={color}
 	style:--hover-color={hoverColor}
 >
-<!-- use:hoverbubble={{color: 'var(--accent1)'}} -->
+	<span class="link-text">
+		<slot></slot>
+	</span>&emsp;
 	{#if $$restProps.rel === 'external'}
-		<span class="ext">🡽</span>
+		<span class="ext">
+			<svg xmlns="http://www.w3.org/2000/svg" width=100 height=100 viewBox="0 0 100 100">
+				<line x1=5 y1=95 x2=90 y2=10 />
+				<path d="M 30,5 L 95,5 95,70" />
+			</svg>
+		</span>
 	{/if}
-	<slot></slot>
 </a>
 
 
@@ -32,31 +38,69 @@
 		position: relative;
 		z-index: 1;
 		text-decoration: none;
-		border-radius: 3px;
+		border-radius: 1.5em;
 		transition: all .25s;
+		white-space: nowrap;
+		vertical-align: bottom;
+		padding-inline: .2em;
 		--bg-color: rgba(0, 0, 0, 0.05);
 
 		&:hover {
 			color: var(--hover-color);
 			background-color: var(--bg-color);
-			box-shadow: 0px 0px 0px 4px var(--bg-color);
+			box-shadow: 0px 0px 0px 8px var(--bg-color);
+
+			& .ext {
+				/* background-color: var(--light1); */
+				opacity: 1;
+			}
+
+			& line,
+			& path {
+				stroke: var(--hover-color);
+				stroke-dashoffset: -300;
+			}
 		}
 	}
 
-	.ext {
-		display: inline;
-		font-family: var(--font-misc);
-		box-shadow: 0 0 0 .1em var(--color);
-		padding-inline: .2em;
-		border-radius: .25em;
-		font-weight: 600;
-		height: 1em;
-		margin-right: .25em;
-		opacity: .5;
-		transition: all .25s;
+	.link-text {
+		white-space: normal;
 	}
 
-	a:hover .ext {
-		box-shadow: 0 0 0 .1em var(--hover-color);
+	.ext {
+		position: relative;
+		top: .22em;
+		left: 0;
+		display: inline-block;
+		width: 1.2em;
+		height: 1.2em;
+		padding: .25em;
+		border-radius: .25em;
+		opacity: .5;
+		transition: all .5s;
+	}
+
+	svg {
+		display: block;
+		position: relative;
+		top: 0;
+		left: 0;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+	}
+
+	line,
+	path {
+		stroke-width: 16;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+		stroke: var(--color);
+		transition: all .8s cubic-bezier(.2, 0, .2, 1);
+		stroke-dasharray: 200 100;
+		stroke-dashoffset: 0;
 	}
 </style>

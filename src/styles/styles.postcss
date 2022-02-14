@@ -32,7 +32,9 @@ body {
 	scroll-behavior: smooth;
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
 	text-rendering: optimizeLegibility;
 	box-sizing: border-box;
 }
@@ -46,18 +48,29 @@ strong {
 	font-weight: 600;
 }
 
-section.content {
+.text-wrap {
+	position: relative;
 	width: 100%;
-	max-width: var(--width-sm);
-	margin-inline: auto;
-	margin-block: 0;
+	max-width: var(--width-md);
+	margin: 0;
+	padding-block: 0;
+	padding-inline: 0;
 
-	.left {
+	& > p {
+		/* text-align: justify; */
+		padding-block: 4rem;
+		display: block;
+		position: relative;
+		max-width: var(--width-sm);
+		margin-inline: auto;
 
-	}
-
-	.right {
-
+		&.left {
+			margin-left: 0;
+		}
+	
+		&.right {
+			margin-right: 0;
+		}
 	}
 }
 

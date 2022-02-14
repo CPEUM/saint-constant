@@ -76,9 +76,9 @@
 					}
 				}
 			}}
-			style:transform="translateY({$mainScroll.y / 4}px)"
+			style:transform="translateY({$mainScroll.y / 3}px)"
 		>
-			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBaINS <span class="left"> DE LA VILLE DE SAINT-CONSTANT &#8595;</span>
+			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBaINS <span class="left">DE LA VILLE DE SAINT-CONSTANT &#8595;</span>
 		</h1>
 	</hgroup>
 </header>
@@ -131,8 +131,9 @@
 	}
 
 	h1 {
+		position: relative;
 		display: inline-block;
-		font-size: clamp(56px, 8vw, 98px);
+		font-size: clamp(56px, 7vw, 92px);
 		font-weight: 400;
 		color: var(--dark2);
 		line-height: 1.1em;
@@ -140,7 +141,7 @@
 		margin-block: 200px;
 		margin-inline: auto;
 		font-family: var(--font-misc);
-		letter-spacing: 0.25em;
+		letter-spacing: 0.2em;
 		text-align: right;
 
 		& .left {

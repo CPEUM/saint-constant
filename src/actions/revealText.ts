@@ -62,12 +62,17 @@ const defaultOptions: Options = {
 export function reveal(element: HTMLElement, options?: Options) {
 	options = mergeObjects({ ...defaultOptions }, options);
 	element.style.perspective = options.perspective + 'px';
-	element.style.transformStyle = 'preserve-3d';
+	element.style.perspectiveOrigin = 'center';
 
-	function initMaskStyle(el: HTMLElement) {
+	function initNestedWrapperStyle(el: HTMLElement) {
 		el.style.position = 'relative';
 		el.style.display = 'inline-block';
 		el.style.transformStyle = 'preserve-3d';
+	}
+
+	function initMaskStyle(el: HTMLElement) {
+		initNestedWrapperStyle(el);
+		el.style.whiteSpace = 'nowrap';
 		if (options.mask) {
 			el.style.overflow = 'hidden';
 			el.style.padding = options.maskPadding;
@@ -82,7 +87,7 @@ export function reveal(element: HTMLElement, options?: Options) {
 		el.style.transitionDelay = options.stagger ? options.staggerDelay * index + 'ms' : '0';
 		el.style.transitionDuration = options.duration + 'ms';
 		el.style.transitionTimingFunction = options.easing;
-		el.style.transitionProperty = 'all'; // 'transform, opacity, top, left';
+		el.style.transitionProperty = 'opacity, transform, top, left';
 		el.style.position = 'relative';
 		el.style.display = 'inline-block';
 	}
@@ -109,30 +114,43 @@ export function reveal(element: HTMLElement, options?: Options) {
 		const maskNodes: HTMLElement[] = [];
 		(Array.from(element.childNodes) as HTMLElement[]).forEach((node) => {
 			if (node.tagName) {
+				initNestedWrapperStyle(node);
 				const nested = parseElement(node, targetNodes.length);
 				targetNodes.push(...nested.targets);
 				maskNodes.push(...nested.masks);
-			} else {
-				node.replaceWith(
-					...node.textContent
-						.trim()
-						.split(/\s\b/)
-						.map((word) => {
+			}
+			else {
+				const newNodes = [];
+				node.textContent
+					.split(/(\s)/)	// previously was: /\s\b/
+					.forEach((word) => {
+						// console.log('"' + word + '"');
+						if (!word) {
+							return;
+						}
+						else if (word === ' ') {
+							newNodes.push(document.createTextNode(' '));
+						}
+						else {
 							const wordspan = document.createElement('span');
 							maskNodes.push(wordspan);
 							initMaskStyle(wordspan);
 							word.split('').forEach((char) => {
-								const charspan = document.createElement('span');
-								charspan.textContent = char.replace(' ', '\u00A0');
-								wordspan.appendChild(charspan);
-								targetNodes.push(charspan);
-								initTargetStyle(charspan, rootIndex + targetNodes.length);
+								if (char.indexOf(' ') > -1) {
+									wordspan.appendChild(document.createTextNode(' '));
+								}
+								else {
+									const charspan = document.createElement('span');
+									charspan.textContent = char; //.replace(' ', '\u00A0');
+									wordspan.appendChild(charspan);
+									targetNodes.push(charspan);
+									initTargetStyle(charspan, rootIndex + targetNodes.length);
+								}
 							});
-							const spacespan = document.createTextNode('\u00A0');
-							wordspan.appendChild(spacespan);
-							return wordspan;
-						})
-				);
+							newNodes.push(wordspan);
+						}
+					});
+				node.replaceWith(...newNodes);
 			}
 		});
 		return {

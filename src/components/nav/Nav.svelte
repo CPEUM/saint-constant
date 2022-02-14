@@ -5,7 +5,6 @@
 	import { routes } from '$utils/routes';
 	import { draw, fly } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
-	import { isMapFull } from '$stores/map';
 	import { mainScroll } from '$stores/scroll';
 	import { onMount } from 'svelte';
 
@@ -42,6 +41,7 @@
 						href={r.path}
 						sveltekit:prefetch
 						class:current={r == $currentRoute}
+						style:background-color={$mainScroll.y > yLimit + 200 ? 'var(--light1)' : ''}
 						style:--delay="{i * 60}ms"
 					>
 						<svg>
@@ -118,7 +118,8 @@
 		overflow: hidden;
 		transition: transform 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1),
 			opacity 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1),
-			box-shadow 0.3s ease-in-out;
+			box-shadow 0.3s ease-in-out,
+			background-color .5s ease;
 
 		& .text {
 			z-index: 1;
