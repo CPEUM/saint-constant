@@ -1,6 +1,6 @@
 <script>
 	import { intersection } from '$actions/intersect';
-	import { mapViewMode, mapFocus } from '$stores/map';
+	import { mapState, mapFocus } from '$stores/map';
 	import { mainScroll } from '$stores/scroll';
 
 	export let title;
@@ -19,11 +19,11 @@
 	}
 
 	function showMap() {
-		mapViewMode.set('proposition');
+		// mapViewMode.set('proposition');
 	}
 
 	function hideMap() {
-		mapViewMode.unset('proposition')
+		// mapViewMode.unset('proposition')
 	}
 
 	function updateParallax() {

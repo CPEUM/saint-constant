@@ -7,6 +7,7 @@
 	import { expoOut } from 'svelte/easing';
 	import { mainScroll } from '$stores/scroll';
 	import { onMount } from 'svelte';
+import { mapState } from '$stores/map';
 
 	let mounted = false;
 
@@ -35,7 +36,7 @@
 {#if mounted}
 	<header in:fly={{ opacity: 0, y: -20, duration: 800, easing: expoOut, delay: 1000 }}>
 		<div>
-			<nav class:hidden={$mainScroll.direction == 'down' && $mainScroll.y > yLimit}>
+			<nav class:hidden={($mainScroll.direction == 'down' && $mainScroll.y > yLimit) || $mapState.isfull}>
 				{#each $routes as r, i}
 					<a
 						href={r.path}

@@ -30,8 +30,8 @@
 		<article>
 			<slot />
 		</article>
-		<Footer />
 	</main>
+	<Footer />
 {/if}
 <Map on:load={() => mapLoaded = true} />
 

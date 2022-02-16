@@ -1,6 +1,6 @@
-@import 'overlayscrollbars/css/OverlayScrollbars.css';
+/* @import 'overlayscrollbars/css/OverlayScrollbars.css'; */
 
-body.os-host {
+/* body.os-host {
 
 	> .os-scrollbar-vertical {
 		width: 1rem;
@@ -23,19 +23,25 @@ body.os-host {
 				width: 2px;
 				background-color: rgba(0,0,0, .45);
 				transition: background-color .3s ease !important;
-
-				/* &::after {
-					content: '';
-					position: absolute;
-					width: 10px;
-					top: -4px;
-					bottom: -4px;
-					left: -4px;
-					border-radius: 2px;
-					background-color: transparent;
-					transition: background-color .3s ease !important;
-				} */
 			}
 		}
 	}
+} */
+
+::-webkit-scrollbar{
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-thumb{
+	background: var(--dark1);
+	border-radius: 5px;
+	border: 2px solid white;
+}
+::-webkit-scrollbar-thumb:hover{
+	background: var(--dark3);
+}
+::-webkit-scrollbar-track{
+	background: var(--light1);
+	border-radius: 5px;
+	box-shadow: none;
 }

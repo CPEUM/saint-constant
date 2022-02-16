@@ -28,7 +28,6 @@
 		});
 
 		map.once('load', () => {
-			console.log('map loaded');
 			dispatch('load');
 		})
 	});
@@ -46,6 +45,7 @@
 
 <style lang="postcss">
 	figure {
+		--ease: cubic-bezier(.9, 0, .1, 1);
 		pointer-events: auto;
 		position: fixed;
 		z-index: 0;
@@ -61,9 +61,10 @@
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		transition: all .5s cubic-bezier(.9, 0, .1, 1);
+		transition: all .5s var(--ease);
 
 		&.full {
+			z-index: 1;
 			top: 0 !important;
 			bottom: 0 !important;
 			left: 0 !important;
@@ -72,8 +73,8 @@
 
 		&:global(.medium) {
 			--pad: 150px;
-			--offset: 33%;
-			--offset-width: calc(50vw - var(--width-md) / 2);
+			--offset-inside: calc(50vw - var(--width-lg) / 4);
+			--offset-outside: calc(50vw - var(--width-lg) / 2);
 			top: var(--pad);
 			bottom: var(--pad);
 			/* border-radius: var(--sm); */
@@ -81,13 +82,13 @@
 		}
 
 		&:global(.left) {
-			left: var(--offset);
-			right: var(--offset-width);
+			left: var(--offset-inside);
+			right: var(--offset-outside);
 		}
 
 		&:global(.right) {
-			right: var(--offset);
-			left: var(--offset-width);
+			right: var(--offset-inside);
+			left: var(--offset-outside);
 		}
 	}
 

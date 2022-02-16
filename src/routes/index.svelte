@@ -12,8 +12,8 @@
 <script lang="ts">
 	import Link from '$components/primitives/Link.svelte';
 	import Orientations from '$components/index/Orientations.svelte';
-	import logos from '$data/logos.json';
 	import Splash from '$components/index/Splash.svelte';
+	import LogoBanner from '$components/LogoBanner.svelte';
 	import { reveal } from '$actions/revealText';
 
 	export let shapefiles;
@@ -34,17 +34,11 @@
 		Dans le cadre d’un appel à projets en innovation sociale financé par le <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et en appui avec la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link> et la <Link rel="external" href="https://roussillon.ca/">MRC de Roussillon</Link>, l’expertise de la <Link rel="external" href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> et de la <Link rel="external" href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain (CUPUM)</Link> de la même institution a été mise à profit pour développer de <strong>nouveaux outils et de nouvelles approches de planification territoriale plus sensibles aux valorisations sociales et culturelles des paysages</strong>.
 	</p>
 </div>
-<section class="logos">
-	{#each logos as logo}
-		<a href={logo.href} rel="external" target="_blank" class="logo">
-			<img src="/media/logos/{logo.filename}" alt={logo.alt} />
-		</a>
-	{/each}
-</section>
+<LogoBanner />
 <div class="text-wrap">
 	<h2 use:reveal>Objectifs du projet</h2>
 	<p class="left">Ce projet vise trois principaux objectifs&nbsp;:</p>
-	<ul>
+	<ul class="right">
 		<li>
 			Co-construire des outils de connaissance, d’intervention et de gestion des paysages et des
 			cadres de vie de la Ville de Saint-Constant;
@@ -59,7 +53,7 @@
 			résultats de la démarche.
 		</li>
 	</ul>
-	<p class="right">
+	<p class="left">
 		<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations, soit&nbsp;:
 	</p>
 </div>
@@ -71,21 +65,5 @@
 </div>
 
 <style lang="postcss">
-	.logos {
-		padding-block: 4rem;
-		width: 100%;
-		max-width: var(--width-lg);
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-
-		& .logo {
-			display: block;
-			flex: 1;
-			min-width: 200px;
-			margin: 2rem;
-			padding: 2rem;
-		}
-	}
+	
 </style>

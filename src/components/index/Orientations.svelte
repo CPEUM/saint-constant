@@ -12,7 +12,7 @@
 	const rootMargin = '-50% 0% -50% 0%';
 	const dist = 100;
 
-	$:	console.log(current);
+	$:	console.log(prev);
 
 	function leave() {
 		mapState.setClass('');
@@ -22,11 +22,11 @@
 
 	function exEnter(i: number) {
 		mapState.setClass(i%2 === 0 ? 'medium right' : 'medium left');
-		debounce(current = i);
+		current = i;
 	}
 
 	function exLeave(i: number) {
-		debounce(prev = i);
+		prev = current ? i : null;
 	}
 </script>
 
