@@ -1,25 +1,23 @@
 import { mergeObjects } from '$utils/mergeObjects';
 import { intersection } from './intersect';
 
-interface InitialStyle {
-	opacity?: number;
-	x?: number | string;
-	y?: number | string;
-	scale?: {
-		x?: number;
-		y?: number;
-	};
-	rotate?: {
-		x?: number;
-		y?: number;
-		z?: number;
-	};
-}
-
 interface Options {
 	duration?: number;
 	staggerDelay?: number;
-	start?: InitialStyle;
+	start?: {
+		opacity?: number;
+		x?: number | string;
+		y?: number | string;
+		scale?: {
+			x?: number;
+			y?: number;
+		};
+		rotate?: {
+			x?: number;
+			y?: number;
+			z?: number;
+		};
+	};
 	transformOrigin?: string;
 	perspective?: number;
 	stagger?: boolean;
@@ -27,6 +25,7 @@ interface Options {
 	mask?: boolean;
 	maskPadding?: string;
 	easing?: string;
+	granularity?: 'word' | 'letter';
 	observerOptions?: IntersectionObserverInit;
 }
 
@@ -54,11 +53,16 @@ const defaultOptions: Options = {
 	mask: false,
 	maskPadding: '0.5em',
 	easing: 'cubic-bezier(0.35, 0, 0.25, 1)',
+	granularity: 'letter',
 	observerOptions: {
 		rootMargin: '-200px 0px -200px'
 	}
 };
 
+/**
+ * Action to apply "reveal", and optional "leave", transitions on the text content of the host element
+ * based on the host's viewport intersection.
+ */
 export function reveal(element: HTMLElement, options?: Options) {
 	options = mergeObjects({ ...defaultOptions }, options);
 	element.style.perspective = options.perspective + 'px';
@@ -95,8 +99,8 @@ export function reveal(element: HTMLElement, options?: Options) {
 	function hideTarget(el: HTMLElement, index: number) {
 		el.style.opacity = options.start.opacity + '';
 		el.style.transform = `rotateX(${options.start.rotate.x}deg) rotateY(${options.start.rotate.y}deg) rotateZ(${options.start.rotate.z}deg) scale(${options.start.scale.x}, ${options.start.scale.y})`;
-		el.style.top = options.start.y + 'px';
-		el.style.left = options.start.x + 'px';
+		el.style.top = options.start.y + (isNaN(Number(options.start.y)) ? '' : 'px');
+		el.style.left = options.start.x + (isNaN(Number(options.start.x)) ? '' : 'px');
 	}
 
 	function showTarget(el: HTMLElement, index: number) {
@@ -118,28 +122,24 @@ export function reveal(element: HTMLElement, options?: Options) {
 				const nested = parseElement(node, targetNodes.length);
 				targetNodes.push(...nested.targets);
 				maskNodes.push(...nested.masks);
-			}
-			else {
+			} else {
 				const newNodes = [];
 				node.textContent
-					.split(/(\s)/)	// previously was: /\s\b/
+					.split(/(\s)/) // previously was: /\s\b/
 					.forEach((word) => {
 						// console.log('"' + word + '"');
 						if (!word) {
 							return;
-						}
-						else if (word === ' ') {
+						} else if (word === ' ') {
 							newNodes.push(document.createTextNode(' '));
-						}
-						else {
+						} else {
 							const wordspan = document.createElement('span');
 							maskNodes.push(wordspan);
 							initMaskStyle(wordspan);
 							word.split('').forEach((char) => {
 								if (char.indexOf(' ') > -1) {
 									wordspan.appendChild(document.createTextNode(' '));
-								}
-								else {
+								} else {
 									const charspan = document.createElement('span');
 									charspan.textContent = char; //.replace(' ', '\u00A0');
 									wordspan.appendChild(charspan);
@@ -192,4 +192,17 @@ export function reveal(element: HTMLElement, options?: Options) {
 			}
 		}
 	};
+}
+
+/* Presets */
+
+export const revealFlyUp: Options = {
+	// to do
+}
+
+export const revealFlyDown: Options = {
+	...revealFlyUp,
+	start: {
+		y: '1em'
+	}
 }
