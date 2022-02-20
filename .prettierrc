@@ -11,5 +11,6 @@
 	"svelteIndentScriptAndStyle": true,
 	"svelteAllowShorthand": true,
 	"jsdocPrintWidth": 100,
-	"quoteProps": "consistent"
+	"quoteProps": "consistent",
+	"breakBeforeElse": true
 }
