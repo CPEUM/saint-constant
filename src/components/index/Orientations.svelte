@@ -1,32 +1,23 @@
 <script lang="ts">
 	import { exerciceRoutes } from '$utils/routes';
-	import { getExerciceColors } from '$utils/exerciceColors';
-	import { hoverbubble } from '$actions/hoverBubble';
 	import { intersection } from '$actions/intersect';
 	import { debounce } from '$utils/debounce';
-	import { fly } from 'svelte/transition';
 	import { mapState } from '$stores/map';
+	import { getAccentColors } from '$utils/exerciceColors';
+	import { revealText } from '$actions/revealText';
+	import { text } from '$transitions/text';
+	import { mainScroll } from '$stores/scroll';
 
-	let current = null;
-	let prev = null;
+	let current = 0;
 	const rootMargin = '-50% 0% -50% 0%';
-	const dist = 100;
-
-	$:	console.log(prev);
 
 	function leave() {
 		mapState.setClass('');
-		current = null;
-		prev = null;
 	}
 
 	function exEnter(i: number) {
 		mapState.setClass(i%2 === 0 ? 'medium right' : 'medium left');
 		current = i;
-	}
-
-	function exLeave(i: number) {
-		prev = current ? i : null;
 	}
 </script>
 
@@ -39,28 +30,50 @@
 			class="triggers"
 			use:intersection={{rootMargin}}
 			on:enter={() => exEnter(i)}
-			on:leave={() => exLeave(i)}
-		/>
+			style={getAccentColors(ex.cssPrefix)}
+		>
+			<span class="number" class:right={i%2 !== 0}>{i + 1}</span>
+		</div>
 	{/each}
-	<div class="board">
-		{#if current !== null}
-			{#key current}
+	<div id="board">
+		<div id="board-content">
+			{#each exerciceRoutes as ex, i}
 				<a
-					in:fly={{y: prev === null ? 0 : current > prev ? dist : -dist}}
-					out:fly={{y: current === null ? 0 : current < prev ? dist : -dist}}
-					href={exerciceRoutes[current].path}
+					class:right={i%2 !== 0}
+					class:disabled={i !== current}
+					href={ex.path}
 					sveltekit:prefetch
-					style={getExerciceColors(current)}
-					use:hoverbubble={{
-						color: 'var(--accent1)',
-						size: 350
-					}}
+					style={getAccentColors(ex.cssPrefix)}
 				>
-					<span>{exerciceRoutes[current].heading}</span>
-					<p>{exerciceRoutes[current].description}</p>
+					<p
+						class="title"
+						use:revealText={{
+							visible: i === current,
+							duration: 650,
+							staggerDelay: 55,
+							mask: true,
+							maskPadding: '.1em',
+							y: '1em',
+							granularity: 'word'
+						}}
+					>
+						{ex.heading}
+					</p>
+					<p
+						class="desc"
+						use:revealText={{
+							visible: i === current,
+							duration: 350,
+							staggerDelay: 35,
+							rotateX: -80,
+							granularity: 'word'
+						}}
+					>
+						{@html ex.description}
+					</p>
 				</a>
-			{/key}
-		{/if}
+			{/each}
+		</div>
 	</div>
 </section>
 
@@ -69,30 +82,93 @@
 		position: relative;
 		width: 100%;
 		max-width: var(--width-lg);
-		margin-block: 50vh;
+		margin-block: 25vh;
 		margin-inline: auto;
 	}
 
 	.triggers {
 		position: relative;
 		width: 100%;
-		height: 100vh;
-		padding-block: 4rem;
+		height: 150vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.board {
-		position: absolute;
-		top: 0;
+	.number {
+		display: flex;
 		width: 100%;
 		height: 100%;
+		position: absolute;
+		font-size: 120vh;
+		font-family: var(--font-misc);
+		align-items: center;
+		justify-content: flex-start;
+		z-index: -1;
+		color: var(--accent1);
+		opacity: .5;
+
+		&.right {
+			justify-content: flex-end;
+		}
+	}
+
+	#board {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding-inline: 4rem;
+	}
+
+	#board-content {
+		width: 100%;
+		height: 100vh;
+		position: sticky;
+		top: 0;
 	}
 
 	a {
-		position: sticky;
-		top: 40%;
+		position: absolute;
+		top: 50%;
+		left: 0;
 		display: block;
-		background-color: white;
-		padding: 2rem;
+		background-color: transparent;
+		text-decoration: none;
+		padding: 0;
+		margin: 0;
 		max-width: var(--width-sm);
+		transform: translateY(-50%);
+		color: var(--dark2);
+
+		&.right {
+			right: 0;
+			text-align: right;
+			margin-left: auto;
+		}
+	}
+
+	.disabled {
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.title {
+		display: inline-block;
+		font-size: var(--xxxl);
+		font-weight: 500;
+		line-height: 1em;
+	}
+
+	.desc {
+		display: inline-block;
+		line-height: 1.5em;
+		letter-spacing: .5px;
+		padding: 0;
+		font-size: var(--md);
+		width: 100%;
+		max-width: 400px;
+		color: var(--accent3);
 	}
 </style>

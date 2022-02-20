@@ -48,14 +48,16 @@
 		--ease: cubic-bezier(.9, 0, .1, 1);
 		pointer-events: auto;
 		position: fixed;
-		z-index: 0;
+		z-index: -1;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 0;
-		bottom: 0;
+		top: 0%;
+		bottom: 0%;
 		left: 100%;
-		right: 0;
+		right: 0%;
+		opacity: .5;
+		border-radius: 0px;
 		width: auto;
 		height: auto;
 		padding: 0;
@@ -64,31 +66,42 @@
 		transition: all .5s var(--ease);
 
 		&.full {
+			opacity: 1;
 			z-index: 1;
 			top: 0 !important;
 			bottom: 0 !important;
 			left: 0 !important;
 			right: 0 !important;
+			border-radius: 0;
+		}
+
+		&:global(.half) {
+			--offset-inside: 50%;
+			--offset-outside: 0;
+			opacity: 1;
+			border-radius: 0;
+			top: 0;
+			bottom: 0;
 		}
 
 		&:global(.medium) {
-			--pad: 150px;
-			--offset-inside: calc(50vw - var(--width-lg) / 4);
-			--offset-outside: calc(50vw - var(--width-lg) / 2);
-			top: var(--pad);
-			bottom: var(--pad);
-			/* border-radius: var(--sm); */
+			--offset-inside: max(0px, calc(50vw - var(--width-lg) / 4));
+			--offset-outside: max(0px, calc(50vw - var(--width-lg) / 2));
+			opacity: 1;
+			border-radius: 0px;
+			top: max(120px, calc(50vh - 500px));
+			bottom: max(120px, calc(50vh - 500px));
 			box-shadow: 0px 100px 75px -25px rgba(0,0,0, .1);
 		}
 
 		&:global(.left) {
-			left: var(--offset-inside);
-			right: var(--offset-outside);
+			right: var(--offset-inside);
+			left: var(--offset-outside);
 		}
 
 		&:global(.right) {
-			right: var(--offset-inside);
-			left: var(--offset-outside);
+			right: var(--offset-outside);
+			left: var(--offset-inside);
 		}
 	}
 
@@ -99,6 +112,5 @@
 		width: 100vw;
 		height: 100vh;
 	}
-
 
 </style>

@@ -1,20 +1,15 @@
 <script lang="ts">
 	import logos from '$data/logos.json';
-
-	export let dim = false;
-	export let size: 'small' | 'large' = 'large'
 </script>
 
 
-<section {...$$restProps}>
+<section>
 	{#each logos as logo}
 		<a
 			href={logo.href}
 			rel="external"
 			target="_blank"
 			title={logo.alt}
-			class:dim
-			class:size
 		>
 			<img src="/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 		</a>
@@ -44,10 +39,6 @@
 		min-width: 150px;
 		opacity: .8;
 
-		&.small {
-
-		}
-
 		& img {
 			width: 100%;
 			height: 100%;
@@ -62,16 +53,6 @@
 			& img {
 				transform: translateY(-10px);
 			}
-		}
-	}
-
-	.dim {
-		opacity: .5;
-		filter: saturate(0);
-
-		&:hover {
-			opacity: .8;
-			filter: saturate(1);
 		}
 	}
 </style>

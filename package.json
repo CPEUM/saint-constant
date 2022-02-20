@@ -54,6 +54,7 @@
 	},
 	"dependencies": {
 		"maplibre-gl": "^1.15.2",
-		"overlayscrollbars": "^1.13.1"
+		"overlayscrollbars": "^1.13.1",
+		"pixi.js": "^6.2.2"
 	}
 }

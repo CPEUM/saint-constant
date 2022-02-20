@@ -5,7 +5,7 @@
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { onMount } from 'svelte';
-	import { reveal } from '$actions/revealText';
+	import { revealText } from '$actions/revealText';
 
 	/**
 	 * Passed from index route, where it is defined using import.meta.glob
@@ -66,19 +66,15 @@
 		</div>
 	{/each} -->
 	<hgroup>
-		<h1 use:reveal={{
+		<h1 use:revealText={{
 				duration: 600,
 				staggerDelay: 15,
 				transformOrigin: '0% 20%',
-				start: {
-					rotate: {
-						x: -80
-					}
-				}
+				rotateX: -80
 			}}
 			style:transform="translateY({$mainScroll.y / 3}px)"
 		>
-			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBaINS <span class="left">DE LA VILLE DE SAINT-CONSTANT &#8595;</span>
+			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBAINS <span class="left">DE LA VILLE DE SaINT-CONSTANT &#8595;</span>
 		</h1>
 	</hgroup>
 </header>
@@ -135,7 +131,7 @@
 		display: inline-block;
 		font-size: clamp(56px, 7vw, 92px);
 		font-weight: 400;
-		color: var(--dark2);
+		color: var(--dark1);
 		line-height: 1.1em;
 		padding: 0;
 		margin-block: 200px;
