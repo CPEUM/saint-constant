@@ -1,45 +1,30 @@
 <script lang="ts">
 	import { mainScroll } from '$stores/scroll';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
-	import { decorations } from '$utils/decorations';
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { onMount } from 'svelte';
 	import { revealText } from '$actions/revealText';
-
-	/**
-	 * Passed from index route, where it is defined using import.meta.glob
-	 * from within the route's load function
-	 */
-	export let shapefiles;
-	let shapes;
+	import { decorations } from '$utils/decorations';
 
 	function generateParallaxFactor(range = 0.5) {
 		return Math.random() * range - 0.5 * range;
 	}
 
-	$:	shapes = shapefiles.map(path => {
-			return {
-				path: path.replace('/static', ''),
-				color: getRandomThemeColor([1, 2]),
-				parallax: generateParallaxFactor(),
-				height: Math.random() * 50 + 100 + 'vh',
-				offset: {
-					y: 25 - Math.random() * 50 + '%',
-					x: 50 - Math.random() * 100 + '%'
-				}
-			}
-		})
+	const shapes = decorations.map((deco) => {
+		return {
+			...deco,
+			parallax: generateParallaxFactor(),
+			fillColor: deco.fill ? getRandomThemeColor([1, 2]) : 'none',
+			strokeColor: deco.stroke ? getRandomThemeColor([1, 2]) : 'none',
+		}
+	});
 
-	const bgSvgsViewBox = { width: 1000, height: 1500 };
-	const bgSvgs = generateSvgPaths(2).map((svgPath) => ({
-		svgProps: {
-			viewBox: '0 0 1000 1000'
-		},
-		pathProps: {
-			d: svgPath,
-			fill: getRandomThemeColor([1, 2])
-		},
+	const waveVb = { width: 1000, height: 1500 };
+	const waves = generateSvgPaths(2, { viewBox: waveVb, padding: 900 }).map((svgPath) => ({
+		viewBox: `0 0 ${waveVb.width} ${waveVb.height}`,
+		d: svgPath,
+		fill: getRandomThemeColor([1, 2]),
 		parallax: generateParallaxFactor(1)
 	}));
 
@@ -52,19 +37,35 @@
 	});
 </script>
 
-<header>
-	<!-- {#each shapes as shape}
-		<div
-			class="shape"
-			style:top="{-$mainScroll.y * shape.parallax}px"
-			style:height={shape.height}
-			style:background-color={shape.color}
-			style:--image-url="url({shape.path})"
-			style:transform="translate({shape.offset.x}, {shape.offset.y})"
-		>
-			<div class="grain"></div>
-		</div>
-	{/each} -->
+<header style:--scroll="{$mainScroll.y}px">
+	<svg
+		viewBox={waves[1].viewBox}
+		preserveAspectRatio="none"
+		style:--parallax={waves[1].parallax}
+	>
+		<path
+			d={waves[0].d}
+			fill={waves[0].fill}
+		/>
+	</svg>
+	<svg viewBox={waves[1].viewBox} preserveAspectRatio="xMidYMax slice">
+		<clipPath id="wave-mask">
+			<path
+				d={waves[1].d}
+			/>
+		</clipPath>
+		<g clip-path="url(#wave-mask)">
+			{#each shapes as shape}
+				<path
+					vector-effect="non-scaling-stroke"
+					d={shape.d}
+					fill={shape.fillColor}
+					stroke={shape.strokeColor}
+					style:--parallax={shape.parallax}
+				/>
+			{/each}
+		</g>
+	</svg>
 	<hgroup>
 		<h1 use:revealText={{
 				duration: 600,
@@ -72,7 +73,6 @@
 				transformOrigin: '0% 20%',
 				rotateX: -80
 			}}
-			style:transform="translateY({$mainScroll.y / 3}px)"
 		>
 			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBAINS <span class="left">DE LA VILLE DE SaINT-CONSTANT &#8595;</span>
 		</h1>
@@ -89,30 +89,23 @@
 		min-height: 150vh;
 		overflow: visible;
 		user-select: none;
-		margin-bottom: 200px;
 	}
 
-	.shape {
-		left: 0;
-		width: 100%;
-		min-width: 1200px;
-		height: 500px;
+	svg {
+		pointer-events: none;
+		user-select: none;
 		position: absolute;
-		mask-image: var(--image-url);
-		mask-repeat: no-repeat;
-		mask-size: contain;
-		mask-position: center;
+		padding: 0;
+		margin: 0;
+		width: 100vw;
+		height: 175vh;
+		left: 50%;
+		transform: translateX(-50%);
+		overflow: visible;
+		z-index: -10;
 
-		& .grain {
-			background: url(/grain.svg);
-			background-repeat: repeat;
-			background-size: 1000px;
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			opacity: .4;
+		& .parallax {
+			transform: translateY(calc(var(--scroll) * var(--parallax)));
 		}
 	}
 
@@ -120,7 +113,7 @@
 		min-height: 100vh;
 		max-width: var(--width-lg);
 		margin: 0 auto;
-		z-index: 1;
+		z-index: 10;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -139,15 +132,11 @@
 		font-family: var(--font-misc);
 		letter-spacing: 0.2em;
 		text-align: right;
+		transform: translateY(calc(var(--scroll) / 3));
 
 		& .left {
 			display: inline-block;
 			text-align: left;
-		}
-
-		& .alt {
-
-			/* font-weight:  */
 		}
 	}
 </style>

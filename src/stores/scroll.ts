@@ -1,7 +1,13 @@
 import OverlayScrollbars from 'overlayscrollbars';
-import { readable } from 'svelte/store';
+import { derived, readable } from 'svelte/store';
 import { onMount } from 'svelte';
 import { browser } from '$app/env';
+
+interface MainScroll {
+	y: number;
+	delta: number;
+	direction: 'up' | 'down';
+}
 
 const initial = {y: 0, delta: 0, direction: null};
 
@@ -48,3 +54,8 @@ export const mainScroll = readable(initial, function start(set) {
 	// 	});
 	// })
 });
+
+/* Get the page's progress as a float between 0 and 1 inclusively */
+// export const progress = derived(
+// 	mainScroll
+// )

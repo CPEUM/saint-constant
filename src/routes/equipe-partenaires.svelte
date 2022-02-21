@@ -1,17 +1,12 @@
 <script>
-	import Link from '$components/primitives/Link.svelte';
-	import LogoBanner from '$components/LogoBanner.svelte';
-
-	
+	import { revealFlyUp, revealText } from '$actions/revealText';
+	import Partners from '$components/team/Partners.svelte';
 </script>
 
-
-<section>
-	<p>Ce travail a été réalisé par la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> en collaboration avec la <Link href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain de l'Université de Montréal (CUPUM)</Link> ainsi qu’en vertu du soutien financier du ministère de l’Économie et de l’Innovation du Québec et de la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>. Ce projet a été rendu possible également grâce au soutien partenarial de la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>.</p>
-	<LogoBanner></LogoBanner>
-</section>
+<Partners />
+<hr class="separator">
 <section class="group">
-    <h2>Équipe de recherche</h2>
+    <h2 use:revealText={revealFlyUp}>Équipe de recherche</h2>
     <section class="subgroup">
         <h3>Direction scientifique</h3>
         <ul>
@@ -106,3 +101,9 @@
         </ul>
     </section>
 </section>
+
+<style lang="postcss">
+	#partners {
+		margin-top: 25vh;
+	}
+</style>

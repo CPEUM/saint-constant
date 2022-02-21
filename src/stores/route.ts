@@ -9,6 +9,7 @@ export const currentRoute = derived(page, ($page) => {
 	);
 });
 
-export const currentExercice = derived(routes, ($routes) => {
-	return exerciceRoutes.find((ex) => ex.path === $routes.find((r) => r.exercices).path);
+export const currentExercice = derived(page, ($page) => {
+	console.log('triggered page store!')
+	return exerciceRoutes.find((ex) => ex.path === $page.url.pathname);
 });

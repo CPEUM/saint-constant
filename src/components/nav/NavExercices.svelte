@@ -1,53 +1,74 @@
 <script>
+	import { currentExercice } from '$stores/route';
+	import { getAccentColors } from '$utils/exerciceColors';
 	import { exerciceRoutes } from '$utils/routes';
-
+	import { fly } from 'svelte/transition';
 </script>
 
-
-<nav>
-	{#each exerciceRoutes as ex, i}
-		<a
-			href={ex.path}
-			sveltekit:prefetch
-			style="--rgb-accent1: var(--rgb-{i + 1}accent1); --rgb-accent2: var(--rgb-{i + 1}accent2); --rgb-accent3: var(--rgb-{i + 1}accent3)"
-		>
-			<span>{ex.title}</span>
-		</a>
-	{/each}
-</nav>
+{#if $currentExercice}
+	<nav transition:fly={{y: -25}}>
+		{#each exerciceRoutes as ex, i}
+			<a
+				href={ex.path}
+				sveltekit:prefetch
+				style={getAccentColors(ex.cssPrefix)}
+				class:current={$currentExercice === ex}
+			>
+				<span class="number">0{i+1}.</span>&nbsp;<span class="title">{ex.title}</span>
+			</a>
+		{/each}
+	</nav>
+{/if}
 
 
 <style lang="postcss">
 	nav {
+		position: relative;
+		margin: 0;
 		display: flex;
 		flex-direction: row;
-		gap: 3px;
+		align-items: flex-start;
+		align-self: flex-start;
+		gap: .5em;
 	}
 
 	a {
-		--accent1: rgb(var(--rgb-accent1));
-		--accent2: rgb(var(--rgb-accent2));
-		--accent3: rgb(var(--rgb-accent3));
+		text-decoration: none;
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--accent2);
+		background-color: var(--light1);
 		pointer-events: initial;
-		font-size: 14px;
-		font-weight: 550;
-		height: 3em;
-		padding: 0 1.5em;
+		font-weight: 400;
+		padding: .5em 1.5em;
 		border-radius: 2em;
-		text-decoration: none;
 		overflow: hidden;
+		color: var(--accent2);
+		box-shadow: 0 0 2px 0 var(--accent1);
+		transition: all .25s ease-in-out;
 
-		& span {
+		& .number {
+			position: relative;
+			top: -1px;
+			font-weight: 400;
+			letter-spacing: 1px;
+			font-family: var(--font-misc);
+		}
+
+		& .title {
 			position: relative;
 			top: -1px;
 		}
 
-		&:hover span {
+		&:hover {
+			background-color: var(--accent2);
+			color: var(--light2);
+		}
 
+		&.current {
+			background-color: var(--accent1);
+			color: var(--accent3);
+			box-shadow: 0 .5em 1em -0.5em rgba(0,0,0, 0.15);
 		}
 	}
 </style>

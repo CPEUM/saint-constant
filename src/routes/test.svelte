@@ -24,7 +24,7 @@
 </section>
 <section>
 	<p>Intersection</p>
-	<h1 use:revealText={{opacity: .5, hideOnLeave: true}}>This is a test title</h1>
+	<h1 use:revealText>This is a test title</h1>
 </section>
 
 <style>

@@ -51,7 +51,7 @@ export function splitNodeText(node: HTMLElement, {
 							wordspan.setAttribute(MASK_ATTRIBUTE, '');
 							masks.push(wordspan);
 							if (maskNodeInitCallback) maskNodeInitCallback(wordspan, masks.length);
-							word.split(granularity === 'word' ? ' ' : '').forEach((unit) => {
+							for (const unit of word.split(granularity === 'word' ? ' ' : '')) {
 								const unitspan = document.createElement('span');
 								unitspan.textContent = unit; //.replace(' ', '\u00A0');
 								unitspan.style.transformStyle = 'preserve-3d';
@@ -61,7 +61,7 @@ export function splitNodeText(node: HTMLElement, {
 								wordspan.appendChild(unitspan);
 								targets.push(unitspan);
 								if (targetNodeInitCallback) targetNodeInitCallback(unitspan, targets.length);
-							});
+							};
 							newNodes.push(wordspan);
 						}
 					});

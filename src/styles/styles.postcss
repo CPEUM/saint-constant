@@ -49,6 +49,18 @@ strong {
 	font-weight: 600;
 }
 
+hr.separator {
+	position: relative;
+	display: block;
+	width: 100vw;
+	background-color: var(--light3);
+	height: 1px;
+	border: none;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 0;
+}
+
 .text-wrap {
 	position: relative;
 	width: 100%;
@@ -68,7 +80,7 @@ strong {
 		transform: translateX(-50%);
 	}
 
-	& > p {
+	& > p, & > ul {
 		/* text-align: justify; */
 		padding-block: 4rem;
 		display: block;

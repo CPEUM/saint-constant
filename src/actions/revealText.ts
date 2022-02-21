@@ -55,8 +55,6 @@ export function revealText(element: HTMLElement, {
 	visible = undefined
 }: RevealTextOptions = {}) {
 
-	console.log(y);
-
 	element.style.perspective = perspective + 'px';
 	element.style.perspectiveOrigin = 'center';
 
@@ -104,14 +102,22 @@ export function revealText(element: HTMLElement, {
 		}
 	}
 	function enter() {
-		targets.forEach(showTarget);
+		for (const target of targets) {
+			showTarget(target)
+		}
+		element.style.userSelect = '';
+		element.style.pointerEvents = '';
 		if (!hideOnLeave && intersect) {
 			intersect.destroy();
 			element.removeEventListener('enter', enter);
 		}
 	}
 	function leave() {
-		targets.forEach(hideTarget);
+		for (const target of targets) {
+			hideTarget(target)
+		}
+		element.style.userSelect = 'none';
+		element.style.pointerEvents = 'none';
 	}
 
 	return {
@@ -149,10 +155,18 @@ export function revealText(element: HTMLElement, {
 
 // /* Presets */
 
-// export const revealFlyUp: Options = {
-// 	// to do
-// }
+export const revealFlyUp: RevealTextOptions = {
+	mask: true,
+	maskPadding: '0em',
+	y: '0.75em',
+	opacity: 0,
+	rotateX: 60,
+	transformOrigin: '0% 80%',
+	staggerDelay: 15,
+	duration: 750
+}
 
-// export const revealFlyDown: Options = {
-// 	...revealFlyUp,
-// }
+export const revealFlyDown: RevealTextOptions = {
+	...revealFlyUp,
+	y: '-1.1em'
+}

@@ -32,7 +32,7 @@
 			on:enter={() => exEnter(i)}
 			style={getAccentColors(ex.cssPrefix)}
 		>
-			<span class="number" class:right={i%2 !== 0}>{i + 1}</span>
+			<span class="number" class:right={i%2 !== 0}>0{i + 1}</span>
 		</div>
 	{/each}
 	<div id="board">
@@ -45,6 +45,19 @@
 					sveltekit:prefetch
 					style={getAccentColors(ex.cssPrefix)}
 				>
+					<p class="label"
+						use:revealText={{
+							visible: i === current,
+							duration: 850,
+							staggerDelay: 175,
+							mask: true,
+							maskPadding: 0,
+							y: '1em',
+							granularity: 'word'
+						}}
+					>
+						Exercice 0{i + 1}
+					</p>
 					<p
 						class="title"
 						use:revealText={{
@@ -105,7 +118,7 @@
 		align-items: center;
 		justify-content: flex-start;
 		z-index: -1;
-		color: var(--accent1);
+		color: var(--light3);
 		opacity: .5;
 
 		&.right {
@@ -140,7 +153,7 @@
 		margin: 0;
 		max-width: var(--width-sm);
 		transform: translateY(-50%);
-		color: var(--dark2);
+		color: var(--dark1);
 
 		&.right {
 			right: 0;
@@ -154,20 +167,33 @@
 		user-select: none;
 	}
 
+	.label {
+		position: relative;
+		font-size: var(--md);
+		font-family: var(--font-misc);
+		margin: 0;
+		line-height: 1em;
+		color: var(--accent2);
+		letter-spacing: 5px;
+	}
+
 	.title {
 		display: inline-block;
-		font-size: var(--xxxl);
+		font-size: var(--xxl);
 		font-weight: 500;
 		line-height: 1em;
+		margin-block: 1em;
 	}
 
 	.desc {
+		margin: 0;
 		display: inline-block;
-		line-height: 1.5em;
+		line-height: 1.25em;
 		letter-spacing: .5px;
 		padding: 0;
-		font-size: var(--md);
+		font-size: var(--lg);
 		width: 100%;
+		font-weight: 400;
 		max-width: 400px;
 		color: var(--accent3);
 	}

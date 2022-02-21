@@ -1,28 +1,16 @@
-<script context="module" lang="ts">
-	export function load() {
-		const shapefiles = Object.keys(import.meta.globEager("/static/media/decorations/shapes/*.svg"));
-		return {
-			props: {
-				shapefiles
-			}
-		}
-	};
-</script>
-
 <script lang="ts">
 	import Link from '$components/primitives/Link.svelte';
 	import Orientations from '$components/index/Orientations.svelte';
 	import Splash from '$components/index/Splash.svelte';
 	import Logos from '$components/index/Logos.svelte';
-	import { revealText } from '$actions/revealText';
-
-	export let shapefiles;
+	import { revealFlyUp, revealText } from '$actions/revealText';
 </script>
 
-<Splash {shapefiles} />
+<Splash />
 <Logos />
+<hr class="separator">
 <div class="text-wrap">
-	<h2 use:revealText>Contexte</h2>
+	<h2 use:revealText={{...revealFlyUp}}>Contexte</h2>
 	<p class="left">
 		Localisée sur la Rive-Sud de Montréal, la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
 		est en grande transformation en raison de sa croissance démographique et de la réalisation, au
@@ -35,8 +23,9 @@
 		Dans le cadre d’un appel à projets en innovation sociale financé par le <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et en appui avec la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link> et la <Link rel="external" href="https://roussillon.ca/">MRC de Roussillon</Link>, l’expertise de la <Link rel="external" href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> et de la <Link rel="external" href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain (CUPUM)</Link> de la même institution a été mise à profit pour développer de <strong>nouveaux outils et de nouvelles approches de planification territoriale plus sensibles aux valorisations sociales et culturelles des paysages</strong>.
 	</p>
 </div>
+<hr class="separator">
 <div class="text-wrap">
-	<h2 use:revealText>Objectifs du projet</h2>
+	<h2 use:revealText={{...revealFlyUp}}>Objectifs du projet</h2>
 	<p class="left">Ce projet vise trois principaux objectifs&nbsp;:</p>
 	<ul class="right">
 		<li>
@@ -53,6 +42,7 @@
 			résultats de la démarche.
 		</li>
 	</ul>
+	<hr class="separator">
 	<p class="left">
 		<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations, soit&nbsp;:
 	</p>

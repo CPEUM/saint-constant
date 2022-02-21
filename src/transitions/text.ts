@@ -39,7 +39,8 @@ export function text(
 
 	return {
 		duration: totalDuration,
-		tick: (t) => {
+		tick: (t, u) => {
+			// console.log(t, u);
 			if (t === 1) {
 				if (element.hasAttribute(INTRO_ATTRIBUTE)) {
 					element.removeAttribute(INTRO_ATTRIBUTE);

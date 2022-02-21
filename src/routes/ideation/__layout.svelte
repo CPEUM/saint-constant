@@ -1,11 +1,9 @@
-<script context="module">
+<script lang="ts" context="module">
+	import type { LoadInput, LoadOutput } from '@sveltejs/kit';
 	import { base } from '$app/paths';
 	import { debasePath } from '$utils/path';
 
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
-	export async function load({ url }) {
+	export async function load({ url }: LoadInput): Promise<LoadOutput> {
 		const normalizedPath = base + debasePath(url.pathname);
 		let queriedExercice = exerciceRoutes.find((exercice) => exercice.path == normalizedPath);
 		if (queriedExercice) {
@@ -27,47 +25,16 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import { exerciceRoutes, routes } from '$utils/routes';
-	import { fly } from 'svelte/transition';
-
-	import Image from '$components/primitives/Image.svelte';
+	import Header from '$components/exercice/Header.svelte';
 
 	export let exercice;
 </script>
 
-<!-- <header>
-	<img src="/media/agroparc/3-1-6.jpg" alt="">
-	<img src="/media/agroparc/3-1-8.jpg" alt="">
-	{#key exercice}
-		<h1 transition:fly>Title from layout: {exercice?.title}</h1>
-	{/key}
-</header> -->
-<section>
-	<slot />
-</section>
+<Header {exercice} />
+<slot />
 
-<style>
-	header {
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		height: 100vh;
-		background-color: pink;
-	}
+<style lang="postcss">
 
-	section {
-		width: 100%;
-	}
-
-	h1 {
-		z-index: 1;
-	}
-
-	img {
-		position: absolute;
-		width: 500px;
-	}
 </style>

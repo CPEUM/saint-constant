@@ -1,14 +1,11 @@
-const defaultOptions = {
-	padding: 500,
-	viewBox: {
+export function generateSvgPaths(n, {
+	padding = 500,
+	viewBox = {
 		width: 1000,
 		height: 1000
 	},
-	relative: false
-};
-
-export function generateSvgPaths(n, options = defaultOptions) {
-	const { viewBox, padding, relative } = {...defaultOptions, ...options};
+	relative = false
+} = {}) {
 	const bufferZone = 100;
 	const factor = {
 		x: relative ? 1 / viewBox.width : 1,

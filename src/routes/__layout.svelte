@@ -3,24 +3,21 @@
 	import Map from '$components/map/Map.svelte';
 	import Nav from '$components/nav/Nav.svelte';
 	import Footer from '$components/Footer.svelte';
-	import Background from '$components/Background.svelte';
-	import { mapState } from '$stores/map';
 	import { fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import { navigating } from '$app/stores';
 
 	let mapLoaded = false;
 </script>
 
-<!-- <Background /> -->
 <Nav />
 {#if mapLoaded && !$navigating}
 	<main in:fade={{}}>
+		<div class="grain"></div>
 		<article>
 			<slot />
 		</article>
+		<Footer />
 	</main>
-	<Footer />
 {/if}
 <Map on:load={() => mapLoaded = true} />
 
@@ -29,9 +26,23 @@
 		position: relative;
 	}
 
+	.grain {
+		user-select: none;
+		pointer-events: none;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-image: url(/grain.svg);
+		background-repeat: repeat;
+		background-size: 700px;
+		top: 0;
+		left: 0;
+		opacity: .5;
+		z-index: -1;
+	}
+
 	article {
 		position: relative;
-		/* z-index: 1; */
 		padding: 0 1rem;
 		display: flex;
 		flex-direction: column;

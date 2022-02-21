@@ -22,7 +22,7 @@
 
 		map = new M({
 			container,
-			style: 'https://demotiles.maplibre.org/style.json', // style URL
+			style: 'mapbox://styles/iolyd/ckzw8nw7y001z14pq7ek199lr', // style URL
 			center: [0, 0], // starting position [lng, lat]
 			zoom: 1 // starting zoom
 		});
@@ -72,7 +72,7 @@
 			bottom: 0 !important;
 			left: 0 !important;
 			right: 0 !important;
-			border-radius: 0;
+			border-radius: 0 !important;
 		}
 
 		&:global(.half) {
@@ -91,7 +91,7 @@
 			border-radius: 0px;
 			top: max(120px, calc(50vh - 500px));
 			bottom: max(120px, calc(50vh - 500px));
-			box-shadow: 0px 100px 75px -25px rgba(0,0,0, .1);
+			box-shadow: 0px 75px 100px -25px rgba(0,0,0, .05);
 		}
 
 		&:global(.left) {
