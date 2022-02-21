@@ -1,1 +1,1 @@
-import{b as t}from"./paths-4b3c6e7e.js";function s(e){return t&&e.startsWith(t)?e.slice(t.length):e}function n(e){return s(e).replace(/#.*$/,"").replace(/^\/+/,"").split("/").map(r=>`/${r}`)}export{s as d,n as g};
+import{b as t}from"./paths-4b3c6e7e.js";function s(e){return t&&e.startsWith(t)?e.slice(t.length):e}function a(e){return s(e).replace(/#.*$/,"").replace(/^\/+/,"").split("/").map(r=>`/${r}`)}export{s as d,a as g};
