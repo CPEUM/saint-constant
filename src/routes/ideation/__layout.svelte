@@ -17,7 +17,7 @@
 		routes.setExercice(exerciceRoutes[0].path);
 		return {
 			status: 308,
-			redirect: debasePath(exerciceRoutes[0].path)
+			redirect: exerciceRoutes[0].path
 				// base && url.pathname.indexOf(base) === 0
 				// 	? exerciceRoutes[0].path
 				// 	: debasePath(exerciceRoutes[0].path)
