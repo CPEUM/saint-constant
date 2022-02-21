@@ -35,7 +35,7 @@ const config = {
 		},
 	},
 	compilerOptions: {
-		cssHash: ({ hash, css, /* name, filename */ }) => `${hash(css)}`
+		cssHash: ({ hash, css, /* name, filename */ }) => `cpeum-${hash(css)}`
 	}
 };
 
