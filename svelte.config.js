@@ -2,7 +2,7 @@ import path from 'path';
 import adapter_static from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
-const BASE_PATH = process.env.PUBLIC_BASE_PATH ? process.env.PUBLIC_BASE_PATH : '';
+const BASE_PATH = process.env.PUBLIC_BASE_PATH || '';
 
 /**
  * @type {import('@sveltejs/kit').Config}
@@ -27,8 +27,7 @@ const config = {
 					$transitions: path.resolve('./src/transitions'),
 					$utils: path.resolve('./src/utils')
 				}
-			},
-			base: BASE_PATH
+			}
 		},
 		paths: {
 			base: BASE_PATH

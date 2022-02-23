@@ -32,7 +32,7 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background-image: url(grain.svg);
+		background-image: url(/grain.svg);
 		background-repeat: repeat;
 		background-size: 700px;
 		top: 0;
