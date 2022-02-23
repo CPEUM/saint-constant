@@ -27,7 +27,8 @@ const config = {
 					$transitions: path.resolve('./src/transitions'),
 					$utils: path.resolve('./src/utils')
 				}
-			}
+			},
+			base: BASE_PATH
 		},
 		paths: {
 			base: BASE_PATH
