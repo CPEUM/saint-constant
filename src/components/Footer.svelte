@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { routes } from '$utils/routes';
 	import { intersection } from '$actions/intersect';
 	import Link from './primitives/Link.svelte';
-	import logos from '$data/logos.json';
+	import logos from '$data/logos';
 
 	const extLinks = [
 		{title: 'CPEUM', href: 'https://paysage.umontreal.ca'},
@@ -32,7 +33,7 @@
 					target="_blank"
 					title={logo.alt}
 				>
-					<img src="/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
+					<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 				</a>
 			{/each}
 		</section>

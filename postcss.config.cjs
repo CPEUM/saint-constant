@@ -2,8 +2,8 @@ module.exports = {
 	plugins: [
 		require('postcss-url')({
 			url: (asset) => {
-				if (!asset.url.startsWith('/')) return asset.url;
-				console.log(asset.url + ' to --> ' + `${process.env.PUBLIC_BASE_PATH || ''}${asset.url}`);
+				if (!asset.url.startsWith('/') || (process.env.PUBLIC_BASE_PATH && asset.url.startsWith(process.env.PUBLIC_BASE_PATH))) return asset.url;
+				console.log('Rebasing css url() ' + asset.url + ' to --> ' + `${process.env.PUBLIC_BASE_PATH || ''}${asset.url}`);
 				return `${process.env.PUBLIC_BASE_PATH || ''}${asset.url}`;
 			}
 		}),

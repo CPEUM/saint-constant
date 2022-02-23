@@ -1,5 +1,6 @@
 <script lang="ts">
-	import logos from '$data/logos.json';
+	import { base } from '$app/paths';
+	import logos from '$data/logos';
 </script>
 
 
@@ -11,7 +12,7 @@
 			target="_blank"
 			title={logo.alt}
 		>
-			<img src="/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
+			<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 		</a>
 	{/each}
 </section>

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import logos from '$data/logos.json';
+	import { base } from '$app/paths';
+	import logos from '$data/logos';
 
 	export let dim = false;
 	export let size: 'small' | 'large' = 'large'
@@ -16,7 +17,7 @@
 			class:dim
 			class:size
 		>
-			<img src="/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
+			<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 		</a>
 	{/each}
 </section>

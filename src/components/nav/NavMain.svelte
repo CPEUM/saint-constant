@@ -1,6 +1,5 @@
 <script lang="ts">
-import { mapState } from '$stores/map';
-
+	import { mapState } from '$stores/map';
 	import { currentRoute } from '$stores/route';
 	import { mainScroll } from '$stores/scroll';
 	import { routes } from '$utils/routes';
@@ -62,11 +61,16 @@ import { mapState } from '$stores/map';
 		transition-duration: .5s;
 		transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 
+		@media (max-width: 800px) {
+			flex-direction: column;
+		}
+
 		&.min {
 			max-height: 0;
 			margin-bottom: 0;
 
 			a {
+				white-space: nowrap;
 				pointer-events: none;
 				transform: translateY(-50px);
 				opacity: 0;
