@@ -4,6 +4,12 @@ export interface ParseNodeOptions {
 	targetNodeInitCallback?: (element: HTMLElement, index: number) => void;
 }
 
+export const splitNodeAttributes = {
+	HOST: 'text-split-host',
+	TARGET: 'text-split-target',
+	MASK: 'text-split-mask'
+}
+
 /**
  * Parsing child nodes recursively, splitting and wrapping content.
  */
@@ -12,10 +18,6 @@ export function splitNodeText(node: HTMLElement, {
 	maskNodeInitCallback = null,
 	targetNodeInitCallback = null
 }: ParseNodeOptions = {}) {
-
-	const HOST_ATTRIBUTE = 'text-split';
-	const TARGET_ATTRIBUTE = 'text-target-node';
-	const MASK_ATTRIBUTE = 'text-mask-node';
 
 	const targets: HTMLElement[] = [];
 	const masks: HTMLElement[] = [];
@@ -48,7 +50,7 @@ export function splitNodeText(node: HTMLElement, {
 							const wordspan = document.createElement('span');
 							initNestedWrapperStyle(wordspan);
 							wordspan.style.whiteSpace = 'nowrap';
-							wordspan.setAttribute(MASK_ATTRIBUTE, '');
+							wordspan.setAttribute(splitNodeAttributes.MASK, '');
 							masks.push(wordspan);
 							if (maskNodeInitCallback) maskNodeInitCallback(wordspan, masks.length);
 							for (const unit of word.split(granularity === 'word' ? ' ' : '')) {
@@ -57,7 +59,7 @@ export function splitNodeText(node: HTMLElement, {
 								unitspan.style.transformStyle = 'preserve-3d';
 								unitspan.style.position = 'relative';
 								unitspan.style.display = 'inline-block';
-								unitspan.setAttribute(TARGET_ATTRIBUTE, '');
+								unitspan.setAttribute(splitNodeAttributes.TARGET, '');
 								wordspan.appendChild(unitspan);
 								targets.push(unitspan);
 								if (targetNodeInitCallback) targetNodeInitCallback(unitspan, targets.length);
@@ -70,12 +72,12 @@ export function splitNodeText(node: HTMLElement, {
 		});
 	}
 
-	if (node.hasAttribute(HOST_ATTRIBUTE)) {
-		targets.push(...Array.from(node.querySelectorAll(`[${TARGET_ATTRIBUTE}]`)) as HTMLElement[]);
-		masks.push(...Array.from(node.querySelectorAll(`[${MASK_ATTRIBUTE}]`)) as HTMLElement[]);
+	if (node.hasAttribute(splitNodeAttributes.HOST)) {
+		targets.push(...Array.from(node.querySelectorAll(`[${splitNodeAttributes.TARGET}]`)) as HTMLElement[]);
+		masks.push(...Array.from(node.querySelectorAll(`[${splitNodeAttributes.MASK}]`)) as HTMLElement[]);
 	}
 	else {
-		node.setAttribute(HOST_ATTRIBUTE, '');
+		node.setAttribute(splitNodeAttributes.HOST, '');
 		node.normalize();
 		parseNode(node);
 	}

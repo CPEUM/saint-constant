@@ -29,12 +29,12 @@ import { mapState } from '$stores/map';
 		<a
 			href={r.path}
 			sveltekit:prefetch
-			class:current={r.title == $currentRoute.title}
+			class:current={r.title == $currentRoute?.title}
 			style:background-color={$mainScroll.y > yLimit + 200 ? 'var(--light1)' : ''}
 			style:--delay="{i * 60}ms"
 		>
 			<svg>
-				{#if r.title == $currentRoute.title}
+				{#if r.title == $currentRoute?.title}
 					{#each generateLines() as line, i}
 						<line {...line}
 							in:draw={{speed: .25, delay: i * 20}}

@@ -16,7 +16,6 @@ const config = {
 	}),
 	kit: {
 		adapter: adapter_static(),
-		// target: 'body',
 		vite: {
 			resolve: {
 				alias: {
@@ -31,7 +30,8 @@ const config = {
 			}
 		},
 		paths: {
-			base: BASE_PATH
+			base: BASE_PATH,
+			assets: BASE_PATH
 		},
 	},
 	compilerOptions: {
