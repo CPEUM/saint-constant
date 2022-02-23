@@ -30,8 +30,7 @@ const config = {
 			}
 		},
 		paths: {
-			base: BASE_PATH,
-			assets: BASE_PATH
+			base: BASE_PATH
 		},
 	},
 	compilerOptions: {
