@@ -1,5 +1,5 @@
 <script>
-	import { revealText } from '$actions/revealText v2';
+	import { revealText } from '$actions/revealText';
 	import { text } from '$transitions/text';
 
 	let visible = false;

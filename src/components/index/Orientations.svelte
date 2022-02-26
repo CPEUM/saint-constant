@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { exerciceRoutes } from '$utils/routes';
 	import { intersection } from '$actions/intersect';
-	import { debounce } from '$utils/debounce';
 	import { mapState } from '$stores/map';
 	import { getAccentColors } from '$utils/exerciceColors';
 	import { revealText } from '$actions/revealText';
-	import { text } from '$transitions/text';
-	import { mainScroll } from '$stores/scroll';
 
 	let current = 0;
 	const rootMargin = '-50% 0% -50% 0%';
+
+	function mask(bbox: DOMRect) {
+		mapState
+	}
 
 	function leave() {
 		mapState.setClass('');
@@ -30,7 +31,7 @@
 			class="triggers"
 			use:intersection={{rootMargin}}
 			on:enter={() => exEnter(i)}
-			style={getAccentColors(ex.cssPrefix)}
+			style={getAccentColors(ex.key)}
 		>
 			<span class="number" class:right={i%2 !== 0}>0{i + 1}</span>
 		</div>
@@ -43,7 +44,9 @@
 					class:disabled={i !== current}
 					href={ex.path}
 					sveltekit:prefetch
-					style={getAccentColors(ex.cssPrefix)}
+					style={getAccentColors(ex.key)}
+					style:--angle={Math.random() * 90 + 'deg'}
+					style:--size={(Math.random() * 200 + 500) + 'px'}
 				>
 					<p class="label"
 						use:revealText={{
@@ -154,11 +157,41 @@
 		max-width: var(--width-sm);
 		transform: translateY(-50%);
 		color: var(--dark1);
+		transition: all .25s ease-out;
+
+		/* & .title::before {
+			user-select: none;
+			pointer-events: none;
+			content: '';
+			width: var(--size);
+			height: var(--size);
+			border-radius: 47%;
+			position: absolute;
+			transform-origin: center;
+			transform: translateY(-50%) rotate(var(--angle));
+			background-image: url(/grain.svg);
+			background-color: var(--light2);
+			box-shadow: inset 0px 0px 0px 0px var(--accent1);
+			opacity: 0;
+			top: 50%;
+			left: 0%;
+			transition: all .5s cubic-bezier(.5, 0, .2, 1);
+		}
+
+		&:hover .title::before {
+			opacity: 1;
+			box-shadow: inset 0px 0px 0px 200px var(--accent1);
+		} */
 
 		&.right {
 			right: 0;
 			text-align: right;
 			margin-left: auto;
+
+			& .title::before {
+				right: 0%;
+				left: initial;
+			}
 		}
 	}
 

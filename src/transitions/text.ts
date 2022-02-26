@@ -1,10 +1,14 @@
-import { revealText, RevealTextOptions } from '$actions/revealText v2';
-import { transitionAttributes } from '$actions/revealText v2';
+import { revealText, RevealTextOptions } from '$actions/revealText';
 
 type TextTransitionOptions = Omit<
 	RevealTextOptions,
 	'visible' | 'hidenOnLeave' | 'useIntersect' | 'intersectOptions'
 >;
+
+const transitionAttributes = {
+	INTRO: 'text-introing',
+	OUTRO: 'text-outroing'
+}
 
 /**
  * Transitions the text content of the host element with possibility of staggering.

@@ -103,6 +103,11 @@
 </section>
 
 <style lang="postcss">
+	h2 {
+		position: relative;
+		z-index: 100;
+	}
+
 	#partners {
 		margin-top: 25vh;
 	}

@@ -41,6 +41,7 @@
 		justify-content: flex-start;
 		align-items: center;
 		padding: 1em;
+		line-height: 1.5em;
 		top: 0rem;
 		margin: 0;
 		width: 100%;

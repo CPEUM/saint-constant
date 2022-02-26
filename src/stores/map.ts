@@ -11,19 +11,17 @@ interface MapStateObject {
 	class: string;
 }
 
-const defaultMapState: MapStateObject = {
-	isfull: false,
-	style: '',
-	class: ''
-};
-
 /**
  * Store with style indications set by intersection-observed elements or interactions.
  *
  * Styles are applied to the map's container element where `isfull` has precedence over `style` and `class`
  */
 export const mapState = (function () {
-	const { subscribe, set, update } = writable(defaultMapState);
+	const { subscribe, set, update } = writable<MapStateObject>({
+		isfull: false,
+		style: '',
+		class: ''
+	});
 	return {
 		subscribe,
 		set,
@@ -64,3 +62,5 @@ export const mapFocus = (function() {
 		clear: () => debounce(() => set(null)),
 	}
 })();
+
+// See actions for hover highlight

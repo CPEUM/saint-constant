@@ -1,4 +1,4 @@
-import { ParseNodeOptions, splitNodeText } from '$utils/splitText';
+import { ParseNodeOptions, splitNodeAttributes, splitNodeText } from '$utils/splitText';
 import { getUnits } from '$utils/strings';
 import { intersection } from './intersect';
 
@@ -61,26 +61,29 @@ export function revealText(element: HTMLElement, {
 	const maskPaddingVal = parseFloat(maskPadding + '');
 	const maskPaddingUnits = getUnits(maskPadding) || 'px';
 
-	function initTargetStyle(el: HTMLElement, index: number) {
-		visible ? showTarget(el) : hideTarget(el);
+	function initTargetStyle(el: HTMLElement, i: number) {
+		// const i = parseInt(el.getAttribute(splitNodeAttributes.TARGET));
+		visible ? showTarget(el, i) : hideTarget(el, i);
 		el.style.transformOrigin = transformOrigin;
-		el.style.transitionDelay = delay + (stagger ? staggerDelay * index : 0) + 'ms';
+		el.style.transitionDelay = delay + (stagger ? staggerDelay * i : 0) + 'ms';
 		el.style.transitionDuration = duration + 'ms';
 		el.style.transitionTimingFunction = easing;
 		el.style.transitionProperty = 'opacity, transform, top, left';
 	}
-	function initMaskStyle(el: HTMLElement, index: number) {
+	function initMaskStyle(el: HTMLElement, i: number) {
 		el.style.overflow = 'hidden';
 		el.style.padding = maskPaddingVal + maskPaddingUnits;
 		el.style.margin = -1 * maskPaddingVal + maskPaddingUnits;
 	}
-	function hideTarget(el: HTMLElement) {
+	function hideTarget(el: HTMLElement, i: number) {
+		el.style.transitionDelay = delay + (stagger ? staggerDelay * i : 0) + 'ms';
 		el.style.opacity = opacity + '';
 		el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`;
 		el.style.top = y + (isNaN(Number(y)) ? '' : 'px');
 		el.style.left = x + (isNaN(Number(x)) ? '' : 'px');
 	}
-	function showTarget(el: HTMLElement) {
+	function showTarget(el: HTMLElement, i: number) {
+		el.style.transitionDelay = delay + (stagger ? staggerDelay * i : 0) + 'ms';
 		el.style.opacity = '1';
 		el.style.transform = 'initial';
 		el.style.top = '0';
@@ -102,8 +105,9 @@ export function revealText(element: HTMLElement, {
 		}
 	}
 	function enter() {
+		let i = 0;
 		for (const target of targets) {
-			showTarget(target)
+			showTarget(target, i++)
 		}
 		element.style.userSelect = '';
 		element.style.pointerEvents = '';
@@ -113,8 +117,9 @@ export function revealText(element: HTMLElement, {
 		}
 	}
 	function leave() {
+		let i = 0;
 		for (const target of targets) {
-			hideTarget(target)
+			hideTarget(target, i++)
 		}
 		element.style.userSelect = 'none';
 		element.style.pointerEvents = 'none';

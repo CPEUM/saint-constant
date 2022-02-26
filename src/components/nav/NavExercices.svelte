@@ -1,18 +1,19 @@
 <script>
-	import { currentExercice } from '$stores/route';
+	import { mapState } from '$stores/map';
+	import { exercice, route } from '$stores/route';
 	import { getAccentColors } from '$utils/exerciceColors';
 	import { exerciceRoutes } from '$utils/routes';
 	import { fly } from 'svelte/transition';
 </script>
 
-{#if $currentExercice}
-	<nav transition:fly={{y: -25}}>
+{#if $route.exercices}
+	<nav transition:fly={{y: -25}} class:min={$mapState.isfull}>
 		{#each exerciceRoutes as ex, i}
 			<a
 				href={ex.path}
 				sveltekit:prefetch
-				style={getAccentColors(ex.cssPrefix)}
-				class:current={$currentExercice === ex}
+				style={getAccentColors(ex.key)}
+				class:current={$exercice === ex}
 			>
 				<span class="number">0{i+1}.</span>&nbsp;<span class="title">{ex.title}</span>
 			</a>
@@ -30,6 +31,18 @@
 		align-items: flex-start;
 		align-self: flex-start;
 		gap: .5em;
+		transition: all .5s cubic-bezier(.6, 0, .2, 1);
+
+		@media (max-width: 800px) {
+			flex-direction: column;
+		}
+	}
+
+	.min {
+		transform: translateY(-40px);
+		opacity: 0;
+		user-select: none;
+		pointer-events: none;
 	}
 
 	a {

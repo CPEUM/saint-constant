@@ -5,24 +5,26 @@ interface Options {
 	callback?: (bbox: DOMRect) => void
 }
 
-export function bbox(element: HTMLElement, options: Options) {
-	options = mergeObjects({scrollParent: document.body}, options);
+export function bbox(element: HTMLElement, {
+	scrollParent = document.body,
+	callback = undefined
+}: Options = {}) {
 
 	function scroll() {
-		options.callback(element.getBoundingClientRect());
+		callback(element.getBoundingClientRect());
 	}
 
-	if (options.callback) {
-		options.scrollParent.addEventListener('scroll', scroll);
+	if (callback) {
+		scrollParent.addEventListener('scroll', scroll);
 	}
 
 	return {
 		update(newOptions: Options) {
-			options.callback = newOptions.callback;
+			callback = newOptions.callback;
 		},
 		destoy() {
-			if (options.callback) {
-				options.scrollParent.removeEventListener('scroll', scroll);
+			if (callback) {
+				scrollParent.removeEventListener('scroll', scroll);
 			}
 		}
 	}

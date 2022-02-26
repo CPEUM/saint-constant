@@ -7,7 +7,7 @@ export interface ParseNodeOptions {
 export const splitNodeAttributes = {
 	HOST: 'text-split-host',
 	TARGET: 'text-split-target',
-	MASK: 'text-split-mask'
+	MASK: 'text-split-mask',
 }
 
 /**
@@ -61,8 +61,8 @@ export function splitNodeText(node: HTMLElement, {
 								unitspan.style.display = 'inline-block';
 								unitspan.setAttribute(splitNodeAttributes.TARGET, '');
 								wordspan.appendChild(unitspan);
-								targets.push(unitspan);
 								if (targetNodeInitCallback) targetNodeInitCallback(unitspan, targets.length);
+								targets.push(unitspan);
 							};
 							newNodes.push(wordspan);
 						}

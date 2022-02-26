@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
 	import { revealText } from '$actions/revealText';
 	import { decorations } from '$utils/decorations';
+	import { exerciceRoutes } from '$utils/routes';
 
 	function generateParallaxFactor(range = 0.5) {
 		return Math.random() * range - 0.5 * range;
@@ -15,7 +16,7 @@
 		return {
 			...deco,
 			parallax: generateParallaxFactor(),
-			fillColor: deco.fill ? getRandomThemeColor([1, 2]) : 'none',
+			fillColor: deco.fill ? getRandomThemeColor([2, 3], exerciceRoutes.map(r => r.key)) : 'none',
 			strokeColor: deco.stroke ? getRandomThemeColor([1, 2]) : 'none',
 		}
 	});
@@ -24,7 +25,7 @@
 	const waves = generateSvgPaths(2, { viewBox: waveVb, padding: 900 }).map((svgPath) => ({
 		viewBox: `0 0 ${waveVb.width} ${waveVb.height}`,
 		d: svgPath,
-		fill: getRandomThemeColor([1, 2]),
+		fill: getRandomThemeColor([2, 3]),
 		parallax: generateParallaxFactor(1)
 	}));
 
@@ -124,7 +125,7 @@
 		display: inline-block;
 		font-size: clamp(56px, 7vw, 92px);
 		font-weight: 400;
-		color: var(--dark1);
+		color: var(--accent1);
 		line-height: 1.1em;
 		padding: 0;
 		margin-block: 200px;

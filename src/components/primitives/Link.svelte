@@ -39,7 +39,7 @@
 		z-index: 1;
 		text-decoration: none;
 		border-radius: 1.5em;
-		transition: all .25s;
+		transition: all .15s ease-out;
 		white-space: nowrap;
 		vertical-align: bottom;
 		padding-inline: .2em;

@@ -8,7 +8,7 @@
 
 
 <section {...$$restProps}>
-	{#each logos as logo}
+	{#each logos.prime as logo}
 		<a
 			href={logo.href}
 			rel="external"

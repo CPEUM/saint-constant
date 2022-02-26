@@ -26,7 +26,7 @@
 >
 	<div id="content" class:expand style:color>
 		<section id="logos">
-			{#each logos as logo}
+			{#each logos.prime as logo}
 				<a
 					href={logo.href}
 					rel="external"
@@ -36,33 +36,31 @@
 					<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 				</a>
 			{/each}
+		<hr>
 		</section>
 		<section id="links">
-			<section>
-				<ul>
-					{#each extLinks as l}
-						<li>
-							<Link style={'font-weight: 400'} href={l.href} rel="external" {color}>{l.title}</Link>
-						</li>
-					{/each}
-				</ul>
-			</section>
-			<section>
-				<ul>
-					{#each $routes as route}
-						<li>
-							<Link style={'font-weight: 400'} href={route.path} {color}>{route.title}</Link>
-						</li>
-					{/each}
-				</ul>
-			</section>
-			<section>
-				<p>&copy; Chaire en paysage urbain de l'Université de Montréal</p>
+			<ul>
+				{#each extLinks as l}
+					<li>
+						<Link style={'font-weight: 400'} href={l.href} rel="external" {color}>{l.title}</Link>
+					</li>
+				{/each}
+			</ul>
+			<ul>
+				{#each routes as route}
+					<li>
+						<Link style={'font-weight: 400'} href={route.path} {color}>{route.title}</Link>
+					</li>
+				{/each}
+			</ul>
+			<div>
+				<p>&copy;</p>
+				<p>Chaire en paysage urbain de l'Université de Montréal</p>
 				<p>2022</p>
-			</section>
+			</div>
 		</section>
 	</div>
-	<hr style:top={expand ? '0%' : '100%'} />
+	<!-- <hr style:top={expand ? '0%' : '100%'} /> -->
 </footer>
 
 
@@ -77,6 +75,7 @@
 
 	hr {
 		position: absolute;
+		bottom: 0;
 		width: 100%;
 		height: 1px;
 		padding: 0;
@@ -90,14 +89,14 @@
 		bottom: 0;
 		width: 100%;
 		margin: 0;
-		padding: 2rem;
+		padding-inline: 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-end;
 		font-size: var(--sm);
 		font-weight: 400;
-		/* background-color: var(--light2); */
+		background-color: var(--light2);
 		clip-path: inset(100% 0px 0px 0px);
 		transition: all 1s cubic-bezier(.8, 0, .2, 1);
 
@@ -106,42 +105,71 @@
 		}
 	}
 
-	#links {
+	#logos {
+		position: relative;
 		display: flex;
-		gap: 3rem;
+		flex-direction: row;
+		flex-wrap: wrap;
 		width: 100%;
-		max-width: var(--width-lg);
+		align-items: center;
+		gap: 2rem;
+		justify-content: space-evenly;
+		padding-block: 2rem;
+
+		& a {
+			flex: 1;
+			min-width: 120px;
+			max-width: 180px;
+			filter: saturate(0);
+			opacity: .5;
+			transition: all .25s ease-out;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&:hover a {
+			filter: saturate(1);
+		}
 	}
 
-	#links > section {
-		flex: 1;
+	#links {
 		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		text-align: center;
+		gap: 2rem;
+		width: 100%;
+		padding-block: 2rem;
+		max-width: var(--width-lg);
 
-		&:first-of-type {
-			align-items: right;
-			text-align: left;
-		}
-
-		&:last-of-type {
-			text-align: right;
-			justify-content: flex-end;
-			opacity: .75;
-		}
-
-		& ul {
+		& > * {
+			flex: 1;
 			padding: 0;
 			margin: 0;
 			text-indent: 0;
+			text-align: center;
 			list-style-type: none;
+
+			&:first-child {
+				text-align: left;
+				justify-content: flex-start;
+			}
+
+			&:last-child {
+				text-align: right;
+				align-items: flex-end;
+			}
 		}
 
 		& li {
-			padding: 3px 0;
+			padding: 4px 0;
 			margin: 0;
 			text-decoration: none;
+		}
+
+		div {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
 		}
 
 		& p {
@@ -150,6 +178,7 @@
 			margin: 0;
 			padding: 0;
 			bottom: 0;
+			max-width: 200px;
 		}
 	}
 </style>

@@ -9,7 +9,7 @@
 			numOctaves="2"
 			stitchTiles="stitch"
 		/>
-		<feColorMatrix type="saturate" values=".4"/>
+		<feColorMatrix type="saturate" values=".3"/>
 		<feComponentTransfer>
 			<feFuncR type="linear" slope="2" />
 			<feFuncG type="linear" slope="2" />

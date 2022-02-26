@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { mapState } from '$stores/map';
-	import { currentRoute } from '$stores/route';
+	import { exercice, route } from '$stores/route';
 	import { mainScroll } from '$stores/scroll';
 	import { routes } from '$utils/routes';
 	import { draw } from 'svelte/transition';
@@ -9,7 +9,7 @@
 
 	function generateLines() {
 		const n = Math.round(8 + Math.random() * 4);
-		const ypad = 10;
+		const ypad = 0;
 		const xpad = 0;
 		return [...Array(n)].map(e => (
 			{
@@ -17,23 +17,23 @@
 				y1: ypad + Math.random() * (100 - 2 * ypad) + '%',
 				x2: xpad + Math.random() * (100 - 2 * xpad) + '%',
 				y2: ypad + Math.random() * (100 - 2 * ypad) + '%',
-				stroke: `hsl(${20 + Math.random() * 180}, 50%, 65%)`,
+				stroke: `hsl(${20 + Math.random() * 180}, 55%, 65%)`,
 			}
 		));
 	}
 </script>
 
 <nav class:min={($mainScroll.direction == 'down' && $mainScroll.y > yLimit) || $mapState.isfull}>
-	{#each $routes as r, i}
+	{#each routes as r, i}
 		<a
-			href={r.path}
+			href={r.exercices ? $exercice.path : r.path}
 			sveltekit:prefetch
-			class:current={r.title == $currentRoute?.title}
+			class:current={r.title == $route?.title}
 			style:background-color={$mainScroll.y > yLimit + 200 ? 'var(--light1)' : ''}
 			style:--delay="{i * 60}ms"
 		>
 			<svg>
-				{#if r.title == $currentRoute?.title}
+				{#if r.title == $route?.title}
 					{#each generateLines() as line, i}
 						<line {...line}
 							in:draw={{speed: .25, delay: i * 20}}
@@ -43,6 +43,7 @@
 					{/each}
 				{/if}
 			</svg>
+			<!-- <div class="grain"></div> -->
 			<span class="text">{r.title}</span>
 			<span class="hover-text">{r.title}</span>
 		</a>
@@ -55,15 +56,16 @@
 		flex-direction: row;
 		gap: 0.5em;
 		align-items: center;
+		flex-wrap: wrap;
 		max-height: 80px;
 		margin-bottom: 1em;
 		transition-property: max-height, margin-bottom;
 		transition-duration: .5s;
 		transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 
-		@media (max-width: 800px) {
+		/* @media (max-width: 800px) {
 			flex-direction: column;
-		}
+		} */
 
 		&.min {
 			max-height: 0;
@@ -78,6 +80,10 @@
 		}
 	}
 
+	.grain {
+		opacity: .3;
+	}
+
 	a {
 		position: relative;
 		display: flex;
@@ -86,6 +92,7 @@
 		align-items: center;
 		pointer-events: initial;
 		padding-block: 0.5em;
+		white-space: nowrap;
 		padding-inline: 1em;
 		background-color: transparent;
 		border-radius: 2em;
@@ -101,8 +108,9 @@
 			background-color .5s ease;
 
 		& .text {
+			position: relative;
 			z-index: 1;
-			transform: skewY(0deg) translateY(0);
+			transform: skewY(0deg) translateY(-0.05em);
 			opacity: 1;
 			transition: all .3s cubic-bezier(.5, 0, .3, 1);
 		}
@@ -120,14 +128,15 @@
 			box-shadow: 0 1em 2em -0.4em rgba(0, 0, 0, 0.2);
 		}
 
-		&:hover, &.current {
+		&:hover,
+		&.current {
 			& .text {
 				transform: skewY(8deg) translateY(-2em);
 				opacity: 0;
 			}
 
 			& .hover-text {
-				transform: skewY(0) translateY(0);
+				transform: skewY(0) translateY(-0.05em);
 				opacity: 1;
 			}
 		}
@@ -135,7 +144,7 @@
 		&.current {
 			pointer-events: none;
 			color: var(--light1);
-			/* background-color: var(--dark1); */
+			background-color: var(--light3) !important;
 			box-shadow: 0 .8em 2em -0.5em rgba(0, 0, 0, 0.25);
 		}
 	}
@@ -150,8 +159,8 @@
 		overflow: visible;
 
 		& line {
-			stroke-width: 10px;
-			stroke-linecap: square;
+			stroke-width: 20px;
+			stroke-linecap: round;
 		}
 	}
 </style>

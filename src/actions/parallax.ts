@@ -1,12 +1,15 @@
+interface ParallaxOptions {
+	scrollParent?: HTMLElement;
+	factor?: number;
+}
+
 /**
  * Svelte action to add parallax effect using a translateY transformation
- * @param {HTMLElement} element
- * @param {{scrollparent: HTMLElement, factor: number}} options
- * 
  */
-export function parallax(element, {scrollParent = null, factor = .8} = {}) {
-
-	if (!scrollParent) scrollParent = document.body;
+export function parallax(element: HTMLElement, {
+	scrollParent = document.body,
+	factor = .8
+}: ParallaxOptions = {}) {
 
 	let TY = 0;
 

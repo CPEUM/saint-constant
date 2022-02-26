@@ -1,13 +1,13 @@
 <script lang="ts">
 	import SectionHeading from './SectionHeading.svelte';
 
-	export let heading: string;
+	// export let heading: string;
 </script>
 
 
 <section>
 	<SectionHeading>
-		{heading}
+		Préférences
 	</SectionHeading>
 	<slot></slot>
 </section>

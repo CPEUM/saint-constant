@@ -52,18 +52,18 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 0%;
-		bottom: 0%;
-		left: 100%;
-		right: 0%;
-		opacity: .5;
-		border-radius: 0px;
+		top: 50%;
+		bottom: 50%;
+		left: 50%;
+		right: 50%;
+		opacity: 0;
+		border-radius: 500px;
 		width: auto;
 		height: auto;
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		transition: all .5s var(--ease);
+		transition: all .4s var(--ease);
 
 		&.full {
 			opacity: 1;

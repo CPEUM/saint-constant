@@ -49,6 +49,7 @@
 		justify-content: center;
 		width: 3em;
 		height: 3em;
+		top: -.25em;
 		border-radius: 50%;
 		cursor: pointer;
 		padding: 10px;

@@ -15,10 +15,9 @@ export function debasePath(path) {
 
 /**
  * Take a path, debases it if needed, and return its segments as an array of strings
- * @param {string} path
- * @returns {string[]}
  */
-export function getSegments(path) {
+export function getSegments(path: string) {
+	if (!path) return null;
 	return debasePath(path)
 		.replace(/#.*$/, '')
 		.replace(/^\/+/, '')
