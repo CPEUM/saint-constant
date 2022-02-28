@@ -5,7 +5,6 @@
 	import Interest from '$components/exercice/Interest.svelte';
 	import FigureMap from '$components/figure/FigureMap.svelte';
 	import FigureMarker from '$components/figure/FigureMarker.svelte';
-	import FigureLegendItem from '$components/figure/FigureLegendItem.svelte';
 	import Preferences from '$components/exercice/Preferences.svelte';
 	import Propositions from '$components/exercice/Propositions.svelte';
 	import BarChart from '$components/chart/BarChart.svelte';
@@ -14,14 +13,18 @@
 	import BodiesItem from '$components/bodies/BodiesItem.svelte';
 	import List from '$components/list/List.svelte';
 	import ListItem from '$components/list/ListItem.svelte';
+	import Legend from '$components/legend/Legend.svelte';
+	import LegendItem from '$components/legend/LegendItem.svelte';
+	import { highlight } from '$actions/highlight';
+	import { revealFlyUp, revealText } from '$actions/revealText';
 </script>
 
 <Exercice key="{'agroparc'}">
-	<Concept heading="Le concept d’agroparc">
-		<!-- <div class="text-wrap">
+	<!-- <Concept heading="Le concept d’agroparc">
+		<div class="text-wrap">
 			<p>Le concept d'agroparc est né dans une perspective de reconnaissance des valeurs environnementales et récréatives du territoire agricole de Saint-Constant.</p>
 			<p>L’agroparc vise à&nbsp;:</p>
-		</div> -->
+		</div>
 		<Bodies>
 			<BodiesItem>Allier agriculture et environnement</BodiesItem>
 			<BodiesItem>Améliorer les interrelations ville/campagne</BodiesItem>
@@ -29,7 +32,7 @@
 			<BodiesItem>Assurer un équilibre économique, social et environnemental dans le développement du territoire</BodiesItem>
 		</Bodies>
 		<div class="text-wrap">
-			<!-- <ExcerptToggle key="agroparc1">Quelques références supplémentaires d'agroparcs</ExcerptToggle> -->
+			<ExcerptToggle key="agroparc1">Quelques références supplémentaires d'agroparcs</ExcerptToggle>
 			<p>Les exemples d’agroparc en Europe montrent que les parcs agricoles peuvent être initiés à partir&nbsp;:</p>
 		</div>
 		<Bodies>
@@ -49,66 +52,87 @@
 			<ListItem><strong>Activités éducatives</strong> (accueil de groupes scolaires, sentiers d’interprétation, etc.)</ListItem>
 		</List>
 	</Concept>
-	<Interest heading="L’intérêt d’un acgroparc à Saint-Constant">
-		<p>Le Plan de développement de la zone agricole (PDZA) de la MRC de Roussillon (2019) mentionne que le développement du territoire agricole de Saint-Constant présente certains défis dont&nbsp;:</p>
+	<Interest heading="L’intérêt d’un agroparc à Saint-Constant">
+		<div class="text-wrap">
+			<p>Le Plan de développement de la zone agricole (PDZA) de la MRC de Roussillon (2019) mentionne que le développement du territoire agricole de Saint-Constant présente certains défis dont&nbsp;:</p>
+		</div>
 		<List>
 			<ListItem>La présence de terres en friche à proximité de l’autoroute 30 ou du milieu urbanisé</ListItem>
 			<ListItem>Une offre de produits locaux à renforcer</ListItem>
 		</List>
-		<p>De plus, il soulève certaines préoccupations environnementales en regard des pratiques agricoles actuelles liées notamment à&nbsp;:</p>
+		<div class="text-wrap">
+			<p>De plus, il soulève certaines préoccupations environnementales en regard des pratiques agricoles actuelles liées notamment à&nbsp;:</p>
+		</div>
 		<List>
 			<ListItem>La faible présence de superficies boisées</ListItem>
 			<ListItem>L’érosion des rives et la mauvaise qualité de l’eau</ListItem>
 		</List>
-		<p>Les objectifs d’un agroparc à Saint-Constant&nbsp:</p>
+		<div class="text-wrap">
+			<p>Les objectifs d’un agroparc à Saint-Constant touchent&nbsp:</p>
+		</div>
 		<Bodies>
-			<BodiesItem>Développements multifonctionnels des terres agricoles</BodiesItem>
-			<BodiesItem>Valorisation de la production locale</BodiesItem>
-			<BodiesItem>Améliorer les liens entre le milieu urbain et le milieu agricole</BodiesItem>
+			<BodiesItem>Le développement multifonctionnel des terres agricoles</BodiesItem>
+			<BodiesItem>La valorisation de la production locale</BodiesItem>
+			<BodiesItem>L'amélioration des liens entre le milieu urbain et le milieu agricole</BodiesItem>
 		</Bodies>
-		<p><strong>Le projet de l’agroparc voit alors les friches agricoles à proximité du noyau villageois comme lieux d’opportunités de création d’un pôle d’interaction multifonctionnel entre producteurs et citoyens.</strong></p>
-	</Interest>
+		<div class="text-wrap">
+			<p><strong>Le projet de l’agroparc voit alors les friches agricoles à proximité du noyau villageois comme lieux d’opportunités de création d’un pôle d’interaction multifonctionnel entre producteurs et citoyens.</strong></p>
+		</div>
+	</Interest> -->
 	<Preferences>
-		<p>Le secteur du noyau villageois a été identifié comme territoire potentiel de développement de l’agroparc pour une première phase. Il présente plusieurs potentiels stratégiques comme&nbsp;:</p>
+		<div class="text-wrap">
+			<p>Le secteur du noyau villageois a été identifié comme territoire potentiel de développement de l’agroparc pour une première phase. Il présente plusieurs potentiels stratégiques comme&nbsp;:</p>
+		</div>
 		<List>
 			<ListItem>La présence de terrains publics en zone agricole</ListItem>
 			<ListItem>Le développement de projets municipaux capables de s’intégrer aux principes d’aménagement de l’agroparc (pôle récréotouristique du château d’eau)</ListItem>
 		</List>
-		<p>Dans ce secteur, six sous-secteurs d’intervention ont été identifiés par les participants présents au rendez-vous citoyens du 13 février 2020.</p>
-		<!-- <FigureMap>
-			<FigureMarker lat={45.36999} lon={-73.57000} label="1" />
-			<FigureMarker lat={45.36949} lon={-73.57010} label="2" />
-			<FigureMarker lat={45.36939} lon={-73.57005} label="3" />
-			<FigureMarker lat={45.36991} lon={-73.57001} label="4" />
-			<FigureMarker lat={45.36929} lon={-73.57000} label="5" />
-			<FigureMarker lat={45.36979} lon={-73.57003} label="6" />
-			<FigureLegendItem label="1">Parc Leblanc</FigureLegendItem>
-			<FigureLegendItem label="2">Site de l’église de Saint-Constant</FigureLegendItem>
-			<FigureLegendItem label="3">Chandellerie</FigureLegendItem>
-			<FigureLegendItem label="4">Site des travaux publics</FigureLegendItem>
-			<FigureLegendItem label="5">Bassin de rétention de la rue Chantale</FigureLegendItem>
-			<FigureLegendItem label="6">Parc des Citoyens</FigureLegendItem>
-		</FigureMap> -->
-		<h3>Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen</h3>
-		<!-- <BarChart src="/chartdata/agroparc-sous-secteurs.json" /> -->
-		<h4>Sous-secteur 5&nbsp;: Bassin de rétention de la rue Chantale <span>(ainsi que l’ensemble de ses espaces verts adjacents)</span>&nbsp;:</h4>
-		<p>Implantation d’activités de production agricole, de récréation et de conservation.</p>
-		<h4>Sous-secteur 6&nbsp;: Parc des Citoyens&nbsp;:</h4>
-		<p>Implantation d’activités de récréation et de conservation, suivies des activités de production agricole.</p>
-		<h4>Sous-secteur 2&nbsp;: Site de l’église <span>et</span> Secteur 3&nbsp;: Site de la chandellerie&nbsp;:</h4>
-		<p>Implantation d’activités commerciales et de récréation.</p>
-		<h4>Sous-secteur 1&nbsp;: Parc Leblanc <span>et</span> Secteur 4&nbsp;: Site des travaux publics&nbsp;:</h4>
-		<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
+		<div class="text-wrap">
+			<p>Dans ce secteur, six sous-secteurs d’intervention ont été identifiés par les participants présents au rendez-vous citoyens du 13 février 2020.</p>
+		</div>
+		<FigureMap>
+			<FigureMarker lat={45.36999} lon={-73.57000} label="1" key="asd" />
+			<FigureMarker lat={45.36949} lon={-73.57010} label="2" key="asd" />
+			<FigureMarker lat={45.36939} lon={-73.57005} label="3" key="asdasd" />
+			<FigureMarker lat={45.36991} lon={-73.57001} label="4" key="asd" />
+			<FigureMarker lat={45.36929} lon={-73.57000} label="5" key="asd" />
+			<FigureMarker lat={45.36979} lon={-73.57003} label="6" key="" />
+			<Legend>
+				<LegendItem label="1" key="asd">Parc Leblanc</LegendItem>
+				<LegendItem label="2" key="asd">Site de l’église de Saint-Constant</LegendItem>
+				<LegendItem label="3" key="asd">Chandellerie</LegendItem>
+				<LegendItem label="4" key="asd">Site des travaux publics</LegendItem>
+				<LegendItem label="5" key="asd">Bassin de rétention de la rue Chantale</LegendItem>
+				<LegendItem label="6" key="asd">Parc des Citoyens</LegendItem>
+			</Legend>
+		</FigureMap>
+		<div class="text-wrap">
+			<h3 class="left">Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen</h3>
+		</div>
+		<BarChart src="/data/charts/agroparc-sous-secteurs.json">
+			<h4 class="left">Sous-secteur 5&nbsp;: Bassin de rétention de la rue Chantale <span>(ainsi que l’ensemble de ses espaces verts adjacents)</span>&nbsp;:</h4>
+			<p class="right">Implantation d’activités de production agricole, de récréation et de conservation.</p>
+			<h4>Sous-secteur 6&nbsp;: Parc des Citoyens&nbsp;:</h4>
+			<p>Implantation d’activités de récréation et de conservation, suivies des activités de production agricole.</p>
+			<h4>Sous-secteur 2&nbsp;: Site de l’église <span>et</span> Secteur 3&nbsp;: Site de la chandellerie&nbsp;:</h4>
+			<p>Implantation d’activités commerciales et de récréation.</p>
+			<h4>Sous-secteur 1&nbsp;: Parc Leblanc <span>et</span> Secteur 4&nbsp;: Site des travaux publics&nbsp;:</h4>
+			<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
+		</BarChart>
 	</Preferences>
 	<Propositions>
-		<p>Le travail d’idéation sur la proposition de l’agroparc de Saint-Constant a été effectué à deux échelles&nbsp;:</p>
-		<ul>
-			<li>L’échelle de la municipalité pour déterminer la programmation territoriale</li>
-			<li>L’échelle du secteur du noyau villageois pour détailler certaines propositions d’aménagement et mettre en images les activités de l’agroparc.</li>
-		</ul>
-		<p>Les deux échelles de projet permettent une cohabitation multifonctionnelle des espaces. Les lieux de production agricole deviennent à la fois des lieux de promenades (récréation), de découvertes (éducation), des espaces naturels (conservation) et des lieux de vente directe entre producteurs et consommateurs (commercial).</p>
-		<h3>À l’échelle de la municipalité</h3>
-		<p>On retrouve quatre principales actions&nbsp;:</p>
+		<div class="text-wrap">
+			<p>Le travail d’idéation sur la proposition de l’agroparc de Saint-Constant a été effectué à deux échelles&nbsp;:</p>
+		</div>
+		<List>
+			<ListItem>L’échelle de la municipalité pour déterminer la programmation territoriale</ListItem>
+			<ListItem>L’échelle du secteur du noyau villageois pour détailler certaines propositions d’aménagement et mettre en images les activités de l’agroparc.</ListItem>
+		</List>
+		<div class="text-wrap">
+			<p>Les deux échelles de projet permettent une cohabitation multifonctionnelle des espaces. Les lieux de production agricole deviennent à la fois des lieux de promenades (récréation), de découvertes (éducation), des espaces naturels (conservation) et des lieux de vente directe entre producteurs et consommateurs (commercial).</p>
+			<h3 use:revealText={revealFlyUp} class="left">À l’échelle de la municipalité</h3>
+			<p>On retrouve quatre principales actions&nbsp;:</p>
+		</div>
 		<List>
 			<ListItem><strong>Un sentier multifonctionnel</strong>, participe à faire le lien nord-sud entre le territoire agricole et le noyau villageois.</ListItem>
 			<ListItem><strong>L’implantation d’agriculture urbaine</strong>, souligne l’identité agricole de la ville en milieu urbain en s’implantant à l’emplacement de la ligne de transport électrique. Marque l’entrée de ville et renforce la convivialité et la qualité du cadre de vie.</ListItem>
@@ -116,15 +140,17 @@
 			<ListItem><strong>La création d’un pôle d’accueil</strong> dans le secteur du noyau villageois. Ce projet détaillé dans les prochaines sections permettra d’illustrer une diversité d’actions (récréatives, de conservation, commerciales et de production) à la suite des consultations entreprises lors du rendez-vous citoyens. </ListItem>
 		</List>
 		<!-- MapFigure here... -->
-		<h3>À l’échelle du noyau villageois</h3>
-		<p>La phase 1 du projet de l’agroparc se situe dans le noyau villageois et ses environs. Il découle des aspirations souhaitées par les citoyens, des analyses et constats effectués par les professionnels de l’aménagement.</p>
-		<p>Une variété d’aménagements sont proposés, regroupés dans 4 grands groupes d’activités&nbsp;:</p>
-		<ul>
-			<li>Productives</li>
-			<li>Récréatives</li>
-			<li>De conservation</li>
-			<li>Commerciales</li>
-		</ul>
+		<div class="text-wrap">
+			<h3 use:revealText={revealFlyUp}>À l’échelle du noyau villageois</h3>
+			<p>La phase 1 du projet de l’agroparc se situe dans le noyau villageois et ses environs. Il découle des aspirations souhaitées par les citoyens, des analyses et constats effectués par les professionnels de l’aménagement.</p>
+			<p>Une variété d’aménagements sont proposés, regroupés dans 4 grands groupes d’activités&nbsp;:</p>
+		</div>
+		<Bodies>
+			<BodiesItem size={210}>Productives</BodiesItem>
+			<BodiesItem size={200}>Récréatives</BodiesItem>
+			<BodiesItem size={220}>De conservation</BodiesItem>
+			<BodiesItem size={200}>Commerciales</BodiesItem>
+		</Bodies>
 		<Proposition
 			title="Site A"
 			subtitle="Le secteur agricole du bassin de rétention de la rue Chantal"

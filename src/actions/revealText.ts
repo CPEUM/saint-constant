@@ -162,13 +162,14 @@ export function revealText(element: HTMLElement, {
 
 export const revealFlyUp: RevealTextOptions = {
 	mask: true,
-	maskPadding: '0em',
-	y: '0.75em',
+	maskPadding: '.1em',
+	y: '1em',
 	opacity: 0,
 	rotateX: 60,
 	transformOrigin: '0% 80%',
-	staggerDelay: 15,
-	duration: 750
+	staggerDelay: 80,
+	duration: 750,
+	granularity: 'word'
 }
 
 export const revealFlyDown: RevealTextOptions = {

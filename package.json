@@ -58,6 +58,7 @@
 	"dependencies": {
 		"maplibre-gl": "^1.15.2",
 		"matter-attractors": "^0.1.6",
+		"matter-attractors-f": "^0.1.7",
 		"matter-js": "^0.18.0",
 		"overlayscrollbars": "^1.13.1",
 		"svg-parser": "^2.0.4"

@@ -1,28 +1,41 @@
 <script lang="ts">
+	import type { BodiesContext } from './Bodies.svelte';
 	import { getContext, onMount } from 'svelte';
-	import { BodiesContext } from './Bodies.svelte';
-	import Matter from 'matter-js';
+	import Matter from '$utils/matter';
 
-	export let size = 280;
-	export let radius: Matter.IChamfer['radius'] = size / 4;
-	let angle = 0;
+	let node: HTMLElement;
+	export let size: number = null;
+	export let width = size || Math.round(Math.random() * 100 + 250);
+	export let height = width;
+	export let radius = Math.round(Math.random() * .25 * width + .25 * width);
+	// export let radii = Array(4).fill(null).map(_ => radius || Math.random() * Math.max(width, height) / 2)
+	// let radiiCSS;
+	// $:	radiiCss = radii.map(r => r + 'px').join(' ');
+	let angle = (Math.random() - 0.5) / 180;
 	let top = 0;
 	let left = 0;
 
 	const ctx = getContext<BodiesContext>('bodies');
 	const visible = ctx.visible;
-	const index = ctx.index();
+	const index = ctx.getIndex();
 	const engine = ctx.getEngine();
 	let body: Matter.Body;
 
 	onMount(() => {
-		body = Matter.Bodies.rectangle(Math.random() * 500, Math.random() * 150, size, size, {
-			angle: (Math.random() - 0.5) / 180,
-			friction: 0.7,
-			frictionStatic: 10,
-			density: .01,
-			chamfer: { radius },
-		});
+		body = Matter.Bodies.rectangle(
+			Matter.Common.random(0, node.parentElement.clientWidth),
+			Matter.Common.random(0, node.parentElement.clientHeight),
+			width,
+			height,
+			{
+				angle,
+				friction: .1,
+				frictionStatic: 8,
+				density: .001,
+				chamfer: { radius }
+			}
+		);
+		ctx.addBodyRef(body);
 		Matter.Composite.add(engine.world, body);
 		Matter.Events.on(engine, 'afterUpdate', () => {
 			angle = body.angle;
@@ -33,14 +46,15 @@
 </script>
 
 <li
+	bind:this={node}
 	class:hidden={!$visible}
+	style:top="{top}px"
+	style:left="{left}px"
+	style:border-radius="{radius}px"
+	style:width="{width}px"
+	style:height="{height}px"
 	style:--delay="{index * ctx.staggerDelay}ms"
 	style:--angle="{angle}rad"
-	style:--top="{top}px"
-	style:--left="{left}px"
-	style:--radius="{radius}px"
-	style:width="{size}px"
-	style:height="{size}px"
 >
 	<span>
 		<slot />
@@ -58,24 +72,28 @@
 		padding: 2em;
 		text-align: center;
 		position: absolute;
-		color: var(--accent3);
-		top: var(--top);
-		left: var(--left);
-		transform: translate(-50%, -50%);
-		transition: opacity .5s var(--delay);
-
+		color: var(--light1);
+		font-weight: 500;
+		background-color: var(--accent3);
+		transform: translate(-50%, -50%) rotate(var(--angle));
+		overflow: hidden;
+		transition: opacity .3s;
+		
 		&::before {
 			content: '';
 			position: absolute;
-			z-index: -1;
+			opacity: .3;
+			z-index: 1;
 			top: 0;
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background-color: var(--accent1);
-			border-radius: var(--radius);
-			transform: rotate(var(--angle));
+			background: url(/grain.svg);
 		}
+	}
+
+	span {
+		transform: rotate(calc(-1 * var(--angle)));
 	}
 
 	.hidden {

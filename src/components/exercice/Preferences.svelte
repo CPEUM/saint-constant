@@ -7,7 +7,7 @@
 
 <section>
 	<SectionHeading>
-		Préférences
+		Préférences d'aménagement des citoyens et des acteurs du milieu
 	</SectionHeading>
 	<slot></slot>
 </section>

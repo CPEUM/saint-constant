@@ -1,35 +1,36 @@
+<script lang="ts" context="module">
+	import { Map as M } from 'maplibre-gl';
+
+	/**
+	 * General map, accessible throughout the app!
+	 */
+	let map: M;
+	export function getMap() {
+		return map;
+	}
+</script>
+
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { Map as M } from 'maplibre-gl';
 	import { mapState } from '$stores/map';
+	import { getData } from '$utils/getData';
 
-	let map: M;
 	let container: HTMLElement;
 	const dispatch = createEventDispatcher<{load: null}>();
-
-	async function getData(filepath) {
-		const res = await fetch(filepath);
-		if (res.ok) {
-			return await res.json();
-		}
-		else {
-			throw new Error('Couldn\'t get data fetched from map component');
-		}
-	}
 
 	onMount(async () => {
 		getData('/data/test.json');
 
 		map = new M({
-			container,
-			style: 'mapbox://styles/iolyd/ckzw8nw7y001z14pq7ek199lr', // style URL
-			center: [0, 0], // starting position [lng, lat]
-			zoom: 1 // starting zoom
-		});
+				container,
+				style: 'mapbox://styles/iolyd/ckzw8nw7y001z14pq7ek199lr', // style URL
+				center: [0, 0], // starting position [lng, lat]
+				zoom: 1 // starting zoom
+			});
 
 		map.once('load', () => {
 			dispatch('load');
-		})
+		});
 	});
 </script>
 
@@ -52,10 +53,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 50%;
-		bottom: 50%;
-		left: 50%;
-		right: 50%;
+		top: 25%;
+		bottom: 25%;
+		left: 25%;
+		right: 25%;
 		opacity: 0;
 		border-radius: 500px;
 		width: auto;
@@ -66,13 +67,22 @@
 		transition: all .4s var(--ease);
 
 		&.full {
-			opacity: 1;
-			z-index: 1;
+			opacity: 1 !important;
+			z-index: 1 !important;
 			top: 0 !important;
 			bottom: 0 !important;
 			left: 0 !important;
 			right: 0 !important;
 			border-radius: 0 !important;
+		}
+
+		&:global(.figure) {
+			opacity: .5;
+			top: 0rem;
+			right: 0rem;
+			bottom: 0rem;
+			left: 0rem;
+			border-radius: 0;
 		}
 
 		&:global(.half) {

@@ -14,6 +14,7 @@
 	import { intersection } from '$actions/intersect';
 
 	export let numbered: boolean = false;
+	export let staggerDelay: number = 150;
 	let length = 0;
 	const visible = writable(false);
 
@@ -25,6 +26,8 @@
 </script>
 
 <ul
+	{...$$restProps}
+	style:--staggerDelay="{staggerDelay}ms"
 	use:intersection={{rootMargin: '-30% 0px -30%'}}
 	on:enter|once={() => visible.set(true)}
 >
@@ -32,5 +35,14 @@
 </ul>
 
 <style lang="postcss">
-
+	ul {
+		position: relative;
+		z-index: 0;
+		list-style-type: none;
+		margin: 0 auto;
+		padding: 0;
+		padding-bottom: 2em;
+		width: 100%;
+		max-width: var(--width-sm);
+	}
 </style>

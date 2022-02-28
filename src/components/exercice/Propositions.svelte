@@ -7,7 +7,7 @@
 
 <section>
 	<SectionHeading>
-		Propositions
+		Propositions d'aménagement
 	</SectionHeading>
 	<slot></slot>
 </section>

@@ -18,6 +18,7 @@ specifiers:
   eslint-plugin-svelte3: ^3.4.0
   maplibre-gl: ^1.15.2
   matter-attractors: ^0.1.6
+  matter-attractors-f: ^0.1.7
   matter-js: ^0.18.0
   overlayscrollbars: ^1.13.1
   postcss: ^8.4.6
@@ -38,6 +39,7 @@ specifiers:
 dependencies:
   maplibre-gl: 1.15.2
   matter-attractors: 0.1.6
+  matter-attractors-f: 0.1.7
   matter-js: 0.18.0
   overlayscrollbars: 1.13.1
   svg-parser: 2.0.4
@@ -1571,6 +1573,10 @@ packages:
       vt-pbf: 3.1.3
     transitivePeerDependencies:
       - mapbox-gl
+    dev: false
+
+  /matter-attractors-f/0.1.7:
+    resolution: {integrity: sha512-eTiyHbkNFVn1+Fzx9sQ2t8j5r7aAIWHV96Cnlya8SpZX2B5YnhCZP0Is5fNXPBGl15I+Ud3KC3OyItfbibF18Q==}
     dev: false
 
   /matter-attractors/0.1.6:

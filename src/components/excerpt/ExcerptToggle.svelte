@@ -2,12 +2,10 @@
 	export let key;
 </script>
 
-
 <button>
-	Ouvrir excerpt
-	<slot></slot>
+	<span>Ouvrir extrait : </span>
+	<span><slot /></span>
 </button>
-
 
 <style>
 

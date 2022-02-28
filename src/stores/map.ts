@@ -1,16 +1,15 @@
-import maplibre from 'maplibre-gl';
+import Maplibre from 'maplibre-gl';
 import { writable } from 'svelte/store';
 
-maplibre.accessToken = 'pk.eyJ1IjoiaW9seWQiLCJhIjoiY2twNXFqNXRzMGNxMTJ2cDJ1cms5anZtayJ9.WwgtCYAVZVl00E9IgzFNmg';
+Maplibre.accessToken = 'pk.eyJ1IjoiaW9seWQiLCJhIjoiY2twNXFqNXRzMGNxMTJ2cDJ1cms5anZtayJ9.WwgtCYAVZVl00E9IgzFNmg';
+export { Maplibre };
 
-export { maplibre };
 
 interface MapStateObject {
 	isfull: boolean;
 	style: string;
 	class: string;
 }
-
 /**
  * Store with style indications set by intersection-observed elements or interactions.
  *

@@ -26,7 +26,7 @@
 >
 	<div id="content" class:expand style:color>
 		<section id="logos">
-			{#each logos.prime as logo}
+			{#each [...logos.prime, ...logos.second] as logo}
 				<a
 					href={logo.href}
 					rel="external"
