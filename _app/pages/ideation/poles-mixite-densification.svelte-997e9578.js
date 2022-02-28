@@ -1,1 +1,0 @@
-import{S as l,i as r,s as c,e as d,t as h,c as m,a as p,h as _,d as o,g as f,H as u,I as n}from"../../chunks/vendor-a49792f3.js";function x(i){let e,s;return{c(){e=d("h2"),s=h("poles")},l(t){e=m(t,"H2",{});var a=p(e);s=_(a,"poles"),a.forEach(o)},m(t,a){f(t,e,a),u(e,s)},p:n,i:n,o:n,d(t){t&&o(e)}}}class v extends l{constructor(e){super();r(this,e,null,x,c,{})}}export{v as default};
