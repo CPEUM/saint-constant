@@ -27,7 +27,7 @@ import ListItem from '$components/list/ListItem.svelte';
 <div class="text-wrap">
 	<h2 use:revealText={{...revealFlyUp}}>Objectifs du projet</h2>
 	<p class="left">Ce projet vise trois principaux objectifs&nbsp;:</p>
-	<List class="right">
+	<List class="left">
 		<ListItem>
 			Co-construire des outils de connaissance, d’intervention et de gestion des paysages et des
 			cadres de vie de la Ville de Saint-Constant;
@@ -42,7 +42,7 @@ import ListItem from '$components/list/ListItem.svelte';
 			résultats de la démarche.
 		</ListItem>
 	</List>
-	<p class="left">
+	<p class="right">
 		<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il&nbsp;présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations qui reposent sur la lecture des attraits du territoire, des préoccupations et des aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de diagnostic du projet&nbsp;:
 	</p>
 </div>

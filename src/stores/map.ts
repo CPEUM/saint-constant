@@ -7,9 +7,19 @@ export { Maplibre };
 
 interface MapStateObject {
 	isfull: boolean;
+	// style: {
+	// 	'background-color'?: string,
+	// 	'border-radius'?: string | number,
+	// 	'top'?: string | number,
+	// 	'right'?: string | number,
+	// 	'bottom'?: string | number,
+	// 	'left'?: string | number,
+	// 	'z-index'?: number
+	// };
 	style: string;
 	class: string;
 }
+
 /**
  * Store with style indications set by intersection-observed elements or interactions.
  *
@@ -32,10 +42,15 @@ export const mapState = (function () {
 			update((state) => {
 				return { ...state, isfull: val };
 			}),
-		setStyle: (style: string) =>
+		setStyle: (style: CSSStyleDeclaration) =>
 			update((state) => {
 				return { ...state, style }
 			}),
+		clearStyle: () =>
+			update((state) => {
+				return { ...state, style: null }
+			})
+		,
 		setClass: (className: string) =>
 			update((state) => {
 				return { ...state, class: className }

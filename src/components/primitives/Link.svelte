@@ -5,11 +5,13 @@
 	export let href: string;
 	export let color = 'var(--accent3)';
 	export let hoverColor = 'var(--dark3)';
+
+	let external = $$restProps.rel === 'external' || !!href.match(/^(https:|http:|www\.)\S*/) || undefined;
 </script>
 
 
 <a
-	sveltekit:prefetch={$$restProps.rel === 'external' ? undefined : true}
+	sveltekit:prefetch={external ? undefined : true}
 	{href}
 	{...$$restProps}
 	style:--color={color}
@@ -18,7 +20,7 @@
 	<span class="link-text">
 		<slot></slot>
 	</span>&emsp;
-	{#if $$restProps.rel === 'external'}
+	{#if external}
 		<span class="ext">
 			<svg xmlns="http://www.w3.org/2000/svg" width=100 height=100 viewBox="0 0 100 100">
 				<line x1=5 y1=95 x2=90 y2=10 />

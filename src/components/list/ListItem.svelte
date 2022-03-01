@@ -32,14 +32,14 @@
 		margin: .5em 0;
 		opacity: 1;
 		background-color: var(--light1);
-		border-radius: 12px;
+		border-radius: 1em;
 		color: var(--dark1);
-		box-shadow: 0 .5em 2em -1em rgba(0, 0, 40, 0.1);
+		box-shadow: 0 .5em 2em -1em rgba(0, 0, 25, 0.2);
 		transition: all .3s calc(var(--index) * var(--staggerDelay)) cubic-bezier(.2, 0, .4, 1);
 
 		&::after {
 			content: '';
-			border-radius: 12px;
+			border-radius: 1em;
 			position: absolute;
 			background-image: url(/grain.svg);
 			background-repeat: repeat;
@@ -75,10 +75,11 @@
 	.line {
 		z-index: 2;
 		position: absolute;
-		top: .5em;
-		bottom: .5em;
-		left: 0;
+		top: 1em;
+		bottom: 1em;
+		left: 1px;
 		width: 2px;
+		border-radius: 2px;
 		background-color: var(--accent2);
 		transition: all .5s calc(var(--index) * var(--staggerDelay));
 	}

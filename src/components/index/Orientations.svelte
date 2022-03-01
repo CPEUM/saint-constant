@@ -5,7 +5,7 @@
 	import { getAccentColors } from '$utils/exerciceColors';
 	import { revealText } from '$actions/revealText';
 
-	let current = 0;
+	let current = null;
 	const rootMargin = '-50% 0% -50% 0%';
 
 	function mask(bbox: DOMRect) {
@@ -13,6 +13,7 @@
 	}
 
 	function leave() {
+		current = null;
 		mapState.setClass('');
 	}
 
@@ -32,8 +33,13 @@
 			use:intersection={{rootMargin}}
 			on:enter={() => exEnter(i)}
 			style={getAccentColors(ex.key)}
+			class:right={i%2 !== 0}
+			style:--angle="{-6 + Math.random() * 12}deg"
 		>
-			<span class="number" class:right={i%2 !== 0}>0{i + 1}</span>
+			<svg height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+				<text x="50" y="50" font-size="100" text-anchor="middle" dominant-baseline="middle" vector-effect="non-scaling-stroke">0{i + 1}</text>
+			</svg>
+			<!-- <span class="number" class:right={i%2 !== 0}>0{i + 1}</span> -->
 		</div>
 	{/each}
 	<div id="board">
@@ -98,7 +104,7 @@
 		position: relative;
 		width: 100%;
 		max-width: var(--width-lg);
-		margin-block: 25vh;
+		margin-block: 10vh;
 		margin-inline: auto;
 	}
 
@@ -111,7 +117,7 @@
 		justify-content: center;
 	}
 
-	.number {
+	/* .number {
 		display: flex;
 		width: 100%;
 		height: 100%;
@@ -121,11 +127,38 @@
 		align-items: center;
 		justify-content: flex-start;
 		z-index: -1;
-		color: var(--light3);
+		color: var(--accent1);
 		opacity: .5;
 
 		&.right {
 			justify-content: flex-end;
+		}
+	} */
+
+	@keyframes stroky {
+		from {
+			stroke-dashoffset: 0%;
+		}
+		to {
+			stroke-dashoffset: 120%;
+		}
+	}
+	svg {
+		position: absolute;
+		z-index: -1;
+		width: 100vw;
+		height: 100%;
+		transform: rotate(var(--angle));
+
+		text {
+			opacity: .5;
+			stroke-linejoin: round;
+			/* stroke-linecap: round; */
+			stroke-dasharray: 100% 20%;
+			stroke-width: 3px;
+			stroke: var(--accent1);
+			fill: none;
+			animation: stroky 10s infinite linear;
 		}
 	}
 
@@ -156,42 +189,12 @@
 		margin: 0;
 		max-width: var(--width-sm);
 		transform: translateY(-50%);
-		color: var(--dark1);
 		transition: all .25s ease-out;
-
-		/* & .title::before {
-			user-select: none;
-			pointer-events: none;
-			content: '';
-			width: var(--size);
-			height: var(--size);
-			border-radius: 47%;
-			position: absolute;
-			transform-origin: center;
-			transform: translateY(-50%) rotate(var(--angle));
-			background-image: url(/grain.svg);
-			background-color: var(--light2);
-			box-shadow: inset 0px 0px 0px 0px var(--accent1);
-			opacity: 0;
-			top: 50%;
-			left: 0%;
-			transition: all .5s cubic-bezier(.5, 0, .2, 1);
-		}
-
-		&:hover .title::before {
-			opacity: 1;
-			box-shadow: inset 0px 0px 0px 200px var(--accent1);
-		} */
 
 		&.right {
 			right: 0;
 			text-align: right;
 			margin-left: auto;
-
-			& .title::before {
-				right: 0%;
-				left: initial;
-			}
 		}
 	}
 
@@ -216,6 +219,13 @@
 		font-weight: 500;
 		line-height: 1em;
 		margin-block: 1em;
+		color: var(--dark1);
+		transition: all .2s ease-out;
+		
+		/* &:hover {
+			color: var(--accent2);
+			transform: translateY(5px);
+		} */
 	}
 
 	.desc {

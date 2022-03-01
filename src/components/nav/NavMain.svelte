@@ -17,7 +17,7 @@
 				y1: ypad + Math.random() * (100 - 2 * ypad) + '%',
 				x2: xpad + Math.random() * (100 - 2 * xpad) + '%',
 				y2: ypad + Math.random() * (100 - 2 * ypad) + '%',
-				stroke: `hsl(${20 + Math.random() * 180}, 55%, 65%)`,
+				stroke: `hsl(${20 + Math.random() * 180}, 60%, 70%)`,
 			}
 		));
 	}
@@ -143,7 +143,7 @@
 
 		&.current {
 			pointer-events: none;
-			color: var(--light1);
+			color: var(--dark1);
 			background-color: var(--light3) !important;
 			box-shadow: 0 .8em 2em -0.5em rgba(0, 0, 0, 0.25);
 		}

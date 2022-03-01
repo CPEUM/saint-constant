@@ -12,12 +12,16 @@
 	export let fill: string = 'var(--accent1)';
 	export let stroke: string = null;
 	export let arrowEnd: boolean = false;
-    export let arrowStart: boolean = false;
-    export let strokeWidth: number = 0;
-    export let src: string = null;
+	export let arrowStart: boolean = false;
+	export let strokeWidth: number = 0;
+	export let src: string = null;
 </script>
 
-<div class:interactive>
+<div
+	class:interactive
+	on:mouseover
+	on:mouseleave
+>
 	<dt>
 		<Symbol
 			{label} {color} {fill} {stroke} {strokeWidth} {src} {shape} {interactive}
@@ -36,29 +40,23 @@
 		flex-direction: row;
 		align-items: center;
 		width: auto;
-		gap: 1em;
+		gap: .5em;
 		padding: .5em;
-		opacity: .8;
-		transition: all .25s;
+		opacity: .75;
+		border-radius: .75rem;
+		box-shadow: 0 0 1px 0 rgba(0,0,0, .3);
+		transition: all .25s ease;
 	}
-
+	
 	.interactive {
 		cursor: pointer;
 	}
-
-	div.highlight {
-		background-color: white;
+	
+	div.highlight,
+	div:hover {
 		opacity: 1;
-	}
-
-	div:not(:first-child)::after {
-		content: '';
-		position: absolute;
-		top: -4px;
-		left: 0;
-		width: 100%;
-		height: 1px;
-		background-color: rgba(40,40,100,.1);
+		background-color: white;
+		box-shadow: 0 .5em 1em -.5em rgba(0,0,0, .1);
 	}
 
 	dt {

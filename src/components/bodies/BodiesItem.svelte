@@ -72,7 +72,7 @@
 		padding: 2em;
 		text-align: center;
 		position: absolute;
-		color: var(--light1);
+		color: var(--dark3);
 		font-weight: 500;
 		background-color: var(--accent3);
 		transform: translate(-50%, -50%) rotate(var(--angle));
@@ -88,7 +88,9 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: url(/grain.svg);
+			background-image: url(/grain.svg);
+			background-repeat: repear;
+			background-size: 700px;
 		}
 	}
 
