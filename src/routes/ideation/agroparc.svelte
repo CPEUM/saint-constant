@@ -16,7 +16,6 @@
 	import ListItem from '$components/list/ListItem.svelte';
 	import Legend from '$components/legend/Legend.svelte';
 	import LegendItem from '$components/legend/LegendItem.svelte';
-	import SousSecteurs from '$components/agroparc/SousSecteurs.svelte';
 	import Tandem from '$components/tandem/Tandem.svelte';
 	import Image from '$components/primitives/Image.svelte';
 	import { highlight } from '$actions/highlight';
@@ -112,7 +111,28 @@
 				<LegendItem label="6" key="asd">Parc des Citoyens</LegendItem>
 			</Legend>
 		</FigureMap>
-		<SousSecteurs />
+		<div class="text-wrap">
+			<h3 class="center">Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen</h3>
+		</div>
+		<BarChart src="/data/charts/agroparc-sous-secteurs.json" />
+		<List>
+			<ListItem>
+				<p><strong>Sous-secteur 5&nbsp;: Bassin de rétention de la rue Chantale</strong> (ainsi que l’ensemble de ses espaces verts adjacents)&nbsp;:</p>
+				<p>Implantation d’activités de production agricole, de récréation et de conservation.</p>
+			</ListItem>
+			<ListItem>
+				<p><strong>Sous-secteur 6&nbsp;: Parc des Citoyens&nbsp;:</strong></p>
+				<p>Implantation d’activités de récréation et de conservation, suivies des activités de production agricole.</p>
+			</ListItem>
+			<ListItem>
+				<p><strong>Sous-secteur 2&nbsp;: Site de l’église</strong> et <strong>Secteur 3&nbsp;: Site de la chandellerie&nbsp;:</strong></p>
+				<p>Implantation d’activités commerciales et de récréation.</p>
+			</ListItem>
+			<ListItem>
+				<p><strong>Sous-secteur 1&nbsp;: Parc Leblanc</strong> et <strong>Secteur 4&nbsp;: Site des travaux publics&nbsp;:</strong></p>
+				<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
+			</ListItem>
+		</List>
 	</Preferences>
 	<Propositions>
 		<div class="text-wrap">

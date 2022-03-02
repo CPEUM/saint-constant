@@ -37,9 +37,9 @@ pnpm preview
 
 ## Déploiement
 
-La version de travail est présentement déployée sur la page _GitHub Pages_ dépôt.
+La version de travail est présentement déployée sur la page _GitHub Pages_ du dépôt.
 
-sSi nécessaire, assurez vous de faire un `build` en précisant adéquatement la base de l'url final du site en déclarant la variable d'environnement `PUBLIC_BASE_PATH`.
+Si le site n'est pas hébergé à la racine du domaine, (comme c'est le cas avec _GitHub Pages_) assurez vous de faire un `build` en précisant adéquatement la racine (`base`) visée du site en déclarant la variable d'environnement `PUBLIC_BASE_PATH`.
 
 Par exemple, le résultat du [pipeline](/.github/workflows/deploy.yml) de `build` pour la diffusion sur _GitHub Pages_ ressemble à ceci:
 

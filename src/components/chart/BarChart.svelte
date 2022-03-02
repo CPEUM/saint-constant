@@ -48,44 +48,44 @@
 	{#await fetchPromise}
 		<Loading />
 	{:then json}
-	<div class="bars">
-		{#each json.columns as column, barIndex}
-		<div class="bar-wrapper">
-			<div class="col-title">{column.title}</div>
-			<div class="bar" class:hidden={!visible} style="transition-delay: .{barIndex * 150}s">
-				{#each column.rows as segment, i}
-					{#if segment > 0}
-						<!-- svelte-ignore a11y-mouse-events-have-key-events -->
-						<div
-							title="{json.groups[i].title}"
-							class="segment"
-							class:highlight={highlightKey === json.groups[i].title}
-							on:mouseover={() => highlightKey = json.groups[i].title}
-							on:mouseleave={() => highlightKey = null}
-							style:width="{segment * 100 / max}%"
-							style:--color={json.groups[i].color}
-						>
-						</div>
-					{/if}
-				{/each}
+		<div class="bars">
+			{#each json.columns as column, barIndex}
+			<div class="bar-wrapper">
+				<div class="col-title">{column.title}</div>
+				<div class="bar" class:hidden={!visible} style="transition-delay: {barIndex * 150}ms">
+					{#each column.rows as segment, i}
+						{#if segment > 0}
+							<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+							<div
+								title="{json.groups[i].title}"
+								class="segment"
+								class:highlight={highlightKey === json.groups[i].title}
+								on:mouseover={() => highlightKey = json.groups[i].title}
+								on:mouseleave={() => highlightKey = null}
+								style:width="{segment * 100 / max}%"
+								style:--color={json.groups[i].color}
+							>
+							</div>
+						{/if}
+					{/each}
+				</div>
 			</div>
+			{/each}
 		</div>
-		{/each}
-	</div>
-	<Legend size="small">
-		{#each json.groups as group}
-			<!-- svelte-ignore a11y-label-has-associated-control -->
-			<!-- svelte-ignore a11y-mouse-events-have-key-events -->
-			<LegendItem
-				on:mouseover={() => highlightKey = group.title}
-				on:mouseleave={() => highlightKey = null}
-				highlight={highlightKey === group.title}
-				fill={group.color}
-			>
-				{group.title}
-			</LegendItem>
-		{/each}
-	</Legend>
+		<Legend size="small">
+			{#each json.groups as group}
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+				<LegendItem
+					on:mouseover={() => highlightKey = group.title}
+					on:mouseleave={() => highlightKey = null}
+					highlight={highlightKey === group.title}
+					fill={group.color}
+				>
+					{group.title}
+				</LegendItem>
+			{/each}
+		</Legend>
 	{:catch error}
 		<p style="color: red; font-style: italic">Le chargement du fichier de données {src} a encontré une erreur</p>
 	{/await}

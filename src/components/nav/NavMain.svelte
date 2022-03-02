@@ -147,6 +147,10 @@
 			background-color: var(--light3) !important;
 			box-shadow: 0 .8em 2em -0.5em rgba(0, 0, 0, 0.25);
 		}
+
+		&.loading {
+			box-shadow: 0 .5em 1em -0.5em rgba(0, 0, 0, 0.2), 0 0 0 1em rgba(255,255,255,.5);
+		}
 	}
 
 	svg {

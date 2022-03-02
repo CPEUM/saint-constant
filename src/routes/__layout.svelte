@@ -1,7 +1,5 @@
 <script lang="ts" context="module">
-	import type { LoadInput } from '@sveltejs/kit';
-
-	export function load({ url }: LoadInput) {
+	export function load({ url }) {
 		return {
 			props: {
 				topNavigation: getSegments(url.pathname)[0]
@@ -21,6 +19,8 @@
 	import { getSegments } from '$utils/path';
 	import { expoIn, expoOut } from 'svelte/easing';
 	import { browser } from '$app/env';
+	import Loading from '$components/Loading.svelte';
+	import { mainScroll } from '$stores/scroll';
 
 	export let topNavigation: string;
 
@@ -35,11 +35,12 @@
 </script>
 
 <Nav />
-{#if mapLoaded}
+{#if mapLoaded && !$navigating}
 	{#key topNavigation}
 		<main
 			in:fly={{y: 40, duration: 1550, delay: 350, easing: expoOut}}
-			out:fade={{duration: 350}}
+			out:scale={{opacity: 0, start: .98, duration: 350, easing: expoIn}}
+			style:transform-origin="center {$mainScroll.y}px"
 		>
 			<div class="grain"></div>
 			<article>
@@ -48,6 +49,8 @@
 			<Footer />
 		</main>
 	{/key}
+{:else}
+	<Loading />
 {/if}
 <Map on:load={() => mapLoaded = true} />
 

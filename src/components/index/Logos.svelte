@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { revealFlyUp, revealText } from '$actions/revealText';
 	import { base } from '$app/paths';
 	import logos from '$data/logos';
 </script>
 
-
 <section>
+	<h2 use:revealText={revealFlyUp}>Partenaires</h2>
 	<div>
 		{#each logos.prime as logo}
 			<a
@@ -31,7 +32,6 @@
 	</div>
 </section>
 
-
 <style lang="postcss">
 	section {
 		user-select: none;
@@ -39,7 +39,7 @@
 		padding-top: 5rem;
 		padding-bottom: 8rem;
 		width: 100%;
-		max-width: var(--width-lg);
+		max-width: var(--width-md);
 
 		&:hover a:not(:hover) {
 			opacity: .75;

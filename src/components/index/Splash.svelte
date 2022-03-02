@@ -9,11 +9,11 @@
 	import { exerciceRoutes } from '$utils/routes';
 	import { parallax } from '$actions/parallax';
 
-	const shapes = decorations.map((deco) => {
+	const shapes = decorations.slice(0, 3).map((deco) => {
 		return {
 			...deco,
-			fillColor: deco.fill ? getRandomThemeColor([2, 3], exerciceRoutes.map(r => r.key)) : 'none',
-			strokeColor: deco.stroke ? getRandomThemeColor([1, 2]) : 'none',
+			fillColor: getRandomThemeColor([2, 3], exerciceRoutes.map(r => r.key)),
+			strokeColor: getRandomThemeColor([2, 3])
 		}
 	});
 
@@ -57,11 +57,16 @@
 					d={shape.d}
 					fill={shape.fillColor}
 					stroke={shape.strokeColor}
+					stroke-width="50"
+					stroke-linejoin="round"
+					stroke-linecap="round"
+					stroke-dasharray="54% 20% 64% 90% 30% 130%"
+					stroke-dashoffset="{Math.random() * 300}%"
 				/>
 			{/each}
 		</g>
 	</svg>
-	<hgroup use:parallax>
+	<hgroup use:parallax={{factor: .7}}>
 		<h1 use:revealText={{
 				duration: 600,
 				staggerDelay: 15,

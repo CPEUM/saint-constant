@@ -4,6 +4,8 @@
 	import { intersection } from '$actions/intersect';
 	import Link from './primitives/Link.svelte';
 	import logos from '$data/logos';
+	import { generateSvgPaths } from '$utils/generateSvgPaths';
+	import { getRandomThemeColor } from '$utils/randomThemeColor';
 
 	const extLinks = [
 		{title: 'CPEUM', href: 'https://paysage.umontreal.ca'},
@@ -16,14 +18,45 @@
 	let expand = false;
 
 	const color = 'rgba(0, 0, 0, 0.4)'
+
+	const hillsVb = { width: 1000, height: 700 };
+	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 500 }).map((svgPath) => ({
+		viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
+		d: svgPath,
+		fill: getRandomThemeColor([1, 2]),
+		// stroke: getRandomThemeColor([1, 2, 3])
+	}));
+	hills.push(
+		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 450 }).map((svgPath) => ({
+			viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
+			d: svgPath,
+			fill: 'var(--light2)',
+			// stroke: 'var(--light3)'
+		}))
+	);
 </script>
 
-
+<!-- Background svg -->
+<svg viewBox={hills[0].viewBox} preserveAspectRatio="xMidYMin slice">
+	{#each hills as hill}
+		<path
+			vector-effect="non-scaling-stroke"
+			d={hill.d}
+			fill={hill.fill}
+			stroke-width="0"
+			stroke-linejoin="round"
+			stroke-linecap="round"
+			stroke-dasharray="54% 20% 64% 90% 30% 130%"
+			stroke-dashoffset="{Math.random() * 300}%"
+		/>
+	{/each}
+</svg>
 <footer
 	use:intersection={{rootMargin: '0px 0px', threshold: 0.5}}
 	on:enter={() => expand = true}
 	on:leave={() => expand = false}
 >
+	<!-- Content -->
 	<div id="content" class:expand style:color>
 		<section id="logos">
 			{#each [...logos.prime, ...logos.second] as logo}
@@ -63,14 +96,28 @@
 	<!-- <hr style:top={expand ? '0%' : '100%'} /> -->
 </footer>
 
-
 <style lang="postcss">
 	footer {
 		position: relative;
 		width: 100%;
-		margin-top: 2rem;
+		margin-top: 16rem;
 		padding: 0;
 		overflow: hidden;
+	}
+
+	svg {
+		pointer-events: none;
+		user-select: none;
+		position: absolute;
+		padding: 0;
+		margin: 0;
+		width: 100vw;
+		height: 65vh;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		overflow: visible;
+		z-index: -20;
 	}
 
 	hr {
@@ -96,7 +143,7 @@
 		justify-content: flex-end;
 		font-size: var(--sm);
 		font-weight: 400;
-		background-color: var(--light2);
+		/* background-color: var(--light2); */
 		clip-path: inset(100% 0px 0px 0px);
 		transition: all 1s cubic-bezier(.8, 0, .2, 1);
 

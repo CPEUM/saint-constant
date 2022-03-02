@@ -4,7 +4,7 @@
 	import { mapState, mapFocus } from '$stores/map';
 	import { parallax } from '$actions/parallax';
 	import { base } from '$app/paths';
-import { revealFlyUp, revealText } from '$actions/revealText';
+	import { revealFlyUp, revealText } from '$actions/revealText';
 
 	export let label: string;
 	export let title: string;

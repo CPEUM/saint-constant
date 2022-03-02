@@ -4,7 +4,7 @@
 
 	export let href: string;
 	export let color = 'var(--accent3)';
-	export let hoverColor = 'var(--dark3)';
+	export let hoverColor = 'var(--dark2)';
 
 	let external = $$restProps.rel === 'external' || !!href.match(/^(https:|http:|www\.)\S*/) || undefined;
 </script>
@@ -91,12 +91,14 @@
 		padding: 0;
 		width: 100%;
 		height: 100%;
+		opacity: 1;
 		overflow: visible;
 	}
 
 	line,
 	path {
-		stroke-width: 16;
+		opacity: 1;
+		stroke-width: 18;
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		fill: none;
