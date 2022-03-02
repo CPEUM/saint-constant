@@ -7,7 +7,6 @@
 	import { intersection } from '$actions/intersect';
 	import { getMap } from '$components/map/Map.svelte';
 	import { mapState } from '$stores/map';
-	import { mainScroll } from '$stores/scroll';
 	import { Map as M } from 'maplibre-gl';
 	import { onMount } from 'svelte';
 

@@ -36,10 +36,10 @@ function setObserver(options: IntersectionObserverInit) {
 	);
 	if (observerIdx > -1) return observers[observerIdx];
 	const newObserver = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
+		for (const entry of entries) {
 			const eventName = entry.isIntersecting ? 'enter' : 'leave';
 			entry.target.dispatchEvent(new CustomEvent(eventName));
-		});
+		}
 	}, options);
 	observers.push(newObserver);
 	return newObserver;

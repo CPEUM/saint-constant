@@ -7,15 +7,11 @@
 	import { revealText } from '$actions/revealText';
 	import { decorations } from '$utils/decorations';
 	import { exerciceRoutes } from '$utils/routes';
-
-	function generateParallaxFactor(range = 0.5) {
-		return Math.random() * range - 0.5 * range;
-	}
+	import { parallax } from '$actions/parallax';
 
 	const shapes = decorations.map((deco) => {
 		return {
 			...deco,
-			parallax: generateParallaxFactor(),
 			fillColor: deco.fill ? getRandomThemeColor([2, 3], exerciceRoutes.map(r => r.key)) : 'none',
 			strokeColor: deco.stroke ? getRandomThemeColor([1, 2]) : 'none',
 		}
@@ -26,7 +22,6 @@
 		viewBox: `0 0 ${waveVb.width} ${waveVb.height}`,
 		d: svgPath,
 		fill: getRandomThemeColor([2, 3]),
-		parallax: generateParallaxFactor(1)
 	}));
 
 	let mounted = false;
@@ -38,11 +33,11 @@
 	});
 </script>
 
-<header style:--scroll="{$mainScroll.y}px">
+<!-- style:--scroll="{$mainScroll.y}px" -->
+<header>
 	<svg
 		viewBox={waves[1].viewBox}
 		preserveAspectRatio="none"
-		style:--parallax={waves[1].parallax}
 	>
 		<path
 			d={waves[0].d}
@@ -62,12 +57,11 @@
 					d={shape.d}
 					fill={shape.fillColor}
 					stroke={shape.strokeColor}
-					style:--parallax={shape.parallax}
 				/>
 			{/each}
 		</g>
 	</svg>
-	<hgroup>
+	<hgroup use:parallax>
 		<h1 use:revealText={{
 				duration: 600,
 				staggerDelay: 15,
@@ -104,10 +98,6 @@
 		transform: translateX(-50%);
 		overflow: visible;
 		z-index: -10;
-
-		& .parallax {
-			transform: translateY(calc(var(--scroll) * var(--parallax)));
-		}
 	}
 
 	hgroup {
@@ -125,7 +115,7 @@
 		display: inline-block;
 		font-size: clamp(56px, 7vw, 92px);
 		font-weight: 400;
-		color: var(--accent1);
+		color: var(--dark1);
 		line-height: 1.1em;
 		padding: 0;
 		margin-block: 200px;

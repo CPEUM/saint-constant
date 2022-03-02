@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
 	import { Map as M } from 'maplibre-gl';
-
 	/**
 	 * General map, accessible throughout the app!
 	 */
@@ -34,11 +33,14 @@
 	});
 </script>
 
-
 <figure
 	class:full={$mapState.isfull}
 	class={$mapState.class}
-	style={$mapState.style}
+	class:mask={$mapState.mask.top}
+	style:top={$mapState.mask.top}
+	style:right={$mapState.mask.right}
+	style:bottom={$mapState.mask.bottom}
+	style:left={$mapState.mask.left}
 >
 	<div bind:this={container}></div>
 </figure>
@@ -46,17 +48,17 @@
 
 <style lang="postcss">
 	figure {
-		--ease: cubic-bezier(.9, 0, .1, 1);
+		--ease: cubic-bezier(.3, 0, 0, 1);
 		pointer-events: auto;
 		position: fixed;
 		z-index: -1;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 25%;
-		bottom: 25%;
-		left: 25%;
-		right: 25%;
+		top: 40%;
+		bottom: 40%;
+		left: 40%;
+		right: 40%;
 		opacity: 0;
 		border-radius: 500px;
 		width: auto;
@@ -74,6 +76,12 @@
 			left: 0 !important;
 			right: 0 !important;
 			border-radius: 0 !important;
+		}
+
+		&.mask:not(.full) {
+			opacity: 1;
+			border-radius: 0;
+			transition: all .6s ease-in-out;
 		}
 
 		&:global(.figure) {
@@ -98,10 +106,10 @@
 			--offset-inside: max(0px, calc(50vw - var(--width-lg) / 4));
 			--offset-outside: max(0px, calc(50vw - var(--width-lg) / 2));
 			opacity: 1;
-			border-radius: 0px;
+			border-radius: 2rem;
 			top: max(120px, calc(50vh - 500px));
 			bottom: max(120px, calc(50vh - 500px));
-			box-shadow: 0px 75px 100px -25px rgba(0,0,0, .05);
+			box-shadow: 0px 40px 80px -25px rgba(0,0,25, .1);
 		}
 
 		&:global(.left) {
@@ -112,6 +120,15 @@
 		&:global(.right) {
 			right: var(--offset-outside);
 			left: var(--offset-inside);
+		}
+
+		&:global(.proposition) {
+			top: 0;
+			left: 50%;
+			right: 0;
+			bottom: 0;
+			opacity: 1;
+			border-radius: 0;
 		}
 	}
 

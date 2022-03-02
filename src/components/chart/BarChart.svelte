@@ -157,7 +157,7 @@
 			height: 100%;
 			background-image: url(/grain.svg);
 			background-repeat: repeat;
-			background-size: 400px;
+			background-size: 800px;
 		}
 	}
 

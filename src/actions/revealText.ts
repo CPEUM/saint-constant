@@ -78,16 +78,16 @@ export function revealText(element: HTMLElement, {
 	function hideTarget(el: HTMLElement, i: number) {
 		el.style.transitionDelay = delay + (stagger ? staggerDelay * i : 0) + 'ms';
 		el.style.opacity = opacity + '';
-		el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`;
-		el.style.top = y + (isNaN(Number(y)) ? '' : 'px');
-		el.style.left = x + (isNaN(Number(x)) ? '' : 'px');
+		el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) translate(${x + (isNaN(Number(x)) ? '' : 'px')}, ${ y + (isNaN(Number(y)) ? '' : 'px')}) scale(${scale})`;
+		// el.style.top = y + (isNaN(Number(y)) ? '' : 'px');
+		// el.style.left = x + (isNaN(Number(x)) ? '' : 'px');
 	}
 	function showTarget(el: HTMLElement, i: number) {
 		el.style.transitionDelay = delay + (stagger ? staggerDelay * i : 0) + 'ms';
 		el.style.opacity = '1';
 		el.style.transform = 'initial';
-		el.style.top = '0';
-		el.style.left = '0';
+		// el.style.top = '0';
+		// el.style.left = '0';
 	}
 
 	const { targets, masks } = splitNodeText(element, {
@@ -163,12 +163,11 @@ export function revealText(element: HTMLElement, {
 export const revealFlyUp: RevealTextOptions = {
 	mask: true,
 	maskPadding: '.1em',
-	y: '1em',
+	y: '1.1em',
 	opacity: 0,
-	rotateX: 60,
-	transformOrigin: '0% 80%',
-	staggerDelay: 80,
-	duration: 750,
+	staggerDelay: 70,
+	duration: 1250,
+	easing: 'cubic-bezier(.2, 0, 0, 1)',
 	granularity: 'word'
 }
 

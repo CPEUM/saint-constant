@@ -8,10 +8,6 @@
 	let current = null;
 	const rootMargin = '-50% 0% -50% 0%';
 
-	function mask(bbox: DOMRect) {
-		mapState
-	}
-
 	function leave() {
 		current = null;
 		mapState.setClass('');
@@ -37,7 +33,7 @@
 			style:--angle="{-6 + Math.random() * 12}deg"
 		>
 			<svg height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-				<text x="50" y="50" font-size="100" text-anchor="middle" dominant-baseline="middle" vector-effect="non-scaling-stroke">0{i + 1}</text>
+				<text x="50" y="75" font-size="100" text-anchor="middle" dominant-baseline="baseline">0{i + 1}</text>
 			</svg>
 			<!-- <span class="number" class:right={i%2 !== 0}>0{i + 1}</span> -->
 		</div>
@@ -117,48 +113,33 @@
 		justify-content: center;
 	}
 
-	/* .number {
-		display: flex;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		font-size: 120vh;
-		font-family: var(--font-misc);
-		align-items: center;
-		justify-content: flex-start;
-		z-index: -1;
-		color: var(--accent1);
-		opacity: .5;
-
-		&.right {
-			justify-content: flex-end;
-		}
-	} */
-
 	@keyframes stroky {
 		from {
 			stroke-dashoffset: 0%;
 		}
 		to {
-			stroke-dashoffset: 120%;
+			stroke-dashoffset: 30%;
 		}
 	}
 	svg {
+		overflow: visible;
 		position: absolute;
-		z-index: -1;
+		z-index: -2;
 		width: 100vw;
 		height: 100%;
 		transform: rotate(var(--angle));
 
 		text {
-			opacity: .5;
+			font-family: var(--font-misc);
+			opacity: .7;
 			stroke-linejoin: round;
-			/* stroke-linecap: round; */
-			stroke-dasharray: 100% 20%;
+			stroke-linecap: round;
+			/* stroke-dasharray: 100% 20%; */
+			stroke-dasharray: 10% 20%;
 			stroke-width: 3px;
-			stroke: var(--accent1);
-			fill: none;
-			animation: stroky 10s infinite linear;
+			stroke: var(--accent3);
+			fill: var(--accent1);
+			/* animation: stroky 60s infinite linear; */
 		}
 	}
 
@@ -183,7 +164,6 @@
 		top: 50%;
 		left: 0;
 		display: block;
-		background-color: transparent;
 		text-decoration: none;
 		padding: 0;
 		margin: 0;
@@ -195,10 +175,15 @@
 			right: 0;
 			text-align: right;
 			margin-left: auto;
+
+			& .title {
+				text-align: left;
+			}
 		}
 	}
 
 	.disabled {
+		opacity: 0;
 		pointer-events: none;
 		user-select: none;
 	}
@@ -208,9 +193,10 @@
 		font-size: var(--md);
 		font-family: var(--font-misc);
 		margin: 0;
+		font-weight: 600;
 		line-height: 1em;
-		color: var(--accent2);
-		letter-spacing: 5px;
+		color: var(--dark1);
+		letter-spacing: 4px;
 	}
 
 	.title {
@@ -221,11 +207,7 @@
 		margin-block: 1em;
 		color: var(--dark1);
 		transition: all .2s ease-out;
-		
-		/* &:hover {
-			color: var(--accent2);
-			transform: translateY(5px);
-		} */
+		text-align: right;
 	}
 
 	.desc {

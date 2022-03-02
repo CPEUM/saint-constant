@@ -4,13 +4,13 @@
 	import Splash from '$components/index/Splash.svelte';
 	import Logos from '$components/index/Logos.svelte';
 	import { revealFlyUp, revealText } from '$actions/revealText';
-import List from '$components/list/List.svelte';
-import ListItem from '$components/list/ListItem.svelte';
+	import List from '$components/list/List.svelte';
+	import ListItem from '$components/list/ListItem.svelte';
 </script>
 
 <Splash />
 <div class="text-wrap">
-	<h2 use:revealText={{...revealFlyUp}}>Contexte</h2>
+	<h2 use:revealText={revealFlyUp}>Contexte</h2>
 	<p class="left">
 		Localisée sur la Rive-Sud de Montréal, la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link>
 		est en grande transformation en raison de sa croissance démographique et de la réalisation, au
@@ -19,13 +19,13 @@ import ListItem from '$components/list/ListItem.svelte';
 		de ses interventions sur ses paysages, autant du point de vue de ses résidents que des visiteurs.
 		À cette fin, la ville désire se doter d’outils pour <strong>améliorer sa connaissance des enjeux de paysage et pour assurer la cohérence des interventions sur l’ensemble du territoire municipal</strong>.
 	</p>
-	<p class="right">
+	<p class="right" style="margin-top: 6rem;">
 		Dans le cadre d’un appel à projets en innovation sociale financé par le <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et en appui avec la <Link rel="external" href="https://saint-constant.ca/">Ville de Saint-Constant</Link> et la <Link rel="external" href="https://roussillon.ca/">MRC de Roussillon</Link>, l’expertise de la <Link rel="external" href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> et de la <Link rel="external" href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain (CUPUM)</Link> de la même institution a été mise à profit pour développer de <strong>nouveaux outils et de nouvelles approches de planification territoriale plus sensibles aux valorisations sociales et culturelles des paysages</strong>.
 	</p>
 </div>
 <Logos />
 <div class="text-wrap">
-	<h2 use:revealText={{...revealFlyUp}}>Objectifs du projet</h2>
+	<h2 use:revealText={revealFlyUp}>Objectifs du projet</h2>
 	<p class="left">Ce projet vise trois principaux objectifs&nbsp;:</p>
 	<List class="left">
 		<ListItem>

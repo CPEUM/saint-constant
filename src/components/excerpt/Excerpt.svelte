@@ -1,14 +1,14 @@
-<script>
-	async function getComp(excerptName) {
-		return import(`./${excerptName}.svelte`)
+<script lang="ts">
+	export let name: string;
+	// export let comp;
+	async function getExcerptComp() {
+		return import(`./excerpt-articles/${name}.svelte`);
 	}
 </script>
-
 
 <article>
 	<slot></slot>
 </article>
-
 
 <style>
 	article {

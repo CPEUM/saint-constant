@@ -111,6 +111,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		width: 100%;
+		max-width: var(--width-lg);
 		align-items: center;
 		gap: 2rem;
 		justify-content: space-evenly;

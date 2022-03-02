@@ -17,18 +17,18 @@
 
 <style>
 	dl {
-		opacity: .7;
+		opacity: .9;
 		display: inline-flex;
 		flex-direction: column;
-		gap: .25rem;
-		padding: .25rem;
+		gap: 0;
+		padding: 3px;
 		margin: 0;
 		border-radius: 1rem;
 		background-color: var(--light1);
 		width: auto;
 		max-width: var(--width-sm);
 		height: auto;
-		box-shadow: 0 0 1px 0px rgba(0,0,30, .25);
+		box-shadow: 0 0 1px 0 rgba(0,0,30, 0);
 		transition: all .2s ease-in-out;
 	}
 

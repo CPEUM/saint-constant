@@ -63,10 +63,14 @@
 
 	article {
 		position: relative;
-		padding: 0 1rem;
+		padding: 0 4rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
+
+		@media screen and (max-width: 900px) {
+			padding: 0 1rem;
+		}
 	}
 </style>

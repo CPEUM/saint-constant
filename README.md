@@ -1,38 +1,48 @@
-# create-svelte
+# Saint-Constant: site exposition
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+Page de diffusion et valorisation pour le volet idéation et la démarche participative du projet Saint-Constant mené par la CPEUM.
 
-## Creating a project
+Le site est conçu avec [SvelteKit](https://github.com/sveltejs/kit) et profite de l'adapteur de compilation statique ([adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) pour produire des fichiers de distribution destinés à un hébergement statique, sans serveur Node.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Il est conseillé de travailler avec `pnpm` pour respecter le fichier `pnpm-lock.yaml` inclu dans le git du projet:
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
+```sh
+pnpm install
 ```
 
-> Note: the `@next` is temporary
+## Développement
 
-## Developing
+Pour lancer le serveur de développement:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```sh
+pnpm dev
+# ou, pour ouvrir une fenêtre de fureteur automatiqument
+# au lancement du serveur de développement:
+pnpm dev -- --open
 ```
 
-## Building
+Pour construire une version de l'application et produire les fichiers de distribution:
 
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
+```sh
+pnpm build
 ```
 
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+Vous pouvez aussi visualiser localement les fichiers de `/build`:
+
+```sh
+pnpm preview
+```
+
+> Attention, n'utilisez pas cette commande pour servir l'application en environnement de production.
+
+## Déploiement
+
+La version de travail est présentement déployée sur la page _GitHub Pages_ dépôt.
+
+sSi nécessaire, assurez vous de faire un `build` en précisant adéquatement la base de l'url final du site en déclarant la variable d'environnement `PUBLIC_BASE_PATH`.
+
+Par exemple, le résultat du [pipeline](/.github/workflows/deploy.yml) de `build` pour la diffusion sur _GitHub Pages_ ressemble à ceci:
+
+```sh
+PUBLIC_BASE_PATH=/saint-constant
+```

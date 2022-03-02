@@ -1,9 +1,9 @@
 <script>
-	import { revealText } from '$actions/revealText';
+	import { revealFlyUp, revealText } from '$actions/revealText';
 </script>
 
 <h2
-	use:revealText={{y: '1em', mask: true, granularity: 'word', staggerDelay: 60}}
+	use:revealText={revealFlyUp}
 	{...$$restProps}
 >
 	<span>

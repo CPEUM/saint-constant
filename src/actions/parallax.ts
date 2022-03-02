@@ -6,7 +6,7 @@ interface ParallaxOptions {
 /**
  * Svelte action to add parallax effect using a translateY transformation
  */
-export function parallax(element: HTMLElement, {
+export function parallax(element: HTMLElement | SVGElement, {
 	scrollParent = document.body,
 	factor = .8
 }: ParallaxOptions = {}) {

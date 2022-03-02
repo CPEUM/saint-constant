@@ -12,12 +12,13 @@
 	class:hidden={!$visible}
 	style:--index={index}
 	style:--rotate="{5 - Math.random() * 10}deg"
-	style:--scale="{1.2 - Math.random() * .4}, {1.05 - Math.random() * .1}"
+	style:--w="{120 - Math.random() * 40}%"
+	style:--h="{105 - Math.random() * 10}%"
 >
 	<div class="line" />
-	<span>
+	<div class="slot">
 		<slot />
-	</span>
+	</div>
 </li>
 
 <style lang="postcss">
@@ -34,7 +35,9 @@
 		background-color: var(--light1);
 		border-radius: 1em;
 		color: var(--dark1);
-		box-shadow: 0 .5em 2em -1em rgba(0, 0, 25, 0.2);
+		border: 1px solid rgba(0, 0, 30, 0.1);
+		/* box-shadow: 0 0 1px 0 rgba(0, 0, 30, 0.8); */
+		/* box-shadow: 0 .5em 2em -1em rgba(0, 0, 25, 0.2); */
 		transition: all .3s calc(var(--index) * var(--staggerDelay)) cubic-bezier(.2, 0, .4, 1);
 
 		&::after {
@@ -56,18 +59,18 @@
 			content: '';
 			z-index: -1;
 			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
+			width: var(--w);
+			height: var(--h);
+			top: 50%;
+			left: 50%;
 			border-radius: 16px;
-			border: 2px dashed var(--accent1);
-			transform: scale(var(--scale)) rotate(var(--rotate));
+			border: 1px dashed var(--accent2);
+			transform: translate(-50%, -50%) rotate(var(--rotate));
 			opacity: .5;
 		}
 	}
 
-	span {
+	.slot {
 		position: relative;
 		z-index: 2;
 	}
@@ -77,8 +80,8 @@
 		position: absolute;
 		top: 1em;
 		bottom: 1em;
-		left: 1px;
-		width: 2px;
+		left: -2px;
+		width: 3px;
 		border-radius: 2px;
 		background-color: var(--accent2);
 		transition: all .5s calc(var(--index) * var(--staggerDelay));

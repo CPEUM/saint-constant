@@ -3,11 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { setContext } from 'svelte';
 
-	setContext('tandem', {
-
-	})
 </script>
 
 <section>
@@ -21,13 +17,21 @@
 
 <style>
 	section {
-		background-color: grey;
+		/* background-color: grey; */
 		width: 100%;
 		display: flex;
 		flex-direction: row;
+		align-items: flex-start;
+		justify-content: flex-start;
+		min-height: 100vh;
+		gap: 3rem;
 	}
 
 	div {
+		position: sticky;
+		padding-block: 4rem;
 		flex: 1;
+		min-width: 0;
+		top: 3rem;
 	}
 </style>
