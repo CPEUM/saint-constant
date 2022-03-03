@@ -183,7 +183,7 @@
 	}
 
 	.disabled {
-		opacity: 0;
+		/* opacity: 0; */
 		pointer-events: none;
 		user-select: none;
 	}

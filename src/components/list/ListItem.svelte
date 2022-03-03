@@ -25,6 +25,11 @@
 	.hidden {
 		opacity: 0;
 		transform: translateY(-20px);
+
+		&::after,
+		&::before {
+			opacity: 0;
+		}
 	}
 
 	li {
@@ -38,6 +43,11 @@
 		box-shadow: 0 0 1px 0 rgba(0,0,30, .3);
 		/* border: 1px solid rgba(0, 0, 30, 0.1); */
 		transition: all .3s calc(var(--index) * var(--staggerDelay)) cubic-bezier(.2, 0, .4, 1);
+
+		&::after,
+		&::before {
+			transition: all .25s ease-out;
+		}
 
 		&::after {
 			content: '';

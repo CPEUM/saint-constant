@@ -18,14 +18,14 @@ export default {
 	],
 	second: [
 		{
-			filename: 'saint-constant-couleur.svg',
-			alt: 'Ville de Saint-Constant',
-			href: 'https://saint-constant.ca/'
+			filename: 'vrm-couleur.svg',
+			alt: 'Villes Régions Monde',
+			href: 'http://www.vrm.ca/'
 		},
 		{
-			filename: 'mrc-roussillon-couleur.svg',
-			alt: 'Municipalités régionales de comté Roussillon',
-			href: 'https://roussillon.ca/'
+			filename: 'ivanhoe-cambridge-couleur.svg',
+			alt: 'Observatoire Ivanhoé Cambridge du développement urbain et immobilier',
+			href: 'https://observatoire-ivanhoe-cambridge.umontreal.ca/'
 		}
 	]
 }

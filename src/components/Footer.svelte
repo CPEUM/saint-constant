@@ -124,7 +124,8 @@
 		position: absolute;
 		bottom: 0;
 		width: 100%;
-		height: 1px;
+		height: 2px;
+		border-radius: 1px;
 		padding: 0;
 		margin: 0;
 		background-color: var(--light3);
@@ -145,7 +146,7 @@
 		font-weight: 400;
 		/* background-color: var(--light2); */
 		clip-path: inset(100% 0px 0px 0px);
-		transition: all 1s cubic-bezier(.8, 0, .2, 1);
+		transition: all 1.5s cubic-bezier(.9, 0, .1, 1);
 
 		&.expand {
 			clip-path: inset(0% 0px 0px 0px);
@@ -169,11 +170,12 @@
 			min-width: 120px;
 			max-width: 180px;
 			filter: saturate(0);
-			opacity: .5;
-			transition: all .25s ease-out;
+			opacity: .7;
+			transition: all .2s ease-out;
 
 			&:hover {
 				opacity: 1;
+				transform: scale(1.02);
 			}
 		}
 
