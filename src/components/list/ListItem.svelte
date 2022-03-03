@@ -22,7 +22,11 @@
 <style lang="postcss">
 	.hidden {
 		opacity: 0;
-		transform: translateY(-20px);
+		transform: translateY(-10px);
+
+		& * {
+			opacity: 0;
+		}
 	}
 
 	li {
@@ -48,7 +52,7 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			opacity: .3;
+			opacity: .5;
 		} */
 
 		&::before {

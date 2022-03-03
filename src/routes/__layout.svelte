@@ -15,7 +15,6 @@
 	import Footer from '$components/Footer.svelte';
 	import { fade, fly, scale } from 'svelte/transition';
 	import { navigating } from '$app/stores';
-	import { exercice } from '$stores/route';
 	import { getSegments } from '$utils/path';
 	import { expoIn, expoOut } from 'svelte/easing';
 	import { browser } from '$app/env';
@@ -35,8 +34,8 @@
 </script>
 
 <Nav />
-{#if mapLoaded && !$navigating}
-	{#key topNavigation}
+{#key topNavigation}
+	{#if mapLoaded && !$navigating}
 		<main
 			in:fly={{y: 40, duration: 1550, delay: 350, easing: expoOut}}
 			out:scale={{opacity: 0, start: .98, duration: 350, easing: expoIn}}
@@ -48,8 +47,9 @@
 			</article>
 			<Footer />
 		</main>
-	{/key}
-{:else}
+	{/if}
+{/key}
+{#if !mapLoaded || $navigating}
 	<Loading />
 {/if}
 <Map on:load={() => mapLoaded = true} />
