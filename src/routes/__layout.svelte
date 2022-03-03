@@ -2,9 +2,9 @@
 	export function load({ url }) {
 		return {
 			props: {
-				topNavigation: getSegments(url.pathname)[0]
+				topRoute: getSegments(url.pathname)[0]
 			}
-		}
+		};
 	}
 </script>
 
@@ -21,27 +21,33 @@
 	import Loading from '$components/Loading.svelte';
 	import { mainScroll } from '$stores/scroll';
 
-	export let topNavigation: string;
+	export let topRoute: string;
+	let topNavigating = true;
+	$: {
+		topNavigating = $navigating
+			? getSegments($navigating.from?.href)[0] !== getSegments($navigating.to.href)[0]
+			: false;
+	}
 
 	let mapLoaded = false;
-	$:	{
+	$: {
 		if (!$navigating && browser) {
-			document.body.style.scrollBehavior = 'unset';
+			// document.body.style.scrollBehavior = 'unset';
 			document.body.scrollTop = 0;
-			document.body.style.scrollBehavior = 'smooth';
+			// document.body.style.scrollBehavior = 'smooth';
 		}
 	}
 </script>
 
 <Nav />
-{#key topNavigation}
-	{#if mapLoaded && !$navigating}
+{#key topRoute}
+	{#if mapLoaded && !topNavigating}
 		<main
-			in:fly={{y: 40, duration: 1550, delay: 350, easing: expoOut}}
-			out:scale={{opacity: 0, start: .98, duration: 350, easing: expoIn}}
+			in:fly={{ y: 40, duration: 1550, delay: 350, easing: expoOut }}
+			out:scale={{ opacity: 0, start: 0.98, duration: 350, easing: expoIn }}
 			style:transform-origin="center {$mainScroll.y}px"
 		>
-			<div class="grain"></div>
+			<div class="grain" />
 			<article>
 				<slot />
 			</article>
@@ -52,7 +58,7 @@
 {#if !mapLoaded || $navigating}
 	<Loading />
 {/if}
-<Map on:load={() => mapLoaded = true} />
+<Map on:load={() => (mapLoaded = true)} />
 
 <style lang="postcss">
 	main {
@@ -60,7 +66,7 @@
 	}
 
 	.grain {
-		opacity: .5;
+		opacity: 0.5;
 		z-index: -1;
 	}
 

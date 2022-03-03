@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { mainScroll } from '$stores/scroll';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
-	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { onMount } from 'svelte';
 	import { revealText } from '$actions/revealText';
 	import { decorations } from '$utils/decorations';
 	import { exerciceRoutes } from '$utils/routes';
-	import { parallax } from '$actions/parallax';
 
 	const shapes = decorations.slice(0, 3).map((deco) => {
 		return {
@@ -31,9 +28,16 @@
 			mounted = true;
 		}, 0);
 	});
+
+	let y = 0;
+	function scroll(e: UIEvent) {
+		console.log(e);
+		y = (e.target as HTMLElement).scrollTop;
+	}
 </script>
 
-<!-- style:--scroll="{$mainScroll.y}px" -->
+<svelte:body on:scroll={scroll} />
+
 <header>
 	<svg
 		viewBox={waves[1].viewBox}
@@ -66,7 +70,7 @@
 			{/each}
 		</g>
 	</svg>
-	<hgroup use:parallax={{factor: .7}}>
+	<hgroup style:transform="translateY({y * 0.4}px)">
 		<h1 use:revealText={{
 				duration: 600,
 				staggerDelay: 15,
