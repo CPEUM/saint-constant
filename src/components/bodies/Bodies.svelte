@@ -56,11 +56,12 @@
 	const walls = new Walls(engine, initSize, initSize, thickness);
 
 	// Rescaling walls
-	const areaRatio = 4; // Surface area multiplier
+	const baseArea = 500;
+	const areaRatio = 3; // Surface area multiplier
 	$: {
 		if (containerWidth) {
 			calculatedHeight = Math.max(
-				Math.ceil((areaRatio * liBodies.map((body) => body.area).reduce((a, b) => a + b, 0)) / containerWidth),
+				Math.ceil((baseArea + areaRatio * liBodies.map((body) => body.area).reduce((a, b) => a + b, 0)) / containerWidth),
 				400
 			);
 			walls.update(containerWidth, calculatedHeight);

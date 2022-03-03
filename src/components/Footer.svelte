@@ -19,15 +19,15 @@
 
 	const color = 'rgba(0, 0, 0, 0.4)'
 
-	const hillsVb = { width: 1000, height: 700 };
-	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 500 }).map((svgPath) => ({
+	const hillsVb = { width: 1000, height: 800 };
+	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map((svgPath) => ({
 		viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
 		d: svgPath,
 		fill: getRandomThemeColor([1, 2]),
 		// stroke: getRandomThemeColor([1, 2, 3])
 	}));
 	hills.push(
-		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 450 }).map((svgPath) => ({
+		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 540 }).map((svgPath) => ({
 			viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
 			d: svgPath,
 			fill: 'var(--light2)',
@@ -93,18 +93,9 @@
 			</div>
 		</section>
 	</div>
-	<!-- <hr style:top={expand ? '0%' : '100%'} /> -->
 </footer>
 
 <style lang="postcss">
-	footer {
-		position: relative;
-		width: 100%;
-		margin-top: 16rem;
-		padding: 0;
-		overflow: hidden;
-	}
-
 	svg {
 		pointer-events: none;
 		user-select: none;
@@ -120,6 +111,14 @@
 		z-index: -20;
 	}
 
+	footer {
+		position: relative;
+		width: 100%;
+		margin-top: 16rem;
+		padding: 0;
+		overflow: hidden;
+	}
+
 	hr {
 		position: absolute;
 		bottom: 0;
@@ -129,7 +128,6 @@
 		padding: 0;
 		margin: 0;
 		background-color: var(--light3);
-		transition: all 1s cubic-bezier(.8, 0, .2, 1);
 		border: none;
 	}
 
@@ -146,9 +144,11 @@
 		font-weight: 400;
 		/* background-color: var(--light2); */
 		clip-path: inset(100% 0px 0px 0px);
-		transition: all 1.5s cubic-bezier(.9, 0, .1, 1);
+		transform: translateY(40px);
+		transition: all 1.2s cubic-bezier(.4, 0, .1, 1);
 
 		&.expand {
+			transform: translateY(0px);
 			clip-path: inset(0% 0px 0px 0px);
 		}
 	}

@@ -18,13 +18,10 @@
 	import LegendItem from '$components/legend/LegendItem.svelte';
 	import Tandem from '$components/tandem/Tandem.svelte';
 	import Image from '$components/primitives/Image.svelte';
-	import { highlight } from '$actions/highlight';
 	import { revealFlyUp, revealText } from '$actions/revealText';
-
-	let prop1key = null;
 </script>
 
-<Exercice key="{'agroparc'}">
+<Exercice key="agroparc">
 	<Concept heading="Le concept d’agroparc">
 		<div class="text-wrap">
 			<p>Le concept d'agroparc est né dans une perspective de reconnaissance des valeurs environnementales et récréatives du territoire agricole de Saint-Constant.</p>

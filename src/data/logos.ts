@@ -7,7 +7,7 @@ export default {
 		},
 		{
 			filename: 'mrc-roussillon-couleur.svg',
-			alt: 'Municipalités régionales de comté Roussillon',
+			alt: 'Municipalités régionales de comté de Roussillon',
 			href: 'https://roussillon.ca/'
 		},
 		{

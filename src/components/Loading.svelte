@@ -20,7 +20,7 @@ style="font-size: {size}px; background-color: {background}"
 			cx="50" cy="50" r="50"
 			fill="none"
 			stroke={color}
-			stroke-width="5"
+			stroke-width="4"
 			stroke-linecap="round"
 			vector-effect="non-scaling-stroke"
 		>

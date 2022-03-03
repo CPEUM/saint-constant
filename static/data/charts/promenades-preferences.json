@@ -1,0 +1,50 @@
+{
+    "groups": [
+        {
+            "title": "Négatif",
+            "color": "hsl(220, 20%, 55%)"
+        },
+        {
+            "title": "Positif",
+            "color": "hsl(120, 55%, 65%)"
+        }
+    ],
+    "columns": [
+        {
+            "title": "Noues paysagères",
+            "rows": [1, 3]
+        },
+        {
+            "title": "Fosses de plantation",
+            "rows": [0, 1]
+        },
+        {
+            "title": "Plantation d'arbres",
+            "rows": [0, 3]
+        },
+        {
+            "title": "Aires de repos avec mobilier urbain",
+            "rows": [0, 10]
+        },
+        {
+            "title": "Extension du trottoir",
+            "rows": [4, 0]
+        },
+        {
+            "title": "Mesures d'apaisement",
+            "rows": [1, 6]
+        },
+        {
+            "title": "Voies séparées avec bandes tampon",
+            "rows": [0, 10]
+        },
+        {
+            "title": "Voies séparées",
+            "rows": [0, 5]
+        },
+        {
+            "title": "Voies partagées",
+            "rows": [0, 0]
+        }
+    ]
+}

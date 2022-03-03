@@ -7,19 +7,23 @@
 
 	const yLimit = 120;
 
+	function generateColorString() {
+		return `hsl(${20 + Math.random() * 180}, 60%, 70%)`;
+	}
+
 	function generateLines() {
 		const n = Math.round(8 + Math.random() * 4);
 		const ypad = 0;
 		const xpad = 0;
-		return [...Array(n)].map(e => (
-			{
+		return [...Array(n)].map((e) => {
+			return {
 				x1: xpad + Math.random() * (100 - 2 * xpad) + '%',
 				y1: ypad + Math.random() * (100 - 2 * ypad) + '%',
 				x2: xpad + Math.random() * (100 - 2 * xpad) + '%',
 				y2: ypad + Math.random() * (100 - 2 * ypad) + '%',
-				stroke: `hsl(${20 + Math.random() * 180}, 60%, 70%)`,
+				stroke: generateColorString(),
 			}
-		));
+		});
 	}
 </script>
 
@@ -31,6 +35,7 @@
 			class:current={r.title == $route?.title}
 			style:background-color={$mainScroll.y > yLimit + 200 ? 'var(--light1)' : ''}
 			style:--delay="{i * 60}ms"
+			style:--activebg={generateColorString()}
 		>
 			<svg>
 				{#if r.title == $route?.title}
@@ -144,7 +149,7 @@
 		&.current {
 			pointer-events: none;
 			color: var(--dark1);
-			background-color: var(--light3) !important;
+			background-color: var(--activebg) !important;
 			box-shadow: 0 .8em 2em -0.5em rgba(0, 0, 0, 0.25);
 		}
 

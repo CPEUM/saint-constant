@@ -1,7 +1,5 @@
 <script lang="ts" context="module">
-	import type { LoadInput, LoadOutput } from '@sveltejs/kit';
-
-	export async function load({ url }: LoadInput): Promise<LoadOutput> {
+	export async function load({ url }) {
 		const queried = exerciceRoutes.find((ex) => ex.path === url.pathname);
 		if (queried) {
 			return {

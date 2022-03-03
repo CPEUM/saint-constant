@@ -1,10 +1,23 @@
 <script lang="ts">
+	import type { TooltipOptions } from '$actions/tooltip';
+	import { intersection } from '$actions/intersect';
 	import { revealFlyUp, revealText } from '$actions/revealText';
+	import { tooltip } from '$actions/tooltip';
 	import { base } from '$app/paths';
 	import logos from '$data/logos';
+
+	let hidden = true;
+	const ttipOpts: TooltipOptions = {
+		follow: true,
+		position: 'bottom'
+	}
 </script>
 
-<section>
+<section
+	use:intersection
+	on:enter|once={() => hidden = false}
+	class:hidden
+>
 	<h2 use:revealText={revealFlyUp}>Partenaires</h2>
 	<div>
 		{#each logos.prime as logo}
@@ -13,6 +26,7 @@
 				rel="external"
 				target="_blank"
 				title={logo.alt}
+				use:tooltip={ttipOpts}
 			>
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
@@ -25,6 +39,7 @@
 				rel="external"
 				target="_blank"
 				title={logo.alt}
+				use:tooltip={ttipOpts}
 			>
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
@@ -55,17 +70,20 @@
 		width: 100%;
 	}
 
+	.hidden a {
+		opacity: 0;
+	}
+
 	a {
 		pointer-events: all;
 		position: relative;
-		display: block;
-		flex: 1;
-		padding: 4rem;
-		transition: all .3s ease-in-out;
-		max-width: 400px;
-		min-width: 200px;
+		display: inline-block;
+		flex: 0;
+		padding: 3rem;
+		flex-basis: 33%;
 		opacity: .8;
-
+		transition: all .3s ease-in-out;
+		
 		& img {
 			width: 100%;
 			height: 100%;

@@ -12,44 +12,31 @@
 	class:hidden={!$visible}
 	style:--index={index}
 	style:--rotate="{4 - Math.random() * 8}deg"
-	style:--w="{110 - Math.random() * 12}%"
-	style:--h="{105 - Math.random() * 6}%"
+	style:--w="{102 - Math.random() * 4}%"
+	style:--h="{103 - Math.random() * 6}%"
 >
-	<div class="line" />
-	<div class="slot">
-		<slot />
-	</div>
+	<!-- <div class="line" /> -->
+	<slot />
 </li>
 
 <style lang="postcss">
 	.hidden {
 		opacity: 0;
 		transform: translateY(-20px);
-
-		&::after,
-		&::before {
-			opacity: 0;
-		}
 	}
 
 	li {
 		position: relative;
 		padding: 1em;
-		margin: .5em 0;
+		margin: .25em 0;
 		opacity: 1;
 		background-color: var(--light1);
 		border-radius: 1em;
-		color: var(--dark1);
+		color: var(--dark2);
 		box-shadow: 0 0 1px 0 rgba(0,0,30, .3);
-		/* border: 1px solid rgba(0, 0, 30, 0.1); */
 		transition: all .3s calc(var(--index) * var(--staggerDelay)) cubic-bezier(.2, 0, .4, 1);
 
-		&::after,
-		&::before {
-			transition: all .25s ease-out;
-		}
-
-		&::after {
+		/* &::after {
 			content: '';
 			border-radius: 1em;
 			position: absolute;
@@ -61,19 +48,18 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			opacity: .6;
-		}
+			opacity: .3;
+		} */
 
 		&::before {
 			content: '';
-			z-index: -1;
+			z-index: -2;
 			position: absolute;
 			width: var(--w);
 			height: var(--h);
 			top: 50%;
 			left: 50%;
 			border-radius: 16px;
-			/* border: 1px solid var(--accent1); */
 			background-color: var(--accent1);
 			background-image: url(/grain.svg);
 			background-repeat: repeat;
@@ -83,12 +69,9 @@
 		}
 	}
 
-	.slot {
-		position: relative;
-		z-index: 2;
-	}
-
-	.line {
+	/* .line, */
+	li::after {
+		content: '';
 		opacity: .5;
 		position: absolute;
 		top: 1em;
