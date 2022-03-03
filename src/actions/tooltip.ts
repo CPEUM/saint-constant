@@ -31,7 +31,7 @@ export function tooltip(element: HTMLElement, {
 	backgroundColor = undefined
 }: TooltipOptions = {}) {
 
-	let comp;
+	let comp: Tooltip;
 	const title = element.getAttribute('title');
 	if (!text && title) text = title;
 	
@@ -75,6 +75,7 @@ export function tooltip(element: HTMLElement, {
 		destroy() {
 			element.removeEventListener('mouseover', mouseenter);
 			element.removeEventListener('mouseleave', mouseleave);
+			if (comp) outroAndDestroy(comp);
 		}
 	}
 }
