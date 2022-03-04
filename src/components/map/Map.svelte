@@ -51,7 +51,7 @@
 		--ease: cubic-bezier(.3, 0, 0, 1);
 		pointer-events: auto;
 		position: fixed;
-		z-index: -1;
+		z-index: -20;
 		display: flex;
 		justify-content: center;
 		align-items: center;

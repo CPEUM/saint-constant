@@ -20,6 +20,7 @@
 	import { browser } from '$app/env';
 	import Loading from '$components/Loading.svelte';
 	import { mainScroll } from '$stores/scroll';
+	import { mapState } from '$stores/map';
 
 	export let topRoute: string;
 	let topNavigating = true;
@@ -43,6 +44,7 @@
 {#key topRoute}
 	{#if mapLoaded && !topNavigating}
 		<main
+			class:hidden={$mapState.isfull}
 			in:fly={{ y: 40, duration: 1550, delay: 350, easing: expoOut }}
 			out:scale={{ opacity: 0, start: 0.98, duration: 350, easing: expoIn }}
 			style:transform-origin="center {$mainScroll.y}px"
@@ -63,6 +65,11 @@
 <style lang="postcss">
 	main {
 		position: relative;
+		transition: opacity .3s;
+	}
+
+	.hidden { 
+		opacity: 0;
 	}
 
 	.grain {

@@ -22,7 +22,7 @@
 </script>
 
 <Exercice key="agroparc">
-	<Concept heading="Le concept d’agroparc">
+	<!-- <Concept heading="Le concept d’agroparc">
 		<div class="text-wrap">
 			<p>Le concept d'agroparc est né dans une perspective de reconnaissance des valeurs environnementales et récréatives du territoire agricole de Saint-Constant.</p>
 			<p>L’agroparc vise à&nbsp;:</p>
@@ -130,7 +130,7 @@
 				<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
 			</ListItem>
 		</List>
-	</Preferences>
+	</Preferences> -->
 	<Propositions>
 		<div class="text-wrap">
 			<p>Le travail d’idéation sur la proposition de l’agroparc de Saint-Constant a été effectué à deux échelles&nbsp;:</p>

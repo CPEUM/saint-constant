@@ -108,7 +108,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		overflow: visible;
-		z-index: -20;
+		z-index: -10;
 	}
 
 	footer {

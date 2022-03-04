@@ -1,14 +1,14 @@
 <script context="module" lang="ts">
 	export interface BarChartData {
 		groups: {
-			title: string,
-			color: string
+			title: string;
+			color: string;
 		}[];
 		columns: {
-			title: string,
-			rows: number[]
+			title: string;
+			rows: number[];
 		}[];
-	};
+	}
 </script>
 
 <script lang="ts">
@@ -17,19 +17,21 @@
 	import Legend from '$components/legend/Legend.svelte';
 	import LegendItem from '$components/legend/LegendItem.svelte';
 	import Loading from '$components/Loading.svelte';
-	
-	export let caption = '';
+
 	export let src: string;
 	export let highlightKey = null;
+	export let centered: boolean = false;
 
 	let max;
+	let center;
 	let visible = false;
 	
 	async function fetchData() {
 		const r = await fetch(base + src);
 		if (r.ok) {
 			const data: BarChartData = await r.json();
-			max = Math.max(...data.columns.map(column => column.rows.reduce((sum, val) => sum + val, 0)));
+			max = Math.max(...data.columns.map(column => column.rows.reduce((sum, curr) => sum + curr, 0)));
+			center = Math.max(...data.columns.map(col => col.rows[0]));
 			return data;
 		}
 		else {
@@ -38,38 +40,49 @@
 	}
 
 	let fetchPromise = fetchData();
+
+	function setKey(e: MouseEvent) {
+		highlightKey = (e.target as HTMLElement).getAttribute('key');
+	}
+
+	function clearKey() {
+		highlightKey = null;
+	}
 </script>
 
-<figure
-	{...$$restProps}
-	use:intersection
-	on:enter|once={() => visible = true}
->
+<figure use:intersection on:enter|once={() => (visible = true)}>
 	{#await fetchPromise}
 		<Loading />
 	{:then json}
-		<div class="bars">
+		<div
+			class="bars"
+			style:--max={max}
+			style:--center={center}
+		>
 			{#each json.columns as column, barIndex}
-			<div class="bar-wrapper">
-				<div class="col-title">{column.title}</div>
-				<div class="bar" class:hidden={!visible} style="transition-delay: {barIndex * 150}ms">
-					{#each column.rows as segment, i}
-						{#if segment > 0}
-							<!-- svelte-ignore a11y-mouse-events-have-key-events -->
-							<div
-								title="{json.groups[i].title}"
-								class="segment"
-								class:highlight={highlightKey === json.groups[i].title}
-								on:mouseover={() => highlightKey = json.groups[i].title}
-								on:mouseleave={() => highlightKey = null}
-								style:width="{segment * 100 / max}%"
-								style:--color={json.groups[i].color}
-							>
-							</div>
-						{/if}
-					{/each}
+				<div class="bar-wrapper">
+					<div class="col-title" class:centered>{column.title}</div>
+					<div
+						class="bar"
+						class:hidden={!visible}
+						style="transition-delay: {barIndex * 150}ms"
+					>
+						{#each column.rows as segment, i}
+							{#if segment > 0 || centered}
+								<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+								<div
+									class="segment"
+									class:center={centered}
+									class:highlight={highlightKey === json.groups[i].title}
+									on:mouseover={() => (highlightKey = json.groups[i].title)}
+									on:mouseleave={clearKey}
+									style:--value={segment}
+									style:--color={json.groups[i].color}
+								/>
+							{/if}
+						{/each}
+					</div>
 				</div>
-			</div>
 			{/each}
 		</div>
 		<Legend size="small">
@@ -77,8 +90,8 @@
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 				<LegendItem
-					on:mouseover={() => highlightKey = group.title}
-					on:mouseleave={() => highlightKey = null}
+					on:mouseover={() => (highlightKey = group.title)}
+					on:mouseleave={() => (highlightKey = null)}
 					highlight={highlightKey === group.title}
 					fill={group.color}
 				>
@@ -87,7 +100,9 @@
 			{/each}
 		</Legend>
 	{:catch error}
-		<p style="color: red; font-style: italic">Le chargement du fichier de données {src} a encontré une erreur</p>
+		<p style="color: red; font-style: italic">
+			Le chargement du fichier de données {src} a encontré une erreur
+		</p>
 	{/await}
 </figure>
 
@@ -114,13 +129,19 @@
 	}
 
 	.col-title {
+		position: relative;
 		font-family: var(--font-main);
 		color: var(--dark1);
 		opacity: 1;
 		font-size: 15px;
 		font-weight: 500;
 		line-height: 1.5;
-		margin: .5em 0;
+		margin: 0.5em 0;
+
+		&.centered {
+			text-align: center;
+			padding-right: calc(var(--center) / var(--max) / 2 * 100%);
+		}
 	}
 
 	.bar {
@@ -128,7 +149,7 @@
 		flex-direction: row;
 		width: 100%;
 		gap: 2px;
-		transition: width .35s cubic-bezier(.2, 0, .2, 1);
+		transition: width 0.3s cubic-bezier(0.2, 0, 0.2, 1);
 	}
 
 	.hidden {
@@ -137,16 +158,17 @@
 
 	.segment {
 		position: relative;
-		opacity: .9;
-		display: block;
+		opacity: 0.9;
+		display: inline-block;
 		height: 1em;
+		width: calc(100% * var(--value) / var(--max));
 		border-radius: 2px;
 		background-color: var(--color);
 		overflow: hidden;
-		transition: all .2s ease-out;
-		
+		transition: all 0.2s ease-out;
+
 		&::after {
-			opacity: .3;
+			opacity: 0.3;
 			pointer-events: none;
 			user-select: none;
 			content: '';
@@ -159,10 +181,14 @@
 			background-repeat: repeat;
 			background-size: 800px;
 		}
+
+		&.center:first-child {
+			margin-left: calc(100% * var(--center) / var(--max) - 100% * var(--value) / var(--max));
+		}
 	}
 
 	.segment.highlight {
-		box-shadow: 0 .5em 1em -.25em var(--color);
+		box-shadow: 0 0.5em 1em -0.25em var(--color);
 		opacity: 1;
 		transform: scaleY(1.25);
 	}

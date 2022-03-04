@@ -31,7 +31,7 @@
 
 	li {
 		position: relative;
-		padding: 1em;
+		padding: 1em 1.5em;
 		margin: .25em 0;
 		opacity: 1;
 		background-color: var(--light1);
@@ -75,15 +75,16 @@
 
 	/* .line, */
 	li::after {
+		z-index: 1;
 		content: '';
-		opacity: .5;
+		opacity: 1;
 		position: absolute;
-		top: 1em;
-		bottom: 1em;
-		left: -.5em;
+		top: 1.2em;
+		bottom: 1.2em;
+		left: -.25em;
 		width: .5em;
-		border-radius: .5em 0 0 .5em;
-		background-color: var(--accent2);
+		border-radius: .25em;
+		background-color: var(--accent1);
 		transition: all .5s calc(var(--index) * var(--staggerDelay));
 	}
 

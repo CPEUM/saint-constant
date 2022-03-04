@@ -53,7 +53,6 @@ export function mapMask(
 
 	return {
 		update(newOptions) {
-			console.log(newOptions);
 		},
 		destoy() {
 			observer.unobserve(element);

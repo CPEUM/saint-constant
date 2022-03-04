@@ -124,7 +124,7 @@
 	svg {
 		overflow: visible;
 		position: absolute;
-		z-index: -2;
+		z-index: -20;
 		width: 100vw;
 		height: 100%;
 		transform: rotate(var(--angle));

@@ -57,7 +57,7 @@ import FigureMap from '$components/figure/FigureMap.svelte';
 		<div class="text-wrap">
 			<h3 use:revealText={revealFlyUp}>Résultats des préférences d’aménagements des espaces pour cyclistes et piétons</h3>
 		</div>
-		<BarChart src="/data/charts/promenades-preferences.json" />
+		<BarChart src="/data/charts/promenades-preferences.json" centered="{true}" />
 		<List>
 			<ListItem>Des voies séparées de la route véhiculaire par un espace tampon (espace planté ou bordure)</ListItem>
 			<ListItem>Aménagement d’aires de repos ponctuées de mobiliers urbains</ListItem>

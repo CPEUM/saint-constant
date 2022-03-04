@@ -7,6 +7,7 @@
 	import { revealFlyUp, revealText } from '$actions/revealText';
 
 	export let label: string;
+	export let shortLabel: string = label;
 	export let title: string;
 	export let key: string;
 	export let src: string = '';
@@ -28,7 +29,12 @@
 	<header
 		style:transform="rotateZ({2.5 - Math.random() * 5}deg)"
 	>
-		<hgroup use:parallax>
+		<svg width="500" height="500" viewBox="0 0 500 500">
+			<text x="0" y="450" font-size="500" text-anchor="middle" dominant-baseline="baseline">
+				{shortLabel}
+			</text>
+		</svg>
+		<hgroup use:parallax={{factor: .7}}>
 			<!-- big svg proposition key bg -->
 			<!-- <div class="bg" /> -->
 			<span>{label}</span>
@@ -62,56 +68,16 @@
 		margin-bottom: 6rem;
 		padding: 0;
 		min-height: 100vh;
-		width: 100vw;
-		left: calc(50% - 100vw / 2);
+		width: 100%;
+		/* width: 100vw;
+		left: calc(50% - 100vw / 2); */
 		overflow: hidden;
 		background-color: transparent;
 		border-radius: 2rem;
-	}
-
-	.image {
-		display: block;
-		position: relative;
-		flex: 1;
-		width: 50%;
-		height: auto;
-		min-height: 100%;
-		overflow: hidden;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-
-		/* &::after {
-			content: '';
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			background-image: url(/grain.svg);
-			background-repeat: repeat;
-			background-size: 1200px;
-			opacity: .2;
-		} */
-	}
-
-	hgroup {
-		flex: 1;
-		z-index: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		justify-content: center;
-		min-height: 100%;
 		background-color: var(--accent2);
-		padding: 2rem 3rem;
-		min-width: var(--width-sm);
-		width: 100%;
-		overflow: hidden;
-		/* box-shadow: 0 0 1px 0 var(--accent3); */
 
 		&::after {
-			z-index: -1;
+			z-index: 0;
 			content: '';
 			position: absolute;
 			width: 100%;
@@ -125,10 +91,38 @@
 		}
 	}
 
+	.image {
+		z-index: -1;
+		display: block;
+		position: relative;
+		flex: 1;
+		width: 50%;
+		height: auto;
+		min-height: 100%;
+		overflow: hidden;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+	}
+
+	hgroup {
+		flex: 1;
+		z-index: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: center;
+		min-height: 100%;
+		padding: 2rem 3rem;
+		min-width: var(--width-sm);
+		width: 100%;
+		overflow: hidden;
+	}
+
 	span {
 		z-index: 1;
 		font-family: var(--font-misc);
-		color: var(--accent3);
+		color: var(--light1);
 		padding: 0;
 		margin: 0;
 		font-weight: 400;
@@ -143,5 +137,27 @@
 		padding: 0;
 		font-weight: 500;
 		font-size: var(--xxl);
+	}
+
+	svg {
+		user-select: none;
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+
+		& text {
+			letter-spacing: -10px;
+			font-family: var(--font-misc);
+			fill: var(--accent3);
+			stroke: var(--accent3);
+			/* stroke-width: 20px; */
+			stroke-linejoin: round;
+			stroke-linecap: round;
+			stroke-dasharray: 25%;
+		}
 	}
 </style>

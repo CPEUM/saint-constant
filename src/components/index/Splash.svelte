@@ -31,7 +31,6 @@
 
 	let y = 0;
 	function scroll(e: UIEvent) {
-		console.log(e);
 		y = (e.target as HTMLElement).scrollTop;
 	}
 </script>
@@ -124,7 +123,7 @@
 		display: inline-block;
 		font-size: clamp(56px, 7vw, 92px);
 		font-weight: 400;
-		color: var(--dark1);
+		color: var(--light1);
 		line-height: 1.1em;
 		padding: 0;
 		margin-block: 200px;

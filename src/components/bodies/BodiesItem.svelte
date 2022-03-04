@@ -7,7 +7,7 @@
 	export let size: number = null;
 	export let width = size || Math.round(Math.random() * 100 + 250);
 	export let height = width;
-	export let radius = Math.round(Math.random() * .25 * width + .25 * width);
+	export let radius = Math.round(Math.random() * .5 * width);
 	// export let radii = Array(4).fill(null).map(_ => radius || Math.random() * Math.max(width, height) / 2)
 	// let radiiCSS;
 	// $:	radiiCss = radii.map(r => r + 'px').join(' ');

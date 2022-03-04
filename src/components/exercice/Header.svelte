@@ -8,19 +8,20 @@
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
-	import { ExerciceRoute } from '$utils/routes';
+	import { ExerciceRoute, exerciceRoutes } from '$utils/routes';
+import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
 	
 	let mounted = false;
 	let waves;
 
-	const waveVb = { width: 1000, height: 1500 };
+	const viewBox = { width: 1500, height: 1200 };
 	function makeWaves(key: ExerciceRoute['key']) {
-		return generateSvgPaths(2, { viewBox: waveVb, padding: 900 })
+		return generateSvgPaths(4, { viewBox, padding: 800 })
 			.map((svgPath) => {
 				return {
-					viewBox: `0 0 ${waveVb.width} ${waveVb.height}`,
+					viewBox: `0 0 ${viewBox.width} ${viewBox.height}`,
 					d: svgPath,
-					fill: getRandomThemeColor([2, 3], [$exercice.key]),
+					fill: getRandomThemeColor([3, 2], [$exercice.key]),
 				}
 			});
 	}
@@ -34,11 +35,28 @@
 
 <header style={getAccentColors($exercice.key)}>
 	{#if mounted}
+		<svg transition:fade height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
+			{#key $exercice}
+				{#each waves as wave}
+					<path
+						transition:fade
+						vector-effect="non-scaling-stroke"
+						d={wave.d}
+						fill={wave.fill}
+						stroke={wave.strokeColor}
+						stroke-width="50"
+						stroke-linejoin="round"
+						stroke-linecap="round"
+						stroke-dasharray="54% 20% 64% 90% 30% 130%"
+						stroke-dashoffset="{Math.random() * 300}%"
+					/>
+				{/each}
+			{/key}
+			<!-- <text x="100" y="75" font-size="200" text-anchor="middle" dominant-baseline="baseline">{$exercice.title}</text> -->
+		</svg>
 		{#key $exercice}
-			<!-- <svg transition:fade height="100" width="200" viewBox="0 0 200 100" preserveAspectRatio="xMidYMin slice">
-				<text x="100" y="75" font-size="200" text-anchor="middle" dominant-baseline="baseline">{$exercice.title}</text>
-			</svg> -->
 			<hgroup style:--scroll="{$mainScroll.y}px">
+				<span transition:text={{...revealFlyUp, granularity: 'char'}}>eXERCicE 0{exerciceRoutes.indexOf($exercice) + 1}</span>
 				<h1
 					in:text={{y: '.5em', mask: true, maskPadding: '.1em', granularity: 'word', staggerDelay: 50, delay: 500}}
 					out:text={{y: '-.5em', mask: true, maskPadding: '.1em', delay: 0}}
@@ -65,13 +83,26 @@
 		position: absolute
 	}
 
+	span {
+		display: block;
+		color: var(--light1);
+		font-size: var(--xl);
+		font-family: var(--font-misc);
+		margin: 0;
+		padding: 0;
+		letter-spacing: 3px;
+		line-height: 1em;
+	}
+
 	h1 {
 		width: 100%;
-		max-width: 500px;
 		display: inline-block;
 		font-size: var(--xxxl);
+		color: var(--dark2);
 		font-weight: 500;
 		line-height: 1em;
+		margin: 2rem 0;
+		padding: 0;
 	}
 
 	@keyframes stroky {
@@ -88,7 +119,7 @@
 		position: absolute;
 		z-index: -2;
 		width: 100%;
-		height: 75vh;
+		height: 100vh;
 		transform: rotate(var(--angle));
 
 		text {

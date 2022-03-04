@@ -19,7 +19,6 @@ export function intersection(
 
 	return {
 		update(updatedOptions: IntersectionObserverInit) {
-			console.log('intersection observer action update triggered');
 		},
 		destroy() {
 			observer.unobserve(element);
