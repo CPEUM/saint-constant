@@ -40,11 +40,15 @@
 	}
 </script>
 
+<!-- <svelte:window
+	on:sveltekit:navigation-start={start}
+	on:sveltekit:navigation-end={end}
+/> -->
+
 <Nav />
 {#key topRoute}
 	{#if mapLoaded && !topNavigating}
 		<main
-			class:hidden={$mapState.isfull}
 			in:fly={{ y: 40, duration: 1550, delay: 350, easing: expoOut }}
 			out:scale={{ opacity: 0, start: 0.98, duration: 350, easing: expoIn }}
 			style:transform-origin="center {$mainScroll.y}px"
@@ -65,11 +69,6 @@
 <style lang="postcss">
 	main {
 		position: relative;
-		transition: opacity .3s;
-	}
-
-	.hidden { 
-		opacity: 0;
 	}
 
 	.grain {

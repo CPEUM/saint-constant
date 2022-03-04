@@ -117,7 +117,7 @@ import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
 		top: 0;
 		overflow: visible;
 		position: absolute;
-		z-index: -2;
+		z-index: -30;
 		width: 100%;
 		height: 100vh;
 		transform: rotate(var(--angle));

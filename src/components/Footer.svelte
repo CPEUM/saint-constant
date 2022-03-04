@@ -23,7 +23,7 @@
 	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map((svgPath) => ({
 		viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
 		d: svgPath,
-		fill: getRandomThemeColor([1, 2]),
+		fill: getRandomThemeColor([3, 1], ['light']),
 		// stroke: getRandomThemeColor([1, 2, 3])
 	}));
 	hills.push(

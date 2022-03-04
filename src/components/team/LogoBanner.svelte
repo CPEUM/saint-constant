@@ -1,11 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import logos from '$data/logos';
-
-	export let dim = false;
-	export let size: 'small' | 'large' = 'large'
 </script>
-
 
 <section {...$$restProps}>
 	{#each logos.prime as logo}
@@ -14,14 +10,11 @@
 			rel="external"
 			target="_blank"
 			title={logo.alt}
-			class:dim
-			class:size
 		>
 			<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 		</a>
 	{/each}
 </section>
-
 
 <style lang="postcss">
 	section {
@@ -44,10 +37,6 @@
 		max-width: 350px;
 		min-width: 150px;
 		opacity: .8;
-
-		&.small {
-
-		}
 
 		& img {
 			width: 100%;

@@ -3,14 +3,14 @@
 	import { getContext, onMount } from 'svelte';
 	import Matter from '$utils/matter';
 
-	let node: HTMLElement;
 	export let size: number = null;
-	export let width = size || Math.round(Math.random() * 100 + 250);
-	export let height = width;
-	export let radius = Math.round(Math.random() * .5 * width);
-	// export let radii = Array(4).fill(null).map(_ => radius || Math.random() * Math.max(width, height) / 2)
-	// let radiiCSS;
-	// $:	radiiCss = radii.map(r => r + 'px').join(' ');
+	export let width: number = null; // size || Math.round(Math.random() * 100 + 250);
+	export let height: number = null; // width;
+	export let radius: number = null;
+
+	let node: HTMLElement;
+	const sizeMin = 175;
+	const sizeTextFactor = 1.5;
 	let angle = (Math.random() - 0.5) / 180;
 	let top = 0;
 	let left = 0;
@@ -22,6 +22,12 @@
 	let body: Matter.Body;
 
 	onMount(() => {
+		/* Setting sizes */
+		if (!size) size = sizeMin + node.textContent.length * sizeTextFactor;
+		if (!width)	width = size;
+		if (!height) height = width;
+		if (!radius) radius = Math.round(Math.random() * .5 * width);
+		/* Init body */
 		body = Matter.Bodies.rectangle(
 			Matter.Common.random(0, node.parentElement.clientWidth),
 			Matter.Common.random(0, node.parentElement.clientHeight),

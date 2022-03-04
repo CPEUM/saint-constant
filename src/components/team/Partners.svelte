@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { revealFlyUp, revealText } from '$actions/revealText';
-	import LogoBanner from '$components/LogoBanner.svelte';
+	import LogoBanner from '$components/team/LogoBanner.svelte';
 	import Link from '$components/primitives/Link.svelte';
 
 </script>
