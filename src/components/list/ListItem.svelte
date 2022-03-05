@@ -5,11 +5,9 @@
 	const ctx = getContext<ListContext>('list');
 	const numbered = ctx.numbered;
 	const index = ctx.index();
-	const visible = ctx.visible;
 </script>
 
 <li
-	class:hidden={!$visible}
 	style:--index={index}
 	style:--rotate="{4 - Math.random() * 8}deg"
 	style:--w="{102 - Math.random() * 4}%"
@@ -20,7 +18,7 @@
 </li>
 
 <style lang="postcss">
-	.hidden {
+	:global(ul[out=true]) {
 		opacity: 0;
 		transform: translateY(-10px);
 
@@ -88,7 +86,7 @@
 		transition: all .5s calc(var(--index) * var(--staggerDelay));
 	}
 
-	.hidden .line {
+	:global(ul[out=true]) .line {
 		opacity: 0;
 	}
 </style>

@@ -32,10 +32,11 @@
 
 	let mapLoaded = false;
 	$: {
-		if (!$navigating && browser) {
-			// document.body.style.scrollBehavior = 'unset';
+		// Remplacer par on:navigation-start...
+		if ($navigating && browser) {
+			document.body.style.scrollBehavior = 'unset';
 			document.body.scrollTop = 0;
-			// document.body.style.scrollBehavior = 'smooth';
+			document.body.style.scrollBehavior = 'smooth';
 		}
 	}
 </script>

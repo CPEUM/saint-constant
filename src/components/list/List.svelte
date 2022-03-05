@@ -4,7 +4,6 @@
 	export interface ListContext {
 		numbered: boolean;
 		index: () => number;
-		visible: Writable<boolean>;
 	}
 </script>
 
@@ -16,20 +15,24 @@
 	export let numbered: boolean = false;
 	export let staggerDelay: number = 150;
 	let length = 0;
-	const visible = writable(false);
+	let out = true;
 
 	setContext<ListContext>('list', {
 		numbered,
-		index: () => length++,
-		visible
+		index: () => length++
 	});
+
+	function show() {
+		out = false;
+	}
 </script>
 
 <ul
 	{...$$restProps}
 	style:--staggerDelay="{staggerDelay}ms"
 	use:intersection={{rootMargin: '-30% 0px -30%'}}
-	on:enter|once={() => visible.set(true)}
+	on:enter|once={show}
+	{out}
 >
 	<slot />
 </ul>

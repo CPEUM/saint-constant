@@ -25,6 +25,9 @@
 	let max;
 	let center;
 	let visible = false;
+	function show() {
+		visible = true;
+	}
 	
 	async function fetchData() {
 		const r = await fetch(base + src);
@@ -50,7 +53,10 @@
 	}
 </script>
 
-<figure use:intersection on:enter|once={() => (visible = true)}>
+<figure
+	use:intersection on:enter|once={show}
+	{visible}
+>
 	{#await fetchPromise}
 		<Loading />
 	{:then json}
@@ -64,7 +70,6 @@
 					<div class="col-title" class:centered>{column.title}</div>
 					<div
 						class="bar"
-						class:hidden={!visible}
 						style="transition-delay: {barIndex * 150}ms"
 					>
 						{#each column.rows as segment, i}
@@ -152,7 +157,7 @@
 		transition: width 0.3s cubic-bezier(0.2, 0, 0.2, 1);
 	}
 
-	.hidden {
+	figure[visible=false] .bar {
 		width: 0%;
 	}
 
