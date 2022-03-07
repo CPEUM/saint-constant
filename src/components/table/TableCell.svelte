@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export type CellType = 'body' | 'heading';
+	export type CellType = 'body' | 'heading' | 'subheading' | 'spacer';
 </script>
 
 <script lang="ts">
@@ -10,29 +10,26 @@
 	export let colspan: number | string = 1;
 	export let rowspan: number | string = 1;
 	export let align: 'left' | 'center' | 'right' = 'left';
-	export let left: number | string = 0;
+	export let orientation: 'horizontal' | 'vertical' = 'horizontal';
 
 	const tableCtx = getContext<TableContext>('table');
 	const cellIndex = tableCtx.setCellIndex();
 </script>
 
-{#if left}
-	<div
-		style:--span={left}
-		class={type}
-	/>
-{/if}
-{#if type === 'heading'}
+{#if type === 'heading' || type === 'subheading'}
 	<th
 		style:--colspan={colspan}
 		style:--rowspan={rowspan}
 		style:--cellIndex={cellIndex}
 		style:text-align={align}
 		style:align-items={align}
+		class:sub={type === 'subheading'}
 	>
-		<slot />
+		<div class="inner" class:vertical={orientation === 'vertical'}>
+			<slot />
+		</div>
 	</th>
-{:else}
+{:else if type === 'body'}
 	<td
 		style:--colspan={colspan}
 		style:--rowspan={rowspan}
@@ -40,19 +37,26 @@
 		style:text-align={align}
 		style:align-items={align}
 	>
-		<slot />
+		<div class="inner" class:vertical={orientation === 'vertical'}>
+			<slot />
+		</div>
 	</td>
+{:else if type === 'spacer'}
+	<div
+		class="spacer"
+		style:--colspan={colspan}
+		style:--rowspan={rowspan}
+	/>
 {/if}
 
 <style lang="postcss">
-	div {
-		grid-column: span var(--span);
-		opacity: 1;
+	div.spacer {
+		opacity: 0;
 	}
 
 	th,
 	td,
-	div {
+	.spacer {
 		opacity: 1;
 		display: flex;
 		flex-direction: column;
@@ -73,8 +77,17 @@
 		}
 	}
 
-	th,
-	div.heading {
+	.inner {
+		display: inline-block;
+	}
+
+	.vertical {
+		writing-mode: vertical-lr;
+		transform: rotate(180deg);
+	}
+
+	/* div.heading, */
+	th {
 		color: var(--dark2);
 		font-weight: 600;
 		font-size: var(--xs);
@@ -85,10 +98,47 @@
 		/* box-shadow: 0 0 2px 0 var(--accent3); */
 	}
 
+	.sub {
+		/* color: var(--light1); */
+		background-color: var(--accent1);
+		/* border: 1px solid var(--accent2); */
+		box-shadow: 0 0 3px 0 var(--accent2);
+	}
+
 	td {
 		color: var(--dark2);
-		font-size: .9rem;
-		/* box-shadow: 0 0 2px 0 rgba(0,0,40, .5); */
+		font-size: .85rem;
 		background-color: var(--light1);
+		/* z-index: 10; */
+
+		/* &::after,
+		&::before {
+			user-select: none;
+			pointer-events: none;
+			content: '';
+			position: absolute;
+			background-color: transparent;
+			box-shadow: 0 0 0px -40px transparent;
+			transition: all .3s ease-out;
+		}
+		&::after {
+			height: 100%;
+			width: 100vw;
+			left: calc(50% - 50vw);
+			top: 0;
+		}
+		&::before {
+			width: 100%;
+			height: 100vw;
+			top: -50vw;
+			left: 0;
+		}
+
+		&:hover {
+			&::after,
+			&::before {
+				box-shadow: 0 0 70px -40px var(--dark1);
+			}
+		} */
 	}
 </style>

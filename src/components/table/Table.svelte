@@ -10,6 +10,10 @@
 
 	export let cols: number | string;
 	export let caption: string = null;
+	export let colsWidth: Record<number, string> = {};
+
+	const templateCols = Array(parseInt(cols + '')).fill('auto').map((col, i) => colsWidth[i + 1] || col).join(' ');
+
 	let visible = false;
 	let cells = 0;
 
@@ -27,6 +31,7 @@
 	use:intersection
 	on:enter|once={show}
 	{visible}
+	style:grid-template-columns={templateCols}
 >
 	<slot />
 </table>
@@ -38,14 +43,14 @@
 	table {
 		position: relative;
 		display: grid;
+		grid-auto-flow: row;
 		column-gap: 1px;
 		row-gap: 1px;
 		margin: 2rem auto;
-		grid-template-columns: repeat(var(--cols), auto);
 		grid-auto-rows: auto;
 		background-color: var(--accent1);
 		width: 100%;
-		max-width: var(--width-md);
+		max-width: var(--width-lg);
 		border-collapse: collapse;
 		text-indent: 0;
 		border-spacing: 0;
