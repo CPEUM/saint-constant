@@ -1,18 +1,16 @@
 <script>
-import Bodies from '$components/bodies/Bodies.svelte';
-import BodiesItem from '$components/bodies/BodiesItem.svelte';
-
+	import Bodies from '$components/bodies/Bodies.svelte';
+	import BodiesItem from '$components/bodies/BodiesItem.svelte';
 	import Concept from '$components/exercice/Concept.svelte';
 	import Exercice from '$components/exercice/Exercice.svelte';
 	import Interest from '$components/exercice/Interest.svelte';
 	import Preferences from '$components/exercice/Preferences.svelte';
 	import Propositions from '$components/exercice/Propositions.svelte';
-import FigureMap from '$components/figure/FigureMap.svelte';
-import Legend from '$components/legend/Legend.svelte';
-import LegendItem from '$components/legend/LegendItem.svelte';
-import List from '$components/list/List.svelte';
-import ListItem from '$components/list/ListItem.svelte';
-
+	import FigureMap from '$components/figure/FigureMap.svelte';
+	import Legend from '$components/legend/Legend.svelte';
+	import LegendItem from '$components/legend/LegendItem.svelte';
+	import List from '$components/list/List.svelte';
+	import ListItem from '$components/list/ListItem.svelte';
 </script>
 
 <Exercice key="poles">

@@ -1,20 +1,17 @@
 <script>
-import { revealFlyUp, revealText } from '$actions/revealText';
-
+	import { revealFlyUp, revealText } from '$actions/revealText';
 	import Bodies from '$components/bodies/Bodies.svelte';
 	import BodiesItem from '$components/bodies/BodiesItem.svelte';
-import BarChart from '$components/chart/BarChart.svelte';
+	import BarChart from '$components/chart/BarChart.svelte';
 	import Concept from '$components/exercice/Concept.svelte';
 	import Exercice from '$components/exercice/Exercice.svelte';
 	import Interest from '$components/exercice/Interest.svelte';
-import Preferences from '$components/exercice/Preferences.svelte';
-import Proposition from '$components/exercice/Proposition.svelte';
-import Propositions from '$components/exercice/Propositions.svelte';
-import FigureMap from '$components/figure/FigureMap.svelte';
+	import Preferences from '$components/exercice/Preferences.svelte';
+	import Proposition from '$components/exercice/Proposition.svelte';
+	import Propositions from '$components/exercice/Propositions.svelte';
+	import FigureMap from '$components/figure/FigureMap.svelte';
 	import List from '$components/list/List.svelte';
 	import ListItem from '$components/list/ListItem.svelte';
-
-
 </script>
 
 <Exercice key="promenades">

@@ -64,6 +64,7 @@ hr.separator {
 p {
 	position: relative;
 	display: block;
+	width: 100%;
 	max-width: var(--width-sm);
 	padding-block: 1rem;
 	margin-block: 1rem;
@@ -75,9 +76,9 @@ p {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	top: 0;
+	top: var(--bgtop, 0);
 	width: 100vw;
-	height: 100%;
+	bottom: var(--bgbottom, 0);
 	background-color: var(--light1);
 	z-index: -11;
 }

@@ -26,28 +26,29 @@
 <Logos />
 <div class="text-wrap">
 	<h2 use:revealText={revealFlyUp}>Objectifs du projet</h2>
-	<p class="left">Ce projet vise trois principaux objectifs&nbsp;:</p>
-	<List class="left">
-		<ListItem>
-			Co-construire des outils de connaissance, d’intervention et de gestion des paysages et des
-			cadres de vie de la Ville de Saint-Constant;
-		</ListItem>
-		<ListItem>
-			Co-réaliser un modèle stratégique innovant de mise en valeur et de développement des paysages
-			urbains;
-		</ListItem>
-		<ListItem>
-			Assurer un dialogue inclusif entre les milieux preneurs (Ville de Saint-Constant, MRC de
-			Roussillon) et le public interpellé, ainsi que valoriser et diffuser le processus et les
-			résultats de la démarche.
-		</ListItem>
-	</List>
-	<p class="right bg" style="padding-bottom: 5rem; padding-top: 20rem; margin-top: -20rem">
-		<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il&nbsp;présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations qui reposent sur la lecture des attraits du territoire, des préoccupations et des aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de diagnostic du projet&nbsp;:
-	</p>
 </div>
+<p>Ce projet vise trois principaux objectifs&nbsp;:</p>
+<List class="left">
+	<ListItem>
+		Co-construire des outils de connaissance, d’intervention et de gestion des paysages et des
+		cadres de vie de la Ville de Saint-Constant;
+	</ListItem>
+	<ListItem>
+		Co-réaliser un modèle stratégique innovant de mise en valeur et de développement des paysages
+		urbains;
+	</ListItem>
+	<ListItem>
+		Assurer un dialogue inclusif entre les milieux preneurs (Ville de Saint-Constant, MRC de
+		Roussillon) et le public interpellé, ainsi que valoriser et diffuser le processus et les
+		résultats de la démarche.
+	</ListItem>
+</List>
+<p class="bg" style="--bgtop: -40rem; --bgbottom: -4rem">
+	<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il&nbsp;présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations qui reposent sur la lecture des attraits du territoire, des préoccupations et des aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de diagnostic du projet&nbsp;:
+</p>
+
 <Orientations />
-<p class="bg" style="padding-bottom: 12rem; margin-bottom: -12rem">
+<p class="bg" style="--bgtop: -4rem; --bgbottom: -20rem">
 	Ces orientations découlent des propositions d’aménagement formulées au cours de la phase d’idéation. Les propositions d’aménagement présentées sont assorties d’une <strong>charte de principes directeurs susceptibles d’assurer, à terme, la cohérence des actions en vue de la préservation, de la mise en valeur et du développement des attraits des paysages de la Ville de Saint-Constant</strong>.
 </p>
 
