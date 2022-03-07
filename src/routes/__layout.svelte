@@ -2,7 +2,7 @@
 	export function load({ url }) {
 		return {
 			props: {
-				topRoute: 'key' + getSegments(url.pathname)[0]
+				topRoute: getSegments(url.pathname)[0]
 			}
 		};
 	}
@@ -65,7 +65,10 @@
 {#if !mapLoaded || topNavigating}
 	<Loading />
 {/if}
-<Map on:load={() => (mapLoaded = true)} />
+<Map
+	on:load={() => (mapLoaded = true)}
+	on:error={() => (mapLoaded = true)}
+/>
 
 <style lang="postcss">
 	main {

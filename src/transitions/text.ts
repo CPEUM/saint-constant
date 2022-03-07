@@ -1,4 +1,5 @@
-import { revealText, RevealTextOptions } from '$actions/revealText';
+import type { RevealTextOptions } from '$actions/revealText';
+import { revealText } from '$actions/revealText';
 
 type TextTransitionOptions = Omit<
 	RevealTextOptions,

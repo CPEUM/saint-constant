@@ -14,6 +14,9 @@ const config = {
 		postcss: true
 	}),
 	kit: {
+		prerender: {
+			default: true
+		},
 		adapter: adapterStatic(),
 		vite: {
 			// plugins: [imagetools({ force: true })],

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { revealFlyUp, revealText, RevealTextOptions } from '$actions/revealText';
+	import type { RevealTextOptions } from '$actions/revealText';
+	import { revealFlyUp, revealText } from '$actions/revealText';
 	import { text } from '$transitions/text';
 	import { onDestroy } from 'svelte';
 

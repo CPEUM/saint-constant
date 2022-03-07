@@ -7,8 +7,8 @@
 // 			`--accent3: rgb(var(--rgb-accent3));`
 // }
 
-import { ExerciceRoute } from './routes';
+import type { ExerciceRoute } from './routes';
 
 export function getAccentColors(cssPrefix: ExerciceRoute['key']) {
-	return [1, 2, 3].map(l => `--accent${l}: var(--${cssPrefix}${l})`).join('; ')
+	return [1, 2, 3].map((l) => `--accent${l}: var(--${cssPrefix}${l})`).join('; ');
 }

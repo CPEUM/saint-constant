@@ -15,7 +15,7 @@
 	import { getData } from '$utils/getData';
 
 	let container: HTMLElement;
-	const dispatch = createEventDispatcher<{load: null}>();
+	const dispatch = createEventDispatcher<{load: null, error: null}>();
 
 	onMount(async () => {
 		getData('/data/test.json');
@@ -26,6 +26,10 @@
 				center: [0, 0], // starting position [lng, lat]
 				zoom: 1 // starting zoom
 			});
+
+		map.on('error', (e) => {
+			dispatch('error');
+		})
 
 		map.once('load', () => {
 			dispatch('load');

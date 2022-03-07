@@ -1,4 +1,5 @@
-import { ParseNodeOptions, splitNodeAttributes, splitNodeText } from '$utils/splitText';
+import type { ParseNodeOptions } from '$utils/splitText';
+import { splitNodeAttributes, splitNodeText } from '$utils/splitText';
 import { getUnits } from '$utils/strings';
 import { intersection } from './intersect';
 

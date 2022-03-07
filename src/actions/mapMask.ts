@@ -1,4 +1,5 @@
-import { mapState, MapState } from '$stores/map';
+import type { MapState } from '$stores/map';
+import { mapState } from '$stores/map';
 
 export function mapMask(
 	element: HTMLElement,

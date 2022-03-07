@@ -8,7 +8,8 @@
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
-	import { ExerciceRoute, exerciceRoutes } from '$utils/routes';
+	import type { ExerciceRoute } from '$utils/routes';
+	import { exerciceRoutes } from '$utils/routes';
 	import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
 	
 	let mounted = false;

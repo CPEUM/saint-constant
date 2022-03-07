@@ -3,8 +3,8 @@
 </script>
 
 <script lang="ts">
+	import type { TableContext } from './Table.svelte';
 	import { getContext } from 'svelte';
-	import { TableContext } from './Table.svelte';
 	
 	export let type: CellType = 'body';
 	export let colspan: number | string = 1;

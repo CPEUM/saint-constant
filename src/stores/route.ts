@@ -1,7 +1,9 @@
-import { derived, get, Readable } from 'svelte/store';
+import type { Readable } from 'svelte/store';
+import { derived, get } from 'svelte/store';
 import { page } from '$app/stores';
 import { getSegments } from '$utils/path';
-import { ExerciceRoute, exerciceRoutes, routes } from '$utils/routes';
+import type { ExerciceRoute } from '$utils/routes';
+import { exerciceRoutes, routes } from '$utils/routes';
 
 export const route = derived(page, ($page) => {
 	return routes.find(
