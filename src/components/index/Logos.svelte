@@ -6,6 +6,7 @@
 	import { base } from '$app/paths';
 	import logos from '$data/logos';
 
+	export let heading: boolean = true;
 	let hidden = true;
 	const ttipOpts: TooltipOptions = {
 		follow: true,
@@ -18,7 +19,9 @@
 	on:enter|once={() => hidden = false}
 	class:hidden
 >
-	<h2 use:revealText={revealFlyUp}>Partenaires</h2>
+	{#if heading}
+		<h2 use:revealText={revealFlyUp}>Partenaires</h2>
+	{/if}
 	<div>
 		{#each logos.prime as logo}
 			<a
@@ -57,8 +60,8 @@
 		max-width: var(--width-md);
 
 		&:hover a:not(:hover) {
-			opacity: .75;
-			filter: saturate(0);
+			opacity: .5;
+			/* filter: saturate(0); */
 		}
 	}
 
@@ -82,14 +85,14 @@
 		padding: 3rem;
 		flex-basis: 33%;
 		opacity: .8;
-		transition: all .3s ease-in-out;
+		transition: all .2s ease-out;
 		
 		& img {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
 			position: relative;
-			transition: all .25s cubic-bezier(.1, 0, .2, 1);
+			transition: all .2s ease-out;
 		}
 
 		&:hover {

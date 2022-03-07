@@ -27,60 +27,28 @@
 			<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 		</a>
 	{/each}
-	<!-- <div>
-		{#each logos.prime as logo}
-			<a
-				href={logo.href}
-				rel="external"
-				target="_blank"
-				title={logo.alt}
-				use:tooltip={{follow: true, position: 'bottom'}}
-			>
-				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
-			</a>
-		{/each}
-	</div>
-	<div>
-		{#each logos.second as logo}
-			<a
-				href={logo.href}
-				rel="external"
-				target="_blank"
-				title={logo.alt}
-				use:tooltip={{follow: true, position: 'bottom'}}
-			>
-				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
-			</a>
-		{/each}
-	</div> -->
 </section>
 
 <style lang="postcss">
 	section {
-		padding-block: 4rem;
-		width: 100%;
-		max-width: var(--width-lg);
-		min-height: 90vh;
-	}
-
-	div {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
-		align-items: stretch;
-		width: auto;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding-block: 4rem;
+		width: 100%;
+		max-width: var(--width-md);
 	}
 	
 	a {
 		position: relative;
 		display: block;
 		margin: 2rem auto;
-		flex: 1;
+		flex: 1 0 50%;
 		padding: 2rem;
-		transition: all .2s ease-out;
-		max-width: 380px;
-		min-width: 250px;
 		opacity: .8;
+		transition: all .2s ease-out;
 
 		& img {
 			width: 100%;

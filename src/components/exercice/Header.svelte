@@ -9,7 +9,7 @@
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { getRandomThemeColor } from '$utils/randomThemeColor';
 	import { ExerciceRoute, exerciceRoutes } from '$utils/routes';
-import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
+	import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
 	
 	let mounted = false;
 	let waves;
@@ -35,7 +35,7 @@ import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
 
 <header style={getAccentColors($exercice.key)}>
 	{#if mounted}
-		<svg transition:fade height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
+		<svg transition:fade|local height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
 			{#key $exercice}
 				{#each waves as wave}
 					<path

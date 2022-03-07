@@ -1,5 +1,6 @@
 <script>
 	import { revealFlyUp, revealText } from '$actions/revealText';
+	import Logos from '$components/index/Logos.svelte';
 	import Link from '$components/primitives/Link.svelte';
 	import RouteHeader from '$components/RouteHeader.svelte';
 	import LogoBanner from '$components/team/LogoBanner.svelte';
@@ -8,11 +9,11 @@
 
 <RouteHeader>Équipe et partenaires du projet</RouteHeader>
 <p>Ce travail a été réalisé par la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> en collaboration avec la <Link href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain de l'Université de Montréal (CUPUM)</Link> ainsi qu’en vertu du soutien financier du <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et de la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>. Ce projet a été rendu possible également grâce au soutien partenarial de la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>.</p>
-<LogoBanner />
+<Logos heading={false} />
 <section class="group">
-	<h2 use:revealText={revealFlyUp}>Équipe de recherche</h2>
+	<h3 use:revealText={revealFlyUp}>Équipe de recherche</h3>
 	<section class="subgroup">
-		<h3>Direction scientifique</h3>
+		<h4>Direction scientifique</h4>
 		<ul>
 			<li>
 				<p class="name">Sylvain Paquette</p>
@@ -27,7 +28,7 @@
 		</ul>
 	</section>
 	<section class="subgroup">
-		<h3>Recherche et rédaction</h3>
+		<h4>Recherche et rédaction</h4>
 		<ul>
 			<li>
 				<p class="name">Patrick Marmen</p>
@@ -48,7 +49,7 @@
 		</ul>
 	</section>
 	<section class="subgroup">
-		<h3>Soutien à la recherche</h3>
+		<h4>Soutien à la recherche</h4>
 		<ul>
 			<li>
 				<p class="name">Michel Dumont</p>
@@ -74,9 +75,9 @@
 	</section>
 </section>
 <section class="group">
-	<h2>Partenaires</h2>
+	<h3>Partenaires</h3>
 	<section class="subgroup">
-		<h3>Comité de suivi</h3>
+		<h4>Comité de suivi</h4>
 		<ul>
 			<li>
 				<p class="name">Jean-Claude Boyer</p>
@@ -122,25 +123,23 @@
 	}
 
 	ul {
-		dispaly: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: wrap;
-		padding: 0;
-		margin: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		padding: 2rem 0 3rem 0;
+		margin: 0 auto;
 		list-style-type: none;
 		width: 100%;
-		gap: 3rem;
+		max-width: var(--width-sm);
+		row-gap: 3rem;
+		column-gap: 3rem;
 	}
 
 	li {
-		display: inline-flex;
+		display: flex;
 		flex-direction: column;
-		padding: 2rem 0;
+		padding: 0;
 		margin: 0;
-		flex: 1;
-		min-width: 350px;
+		grid-column: span 1;
 
 		& p {
 			padding: 0rem 0;
@@ -148,23 +147,23 @@
 
 			&.name {
 				font-size: var(--md);
-				font-weight: 500;
+				font-weight: 400;
 			}
 
 			&.title {
 				opacity: .7;
-				font-weight: 500;
-				text-transform: uppercase;
+				font-weight: 400;
+				/* text-transform: uppercase; */
 				font-size: var(--sm);
-				letter-spacing: 1px;
+				/* letter-spacing: .5px; */
 			}
 
 			&.role {
 				opacity: .7;
 				font-weight: 400;
-				text-transform: uppercase;
+				/* text-transform: uppercase; */
 				font-size: var(--sm);
-				letter-spacing: 2px;
+				/* letter-spacing: .5px; */
 				/* font-style: italic; */
 			}
 		}

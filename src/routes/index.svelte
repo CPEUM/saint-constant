@@ -46,7 +46,6 @@
 <p class="bg" style="--bgtop: -40rem; --bgbottom: -4rem">
 	<strong>Le présent site vise à exposer les résultats de ce travail de co-construction. Il&nbsp;présente ainsi les assises de la vision stratégique d’aménagement des paysages de la Ville de Saint-Constant.</strong> Celles-ci se déclinent selon trois grandes orientations qui reposent sur la lecture des attraits du territoire, des préoccupations et des aspirations entretenues envers les paysages qui ont été dégagés dans le cadre de la phase de diagnostic du projet&nbsp;:
 </p>
-
 <Orientations />
 <p class="bg" style="--bgtop: -4rem; --bgbottom: -20rem">
 	Ces orientations découlent des propositions d’aménagement formulées au cours de la phase d’idéation. Les propositions d’aménagement présentées sont assorties d’une <strong>charte de principes directeurs susceptibles d’assurer, à terme, la cohérence des actions en vue de la préservation, de la mise en valeur et du développement des attraits des paysages de la Ville de Saint-Constant</strong>.

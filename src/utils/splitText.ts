@@ -35,9 +35,9 @@ export function splitNodeText(node: HTMLElement, {
 				parseNode(cn)
 			}
 			else if (cn.nodeType === Node.TEXT_NODE) {
-				const newNodes = [];
+				const newNodes: Node[] = [];
 				cn.textContent
-					.split(/(\s)/) // previously was: /\s\b/
+					.split(/(\s)/) // previously was non-capturing: /\s\b/
 					.forEach((word) => {
 						// console.log('"' + word + '"');
 						if (!word) {
@@ -67,7 +67,9 @@ export function splitNodeText(node: HTMLElement, {
 							newNodes.push(wordspan);
 						}
 					});
-				cn.replaceWith(...newNodes);
+				// cn.replaceWith(...newNodes); // Svelte no likey, throwy errory!
+				cn.textContent = '';
+				cn.after(...newNodes);
 			}
 		});
 	}

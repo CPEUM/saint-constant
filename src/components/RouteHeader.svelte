@@ -1,10 +1,14 @@
 <script lang="ts">
-	import { revealFlyUp, revealText } from '$actions/revealText';
+	import { revealFlyUp, revealText, RevealTextOptions } from '$actions/revealText';
+	import { text } from '$transitions/text';
+	import { onDestroy } from 'svelte';
+
+	const revealOptions: RevealTextOptions = {...revealFlyUp, granularity: 'char', staggerDelay: 40};
 </script>
 
 <header>
 	<hgroup>
-		<h2 use:revealText={{...revealFlyUp, granularity: 'char', staggerDelay: 40}}>
+		<h2 in:text={revealOptions}>
 			<slot />
 		</h2>
 	</hgroup>

@@ -126,6 +126,13 @@ export function revealText(element: HTMLElement, {
 	}
 
 	return {
+		destroy() {
+			if (intersect) {
+				intersect.destroy();
+				element.removeEventListener('enter', enter);
+				element.removeEventListener('leave', leave);
+			}
+		},
 		update(newOptions: RevealTextOptions) {
 			/* To do: update all relevant props and execute functions when needed */
 			if (newOptions.duration) duration = newOptions.duration;
@@ -146,19 +153,14 @@ export function revealText(element: HTMLElement, {
 				}
 			}
 		},
-		destroy() {
-			if (intersect) {
-				intersect.destroy();
-				element.removeEventListener('enter', enter);
-				element.removeEventListener('leave', leave);
-			}
-		},
 		masks,
 		targets
 	};
 }
 
-// /* Presets */
+/**
+ * Presets
+ */
 
 export const revealFlyUp: RevealTextOptions = {
 	mask: true,

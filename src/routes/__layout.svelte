@@ -2,7 +2,7 @@
 	export function load({ url }) {
 		return {
 			props: {
-				topRoute: getSegments(url.pathname)[0]
+				topRoute: 'key' + getSegments(url.pathname)[0]
 			}
 		};
 	}
@@ -21,37 +21,37 @@
 	import Loading from '$components/Loading.svelte';
 	import { mainScroll } from '$stores/scroll';
 	import { mapState } from '$stores/map';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
-	export let topRoute: string;
-	let topNavigating = true;
-	$: {
-		topNavigating = $navigating
-			? getSegments($navigating.from?.href)[0] !== getSegments($navigating.to.href)[0]
-			: false;
-	}
-
+	export let topRoute = null;
+	export let topNavigating = true;
 	let mapLoaded = false;
-	$: {
-		// Remplacer par on:navigation-start...
-		if ($navigating && browser) {
+
+	beforeNavigate(({from, to}) => {
+		if (getSegments(from?.href)[0] !== getSegments(to?.href)?.[0]) topNavigating = true;
+	});
+
+	afterNavigate(({from, to}) => {
+		if (topNavigating) topNavigating = false;
+		if (browser) {
 			document.body.style.scrollBehavior = 'unset';
 			document.body.scrollTop = 0;
 			document.body.style.scrollBehavior = 'smooth';
 		}
+	});
+
+	function outroend() {
+		if (topNavigating) topNavigating = false;
 	}
 </script>
-
-<!-- <svelte:window
-	on:sveltekit:navigation-start={start}
-	on:sveltekit:navigation-end={end}
-/> -->
 
 <Nav />
 {#key topRoute}
 	{#if mapLoaded && !topNavigating}
 		<main
-			in:fly={{ y: 40, duration: 1550, delay: 350, easing: expoOut }}
-			out:scale={{ opacity: 0, start: 0.98, duration: 350, easing: expoIn }}
+			in:fly={{ y: 40, duration: 1550, easing: expoOut }}
+			out:scale={{ opacity: 0, start: 0.98, duration: 350 }}
+			on:outroend={outroend}
 			style:transform-origin="center {$mainScroll.y}px"
 		>
 			<div class="grain" />
@@ -62,7 +62,7 @@
 		</main>
 	{/if}
 {/key}
-{#if !mapLoaded || $navigating}
+{#if !mapLoaded || topNavigating}
 	<Loading />
 {/if}
 <Map on:load={() => (mapLoaded = true)} />
