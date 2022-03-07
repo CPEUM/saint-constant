@@ -4,12 +4,11 @@
 	import Table from '$components/table/Table.svelte';
 	import TableCell from '$components/table/TableCell.svelte';
 	import SyntheseCarousel from '$components/principes-directeurs/SyntheseCarousel.svelte';
+	import RouteHeader from '$components/RouteHeader.svelte';
 	import { revealFlyUp, revealText } from '$actions/revealText';
 </script>
 
-<header>
-	<h2 use:revealText={revealFlyUp}>Chartes des principes directeurs</h2>
-</header>
+<RouteHeader>Chartes des principes directeurs</RouteHeader>
 <p>Cette section vise à présenter une synthèse des recommandations qui émanent de la démarche de caractérisation des paysages et de l’exercice d’idéation de Saint-Constant. Elle prend la forme d’une charte des principes directeurs pour l’élaboration d’un projet de paysage. Les valeurs principales qui ont conduit à l’élaboration de cette charte sont&nbsp;:</p>
 <List>
 	<ListItem>Une ville pour tous;</ListItem>

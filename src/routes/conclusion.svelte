@@ -1,38 +1,101 @@
-<script>
-	import { revealFlyUp, revealText } from '$actions/revealText';
-	import { onMount } from 'svelte';
-
-	let objectives;
-
-	onMount(() => {
-		objectives = fetch('/objectives.json').then(res => res.json());
-	});
+<script lang="ts">
+	import { base } from '$app/paths';
+	import objectives from '$data/objectives';
+	import { getAccentColors } from '$utils/exerciceColors';
+	import { exerciceRoutes } from '$utils/routes';
+	import RouteHeader from '$components/RouteHeader.svelte';
 </script>
 
-<header>
-	<h2 use:revealText={revealFlyUp}>Conclusion</h2>
-</header>
-<div class="text-wrap">
-	<p>Les propositions d’aménagement présentées ici visent à̀ fournir à la Ville de Saint-Constant de nouveaux outils et de nouvelles approches de planification territoriale en phase avec l’esprit des pratiques en innovation sociale. L’originalité de ce projet réside ainsi dans sa capacité à traduire les préoccupations et les aspirations exprimées par les citoyens et les acteurs clés du développement urbain envers le devenir souhaitable des paysages et des cadres de vies. La démarche de co-construction adoptée avec les partenaires du projet, soit la Ville de Saint-Constant et la MRC de Roussillon, aura permis en effet de développer des outils de connaissances, de concertation et d’intervention en vue d’assurer une cohérence dans la gestion des paysages urbains de Saint-Constant. Il importe de mentionner que les orientations d’aménagement s’inscrivent en arrimage avec les grands projets d’infrastructures municipales et les principaux pôles de développement économiques portés par la Ville de Saint-Constant.</p>
-	<p>Notons enfin que le projet prône l’idée de mesure et de précaution tout autant que de responsabilités sociale et environnementale. À ce titre, il s’inscrit en phase directe avec plusieurs objectifs stratégiques du programme de développement durable à l’horizon 2030, intitulé Agenda 2030, porté par l’Organisation des Nations unies (ONU).</p>
-	<p class="left">Les objectifs de développement durable suivants pourraient ainsi être atteints&nbsp;:</p>
-</div>
+<RouteHeader>Conclusion</RouteHeader>
+<p>Les propositions d’aménagement présentées ici visent à̀ fournir à la Ville de Saint-Constant de nouveaux <strong>outils</strong> et de nouvelles <strong>approches de planification</strong> territoriale en phase avec l’esprit des pratiques en <strong>innovation sociale</strong>. L’originalité de ce projet réside ainsi dans sa capacité à traduire les préoccupations et les aspirations exprimées par les citoyens et les acteurs clés du développement urbain envers le devenir souhaitable des paysages et des cadres de vies. La démarche de co-construction adoptée avec les partenaires du projet, soit la Ville de Saint-Constant et la MRC de Roussillon, aura permis en effet de développer des outils de connaissances, de concertation et d’intervention en vue d’assurer une cohérence dans la gestion des paysages urbains de Saint-Constant. Il importe de mentionner que les orientations d’aménagement s’inscrivent en arrimage avec les grands projets d’infrastructures municipales et les principaux pôles de développement économiques portés par la Ville de Saint-Constant.</p>
+<p>Notons enfin que le projet prône l’idée de mesure et de précaution tout autant que de responsabilités sociale et environnementale. À ce titre, il s’inscrit en phase directe avec plusieurs objectifs stratégiques du programme de développement durable à l’horizon 2030, intitulé <i>Agenda 2030</i>, porté par l’Organisation des Nations unies (ONU).</p>
+<p>Les objectifs de développement durable suivants pourraient ainsi être&nbsp;atteints&nbsp;:</p>
+{#each objectives as o}
+	<section style:--accent={o.color}>
+		<img src="{base}/media/odd/odd-{o.num}.svg" alt="Pastille de l'ODD{o.num}"/>
+		<div class="details">
+			<p>{o.description}</p>
+			<ul>
+				{#each o.implementations as imp}
+					<li>
+						{#if imp.orientations}
+							Orientation{imp.orientations.length > 1 ? 's' : ''}&nbsp;
+							{#each imp.orientations as orientation}
+								<span class="orientation" style={getAccentColors(exerciceRoutes[orientation - 1].key)}>0{orientation}</span>&nbsp;
+							{/each}:
+						{/if}
+						&ensp;{imp.explanation}
+					</li>
+				{/each}
+			</ul>
+		</div>
+	</section>
+{/each}
 
-<style>
-	header {
-		width: 100%;
-		min-height: 50vh;
+<style lang="postcss">
+	section {
+		/* z-index: -10; */
 		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
-	h2 {
-		margin: 0;
-		padding: 0;
+		flex-direction: row;
+		gap: 2rem;
 		width: 100%;
 		max-width: var(--width-md);
-		text-align: left;
-		line-height: 1em;
+		padding: 2rem 0;
+
+		& img {
+			width: 250px;
+			height: 250px;
+			margin: 2.5rem 0;
+			border-radius: 1rem;
+		}
+
+		p {
+			color: var(--accent);
+			font-size: var(--lg);
+			font-weight: 400;
+		}
+
+		.orientation {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0 .5em;
+			/* margin: 0 .1em; */
+			min-width: 2em;
+			height: 2em;
+			box-shadow: 0 0 0 1px var(--accent1);
+			border-radius: 1em;
+			color: var(--accent3);
+			font-family: var(--font-misc);
+		}
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+			max-width: var(--width-sm)
+		}
+
+		li {
+			position: relative;
+			z-index: -10;
+			margin: 1rem auto;
+			padding: 1rem 2rem 1.25rem 2rem;
+			border-radius: 1rem;
+			background-color: var(--light1);
+			box-shadow: 0 0 0 1px var(--light3);
+			/* box-shadow: 0 1.5rem 2.5rem -1.5rem rgba(0,0,30,.1); */
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 1.5em;
+				left: 0em;
+				width: .5em;
+				bottom: 1.5em;
+				background-color: var(--accent);
+				border-radius: 0 .5em .5em 0;
+			}
+		}
 	}
 </style>
