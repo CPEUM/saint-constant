@@ -90,7 +90,7 @@
 				<LegendItem label="6" key="asd">Parc des Citoyens</LegendItem>
 			</Legend>
 		</FigureMap>
-		<h3 class="center">Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen</h3>
+		<h4>Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen</h4>
 		<BarChart src="/data/charts/agroparc-sous-secteurs.json" />
 		<List>
 			<ListItem>
@@ -118,7 +118,9 @@
 			<ListItem>L’échelle du secteur du noyau villageois pour détailler certaines propositions d’aménagement et mettre en images les activités de l’agroparc.</ListItem>
 		</List>
 		<p>Les deux échelles de projet permettent une cohabitation multifonctionnelle des espaces. Les lieux de production agricole deviennent à la fois des lieux de promenades (récréation), de découvertes (éducation), des espaces naturels (conservation) et des lieux de vente directe entre producteurs et consommateurs (commercial).</p>
-		<h3 use:revealText={revealFlyUp} class="left">À l’échelle de la municipalité</h3>
+		<div class="text-wrap">
+			<h3 use:revealText={revealFlyUp} class="left">À l’échelle de la municipalité</h3>
+		</div>
 		<p>On retrouve quatre principales actions&nbsp;:</p>
 		<List>
 			<ListItem><strong>Un sentier multifonctionnel</strong>, participe à faire le lien nord-sud entre le territoire agricole et le noyau villageois.</ListItem>
@@ -127,7 +129,9 @@
 			<ListItem><strong>La création d’un pôle d’accueil</strong> dans le secteur du noyau villageois. Ce projet détaillé dans les prochaines sections permettra d’illustrer une diversité d’actions (récréatives, de conservation, commerciales et de production) à la suite des consultations entreprises lors du rendez-vous citoyens. </ListItem>
 		</List>
 		<!-- FigureMap avec tracés de 3.1.4 -->
-		<h3 use:revealText={revealFlyUp}>À l’échelle du noyau villageois</h3>
+		<div class="text-wrap">
+			<h3 use:revealText={revealFlyUp}>À l’échelle du noyau villageois</h3>
+		</div>
 		<p>La phase 1 du projet de l’agroparc se situe dans le noyau villageois et ses environs. Il découle des aspirations souhaitées par les citoyens, des analyses et constats effectués par les professionnels de l’aménagement.</p>
 		<p>Une variété d’aménagements sont proposés, regroupés dans 4 grands groupes d’activités&nbsp;:</p>
 		<Bodies>
@@ -169,14 +173,14 @@
 			<Tandem>
 				<div class="text-wrap" slot="1">
 					<p>Le projet propose d’aménager&nbsp;:</p>
-					<h4 use:revealText={revealFlyUp}>Des activités de productions agricoles</h4>
+					<h4>Des activités de productions agricoles</h4>
 					<p>Ce secteur vise à fournir un espace d’expérimentation et de développement en <strong>agriculture bio-intensive</strong> sur 8 hectares. Des pratiques de productions similaires se développent de plus en plus au Québec et démontrent la productivité et la rentabilité de ces méthodes plus respectueuses de l’environnement. Ces terres pourront être divisées et se répartir entre plusieurs producteurs pour une plus grande variété de production. Chaque exploitation est dotée d’un kiosque qui sert à la fois de point de vente direct et de hangar de rangement du matériel. Des haies brises vents sont suggérées afin de structurer chacune des exploitations, favoriser la biodiversité, la qualité des sols, protéger les cultures des vents et augmenter la qualité paysagère.</p>
 					<p>L’implantation de ce type d’agriculture dans le secteur du bassin de rétention est stratégique. Par sa proximité au noyau villageois et du tissu urbain résidentiel cela permet à la fois d’offrir une visibilité aux producteurs et de sensibiliser le public aux nouvelles pratiques innovantes, favoriser les circuits courts (proximité entre les lieux de production, distribution et consommation) et transformer ces espaces en milieux de vie mixte.</p>
 					<Image src="/media/agroparc/3-1-6.jpg" alt="Bassin de rétention" />
-					<h4 use:revealText={revealFlyUp}>Des activités récréatives</h4>
+					<h4>Des activités récréatives</h4>
 					<p>À la périphérie nord des jardins de production alimentaire, une allée de promenade multifonctionnelle offre un accès public à ce secteur maraîcher et invite à venir s’y balader. Un grand soin est porté sur les accès vers ce secteur et les liens avec le noyau villageois. La connexion principale est faite avec la place de l’église par l’aménagement d’en sentier en diagonal, en direction du clocher. De plus il y a des accès à l’est pour relier le parc des Citoyens, et à l’ouest avec la rue Saint-Pierre.</p>
 					<p>Cet axe diagonal traverse également une forêt nourricière, qui consolide la présence actuelle d’une friche arbustive, où les visiteurs seraient invités à cueillir les fruits produits pour les déguster directement durant leur balade. Cette forêt a la capacité d’être ponctuée d’activités récréatives comme les labyrinthes de maïs, formant des clairières dans la forêt. Cette intervention a l’opportunité de devenir un véritable terrain de jeu pour les familles à proximité tout en répondant à des enjeux de développement durable.</p>
-					<h4 use:revealText={revealFlyUp}>Des activités de conservation</h4>
+					<h4>Des activités de conservation</h4>
 					<p>Au nord des exploitations, le sentier multifonctionnel est doublé d’une bande végétalisée. Celle-ci prend la forme d’une noue paysagère capable de récupérer les eaux de ruissellement. Des végétaux d’espèces indigènes adaptés aux milieux humides, capables d’attirer les pollinisateurs, et ce, durant une longue période (printemps, été, automne), y seront favorisés. Ce système de captation permettra de filtrer les eaux avant d’être déversés dans le cours d’eau de la rivière Saint-Pierre.</p>
 					<p>Une plantation d’arbres est suggérée au sud pour faire le tampon entre la zone de cultures et l’autoroute. Cela permettra de réduire les nuisances visuelles et l’exposition au vent, tout en favorisant une plus grande biodiversité et permettant de connecter <strong>les boisés existants à conserver</strong>.</p>
 				</div>

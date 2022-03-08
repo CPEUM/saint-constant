@@ -1,10 +1,26 @@
 <script lang="ts">
 	export let name: string;
+
+	async function getExcerptComp() {
+		return import(`./excerpt-articles/${name}.svelte`);
+	}
+
+	let excerptPromise = getExcerptComp();
 </script>
 
 <button>
 	<span><slot /></span>
 </button>
+
+{#await excerptPromise}
+	<!-- show loading -->
+{:then excerptComp}
+<article>
+	<svelte:component this={excerptComp} />
+</article>
+{:catch error}
+	<!-- catch error -->
+{/await}
 
 <style lang="postcss">
 	button {

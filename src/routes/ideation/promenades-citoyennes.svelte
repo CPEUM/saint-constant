@@ -45,7 +45,9 @@
 			<ListItem>Les parcours significatifs</ListItem>
 			<ListItem>Les éléments pour agrémenter la balade (ex.: aires de repos)</ListItem>
 		</List>
-		<h3 use:revealText={revealFlyUp}>Résultats des préférences d’aménagements des espaces pour cyclistes et piétons</h3>
+		<div class="text-wrap">
+			<h3 use:revealText={revealFlyUp}>Résultats des préférences d’aménagements des espaces pour cyclistes et piétons</h3>
+		</div>
 		<BarChart src="/data/charts/promenades-preferences.json" centered="{true}" />
 		<List>
 			<ListItem>Des voies séparées de la route véhiculaire par un espace tampon (espace planté ou bordure)</ListItem>
@@ -57,7 +59,9 @@
 			<ListItem>Insertion de mesures d’apaisement de la circulation</ListItem>
 			<ListItem>Saillies de trottoirs</ListItem>
 		</List>
-		<h3 use:revealText={revealFlyUp}>Résultats des préférences de localisation d’aménagements des parcours</h3>
+		<div class="text-wrap">
+			<h3 use:revealText={revealFlyUp}>Résultats des préférences de localisation d’aménagements des parcours</h3>
+		</div>
 		<h4>Parcours possédant déjà des aménagements de pistes cyclables&nbsp;:</h4>
 		<Bodies>
 			<BodiesItem>Montée Saint-Régis</BodiesItem>
@@ -109,8 +113,8 @@
 			key="a"
 			src=""
 	>
-				<p>Ce corridor se situe au nord et longe les rues du Maçon et de Lausanne.</p>
-			<h3>Contexte actuel</h3>
+			<p>Ce corridor se situe au nord et longe les rues du Maçon et de Lausanne.</p>
+			<h4>Contexte actuel</h4>
 			<List>
 				<ListItem>Quartier résidentiel pavillonnaire</ListItem>
 				<ListItem>Vastes cours avant gazonnées</ListItem>
@@ -118,18 +122,18 @@
 				<ListItem>Manque d’espaces piétons</ListItem>
 				<ListItem>Présence de fossés destinés à la gestion de l’eau</ListItem>
 		</List>
-			<h3>Attraits actuels</h3>
+			<h4>Attraits actuels</h4>
 			<List>
 				<ListItem>Le Pavillon de la biodiversité<span style="opacity: .5">, pôle de rassemblement communautaire composé d’une aire boisée ainsi que d’un jardin horticole</span></ListItem>
 				<ListItem>Le parc Levasseur <span style="opacity: .5">principalement composé d’une aire de jeux et d’une esplanade gazonnée</span></ListItem>
 				<ListItem>Le parc Lafarge</ListItem>
 				<ListItem>La rivière Saint-Régis</ListItem>
 			</List>
-			<h3>Les principaux éléments reliés</h3>
+			<h4>Les principaux éléments reliés</h4>
 			<p>Le pavillon de la biodiversité et le parc Lafarge</p>
-			<h3>Concept général du projet proposé</h3>
+			<h4>Concept général du projet proposé</h4>
 			<p>Étendre le jardin des pollinisateurs présent au pavillon de la biodiversité sous la forme de bordures végétales tout le long d’un parcours (trottoirs et bandes cyclables) sécuritaire, fonctionnel et continu.</p>
-			<h3>Les aménagements</h3>
+			<h4>Les aménagements</h4>
 			<p><em>Des bordures végétales</em> accompagneront les promeneurs tout au long du parcours. Deux localisations possibles&nbsp;:</p>
 			<List numbered={true}>
 				<ListItem><em>Entre le corridor de mobilité active et la chaussée</em> séparant ainsi très distinctement les piétons et les voitures, créant un sentiment de sécurité accru. De plus, les eaux de ruissellement pourraient facilement se rendre vers la bordure, limitant ainsi le besoin en eau. Cependant cette solution demande une gestion et un entretien important et diminue la flexibilité saisonnière de l’espace.</ListItem>
@@ -145,36 +149,36 @@
 			src=""
 	>
 			<p>Ce corridor longe la voie ferrée.</p>
-			<h3>Contexte actuel</h3>
+			<h4>Contexte actuel</h4>
 			<p>Centre du territoire urbanisé qui présente une diversité de milieux et d’identités végétales.</p>
-			<h4>Tronçon 1 (ouest)</h4>
+			<h5>Tronçon 1 (ouest)</h5>
 			<List>
 				<ListItem>Quartier résidentiel d’habitations unifamiliales</ListItem>
 				<ListItem>Cours avant gazonnées composées d’arbres et d’arbustes</ListItem>
 				<ListItem>Chaussée délimitée par des bordures de béton</ListItem>
 			</List>
-			<h4>Tronçon 2 (centre)</h4>
+			<h5>Tronçon 2 (centre)</h5>
 			<List>
 				<ListItem>Vastes espaces verts institutionnels publics, faible diversité végétale</ListItem>
 				<ListItem>Rivière Saint-Régis traversée</ListItem>
 			</List>
-			<h4>Tronçon 3 (est)</h4>
+			<h5>Tronçon 3 (est)</h5>
 			<List>
 				<ListItem>Friches végétales</ListItem>
 				<ListItem>Voies ferrées longées</ListItem>
 				<ListItem>Rivière Saint-Pierre traversée</ListItem>
 			</List>
-			<h3>Attraits actuels</h3>
+			<h4>Attraits actuels</h4>
 			<List>
 				<ListItem>Vastes aires gazonnées (parc du Petit-Bonheur, corridor de transport d’électricité, école Félix-Leclerc et Centre municipal)</ListItem>
 				<ListItem>Rivière Saint-Régis et ses rives boisées</ListItem>
 				<ListItem>Potentiel d’aménagement d’un sentier piéton longeant la voie ferrée</ListItem>
 			</List>
-			<h3>Les éléments reliés</h3>
+			<h4>Les éléments reliés</h4>
 			<p>La gare Sainte-Catherine, la gare Saint-Constant et l’agroparc (est-ouest).</p>
-			<h3>Concept général du projet proposé</h3>
+			<h4>Concept général du projet proposé</h4>
 			<p>Relier le corridor à l’agroparc en faisant un <em>jardin linéaire comestible</em> tout le long d’un parcours actif piéton et cycliste continu. Intégrant ainsi la <em>thématique de l’agriculture et de la biodiversité en ville</em>. Cette initiative a pour objectif de stimuler le développement de ces milieux et de favoriser la traverse du corridor ferroviaire.</p>
-			<h3>Les aménagements</h3>
+			<h4>Les aménagements</h4>
 			<p>L’objectif des aménagements proposés est de planter, tout au long de ce corridor, des arbres, arbustes et herbacées comestibles qui produisent des fruits et des noix. Par la sélection d’espèces indigènes qui nécessitent relativement peu d’entretien. Ils sensibiliseront les citoyens à la diversité du patrimoine végétal local en faisant découvrir des espèces qui se consomment. Ces interventions permettront une plus grande diversité végétale, favorisant la biodiversité de grands espaces publics.</p>
 			<p>Dans les secteurs les plus denses du parcours, à proximités des gares, où les résidents des immeubles d’appartement possèdent peu d’espaces extérieur, l’aménagement de jardins collectifs ou communautaires sont proposés.</p>
 		</Proposition>
@@ -185,29 +189,29 @@
 			src=""
 		>
 			<p>Le tracé ici proposé est parallèle à la rivière Saint-Pierre.</p>
-			<h3>Contexte actuel</h3>
+			<h4>Contexte actuel</h4>
 			<p>Ce corridor est caractérisé par la proximité et l’imbrication entre le milieu urbanisé et le milieu riverain qui sont en contraste.</p>
 			<List>
 				<ListItem>Rivière Saint-Pierre<span style="opacity: .5"> agissant comme coulée verte à travers le territoire, mais principalement dissimulée par l’arrière-cour des propriétés riveraines, peu accessible</span></ListItem>
 				<ListItem>Rue Saint-Pierre de nature commerciale<span style="opacity: .5">, constituée de plusieurs surfaces minérales destinées aux stationnements</span></ListItem>
 			</List>
-			<h3>Attraits actuels</h3>
+			<h4>Attraits actuels</h4>
 			<List>
 				<ListItem>Site d’Exporail</ListItem>
 				<ListItem>Parc Joseph-Narcisse-Cardinal</ListItem>
 				<ListItem>Ensemble du noyau villageois et tout particulièrement le cimetière</ListItem>
 			</List>
-			<h3>Les éléments reliés</h3>
+			<h4>Les éléments reliés</h4>
 			<p>Le corridor longe approximativement le tracé de la rivière Saint-Pierre depuis la route 132 au nord jusqu’à la montée Lasaline.</p>
-			<h3>Concept général du projet proposé</h3>
+			<h4>Concept général du projet proposé</h4>
 			<p>Mettre en valeur la rivière Saint-Pierre en la rendant accessible par un sentier continu et en végétalisant ses abords. Conserver le caractère commercial de la rue Saint-Pierre en améliorant la place du piéton et penser des pistes cyclables dans les axes parallèles.</p>
-			<h3>Les aménagements</h3>
-			<h4>Un sentier piéton le long de la rivière Saint-Pierre</h4>
+			<h4>Les aménagements</h4>
+			<h5>Un sentier piéton le long de la rivière Saint-Pierre</h5>
 			<p>Dans un premier temps, il est proposé de rendre plus accessible la rivière Saint-Pierre par l’aménagement d’un sentier piéton le long de ses berges. La rivière présente une opportunité exceptionnelle d’offrir aux habitants un espace naturel dans ce secteur qui possède moins d’espaces verts. Cela permettrait aussi de valoriser l’image du caractère naturel de Saint-Constant.</p>
 			<p>Il est proposé que ce sentier soit continu de la route 132 jusqu’au parc agricole. Plusieurs sections possèdent un potentiel d’aménagement (ex.: secteur de l’Exporail et le cimetière). Sur les autres tronçons, l’insertion de ce sentier demande d’entreprendre des négociations avec les propriétaires pour obtenir des droits de passages.</p>
-			<h4>Des pistes cyclables sur des rues parallèles à la rue Saint-Pierre</h4>
+			<h5>Des pistes cyclables sur des rues parallèles à la rue Saint-Pierre</h5>
 			<p>À l’image de la bande cyclable de la rue Lasalle qui offre un tracé dans un axe parallèle à la rue Saint-Pierre, le concept d’aménagement du corridor riverain cherche à̀ identifier d’autres axes parallèles à la rue Saint-Pierre qui pourraient facilement accueillir un aménagement cyclable.</p>
-			<h4>Amélioration des infrastructures piétonnes de la rue Saint-Pierre</h4>
+			<h5>Amélioration des infrastructures piétonnes de la rue Saint-Pierre</h5>
 			<p>La rue Saint-Pierre est un axe commercial important. Afin de valoriser la circulation piétonne sur celle-ci, l’amélioration de l’infrastructure piétonne est un aspect essentiel de l’aménagement du corridor riverain. Le point principal est l’aménagement d’un trottoir continue du côté est. De plus, l’élargissement des trottoirs ou la présence d’une bande de plantation permettrait de sécuriser le parcours piéton en éloignant les usagers de la circulation automobile.</p>
 		</Proposition>
 		<Proposition
@@ -217,7 +221,7 @@
 			src=""
 		>
 			<p>Ce corridor-ci se situe au sud, traversant une diversité de milieux naturels et agricoles.</p>
-			<h3>Contexte actuel</h3>
+			<h4>Contexte actuel</h4>
 			<p>Il est caractérisé par sa grande diversité paysagère et ses expériences variées&nbsp;:</p>
 			<List>
 				<ListItem>Milieux naturels</ListItem>
@@ -225,7 +229,7 @@
 				<ListItem>Bassins de rétention</ListItem>
 				<ListItem>Territoire agricole</ListItem>
 			</List>
-			<h3>Attraits actuels</h3>
+			<h4>Attraits actuels</h4>
 			<List>
 				<ListItem>Lac des Fées</ListItem>
 				<ListItem>Base de plein air</ListItem>
@@ -234,11 +238,11 @@
 				<ListItem>Bassin de rétention de la rue Chantal</ListItem>
 				<ListItem>Parc des Citoyens</ListItem>
 			</List>
-			<h3>Les éléments reliés</h3>
+			<h4>Les éléments reliés</h4>
 			<p>Le corridor sud relie le secteur de la gare Saint-Catherine et tout particulièrement le lac des Fées au parc des Citoyens sur la Montée Lasaline.</p>
-			<h3>Concept général du projet proposé</h3>
+			<h4>Concept général du projet proposé</h4>
 			<p>Il vise à faire découvrir la diversité des paysages de Saint-Constant et démontrer son armature naturelle importante par un parcours cycliste et piéton continu. Il est un lieu fonctionnel permettant de mieux relier la gare Sainte-Catherine à la montée Saint-Régis (ex.: création d’un pont piéton sur la rivière Saint-Régis). De même qu’un lieu de promenade de nature récréative, contribuant à la vitalité du noyau villageois.</p>
-			<h3>Les aménagements</h3>
+			<h4>Les aménagements</h4>
 			<p>Les tracés du parcours s’adaptent aux caractéristiques spécifiques des milieux qu’ils traversent. Ils s’insèrent dans les espaces ouverts des milieux soit naturels, semi-naturels ou agricoles. Peu d’aménagements sont nécessaires dans les milieux naturels et semi-naturels (ex.: Base de plein air). Il est recommandé de distinguer la piste cyclable du sentier pédestre afin de minimiser l’empreinte des surfaces imperméables cyclistes.</p>
 		</Proposition>
 	</Propositions>
