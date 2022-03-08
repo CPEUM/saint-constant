@@ -40,7 +40,8 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
-		padding: 1em;
+		padding-inline: 1em;
+		padding-block: 1em .5em;
 		line-height: 1.5em;
 		top: 0rem;
 		margin: 0;

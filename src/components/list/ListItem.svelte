@@ -9,7 +9,7 @@
 
 <li
 	style:--index={index}
-	style:--rotate="{4 - Math.random() * 8}deg"
+	style:--rotate="{3 - Math.random() * 6}deg"
 	style:--w="{102 - Math.random() * 4}%"
 	style:--h="{103 - Math.random() * 6}%"
 >
@@ -18,12 +18,14 @@
 </li>
 
 <style lang="postcss">
-	:global(ul[out=true]) {
-		opacity: 0;
-		transform: translateY(-10px);
-
-		& * {
+	:global(ul[visible=false]) {
+		& li {
 			opacity: 0;
+			transform: translateY(-10px);
+
+			& * {
+				opacity: 0;
+			}
 		}
 	}
 
@@ -32,10 +34,11 @@
 		padding: 1em 1.5em;
 		margin: .25em 0;
 		opacity: 1;
-		background-color: var(--light1);
+		/* background-color: var(--light1); */
 		border-radius: 1em;
-		color: var(--dark2);
-		box-shadow: 0 0 1px 0 rgba(0,0,30, .3);
+		color: var(--dark1);
+		/* border: .5em solid var(--light3); */
+		box-shadow: 0 0 2px 0 var(--accent1);
 		transition: all .3s calc(var(--index) * var(--staggerDelay)) cubic-bezier(.2, 0, .4, 1);
 
 		/* &::after {
@@ -53,6 +56,21 @@
 			opacity: .5;
 		} */
 
+		&::after {
+			z-index: 1;
+			content: '';
+			opacity: 1;
+			position: absolute;
+			top: 1.25em;
+			height: 1em;
+			/* bottom: 1.5em; */
+			left: -.5em;
+			width: 1em;
+			border-radius: .5em;
+			background-color: var(--accent1);
+			transition: all .5s calc(var(--index) * var(--staggerDelay));
+		}
+
 		&::before {
 			content: '';
 			z-index: -2;
@@ -62,31 +80,13 @@
 			top: 50%;
 			left: 50%;
 			border-radius: 16px;
-			background-color: var(--accent1);
+			box-shadow: 0 0 2px 0 var(--accent2);
+			/* background-color: var(--accent1);
 			background-image: url(/grain.svg);
 			background-repeat: repeat;
-			background-size: 1500px;
+			background-size: 1200px; */
 			transform: translate(-50%, -50%) rotate(var(--rotate));
 			opacity: .65;
 		}
-	}
-
-	/* .line, */
-	li::after {
-		z-index: 1;
-		content: '';
-		opacity: 1;
-		position: absolute;
-		top: 1.2em;
-		bottom: 1.2em;
-		left: -.25em;
-		width: .5em;
-		border-radius: .25em;
-		background-color: var(--accent1);
-		transition: all .5s calc(var(--index) * var(--staggerDelay));
-	}
-
-	:global(ul[out=true]) .line {
-		opacity: 0;
 	}
 </style>

@@ -2,7 +2,7 @@
 	export function load({ url }) {
 		return {
 			props: {
-				topRoute: getSegments(url.pathname)[0]
+				topRoute: 'key' + getSegments(url.pathname)[0]
 			}
 		};
 	}
@@ -76,7 +76,7 @@
 	}
 
 	.grain {
-		opacity: 0.5;
+		opacity: 0.4;
 		z-index: -1;
 	}
 

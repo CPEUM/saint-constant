@@ -32,6 +32,7 @@
 	on:enter|once={show}
 	{visible}
 	style:grid-template-columns={templateCols}
+	{...$$restProps}
 >
 	<slot />
 </table>

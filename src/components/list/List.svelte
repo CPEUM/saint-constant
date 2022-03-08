@@ -15,7 +15,7 @@
 	export let numbered: boolean = false;
 	export let staggerDelay: number = 150;
 	let length = 0;
-	let out = true;
+	let visible = false;
 
 	setContext<ListContext>('list', {
 		numbered,
@@ -23,7 +23,7 @@
 	});
 
 	function show() {
-		out = false;
+		visible = true;
 	}
 </script>
 
@@ -32,7 +32,7 @@
 	style:--staggerDelay="{staggerDelay}ms"
 	use:intersection={{rootMargin: '-30% 0px -30%'}}
 	on:enter|once={show}
-	{out}
+	{visible}
 >
 	<slot />
 </ul>
