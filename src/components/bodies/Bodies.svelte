@@ -41,8 +41,11 @@
 
 	// Engine
 	const engine = Matter.Engine.create();
-	engine.gravity.y = -2;
+	engine.gravity.y = 1;
 	engine.gravity.scale = 0;
+	engine.positionIterations = 4;
+	engine.velocityIterations = 3;
+	engine.enableSleeping = true;
 	
 	// Runner
 	const runner = Matter.Runner.create();
