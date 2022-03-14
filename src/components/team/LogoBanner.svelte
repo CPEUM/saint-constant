@@ -2,7 +2,7 @@
 	import { intersection } from '$actions/intersect';
 	import { tooltip } from '$actions/tooltip';
 	import { base } from '$app/paths';
-	import logos from '$data/logos';
+	import logos from '$utils/logos';
 
 	let visible = false;
 

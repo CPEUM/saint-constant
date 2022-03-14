@@ -1,5 +1,5 @@
 <script>
-	import { getRandomThemeColor } from '$utils/randomThemeColor';
+	import { getRandomThemeColor } from '$utils/themeColors';
 	import { circIn, circOut, expoIn, expoOut } from 'svelte/easing';
 	import { spring } from 'svelte/motion';
 	import { scale } from 'svelte/transition';

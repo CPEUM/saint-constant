@@ -48,7 +48,7 @@
 		<div class="text-wrap">
 			<h3 use:revealText={revealFlyUp}>Résultats des préférences d’aménagements des espaces pour cyclistes et piétons</h3>
 		</div>
-		<BarChart src="/data/charts/promenades-preferences.json" centered="{true}" />
+		<BarChart src="/data/charts/promenades/preferences.json" centered="{true}" />
 		<List>
 			<ListItem>Des voies séparées de la route véhiculaire par un espace tampon (espace planté ou bordure)</ListItem>
 			<ListItem>Aménagement d’aires de repos ponctuées de mobiliers urbains</ListItem>
@@ -110,7 +110,7 @@
 		<Proposition
 			label="Parcours A"
 			title="Le corridor des pollinisateurs (est-ouest)"
-			key="a"
+			key="A"
 			src=""
 	>
 			<p>Ce corridor se situe au nord et longe les rues du Maçon et de Lausanne.</p>
@@ -144,8 +144,8 @@
 		</Proposition>
 		<Proposition
 			label="Parcours B"
-			title="Le corridor des pollinisateurs (est-ouest)"
-			key="b"
+			title="Le corridor nourricier (est-ouest)"
+			key="B"
 			src=""
 	>
 			<p>Ce corridor longe la voie ferrée.</p>
@@ -184,8 +184,8 @@
 		</Proposition>
 		<Proposition
 			label="Parcours C"
-			title="Le corridor des pollinisateurs (est-ouest)"
-			key="c"
+			title="Le corridor riverain (nord-sud)"
+			key="C"
 			src=""
 		>
 			<p>Le tracé ici proposé est parallèle à la rivière Saint-Pierre.</p>
@@ -217,7 +217,7 @@
 		<Proposition
 			label="Parcours D"
 			title="Le corridor découverte (est-ouest)"
-			key="d"
+			key="D"
 			src=""
 		>
 			<p>Ce corridor-ci se situe au sud, traversant une diversité de milieux naturels et agricoles.</p>

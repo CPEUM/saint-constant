@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import objectives from '$data/objectives';
-	import { getAccentColors } from '$utils/exerciceColors';
+	import objectives from '$utils/objectives';
+	import { getThemeColors } from '$utils/themeColors';
 	import { exerciceRoutes } from '$utils/routes';
 	import RouteHeader from '$components/RouteHeader.svelte';
 </script>
@@ -21,7 +21,7 @@
 						{#if imp.orientations}
 							Orientation{imp.orientations.length > 1 ? 's' : ''}&nbsp;
 							{#each imp.orientations as orientation}
-								<span class="orientation" style={getAccentColors(exerciceRoutes[orientation - 1].key)}>0{orientation}</span>&nbsp;
+								<span class="orientation" style={getThemeColors(exerciceRoutes[orientation - 1].key)}>0{orientation}</span>&nbsp;
 							{/each}:
 						{/if}
 						&ensp;{imp.explanation}

@@ -2,7 +2,7 @@
 	import { exerciceRoutes } from '$utils/routes';
 	import { intersection } from '$actions/intersect';
 	import { mapState } from '$stores/map';
-	import { getAccentColors } from '$utils/exerciceColors';
+	import { getThemeColors } from '$utils/themeColors';
 	import { revealText } from '$actions/revealText';
 
 	let current = null;
@@ -28,7 +28,7 @@
 			class="triggers"
 			use:intersection={{rootMargin}}
 			on:enter={() => exEnter(i)}
-			style={getAccentColors(ex.key)}
+			style={getThemeColors(ex.key)}
 			class:right={i%2 !== 0}
 			style:--angle="{-6 + Math.random() * 12}deg"
 		>
@@ -46,7 +46,7 @@
 					class:disabled={i !== current}
 					href={ex.path}
 					sveltekit:prefetch
-					style={getAccentColors(ex.key)}
+					style={getThemeColors(ex.key)}
 					style:--angle={Math.random() * 90 + 'deg'}
 					style:--size={(Math.random() * 200 + 500) + 'px'}
 				>

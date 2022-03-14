@@ -3,11 +3,11 @@
 	import { exercice } from '$stores/route';
 	import { mainScroll } from '$stores/scroll';
 	import { text } from '$transitions/text';
-	import { getAccentColors } from '$utils/exerciceColors';
+	import { getThemeColors } from '$utils/themeColors';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
-	import { getRandomThemeColor } from '$utils/randomThemeColor';
+	import { getRandomThemeColor } from '$utils/themeColors';
 	import type { ExerciceRoute } from '$utils/routes';
 	import { exerciceRoutes } from '$utils/routes';
 	import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
@@ -34,7 +34,7 @@
 	});
 </script>
 
-<header style={getAccentColors($exercice.key)}>
+<header style={getThemeColors($exercice.key)}>
 	{#if mounted}
 		<svg transition:fade|local height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
 			{#key $exercice}

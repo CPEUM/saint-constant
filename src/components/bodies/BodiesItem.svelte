@@ -35,9 +35,9 @@
 			height,
 			{
 				angle,
-				friction: .2,
-				frictionStatic: 9,
-				density: .001,
+				friction: .1,
+				frictionStatic: 12,
+				density: .0005,
 				chamfer: { radius }
 			}
 		);

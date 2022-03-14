@@ -28,7 +28,6 @@
 		"paths": {
 			"$actions/*": ["src/actions/*"],
 			"$components/*": ["src/components/*"],
-			"$data/*": ["src/data/*"],
 			"$media/*": ["src/media/*"],
 			"$stores/*": ["src/stores/*"],
 			"$styles/*": ["src/styles/*"],

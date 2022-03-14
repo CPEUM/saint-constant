@@ -1,30 +1,32 @@
 <script lang="ts" context="module">
-	import { Map as M } from 'maplibre-gl';
-	/**
-	 * General map, accessible throughout the app!
-	 */
-	let map: M;
-	export function getMap() {
-		return map;
-	}
+	import { writable } from 'svelte/store';
+
+	export const getMap = () => map;
+	export const mapLoaded = writable(false);
+	export let map: maplibregl.Map;
 </script>
 
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { mapState } from '$stores/map';
-	import { getData } from '$utils/getData';
-
+	import { addCityLayer, addPropositionsLayers } from '$utils/map';
+	import { Map as MaplibreMap } from 'maplibre-gl';
+	import FigureCompass from '$components/figure/FigureCompass.svelte';
+	
 	let container: HTMLElement;
 	const dispatch = createEventDispatcher<{load: null, error: null}>();
+	let bearing = 0;
 
-	onMount(async () => {
-		getData('/data/test.json');
-
-		map = new M({
+	onMount(() => {
+		map = new MaplibreMap({
 				container,
-				style: 'mapbox://styles/iolyd/ckzw8nw7y001z14pq7ek199lr', // style URL
-				center: [0, 0], // starting position [lng, lat]
-				zoom: 1 // starting zoom
+				style: 'https://api.maptiler.com/maps/856b4e05-cd2c-42db-9453-9cd7e156a083/style.json?key=dtV5LH1SmQB4VOb80qqI',
+				center: [-73.5700, 45.3699], // starting position [lng, lat]
+				bearing,
+				pitch: 30,
+				zoom: 14, // starting zoom
+				minZoom: 10,
+				maxZoom: 20
 			});
 
 		map.on('error', (e) => {
@@ -33,9 +35,23 @@
 
 		map.once('load', () => {
 			dispatch('load');
+			mapLoaded.set(true);
+			addCityLayer(map);
+			addPropositionsLayers(map);
+		});
+
+		map.on('rotate', (e) => {
+			bearing = map.getBearing();
 		});
 	});
 </script>
+
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css"
+	/>
+</svelte:head>
 
 <figure
 	class:full={$mapState.isfull}
@@ -46,9 +62,14 @@
 	style:bottom={$mapState.mask.bottom}
 	style:left={$mapState.mask.left}
 >
-	<div bind:this={container}></div>
+	<div id="container" bind:this={container}></div>
+	<div id="info">
+	<!-- Short description of current view (remove when user moves map) -->
+	<!-- Scale line -->
+	<FigureCompass on:click={() => map.flyTo({bearing: 0})} {bearing} />
+	<slot />
+	</div>
 </figure>
-
 
 <style lang="postcss">
 	figure {
@@ -89,7 +110,7 @@
 		}
 
 		&:global(.figure) {
-			opacity: .5;
+			opacity: 1;
 			top: 0rem;
 			right: 0rem;
 			bottom: 0rem;
@@ -136,7 +157,7 @@
 		}
 	}
 
-	div {
+	#container {
 		position: absolute;
 		padding: 0;
 		margin: 0;
@@ -144,4 +165,15 @@
 		height: 100vh;
 	}
 
+	#info {
+		position: absolute;
+		bottom: 2rem;
+		width: 100%;
+		max-width: var(--width-md);
+		padding: 0 1rem;
+		height: 2rem;
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+	}
 </style>

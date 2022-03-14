@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getRandomThemeColor } from '$utils/randomThemeColor';
+	import { getRandomThemeColor } from '$utils/themeColors';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { onMount } from 'svelte';
 	import { revealText } from '$actions/revealText';

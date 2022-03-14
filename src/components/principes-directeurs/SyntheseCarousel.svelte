@@ -5,7 +5,7 @@
 	import TableCell from '$components/table/TableCell.svelte';
 	import { revealFlyUp, revealText } from '$actions/revealText';
 	import { fly, slide } from 'svelte/transition';
-	import { getAccentColors } from '$utils/exerciceColors';
+	import { getThemeColors } from '$utils/themeColors';
 
 	let orientationIndex = 0;
 
@@ -40,7 +40,7 @@
 				in:fly={{x: setDirectionValue(500, 'in'), duration, delay: duration}}
 				out:fly={{x: setDirectionValue(500, 'out'), duration}}
 				class="orientation"
-				style={getAccentColors('agroparc')}
+				style={getThemeColors('agroparc')}
 			>
 				<h4>Orientation 1</h4>
 				<p>Revitaliser le noyau villageois par le développement d’un pôle d’interconnexion entre le milieu urbain et rural.</p>
@@ -75,7 +75,7 @@
 				in:fly={{x: setDirectionValue(500, 'in'), duration, delay: duration}}
 				out:fly={{x: setDirectionValue(500, 'out'), duration}}
 				class="orientation"
-				style={getAccentColors('promenades')}
+				style={getThemeColors('promenades')}
 			>
 				<h4>Orientation 2</h4>
 				<p>Aménager des parcours de mobilité active afin de faire la promotion de la qualité du cadre de vie et des milieux naturels de Saint-Constant.</p>
@@ -128,7 +128,7 @@
 				in:fly={{x: setDirectionValue(500, 'in'), duration, delay: duration}}
 				out:fly={{x: setDirectionValue(500, 'out'), duration}}
 				class="orientation"
-				style={getAccentColors('poles')}
+				style={getThemeColors('poles')}
 			>
 				<h4>Orientation 3</h4>
 				<p>Étudier les perspectives de densification du territoire qui s’intègrent au paysage actuel.</p>

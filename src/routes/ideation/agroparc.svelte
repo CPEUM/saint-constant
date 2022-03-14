@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Concept from '$components/exercice/Concept.svelte';
 	import Proposition from '$components/exercice/Proposition.svelte';
-	import ExcerptToggle from '$components/excerpt/ExcerptToggle.svelte';
+	import Excerpt from '$components/excerpt/Excerpt.svelte';
 	import Interest from '$components/exercice/Interest.svelte';
 	import Figure from '$components/figure/Figure.svelte';
 	import FigureMap from '$components/figure/FigureMap.svelte';
@@ -31,7 +31,7 @@
 			<BodiesItem>Promouvoir la relève agricole et les nouvelles pratiques</BodiesItem>
 			<BodiesItem>Assurer un équilibre économique, social et environnemental dans le développement du territoire</BodiesItem>
 		</Bodies>
-		<ExcerptToggle name="agroparc1">Quelques références supplémentaires d'agroparcs</ExcerptToggle>
+		<Excerpt name="agroparc1">Quelques références supplémentaires d'agroparcs</Excerpt>
 		<p>Les exemples d’agroparc en Europe montrent que les parcs agricoles peuvent être initiés à partir&nbsp;:</p>
 		<Bodies>
 			<BodiesItem>De la délimitation d’un espace agricole à titre de parc, sans intervention d’aménagement supplémentaire</BodiesItem>
@@ -91,7 +91,7 @@
 			</Legend>
 		</FigureMap>
 		<h4>Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen</h4>
-		<BarChart src="/data/charts/agroparc-sous-secteurs.json" />
+		<BarChart src="/data/charts/agroparc/sous-secteurs.json" />
 		<List>
 			<ListItem>
 				<p><strong>Sous-secteur 5&nbsp;: Bassin de rétention de la rue Chantale</strong> (ainsi que l’ensemble de ses espaces verts adjacents)&nbsp;:</p>

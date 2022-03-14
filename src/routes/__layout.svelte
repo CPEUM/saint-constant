@@ -22,6 +22,7 @@
 	import { mainScroll } from '$stores/scroll';
 	import { mapState } from '$stores/map';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import NavBottom from '$components/nav/NavBottom.svelte';
 
 	export let topRoute = null;
 	export let topNavigating = true;
@@ -46,22 +47,25 @@
 </script>
 
 <Nav />
-{#key topRoute}
-	{#if mapLoaded && !topNavigating}
-		<main
-			in:fly={{ y: 40, duration: 1550, easing: expoOut }}
-			out:scale={{ opacity: 0, start: 0.98, duration: 350 }}
-			on:outroend={outroend}
-			style:transform-origin="center {$mainScroll.y}px"
-		>
-			<div class="grain" />
-			<article>
+<main>
+	{#key topRoute}
+		{#if mapLoaded && !topNavigating}
+			<article
+				in:fly={{ y: 40, duration: 1550, easing: expoOut }}
+				out:scale={{ opacity: 0, start: 0.98, duration: 350 }}
+				on:outroend={outroend}
+				style:transform-origin="center {$mainScroll.y}px"
+			>
 				<slot />
+				<div class="grain" />
 			</article>
-			<Footer />
-		</main>
+		{/if}
+	{/key}
+	{#if mapLoaded}
+		<NavBottom />
+		<Footer />
 	{/if}
-{/key}
+</main>
 {#if !mapLoaded || topNavigating}
 	<Loading />
 {/if}
@@ -73,15 +77,18 @@
 <style lang="postcss">
 	main {
 		position: relative;
+		padding: 0;
+		margin: 0;
 	}
 
 	.grain {
+		/* See global styles for rest */
 		opacity: 0.4;
 		z-index: -1;
 	}
 
 	article {
-		position: relative;
+		/* position: relative; */
 		padding: 0 4rem;
 		display: flex;
 		flex-direction: column;

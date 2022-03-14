@@ -1,5 +1,12 @@
 import Matter from '$utils/matter';
 
+const attract = (bodyA: Matter.Body, bodyB: Matter.Body) => {
+	return {
+		x: (bodyA.position.x - bodyB.position.x) * 2e-4,
+		y: (bodyA.position.y - bodyB.position.y) * 2e-4,
+	};
+};
+
 export class MouseAttractor {
 	public body: Matter.Body;
 	public mouse: Matter.Mouse;
@@ -15,12 +22,7 @@ export class MouseAttractor {
 				isStatic: true,
 				plugin: {
 					attractors: [
-					function(bodyA, bodyB) {
-						return {
-								x: (bodyA.position.x - bodyB.position.x) * 2e-4,
-								y: (bodyA.position.y - bodyB.position.y) * 2e-4,
-							};
-						}
+						attract
 					]
 				},
 				collisionFilter: {

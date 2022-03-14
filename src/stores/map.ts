@@ -1,9 +1,4 @@
-import Maplibre from 'maplibre-gl';
 import { writable } from 'svelte/store';
-
-Maplibre.accessToken =
-	'pk.eyJ1IjoiaW9seWQiLCJhIjoiY2twNXFqNXRzMGNxMTJ2cDJ1cms5anZtayJ9.WwgtCYAVZVl00E9IgzFNmg';
-export { Maplibre };
 
 export interface MapState {
 	isfull: boolean;

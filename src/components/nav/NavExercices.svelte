@@ -1,7 +1,7 @@
 <script>
 	import { mapState } from '$stores/map';
 	import { exercice, route } from '$stores/route';
-	import { getAccentColors } from '$utils/exerciceColors';
+	import { getThemeColors } from '$utils/themeColors';
 	import { exerciceRoutes } from '$utils/routes';
 	import { fly } from 'svelte/transition';
 </script>
@@ -12,7 +12,7 @@
 			<a
 				href={ex.path}
 				sveltekit:prefetch
-				style={getAccentColors(ex.key)}
+				style={getThemeColors(ex.key)}
 				class:current={$exercice === ex}
 			>
 				<span class="number">0{i+1}.</span>&nbsp;<span class="title">{ex.title}</span>

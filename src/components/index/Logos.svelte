@@ -4,7 +4,7 @@
 	import { revealFlyUp, revealText } from '$actions/revealText';
 	import { tooltip } from '$actions/tooltip';
 	import { base } from '$app/paths';
-	import logos from '$data/logos';
+	import logos from '$utils/logos';
 
 	export let heading: boolean = true;
 	let hidden = true;

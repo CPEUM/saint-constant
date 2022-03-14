@@ -3,9 +3,9 @@
 	import { routes } from '$utils/routes';
 	import { intersection } from '$actions/intersect';
 	import Link from './primitives/Link.svelte';
-	import logos from '$data/logos';
+	import logos from '$utils/logos';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
-	import { getRandomThemeColor } from '$utils/randomThemeColor';
+	import { getRandomThemeColor } from '$utils/themeColors';
 
 	const extLinks = [
 		{title: 'CPEUM', href: 'https://paysage.umontreal.ca'},
@@ -23,7 +23,7 @@
 	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map((svgPath) => ({
 		viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
 		d: svgPath,
-		fill: getRandomThemeColor([3, 1], ['light']),
+		fill: getRandomThemeColor([3], ['light']),
 		// stroke: getRandomThemeColor([1, 2, 3])
 	}));
 	hills.push(
@@ -114,7 +114,7 @@
 	footer {
 		position: relative;
 		width: 100%;
-		margin-top: 16rem;
+		margin-top: 4rem;
 		padding: 0;
 		overflow: hidden;
 	}

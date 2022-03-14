@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { hoverbubble } from '$actions/hoverBubble';
-	import { getRandomThemeColor } from '$utils/randomThemeColor';
+	import { getRandomThemeColor } from '$utils/themeColors';
 
 	export let href: string;
 	export let color = 'var(--accent3)';
@@ -8,7 +8,6 @@
 
 	let external = $$restProps.rel === 'external' || !!href.match(/^(https:|http:|www\.)\S*/) || undefined;
 </script>
-
 
 <a
 	sveltekit:prefetch={external ? undefined : true}
@@ -29,7 +28,6 @@
 		</span>
 	{/if}
 </a>
-
 
 <style lang="postcss">
 	a {

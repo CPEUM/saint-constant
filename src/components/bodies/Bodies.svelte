@@ -41,9 +41,9 @@
 
 	// Engine
 	const engine = Matter.Engine.create();
-	engine.gravity.y = 1;
+	engine.gravity.y = 0;
 	engine.gravity.scale = 0;
-	engine.positionIterations = 4;
+	engine.positionIterations = 5;
 	engine.velocityIterations = 3;
 	engine.enableSleeping = true;
 	
@@ -77,19 +77,24 @@
 
 	// Start / stop
 	function start() {
-		visible.set(true);
-		Matter.Runner.run(runner, engine);
+		if (!$visible) {
+			visible.set(true);
+			Matter.Runner.run(runner, engine);
+		}
+		else {
+			engine.enabled = true;
+		}
 	}
 	function pause() {
-
+		engine.enabled = false;
 	}
 
 	// Mouse enter / leave
 	function mouseEnter() {
-		engine.gravity.scale = 0;
+		// engine.gravity.scale = 0;
 	}
 	function mouseLeave() {
-		engine.gravity.scale = 0.001;
+		// engine.gravity.scale = 0.001;
 		attractor.setAnchor();
 	}
 		
@@ -112,7 +117,7 @@
 	style:height="{calculatedHeight}px"
 	style:--delay="{staggerDelay}ms"
 	use:intersection={{ rootMargin: '0% 0px -30%' }}
-	on:enter|once={start}
+	on:enter={start}
 	on:leave={pause}
 	on:mouseenter={mouseEnter}
 	on:mouseleave={mouseLeave}
