@@ -21,7 +21,7 @@
 						{#if imp.orientations}
 							Orientation{imp.orientations.length > 1 ? 's' : ''}&nbsp;
 							{#each imp.orientations as orientation}
-								<span class="orientation" style={getThemeColors(exerciceRoutes[orientation - 1].key)}>0{orientation}</span>&nbsp;
+								<a class="orientation" href={exerciceRoutes[orientation - 1].path} sveltekit:prefetch style={getThemeColors(exerciceRoutes[orientation - 1].key)}>0{orientation}</a>&nbsp;
 							{/each}:
 						{/if}
 						&ensp;{imp.explanation}
@@ -55,18 +55,25 @@
 			font-weight: 400;
 		}
 
-		.orientation {
+		a.orientation {
+			text-decoration: none;
+			position: relative;
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
 			padding: 0 .5em;
-			/* margin: 0 .1em; */
+			z-index: 20;
 			min-width: 2em;
 			height: 2em;
 			box-shadow: 0 0 0 1px var(--accent1);
 			border-radius: 1em;
 			color: var(--accent3);
 			font-family: var(--font-misc);
+			transition: all .2s ease-out;
+
+			&:hover {
+				background-color: var(--accent1);
+			}
 		}
 
 		ul {
@@ -78,11 +85,11 @@
 
 		li {
 			position: relative;
-			z-index: -10;
+			/* z-index: -10; */
 			margin: 1rem auto;
 			padding: 1rem 2rem 1.25rem 2rem;
 			border-radius: 1rem;
-			background-color: var(--light1);
+			/* background-color: var(--light1); */
 			box-shadow: 0 0 0 1px var(--light3);
 			/* box-shadow: 0 1.5rem 2.5rem -1.5rem rgba(0,0,30,.1); */
 

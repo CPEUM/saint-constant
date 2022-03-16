@@ -1,21 +1,26 @@
 <script lang="ts">
-	import { exerciceRoutes } from '$utils/routes';
+	import { exerciceRoutes, type ExerciceRoute } from '$utils/routes';
 	import { intersection } from '$actions/intersect';
-	import { mapState } from '$stores/map';
+	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
 	import { getThemeColors } from '$utils/themeColors';
 	import { revealText } from '$actions/revealText';
+	import { bounds } from '$utils/map';
 
 	let current = null;
 	const rootMargin = '-50% 0% -50% 0%';
 
 	function leave() {
 		current = null;
-		mapState.setClass('');
+		mapDisplay.setClass('');
+		mapHighlight.set(null);
 	}
 
-	function exEnter(i: number) {
-		mapState.setClass(i%2 === 0 ? 'medium right' : 'medium left');
+	function exEnter(ex: ExerciceRoute, i: number) {
 		current = i;
+		mapDisplay.setClass(i%2 === 0 ? 'medium right' : 'medium left');
+		mapFocus.set({ bounds: bounds[ex.key]})
+		// mapFocus.set({filter: ['==', 'exercice', ex.key]})
+		mapHighlight.set({ exercice: ex.key })
 	}
 </script>
 
@@ -27,15 +32,15 @@
 		<div
 			class="triggers"
 			use:intersection={{rootMargin}}
-			on:enter={() => exEnter(i)}
+			on:enter={() => exEnter(ex, i)}
 			style={getThemeColors(ex.key)}
 			class:right={i%2 !== 0}
 			style:--angle="{-6 + Math.random() * 12}deg"
 		>
-			<svg height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+			<!-- <svg height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 				<text x="50" y="75" font-size="100" text-anchor="middle" dominant-baseline="baseline">0{i + 1}</text>
-			</svg>
-			<!-- <span class="number" class:right={i%2 !== 0}>0{i + 1}</span> -->
+			</svg> -->
+			<span class="number" class:right={i%2 !== 0}>0{i + 1}</span>
 		</div>
 	{/each}
 	<div id="board">
@@ -142,6 +147,17 @@
 			/* animation: stroky 60s infinite linear; */
 		}
 	}
+	.number {
+		z-index: -20;
+		opacity: .7;
+		font-weight: 800;
+		/* text-shadow: 0 0 3px var(--accent1); */
+		color: var(--accent1);
+		/* color: var(--light1); */
+		font-family: var(--font-misc);
+		font-size: 100vh;
+		transform: rotate(var(--angle));
+	}
 
 	#board {
 		position: absolute;
@@ -177,7 +193,7 @@
 			margin-left: auto;
 
 			& .title {
-				text-align: left;
+				text-align: right;
 			}
 		}
 	}
@@ -186,6 +202,10 @@
 		/* opacity: 0; */
 		pointer-events: none;
 		user-select: none;
+
+		& .desc {
+			background-color: transparent;
+		}
 	}
 
 	.label {
@@ -206,8 +226,8 @@
 		line-height: 1em;
 		margin-block: 1em;
 		color: var(--dark1);
+		text-align: left;
 		transition: all .2s ease-out;
-		text-align: right;
 	}
 
 	.desc {
@@ -215,11 +235,15 @@
 		display: inline-block;
 		line-height: 1.25em;
 		letter-spacing: .5px;
-		padding: 0;
+		padding: 2rem;
 		font-size: var(--lg);
 		width: 100%;
 		font-weight: 400;
 		max-width: 400px;
+		background-color: var(--light1);
+		border-radius: 2rem;
 		color: var(--accent3);
+		text-align: left;
+		transition: all .25s;
 	}
 </style>

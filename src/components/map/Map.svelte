@@ -1,43 +1,137 @@
 <script lang="ts" context="module">
-	import { writable } from 'svelte/store';
+	import { derived, get, writable } from 'svelte/store';
 
-	export const getMap = () => map;
 	export const mapLoaded = writable(false);
 	export let map: maplibregl.Map;
 </script>
 
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { mapState } from '$stores/map';
+	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
 	import { addCityLayer, addPropositionsLayers } from '$utils/map';
-	import { Map as MaplibreMap } from 'maplibre-gl';
+	import {
+		FillStyleLayer,
+		GeoJSONFeature,
+		LineStyleLayer,
+		LngLatBounds,
+		Map as MaplibreMap,
+		type LngLatBoundsLike
+	} from 'maplibre-gl';
+	import bbox from '@turf/bbox';
+	import bboxPolygon from '@turf/bbox-polygon';
+	import combine from '@turf/combine';
+	import { featureCollection } from '@turf/helpers';
 	import FigureCompass from '$components/figure/FigureCompass.svelte';
-	
+
 	let container: HTMLElement;
-	const dispatch = createEventDispatcher<{load: null, error: null}>();
+	const dispatch = createEventDispatcher<{ load: null; error: null }>();
 	let bearing = 0;
+	let layerIds: string[] = [];
+	let fallbackBounds: LngLatBoundsLike = [-73.6, 45.29, -73.58, 45.4];
+	const displayFull = derived(mapDisplay, (mapDisplay) => mapDisplay.full);
+
+	/**
+	 * Focusing the map dynamically
+	 */
+	$: if ($mapLoaded && !$displayFull) {
+		if (!$mapFocus) {
+			map.fitBounds(fallbackBounds, { padding: 100 });
+		} else if ($mapFocus.bounds) {
+			map.fitBounds($mapFocus.bounds);
+		} else if ($mapFocus.center) {
+			map.flyTo({
+				center: $mapFocus.center.point,
+				zoom: $mapFocus.center.zoom
+			});
+		} else if ($mapFocus.filter) {
+			// https://maplibre.org/maplibre-gl-js-docs/example/zoomto-linestring/
+			const filtered: GeoJSONFeature[] = map.querySourceFeatures('propositions', {
+				sourceLayer: 'propositions',
+				filter: $mapFocus.filter
+			});
+			// let bounds: LngLatBounds;
+			// for (const feature of filtered) {
+			// 	let coords = feature.geometry.coordinates;
+			// 	console.log(coords);
+			// 	if (!Array.isArray(coords[0])) {
+			// 		coords = [coords];
+			// 	}
+			// 	for (const pt of coords) {
+			// 		if (!bounds) {
+			// 			bounds = new LngLatBounds(pt, pt);
+			// 		}
+			// 		else {
+			// 			bounds.extend(pt);
+			// 		}
+			// 	}
+			// }
+			const bounds = new LngLatBounds(
+				bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature)))))
+			);
+			map.fitBounds(bounds, { padding: 200, duration: 1000, maxZoom: 14.5 });
+		}
+	}
+
+	/**
+	 * Temporarily reset view when opening full view map
+	 */
+	$: if ($mapLoaded && $displayFull) {
+		map.fitBounds(fallbackBounds);
+	}
+
+	/**
+	 * Highlighting features
+	 */
+	function setHighlight(featureIds: (string|number)[], value: boolean) {
+		for (const id of featureIds) {
+			map.setFeatureState(
+				{ source: 'propositions', id },
+				{ highlight: value }
+			)
+		}
+	}
+	let highlightIds: (string|number)[];
+	$: if ($mapLoaded) {
+		if ($mapHighlight) {
+			if (highlightIds) {
+				setHighlight(highlightIds, false);
+			}
+			const filter = ['all', ...Object.entries($mapHighlight).map(([k, v]) => (['==', k, v]))];
+			highlightIds = map.querySourceFeatures('propositions', {
+				sourceLayer: 'propositions',
+				filter
+			}).map(feature => feature.id);
+			setHighlight(highlightIds, true);
+		}
+		else if (highlightIds) {
+			setHighlight(highlightIds, false);
+		}
+	}
 
 	onMount(() => {
 		map = new MaplibreMap({
-				container,
-				style: 'https://api.maptiler.com/maps/856b4e05-cd2c-42db-9453-9cd7e156a083/style.json?key=dtV5LH1SmQB4VOb80qqI',
-				center: [-73.5700, 45.3699], // starting position [lng, lat]
-				bearing,
-				pitch: 30,
-				zoom: 14, // starting zoom
-				minZoom: 10,
-				maxZoom: 20
-			});
+			container,
+			style: 'https://api.maptiler.com/maps/856b4e05-cd2c-42db-9453-9cd7e156a083/style.json?key=dtV5LH1SmQB4VOb80qqI',
+			bounds: fallbackBounds,
+			fitBoundsOptions: {
+				padding: 100
+			},
+			bearing,
+			pitch: 20,
+			zoom: 14, // starting zoom
+			minZoom: 10,
+			maxZoom: 20
+		});
 
 		map.on('error', (e) => {
 			dispatch('error');
-		})
+		});
 
 		map.once('load', () => {
-			dispatch('load');
+			layerIds.push(addCityLayer(map));
+			layerIds.push(...addPropositionsLayers(map));
 			mapLoaded.set(true);
-			addCityLayer(map);
-			addPropositionsLayers(map);
+			dispatch('load');
 		});
 
 		map.on('rotate', (e) => {
@@ -47,33 +141,22 @@
 </script>
 
 <svelte:head>
-	<link
-		rel="stylesheet"
-		href="https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css"
-	/>
+	<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css" />
 </svelte:head>
 
-<figure
-	class:full={$mapState.isfull}
-	class={$mapState.class}
-	class:mask={$mapState.mask.top}
-	style:top={$mapState.mask.top}
-	style:right={$mapState.mask.right}
-	style:bottom={$mapState.mask.bottom}
-	style:left={$mapState.mask.left}
->
-	<div id="container" bind:this={container}></div>
+<figure class:full={$mapDisplay.full} class={$mapDisplay.class}>
+	<div id="container" bind:this={container} />
 	<div id="info">
-	<!-- Short description of current view (remove when user moves map) -->
-	<!-- Scale line -->
-	<FigureCompass on:click={() => map.flyTo({bearing: 0})} {bearing} />
-	<slot />
+		<!-- Short description of current view (remove when user moves map) -->
+		<!-- Scale line -->
+		<FigureCompass on:click={() => map.flyTo({ bearing: 0 })} {bearing} />
+		<slot />
 	</div>
 </figure>
 
 <style lang="postcss">
 	figure {
-		--ease: cubic-bezier(.3, 0, 0, 1);
+		--ease: cubic-bezier(0.3, 0, 0, 1);
 		pointer-events: auto;
 		position: fixed;
 		z-index: -20;
@@ -91,7 +174,7 @@
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		transition: all .4s var(--ease);
+		transition: all 0.4s var(--ease);
 
 		&.full {
 			opacity: 1 !important;
@@ -106,7 +189,7 @@
 		&.mask:not(.full) {
 			opacity: 1;
 			border-radius: 0;
-			transition: all .6s ease-in-out;
+			transition: all 0.6s ease-in-out;
 		}
 
 		&:global(.figure) {
@@ -134,7 +217,7 @@
 			border-radius: 2rem;
 			top: max(120px, calc(50vh - 500px));
 			bottom: max(120px, calc(50vh - 500px));
-			box-shadow: 0px 40px 80px -25px rgba(0,0,25, .1);
+			box-shadow: 0px 40px 80px -25px rgba(0, 0, 25, 0.1);
 		}
 
 		&:global(.left) {

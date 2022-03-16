@@ -1,24 +1,22 @@
-import { LngLat, LngLatBounds, type LngLatBoundsLike, type LngLatLike, type Source } from 'maplibre-gl';
 import colors from '$styles/colors.json'
 import { base } from '$app/paths';
-import type { ExerciceRoute } from './routes';
+import { LngLatBounds, type MapLayerMouseEvent } from 'maplibre-gl';
 
-interface MapView {
-	center?: LngLat | LngLatLike;
-	bounds?: LngLatBounds | LngLatBoundsLike;
+export const bounds = {
+	// city: new LngLatBounds(),
+	agroparc: new LngLatBounds([-73.577405, 45.354136], [-73.552339, 45.369695]),
+	promenades: new LngLatBounds([-73.616978, 45.35106], [-73.545042, 45.399776]),
+	poles: new LngLatBounds([-73.615091, 45.355221], [-73.548476, 45.401041])
 }
-/**
- * Library of map views
- */
-export const mapViews: Record<string, MapView> = {};
 
 export function addCityLayer(map: maplibregl.Map) {
 	map.addSource('city', {
 		type: 'geojson',
 		data: base + '/data/geo/saint-constant.geojson'
 	});
+	const id = 'city';
 	map.addLayer({
-		id: 'city',
+		id,
 		type: 'line',
 		source: 'city',
 		paint: {
@@ -32,7 +30,10 @@ export function addCityLayer(map: maplibregl.Map) {
 			'line-join': 'round'
 		}
 	});
+	return id;
 }
+
+let hoverId = null;
 
 export function addPropositionsLayers(map: maplibregl.Map) {
 	/**
@@ -40,13 +41,13 @@ export function addPropositionsLayers(map: maplibregl.Map) {
 	 */
 	map.addSource('propositions', {
 		type: 'geojson',
-		data: base + '/data/geo/propositions.geojson'
+		data: base + '/data/geo/propositions.geojson',
+		generateId: true
 	});
-	/**
-	 * Lines
-	 */
+	/* Lines */
+	const ids = ['propositions-lines', 'propositions-points'];
 	map.addLayer({
-		id: 'propositions-lines',
+		id: ids[0],
 		type: 'line',
 		source: 'propositions',
 		filter: [
@@ -55,22 +56,65 @@ export function addPropositionsLayers(map: maplibregl.Map) {
 			['==', ['geometry-type'], 'MultiLineString']
 		],
 		paint: {
-			'line-width': 12,
-			'line-color': ['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]],
-			'line-opacity': .5,
+			'line-width': [
+				'case',
+				['boolean', ['feature-state', 'hover'], false], 20,
+				['boolean', ['feature-state', 'highlight'], false], 15,
+				10
+			],
+			'line-color': [
+				'get',
+				['concat',
+					['get', 'exercice'],
+					['case',
+						['boolean', ['feature-state', 'hover'], false], '3',
+						['boolean', ['feature-state', 'highlight'], false], '3',
+						'2'
+					]
+				],
+				['literal', colors]
+			],
+			'line-opacity': [
+				'case',
+				['boolean', ['feature-state', 'hover'], false], .9,
+				['boolean', ['feature-state', 'highlight'], false], .75,
+				.5
+			]
 			// 'line-gap-width': 2,
 		},
 		layout: {
 			'line-cap': 'round',
 			'line-join': 'round'
+		},
+	});
+	map.on('mousemove', 'propositions-lines', function(e: MapLayerMouseEvent) {
+		if (e.features.length > 0) {
+			if (hoverId !== null) {
+				map.setFeatureState(
+					{ source: 'propositions', id: hoverId },
+					{ hover: false }
+				)
+			}
+			hoverId = e.features[0].id
+			map.setFeatureState(
+				{ source: 'propositions', id: hoverId },
+				{ hover: true }
+			)
 		}
 	});
-	// map.on('mousemove', hihglight line)
-	/**
-	 * Points
-	 */
+	map.on('mouseleave', 'propositions-lines', function() {
+		if (hoverId !== null) {
+			map.setFeatureState(
+				{ source: 'propositions', id: hoverId },
+				{ hover: false }
+			)
+			hoverId = null;
+		}
+		hoverId = null;
+	});
+	/* Points */
 	map.addLayer({
-		id: 'propositions-points',
+		id:ids[1],
 		type: 'circle',
 		filter: [
 			'any',
@@ -87,21 +131,47 @@ export function addPropositionsLayers(map: maplibregl.Map) {
 				20, ['/', ['get', 'radius'], 0.014]
 			],
 			'circle-color': ['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]],
-			'circle-opacity': .5,
-			'circle-stroke-color': ['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]],
-			'circle-stroke-width': 0,
-			'circle-stroke-opacity': 1,
+			'circle-opacity': [
+				'case',
+				['boolean', ['feature-state', 'hover'], false], .9,
+				['boolean', ['feature-state', 'highlight'], false], .75,
+				.5
+			],
+			'circle-stroke-color': ['get', ['concat', ['get', 'exercice'], '3'], ['literal', colors]],
+			'circle-stroke-width': [
+				'case',
+				['boolean', ['feature-state', 'hover'], false], 10,
+				['boolean', ['feature-state', 'highlight'], false], 5,
+				0
+			],
+			'circle-stroke-opacity': .8,
 			'circle-pitch-alignment': 'map',
 			'circle-pitch-scale': 'map'
 		}
 	});
-	// map.on('mousemove', ...highlight point)
-}
-
-export function highlight(map: maplibregl.Map, exercice: ExerciceRoute['key'], key?: string | number) {
-	// https://maplibre.org/maplibre-gl-js-docs/example/hover-styles/
-}
-
-export function focus(map: maplibregl.Map) {
-	
+	map.on('mousemove', 'propositions-points', function(e: MapLayerMouseEvent) {
+		if (e.features.length > 0) {
+			if (hoverId !== null) {
+				map.setFeatureState(
+					{ source: 'propositions', id: hoverId },
+					{ hover: false }
+				)
+			}
+			hoverId = e.features[0].id
+			map.setFeatureState(
+				{ source: 'propositions', id: hoverId },
+				{ hover: true }
+			)
+		}
+	});
+	map.on('mouseleave', 'propositions-points', function() {
+		if (hoverId !== null) {
+			map.setFeatureState(
+				{ source: 'propositions', id: hoverId },
+				{ hover: false }
+			)
+			hoverId = null;
+		}
+	});
+	return ids;
 }

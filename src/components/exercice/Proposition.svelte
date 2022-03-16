@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { intersection } from '$actions/intersect';
 	import { mapMask } from '$actions/mapMask';
-	import { mapState, mapFocus } from '$stores/map';
+	import { mapDisplay, mapFocus } from '$stores/map';
 	import { parallax } from '$actions/parallax';
 	import { base } from '$app/paths';
 	import { revealFlyUp, revealText } from '$actions/revealText';
+	import { getContext } from 'svelte';
+	import type { ExerciceRoute } from '$utils/routes';
 
 	export let label: string;
 	export let shortLabel: string = label;
@@ -12,12 +14,17 @@
 	export let key: string;
 	export let src: string = '';
 
+	let exerciceKey = getContext<ExerciceRoute['key']>('exercice');
+
 	function setFocus() {
-		mapFocus.set(key);
+		mapFocus.set({
+			exercice: exerciceKey,
+			key
+		});
 	}
 
 	function clearFocus() {
-		mapFocus.clear();
+		mapFocus.set(null);
 	}
 </script>
 

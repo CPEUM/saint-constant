@@ -5,23 +5,20 @@
 
 <script>
 	import { intersection } from '$actions/intersect';
-	import { getMap } from '$components/map/Map.svelte';
-	import { mapState } from '$stores/map';
-	import { Map as M } from 'maplibre-gl';
+	import { mapDisplay } from '$stores/map';
 	import { onMount } from 'svelte';
 
 	let map;
 
 	function showMap() {
-		mapState.setClass('figure');
+		mapDisplay.setClass('figure');
 	}
 
 	function hideMap() {
-		mapState.setClass('');
+		mapDisplay.setClass('');
 	}
 	
 	onMount(() => {
-		const map = getMap();
 	});
 </script>
 

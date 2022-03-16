@@ -1,18 +1,18 @@
 <script>
-	import { mapState } from '$stores/map';
+	import { mapDisplay } from '$stores/map';
 	import { draw, fly } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
 </script>
 
-<label id="map-toggle" for="map-toggle-input" class:active={$mapState.isfull}>
+<label id="map-toggle" for="map-toggle-input" class:active={$mapDisplay.full}>
 	<input
 		id="map-toggle-input"
 		type="checkbox"
-		bind:checked={$mapState.isfull}
+		bind:checked={$mapDisplay.full}
 		in:fly={{ x: -40, easing: expoOut, duration: 500, delay: 1500 }}
 	/>
 	<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision">
-		{#if !$mapState.isfull}
+		{#if !$mapDisplay.full}
 			<path
 				in:draw={{}}
 				d="M46,88.3L25.8,50.5c-5.7-10.7-3.8-23.9,4.8-32.4l0,0c10.7-10.7,28.2-10.7,38.9,0l0,0

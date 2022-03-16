@@ -1,42 +1,70 @@
+import type { ExerciceRoute } from '$utils/routes';
+import { LngLat, LngLatBounds, type FilterExpression, type FilterSpecification, type LngLatBoundsLike, type LngLatLike } from 'maplibre-gl';
 import { writable } from 'svelte/store';
 
-export interface MapState {
-	isfull: boolean;
-	class: string;
-	mask: {
-		top?: string;
-		right?: string;
-		bottom?: string;
-		left?: string;
+interface MapFocusOptions {
+	filter?: FilterSpecification;
+	center?: {
+		point: LngLat | LngLatLike;
+		zoom: number;
 	};
+	bounds?: LngLatBounds | LngLatBoundsLike;
 }
+/**
+ * Store to manage the maps's current viewport focus in terms of zoom and position.
+ */
+export const mapFocus = writable<MapFocusOptions>(null);
 
+
+interface MapHighlightOptions {
+	exercice?: ExerciceRoute['key'];
+	key?: string | number;
+	// Add other keys if needed.
+}
+/**
+ * Store to manage the map's current feature highlight triggered by intersection events.
+ * Highlights resulting from mouseover should be handled directly on the map.
+ */
+export const mapHighlight = (function() {
+	const { subscribe, update } = writable<MapHighlightOptions>(null);
+	let previous;
+	return {
+		subscribe,
+		set: (val: MapHighlightOptions) => {
+			update((prev) => {
+				previous = prev;
+				return val;
+			});
+		},
+		getPrevious: () => previous
+	}
+})();
+
+
+interface MapDisplay {
+	full: boolean;
+	class: string;
+}
 /**
  * Store with style indications set by intersection-observed elements or interactions.
- * Styles are applied to the map's container element where `isfull` has precedence over `style` and `class`
+ * Display styling are applied to the map's container element where `full` has precedence over `class`
  */
-export const mapState = (function () {
-	const { subscribe, set, update } = writable<MapState>({
-		isfull: false,
-		class: '',
-		mask: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
+export const mapDisplay = (function () {
+	const { subscribe, set, update } = writable<MapDisplay>({
+		full: false,
+		class: ''
 	});
 	return {
 		subscribe,
 		set,
 		toggle: () => {
 			update((state) => {
-				return { ...state, isfull: !state.isfull };
+				return { ...state, full: !state.full };
 			});
 		},
 		setFull: (val: boolean) => {
 			update((state) => {
-				return { ...state, isfull: val };
+				return { ...state, full: val };
 			});
 		},
 		setClass: (className: string) => {
@@ -48,31 +76,6 @@ export const mapState = (function () {
 			update((state) => {
 				return { ...state, class: '' };
 			});
-		},
-		setMask: (mask) => {
-			update((state) => {
-				return { ...state, mask };
-			})
 		}
 	};
 })();
-
-/**
- * Store to manage the maps's current focus information used to position the view and highlight shapes accordingly
- */
-export const mapFocus = (function () {
-	const { subscribe, set } = writable(null);
-	const delay = 150;
-	let debouncer;
-	function debounce(fn) {
-		if (debouncer) clearTimeout(debouncer);
-		debouncer = setTimeout(fn, delay);
-	}
-	return {
-		subscribe,
-		set: (key) => debounce(() => set(key)),
-		clear: () => debounce(() => set(null))
-	};
-})();
-
-// See actions for hover highlight

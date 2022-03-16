@@ -1,5 +1,5 @@
-import type { MapState } from '$stores/map';
-import { mapState } from '$stores/map';
+import type { MapDisplay } from '$stores/map';
+import { mapDisplay } from '$stores/map';
 
 export function mapMask(
 	element: HTMLElement,
@@ -8,7 +8,7 @@ export function mapMask(
 		right = '0px',
 		bottom = '0px',
 		left = '0px'
-	}: MapState['mask'] = {}
+	}: MapDisplay['mask'] = {}
 ) {
 
 	const root = document.body;
@@ -44,7 +44,7 @@ export function mapMask(
 
 	function updateMask() {
 		const rect = element.getBoundingClientRect();
-		mapState.setMask({
+		mapDisplay.setMask({
 			top: `clamp(${top}, ${rect.top}px, calc(100% - ${bottom}))`,
 			right: `0%`,
 			bottom: `clamp(${bottom}, calc(100% - ${rect.bottom}px), calc(100% - ${top}))`,

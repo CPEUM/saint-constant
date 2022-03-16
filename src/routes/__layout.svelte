@@ -20,7 +20,7 @@
 	import { browser } from '$app/env';
 	import Loading from '$components/Loading.svelte';
 	import { mainScroll } from '$stores/scroll';
-	import { mapState } from '$stores/map';
+	import { mapDisplay } from '$stores/map';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import NavBottom from '$components/nav/NavBottom.svelte';
 

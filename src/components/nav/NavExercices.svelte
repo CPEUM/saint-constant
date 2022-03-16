@@ -1,5 +1,5 @@
 <script>
-	import { mapState } from '$stores/map';
+	import { mapDisplay } from '$stores/map';
 	import { exercice, route } from '$stores/route';
 	import { getThemeColors } from '$utils/themeColors';
 	import { exerciceRoutes } from '$utils/routes';
@@ -7,7 +7,7 @@
 </script>
 
 {#if $route.exercices}
-	<nav transition:fly={{y: -25}} class:min={$mapState.isfull}>
+	<nav transition:fly={{y: -25}} class:min={$mapDisplay.full}>
 		{#each exerciceRoutes as ex, i}
 			<a
 				href={ex.path}

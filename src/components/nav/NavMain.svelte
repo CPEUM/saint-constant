@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mapState } from '$stores/map';
+	import { mapDisplay } from '$stores/map';
 	import { exercice, route } from '$stores/route';
 	import { mainScroll } from '$stores/scroll';
 	import { routes } from '$utils/routes';
@@ -27,7 +27,7 @@
 	}
 </script>
 
-<nav class:min={($mainScroll.direction == 'down' && $mainScroll.y > yLimit) || $mapState.isfull}>
+<nav class:min={($mainScroll.direction == 'down' && $mainScroll.y > yLimit) || $mapDisplay.full}>
 	{#each routes as r, i}
 		<a
 			href={r.exercices ? $exercice.path : r.path}
