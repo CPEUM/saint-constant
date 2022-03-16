@@ -1,1 +1,0 @@
-import{af as a}from"./vendor-c376eaef.js";const l={y:0,delta:0,direction:null},d=a(l,function(c){let o=l;function e(t){const n=t.target.scrollTop-o.y,r={y:t.target.scrollTop,delta:n,direction:o.delta>0&&n>0?"down":"up"};c(r),o=r}{const t=document.body;return t.addEventListener("scroll",e),function(){t.removeEventListener("scroll",e)}}});export{d as m};
