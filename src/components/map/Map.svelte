@@ -9,14 +9,7 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
 	import { addCityLayer, addPropositionsLayers } from '$utils/map';
-	import {
-		FillStyleLayer,
-		GeoJSONFeature,
-		LineStyleLayer,
-		LngLatBounds,
-		Map as MaplibreMap,
-		type LngLatBoundsLike
-	} from 'maplibre-gl';
+	import maplibregl from 'maplibre-gl';
 	import bbox from '@turf/bbox';
 	import bboxPolygon from '@turf/bbox-polygon';
 	import combine from '@turf/combine';
@@ -27,7 +20,7 @@
 	const dispatch = createEventDispatcher<{ load: null; error: null }>();
 	let bearing = 0;
 	let layerIds: string[] = [];
-	let fallbackBounds: LngLatBoundsLike = [-73.6, 45.29, -73.58, 45.4];
+	let fallbackBounds: maplibregl.LngLatBoundsLike = [-73.6, 45.29, -73.58, 45.4];
 	const displayFull = derived(mapDisplay, (mapDisplay) => mapDisplay.full);
 
 	/**
@@ -45,11 +38,11 @@
 			});
 		} else if ($mapFocus.filter) {
 			// https://maplibre.org/maplibre-gl-js-docs/example/zoomto-linestring/
-			const filtered: GeoJSONFeature[] = map.querySourceFeatures('propositions', {
+			const filtered: maplibregl.GeoJSONFeature[] = map.querySourceFeatures('propositions', {
 				sourceLayer: 'propositions',
 				filter: $mapFocus.filter
 			});
-			// let bounds: LngLatBounds;
+			// let bounds: maplibregl.LngLatBounds;
 			// for (const feature of filtered) {
 			// 	let coords = feature.geometry.coordinates;
 			// 	console.log(coords);
@@ -58,14 +51,14 @@
 			// 	}
 			// 	for (const pt of coords) {
 			// 		if (!bounds) {
-			// 			bounds = new LngLatBounds(pt, pt);
+			// 			bounds = new maplibregl.LngLatBounds(pt, pt);
 			// 		}
 			// 		else {
 			// 			bounds.extend(pt);
 			// 		}
 			// 	}
 			// }
-			const bounds = new LngLatBounds(
+			const bounds = new maplibregl.LngLatBounds(
 				bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature)))))
 			);
 			map.fitBounds(bounds, { padding: 200, duration: 1000, maxZoom: 14.5 });
@@ -109,7 +102,7 @@
 	}
 
 	onMount(() => {
-		map = new MaplibreMap({
+		map = new maplibregl.Map({
 			container,
 			style: 'https://api.maptiler.com/maps/856b4e05-cd2c-42db-9453-9cd7e156a083/style.json?key=dtV5LH1SmQB4VOb80qqI',
 			bounds: fallbackBounds,

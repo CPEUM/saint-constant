@@ -1,12 +1,12 @@
 import colors from '$styles/colors.json'
 import { base } from '$app/paths';
-import { LngLatBounds, type MapLayerMouseEvent } from 'maplibre-gl';
+import maplibregl from 'maplibre-gl';
 
 export const bounds = {
-	// city: new LngLatBounds(),
-	agroparc: new LngLatBounds([-73.577405, 45.354136], [-73.552339, 45.369695]),
-	promenades: new LngLatBounds([-73.616978, 45.35106], [-73.545042, 45.399776]),
-	poles: new LngLatBounds([-73.615091, 45.355221], [-73.548476, 45.401041])
+	// city: new maplibregl.LngLatBounds(),
+	agroparc: new maplibregl.LngLatBounds([-73.577405, 45.354136], [-73.552339, 45.369695]),
+	promenades: new maplibregl.LngLatBounds([-73.616978, 45.35106], [-73.545042, 45.399776]),
+	poles: new maplibregl.LngLatBounds([-73.615091, 45.355221], [-73.548476, 45.401041])
 }
 
 export function addCityLayer(map: maplibregl.Map) {
@@ -87,7 +87,7 @@ export function addPropositionsLayers(map: maplibregl.Map) {
 			'line-join': 'round'
 		},
 	});
-	map.on('mousemove', 'propositions-lines', function(e: MapLayerMouseEvent) {
+	map.on('mousemove', 'propositions-lines', function(e: maplibregl.MapLayerMouseEvent) {
 		if (e.features.length > 0) {
 			if (hoverId !== null) {
 				map.setFeatureState(
@@ -149,7 +149,7 @@ export function addPropositionsLayers(map: maplibregl.Map) {
 			'circle-pitch-scale': 'map'
 		}
 	});
-	map.on('mousemove', 'propositions-points', function(e: MapLayerMouseEvent) {
+	map.on('mousemove', 'propositions-points', function(e: maplibregl.MapLayerMouseEvent) {
 		if (e.features.length > 0) {
 			if (hoverId !== null) {
 				map.setFeatureState(

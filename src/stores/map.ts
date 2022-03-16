@@ -1,14 +1,14 @@
 import type { ExerciceRoute } from '$utils/routes';
-import { LngLat, LngLatBounds, type FilterExpression, type FilterSpecification, type LngLatBoundsLike, type LngLatLike } from 'maplibre-gl';
+import maplibregl from 'maplibre-gl';
 import { writable } from 'svelte/store';
 
 interface MapFocusOptions {
-	filter?: FilterSpecification;
+	filter?: maplibregl.FilterSpecification;
 	center?: {
-		point: LngLat | LngLatLike;
+		point: maplibregl.LngLat | maplibregl.LngLatLike;
 		zoom: number;
 	};
-	bounds?: LngLatBounds | LngLatBoundsLike;
+	bounds?: maplibregl.LngLatBounds | maplibregl.LngLatBoundsLike;
 }
 /**
  * Store to manage the maps's current viewport focus in terms of zoom and position.
