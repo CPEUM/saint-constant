@@ -31,7 +31,7 @@
 			<BodiesItem>Promouvoir la relève agricole et les nouvelles pratiques</BodiesItem>
 			<BodiesItem>Assurer un équilibre économique, social et environnemental dans le développement du territoire</BodiesItem>
 		</Bodies>
-		<Excerpt name="agroparc1">Quelques références supplémentaires d'agroparcs</Excerpt>
+		<Excerpt name="Agroparc1">Quelques références supplémentaires d'agroparcs</Excerpt>
 		<p>Les exemples d’agroparc en Europe montrent que les parcs agricoles peuvent être initiés à partir&nbsp;:</p>
 		<Bodies>
 			<BodiesItem>De la délimitation d’un espace agricole à titre de parc, sans intervention d’aménagement supplémentaire</BodiesItem>
