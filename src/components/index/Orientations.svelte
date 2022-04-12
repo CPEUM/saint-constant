@@ -19,7 +19,6 @@
 		current = i;
 		mapDisplay.setClass(i%2 === 0 ? 'medium right' : 'medium left');
 		mapFocus.set({ bounds: bounds[ex.key]})
-		// mapFocus.set({filter: ['==', 'exercice', ex.key]})
 		mapHighlight.set({ exercice: ex.key })
 	}
 </script>
@@ -185,7 +184,12 @@
 		margin: 0;
 		max-width: var(--width-sm);
 		transform: translateY(-50%);
-		transition: all .25s ease-out;
+		color: var(--dark1);
+		transition: all .15s ease-out;
+
+		&:hover {
+			color: var(--accent3);
+		}
 
 		&.right {
 			right: 0;
@@ -215,7 +219,6 @@
 		margin: 0;
 		font-weight: 600;
 		line-height: 1em;
-		color: var(--dark1);
 		letter-spacing: 4px;
 	}
 
@@ -225,7 +228,6 @@
 		font-weight: 500;
 		line-height: 1em;
 		margin-block: 1em;
-		color: var(--dark1);
 		text-align: left;
 		transition: all .2s ease-out;
 	}

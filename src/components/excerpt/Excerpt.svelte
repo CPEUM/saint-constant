@@ -3,11 +3,12 @@
 
 	import Loading from '$components/Loading.svelte';
 	import { expoOut } from 'svelte/easing';
-	import { fade, scale, slide } from 'svelte/transition';
+	import { draw, fade, fly, scale, slide } from 'svelte/transition';
 
 	export let name: string;
 	let excerptPromise;
 	let open = false;
+	let closeIcon = false;
 
 	async function getExcerptComp() {
 		return import(`./excerpt-articles/${name}.svelte`);
@@ -27,7 +28,7 @@
 
 {#if open}
 	{#await excerptPromise}
-		<Loading />
+		<Loading style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;" />
 	{:then excerptComp}
 		<div class="shadow" transition:fade />
 		<article
@@ -35,8 +36,22 @@
 			use:clickoutside
 			on:clickoutside={() => (open = false)}
 		>
-			<button class="close" on:click={() => (open = false)}>Fermer</button>
 			<svelte:component this={excerptComp.default} />
+			<button in:fly={{y: 20, delay: 450}} on:introend={() => closeIcon = true}  class="close" on:click={() => (open = false)}>
+				<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid">
+					{#if closeIcon}	
+						<line in:draw={{}} x1="30" y1="30" x2="70" y2="70" vector-effect="non-scaling-stroke" />
+						<line
+							in:draw={{ delay: 150 }}
+							x1="30"
+							y1="70"
+							x2="70"
+							y2="30"
+							vector-effect="non-scaling-stroke"
+						/>
+					{/if}
+				</svg>
+			</button>
 		</article>
 	{:catch error}
 		<!-- catch error -->
@@ -94,10 +109,38 @@
 	}
 
 	.close {
-		width: 40px;
-		height: 40px;
-		position: sticky;
-		top: 1rem;
-		left: 0;
+		--size: 50px;
+		cursor: pointer;
+		width: var(--size);
+		height: var(--size);
+		max-width: var(--size);
+		border-radius: 50%;
+		border: none;
+		position: fixed;
+		z-index: 20;
+		top: 2.5rem;
+		left: 2.5rem;
+		padding: .5rem;
+		background-color: var(--light1);
+		box-shadow: 0 0 2px 0 rgba(0,0,20, .5);
+		transition: all .2s;
+
+		&:hover {
+			background-color: white;
+			box-shadow: 0 15px 25px -10px rgba(0,0,20, .2);
+		}
+
+		& svg {
+			position: absolute;
+			width: 80%;
+			height: 80%;
+			top: 10%;
+			left: 10%;
+		}
+
+		& line {
+			stroke: var(--dark2);
+			stroke-width: 2px;
+		}
 	}
 </style>

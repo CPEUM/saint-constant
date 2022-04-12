@@ -62,7 +62,6 @@
 			align-items: center;
 			justify-content: center;
 			padding: 0 .5em;
-			z-index: 20;
 			min-width: 2em;
 			height: 2em;
 			box-shadow: 0 0 0 1px var(--accent1);
@@ -97,11 +96,11 @@
 				content: '';
 				position: absolute;
 				top: 1.5em;
-				left: 0em;
+				left: -.25em;
 				width: .5em;
 				bottom: 1.5em;
 				background-color: var(--accent);
-				border-radius: 0 .5em .5em 0;
+				border-radius:.25em;
 			}
 		}
 	}

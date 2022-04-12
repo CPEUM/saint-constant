@@ -3,13 +3,13 @@
 </script>
 
 <nav>
-	{#if $route.previous}
+	{#if $route?.previous}
 		<a href={$route.previous().path}>
 			<p class="label">&#8592; Retourner</p>
 			<p class="title">{$route.previous().title}</p>
 		</a>
 	{/if}
-	{#if $route.next}
+	{#if $route?.next}
 		<a href={$route.next().path}>
 			<p class="label">Poursuivre &#8594;</p>
 			<p class="title">{$route.next().title}</p>

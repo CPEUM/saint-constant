@@ -123,7 +123,7 @@
 		display: inline-block;
 		font-size: clamp(56px, 7vw, 92px);
 		font-weight: 400;
-		color: var(--light1);
+		color: var(--dark2);
 		line-height: 1.1em;
 		padding: 0;
 		margin-block: 200px;

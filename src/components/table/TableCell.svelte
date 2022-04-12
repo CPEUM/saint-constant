@@ -64,7 +64,7 @@
 		position: relative;
 		grid-column: span var(--colspan);
 		grid-row: span var(--rowspan);
-		border-radius: .5em;
+		/* border-radius: .5em; */
 		padding: 1rem;
 		transition: all .2s calc(var(--cellIndex) * 40ms) ease-out;
 	}
@@ -88,18 +88,23 @@
 
 	/* div.heading, */
 	th {
-		color: var(--dark2);
-		font-weight: 600;
+		color: var(--light1);
+		font-weight: 500;
 		font-size: var(--xs);
 		text-transform: uppercase;
-		background-color: var(--accent2);
+		background-color: var(--accent3);
 		letter-spacing: 1px;
 		padding: 1.2rem;
-		/* box-shadow: 0 0 2px 0 var(--accent3); */
+		box-shadow: 0 0 0 1px var(--accent1);
 	}
 
 	.sub {
-		/* color: var(--light1); */
+		color: var(--dark3);
+		font-weight: 400;
+		letter-spacing: 0px;
+		font-size: .9rem;
+		line-height: 1.5em;
+		text-transform: none;
 		background-color: var(--accent1);
 		/* border: 1px solid var(--accent2); */
 		box-shadow: 0 0 3px 0 var(--accent2);

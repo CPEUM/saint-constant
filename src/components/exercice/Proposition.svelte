@@ -17,14 +17,11 @@
 	let exerciceKey = getContext<ExerciceRoute['key']>('exercice');
 
 	function setFocus() {
-		mapFocus.set({
-			exercice: exerciceKey,
-			key
-		});
+		
 	}
 
 	function clearFocus() {
-		mapFocus.set(null);
+
 	}
 </script>
 

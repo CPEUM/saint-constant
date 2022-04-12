@@ -3,7 +3,7 @@ import maplibregl from 'maplibre-gl';
 import { writable } from 'svelte/store';
 
 interface MapFocusOptions {
-	filter?: maplibregl.FilterSpecification;
+	filter?: Record<string, string|number>;
 	center?: {
 		point: maplibregl.LngLat | maplibregl.LngLatLike;
 		zoom: number;

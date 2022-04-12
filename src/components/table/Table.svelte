@@ -49,7 +49,7 @@
 		row-gap: 1px;
 		margin: 2rem auto;
 		grid-auto-rows: auto;
-		background-color: var(--accent1);
+		background-color: var(--accent3);
 		width: 100%;
 		max-width: var(--width-lg);
 		border-collapse: collapse;

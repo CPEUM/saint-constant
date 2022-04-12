@@ -94,20 +94,20 @@
 		<BarChart src="/data/charts/agroparc/sous-secteurs.json" />
 		<List>
 			<ListItem>
-				<p><strong>Sous-secteur 5&nbsp;: Bassin de rétention de la rue Chantale</strong> (ainsi que l’ensemble de ses espaces verts adjacents)&nbsp;:</p>
-				<p>Implantation d’activités de production agricole, de récréation et de conservation.</p>
+				<p><strong>Sous-secteur 5&nbsp;: Bassin de rétention de la rue Chantale</strong> (ainsi que l’ensemble de ses espaces verts adjacents)&nbsp;:<br>
+				Implantation d’activités de production agricole, de récréation et de conservation.</p>
 			</ListItem>
 			<ListItem>
-				<p><strong>Sous-secteur 6&nbsp;: Parc des Citoyens&nbsp;:</strong></p>
-				<p>Implantation d’activités de récréation et de conservation, suivies des activités de production agricole.</p>
+				<p><strong>Sous-secteur 6&nbsp;: Parc des Citoyens&nbsp;:</strong><br>
+				Implantation d’activités de récréation et de conservation, suivies des activités de production agricole.</p>
 			</ListItem>
 			<ListItem>
-				<p><strong>Sous-secteur 2&nbsp;: Site de l’église</strong> et <strong>Secteur 3&nbsp;: Site de la chandellerie&nbsp;:</strong></p>
-				<p>Implantation d’activités commerciales et de récréation.</p>
+				<p><strong>Sous-secteur 2&nbsp;: Site de l’église</strong> et <strong>Secteur 3&nbsp;: Site de la chandellerie&nbsp;:</strong><br>
+				Implantation d’activités commerciales et de récréation.</p>
 			</ListItem>
 			<ListItem>
-				<p><strong>Sous-secteur 1&nbsp;: Parc Leblanc</strong> et <strong>Secteur 4&nbsp;: Site des travaux publics&nbsp;:</strong></p>
-				<p>Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
+				<p><strong>Sous-secteur 1&nbsp;: Parc Leblanc</strong> et <strong>Secteur 4&nbsp;: Site des travaux publics&nbsp;:</strong><br>
+				Peu de potentiel de développement d’activités liées à l’agro-parc.</p>
 			</ListItem>
 		</List>
 	</Preferences>

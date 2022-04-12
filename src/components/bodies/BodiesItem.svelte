@@ -9,8 +9,8 @@
 	export let radius: number = null;
 
 	let node: HTMLElement;
-	const sizeMin = 175;
-	const sizeTextFactor = 1.5;
+	const sizeMin = 150;
+	const sizeTextFactor = 12;
 	let angle = (Math.random() - 0.5) / 180;
 	let top = 0;
 	let left = 0;
@@ -23,7 +23,7 @@
 
 	onMount(() => {
 		/* Setting sizes */
-		if (!size) size = sizeMin + node.textContent.length * sizeTextFactor;
+		if (!size) size = sizeMin + Math.sqrt(node.textContent.length) * sizeTextFactor;
 		if (!width)	width = size;
 		if (!height) height = width;
 		if (!radius) radius = Math.round(Math.random() * .5 * width);
@@ -54,15 +54,15 @@
 <li
 	bind:this={node}
 	class:hidden={!$visible}
-	style:top="{top}px"
-	style:left="{left}px"
 	style:border-radius="{radius}px"
 	style:width="{width}px"
 	style:height="{height}px"
+	style:top="-{height * .5}px"
+	style:left="-{width * .5}px"
+	style:transform="translate({left}px, {top}px) rotate({angle}rad)"
 	style:--delay="{index * ctx.staggerDelay}ms"
-	style:--angle="{angle}rad"
 >
-	<span>
+	<span style:transform="rotate({-1 * angle}rad)">
 		<slot />
 	</span>
 </li>
@@ -76,12 +76,13 @@
 		justify-content: center;
 		align-items: center;
 		padding: 2em;
+		margin: 0;
 		text-align: center;
 		position: absolute;
 		color: var(--dark3);
 		font-weight: 500;
-		background-color: var(--accent3);
-		transform: translate(-50%, -50%) rotate(var(--angle));
+		background-color: var(--accent2);
+		box-shadow: 0 0 0 1px var(--accent3);
 		overflow: hidden;
 		transition: opacity .3s;
 		
@@ -98,10 +99,6 @@
 			background-repeat: repear;
 			background-size: 700px;
 		}
-	}
-
-	span {
-		transform: rotate(calc(-1 * var(--angle)));
 	}
 
 	.hidden {

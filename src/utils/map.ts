@@ -1,13 +1,20 @@
 import colors from '$styles/colors.json'
 import { base } from '$app/paths';
 import maplibregl from 'maplibre-gl';
+import type { FeatureCollection } from '@turf/helpers';
 
 export const bounds = {
-	// city: new maplibregl.LngLatBounds(),
+	fallback: new maplibregl.LngLatBounds([[-73.6, 45.29], [-73.58, 45.4]]),
 	agroparc: new maplibregl.LngLatBounds([-73.577405, 45.354136], [-73.552339, 45.369695]),
 	promenades: new maplibregl.LngLatBounds([-73.616978, 45.35106], [-73.545042, 45.399776]),
 	poles: new maplibregl.LngLatBounds([-73.615091, 45.355221], [-73.548476, 45.401041])
 }
+
+/**
+ * Propositions features data (id, and other filtering keys) minus the features.
+ * Useful for including elements outside the viewport when applying filters for fitBounds or highlighting.
+ */
+export const propositionsFeatures: GeoJSON.FeatureCollection['features'] = [];
 
 export function addCityLayer(map: maplibregl.Map) {
 	map.addSource('city', {
@@ -35,14 +42,19 @@ export function addCityLayer(map: maplibregl.Map) {
 
 let hoverId = null;
 
-export function addPropositionsLayers(map: maplibregl.Map) {
+export async function addPropositionsLayers(map: maplibregl.Map) {
+	const res = await fetch('/data/geo/propositions.geojson');
+	const geojson: GeoJSON.FeatureCollection = await res.json();
+	geojson.features.forEach((f, i) => {
+		f.id = i + 1;
+	});
+	propositionsFeatures.push(...geojson.features);
 	/**
 	 * Adding the geojson source
 	 */
 	map.addSource('propositions', {
 		type: 'geojson',
-		data: base + '/data/geo/propositions.geojson',
-		generateId: true
+		data: geojson
 	});
 	/* Lines */
 	const ids = ['propositions-lines', 'propositions-points'];

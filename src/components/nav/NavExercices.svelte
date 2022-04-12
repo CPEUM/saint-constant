@@ -6,7 +6,7 @@
 	import { fly } from 'svelte/transition';
 </script>
 
-{#if $route.exercices}
+{#if $route?.exercices}
 	<nav transition:fly={{y: -25}} class:min={$mapDisplay.full}>
 		{#each exerciceRoutes as ex, i}
 			<a

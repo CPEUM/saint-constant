@@ -8,7 +8,7 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
-	import { addCityLayer, addPropositionsLayers } from '$utils/map';
+	import { addCityLayer, addPropositionsLayers, bounds, propositionsFeatures } from '$utils/map';
 	import maplibregl from 'maplibre-gl';
 	import bbox from '@turf/bbox';
 	import bboxPolygon from '@turf/bbox-polygon';
@@ -16,19 +16,18 @@
 	import { featureCollection } from '@turf/helpers';
 	import FigureCompass from '$components/figure/FigureCompass.svelte';
 
-	let container: HTMLElement;
 	const dispatch = createEventDispatcher<{ load: null; error: null }>();
+	let container: HTMLElement;
 	let bearing = 0;
-	let layerIds: string[] = [];
-	let fallbackBounds: maplibregl.LngLatBoundsLike = [-73.6, 45.29, -73.58, 45.4];
-	const displayFull = derived(mapDisplay, (mapDisplay) => mapDisplay.full);
+
+	const displayFull = derived(mapDisplay, ($mapDisplay) => $mapDisplay.full);
 
 	/**
 	 * Focusing the map dynamically
 	 */
 	$: if ($mapLoaded && !$displayFull) {
 		if (!$mapFocus) {
-			map.fitBounds(fallbackBounds, { padding: 100 });
+			map.fitBounds(bounds.fallback, { padding: 100 });
 		} else if ($mapFocus.bounds) {
 			map.fitBounds($mapFocus.bounds);
 		} else if ($mapFocus.center) {
@@ -38,30 +37,18 @@
 			});
 		} else if ($mapFocus.filter) {
 			// https://maplibre.org/maplibre-gl-js-docs/example/zoomto-linestring/
-			const filtered: maplibregl.GeoJSONFeature[] = map.querySourceFeatures('propositions', {
-				sourceLayer: 'propositions',
-				filter: $mapFocus.filter
-			});
-			// let bounds: maplibregl.LngLatBounds;
-			// for (const feature of filtered) {
-			// 	let coords = feature.geometry.coordinates;
-			// 	console.log(coords);
-			// 	if (!Array.isArray(coords[0])) {
-			// 		coords = [coords];
-			// 	}
-			// 	for (const pt of coords) {
-			// 		if (!bounds) {
-			// 			bounds = new maplibregl.LngLatBounds(pt, pt);
-			// 		}
-			// 		else {
-			// 			bounds.extend(pt);
-			// 		}
-			// 	}
-			// }
+			// const filtered: maplibregl.GeoJSONFeature[] = map.querySourceFeatures('propositions', {
+			// 	sourceLayer: 'propositions',
+			// 	filter: $mapFocus.filter
+			// });
+			const filters = Object.entries($mapFocus.filter);
+			const filtered = propositionsFeatures.filter((f) => {
+				return filters.every(([k, v]) => f.properties[k] === v);
+			})
 			const bounds = new maplibregl.LngLatBounds(
 				bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature)))))
 			);
-			map.fitBounds(bounds, { padding: 200, duration: 1000, maxZoom: 14.5 });
+			map.fitBounds(bounds, { padding: 300, duration: 1200, maxZoom: 14.25 });
 		}
 	}
 
@@ -69,7 +56,7 @@
 	 * Temporarily reset view when opening full view map
 	 */
 	$: if ($mapLoaded && $displayFull) {
-		map.fitBounds(fallbackBounds);
+		map.fitBounds(bounds.fallback);
 	}
 
 	/**
@@ -89,11 +76,17 @@
 			if (highlightIds) {
 				setHighlight(highlightIds, false);
 			}
-			const filter = ['all', ...Object.entries($mapHighlight).map(([k, v]) => (['==', k, v]))];
-			highlightIds = map.querySourceFeatures('propositions', {
-				sourceLayer: 'propositions',
-				filter
-			}).map(feature => feature.id);
+			// const filter = ['all', ...Object.entries($mapHighlight).map(([k, v]) => (['==', k, v]))];
+			// highlightIds = map.querySourceFeatures('propositions', {
+			// 	sourceLayer: 'propositions',
+			// 	filter
+			// }).map(feature => feature.id);
+			const filters = Object.entries($mapHighlight);
+			highlightIds = propositionsFeatures
+				.filter((f) => {
+					return filters.every(([k, v]) => f.properties[k] === v);
+				})
+				.map(f => f.id);
 			setHighlight(highlightIds, true);
 		}
 		else if (highlightIds) {
@@ -105,13 +98,13 @@
 		map = new maplibregl.Map({
 			container,
 			style: 'https://api.maptiler.com/maps/856b4e05-cd2c-42db-9453-9cd7e156a083/style.json?key=dtV5LH1SmQB4VOb80qqI',
-			bounds: fallbackBounds,
+			bounds: bounds.fallback,
 			fitBoundsOptions: {
 				padding: 100
 			},
 			bearing,
 			pitch: 20,
-			zoom: 14, // starting zoom
+			zoom: 14,
 			minZoom: 10,
 			maxZoom: 20
 		});
@@ -121,8 +114,8 @@
 		});
 
 		map.once('load', () => {
-			layerIds.push(addCityLayer(map));
-			layerIds.push(...addPropositionsLayers(map));
+			addCityLayer(map);
+			addPropositionsLayers(map);
 			mapLoaded.set(true);
 			dispatch('load');
 		});

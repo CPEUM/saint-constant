@@ -2,7 +2,8 @@
 
 declare namespace svelte.JSX {
 	interface HTMLProps<T> {
-	  onenter?: (event?: unknown) => unknown
-	  onleave?: (event?: unknown) => unknown
+		onenter?: (event?: unknown) => unknown;
+		onleave?: (event?: unknown) => unknown;
+		onclickoutside?: (event: unknown) => unknown;
 	}
-  }
+}
