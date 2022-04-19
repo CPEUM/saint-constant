@@ -17,44 +17,48 @@
 
 	function exEnter(ex: ExerciceRoute, i: number) {
 		current = i;
-		mapDisplay.setClass(i%2 === 0 ? 'medium right' : 'medium left');
-		mapFocus.set({ bounds: bounds[ex.key]})
-		mapHighlight.set({ exercice: ex.key })
+		mapDisplay.setClass(i % 2 === 0 ? 'medium right' : 'medium left');
+		mapFocus.set({ bounds: bounds[ex.key] });
+		mapHighlight.set({ exercice: ex.key });
 	}
 </script>
 
-<section
-	use:intersection
-	on:leave={leave}
->
+<section use:intersection on:leave={leave}>
 	{#each exerciceRoutes as ex, i}
 		<div
 			class="triggers"
-			use:intersection={{rootMargin}}
+			use:intersection={{ rootMargin }}
 			on:enter={() => exEnter(ex, i)}
 			style={getThemeColors(ex.key)}
-			class:right={i%2 !== 0}
+			class:right={i % 2 !== 0}
 			style:--angle="{-6 + Math.random() * 12}deg"
 		>
 			<!-- <svg height="100" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-				<text x="50" y="75" font-size="100" text-anchor="middle" dominant-baseline="baseline">0{i + 1}</text>
+				<text
+					x="50"
+					y="75"
+					font-size="100"
+					text-anchor="middle"
+					dominant-baseline="baseline">0{i + 1}</text
+				>
 			</svg> -->
-			<span class="number" class:right={i%2 !== 0}>0{i + 1}</span>
+			<span class="number" class:right={i % 2 !== 0}>0{i + 1}</span>
 		</div>
 	{/each}
 	<div id="board">
 		<div id="board-content">
 			{#each exerciceRoutes as ex, i}
 				<a
-					class:right={i%2 !== 0}
+					class:right={i % 2 !== 0}
 					class:disabled={i !== current}
 					href={ex.path}
 					sveltekit:prefetch
 					style={getThemeColors(ex.key)}
 					style:--angle={Math.random() * 90 + 'deg'}
-					style:--size={(Math.random() * 200 + 500) + 'px'}
+					style:--size={Math.random() * 200 + 500 + 'px'}
 				>
-					<p class="label"
+					<p
+						class="label"
 						use:revealText={{
 							visible: i === current,
 							duration: 850,
@@ -114,7 +118,11 @@
 		height: 150vh;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: left;
+
+		&.right {
+			justify-content: right;
+		}
 	}
 
 	@keyframes stroky {
@@ -122,37 +130,35 @@
 			stroke-dashoffset: 0%;
 		}
 		to {
-			stroke-dashoffset: 30%;
+			stroke-dashoffset: 70%;
 		}
 	}
 	svg {
 		overflow: visible;
 		position: absolute;
 		z-index: -20;
-		width: 100vw;
+		width: 60vw;
 		height: 100%;
 		transform: rotate(var(--angle));
 
 		text {
 			font-family: var(--font-misc);
-			opacity: .7;
+			opacity: 0.5;
 			stroke-linejoin: round;
 			stroke-linecap: round;
-			/* stroke-dasharray: 100% 20%; */
-			stroke-dasharray: 10% 20%;
+			stroke-dasharray: 50% 20%;
 			stroke-width: 3px;
-			stroke: var(--accent3);
+			stroke: var(--accent2);
 			fill: var(--accent1);
-			/* animation: stroky 60s infinite linear; */
+			animation: stroky 60s infinite linear;
 		}
 	}
 	.number {
 		z-index: -20;
-		opacity: .7;
+		opacity: 0.7;
 		font-weight: 800;
-		/* text-shadow: 0 0 3px var(--accent1); */
-		color: var(--accent1);
-		/* color: var(--light1); */
+		color: var(--accent2);
+		text-shadow: 10px 30px 0 var(--accent1);
 		font-family: var(--font-misc);
 		font-size: 100vh;
 		transform: rotate(var(--angle));
@@ -185,7 +191,7 @@
 		max-width: var(--width-sm);
 		transform: translateY(-50%);
 		color: var(--dark1);
-		transition: all .15s ease-out;
+		transition: all 0.15s ease-out;
 
 		&:hover {
 			color: var(--accent3);
@@ -229,23 +235,22 @@
 		line-height: 1em;
 		margin-block: 1em;
 		text-align: left;
-		transition: all .2s ease-out;
+		transition: all 0.2s ease-out;
 	}
 
 	.desc {
 		margin: 0;
 		display: inline-block;
 		line-height: 1.25em;
-		letter-spacing: .5px;
-		padding: 2rem;
-		font-size: var(--lg);
+		letter-spacing: 0.25px;
+		/* padding: 2rem; */
+		font-size: 1.5rem;
 		width: 100%;
-		font-weight: 400;
+		font-weight: 500;
 		max-width: 400px;
-		background-color: var(--light1);
+		/* background-color: var(--light1); */
 		border-radius: 2rem;
-		color: var(--accent3);
 		text-align: left;
-		transition: all .25s;
+		transition: all 0.2s;
 	}
 </style>

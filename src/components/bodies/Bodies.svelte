@@ -34,7 +34,9 @@
 	setContext<BodiesContext>('bodies', {
 		getEngine: () => engine,
 		getIndex: () => length++,
-		addBodyRef: (body) => { liBodies.push(body) },
+		addBodyRef: (body) => {
+			liBodies.push(body);
+		},
 		visible,
 		staggerDelay
 	});
@@ -46,7 +48,7 @@
 	engine.positionIterations = 5;
 	engine.velocityIterations = 3;
 	engine.enableSleeping = true;
-	
+
 	// Runner
 	const runner = Matter.Runner.create();
 
@@ -64,7 +66,11 @@
 	$: {
 		if (containerWidth) {
 			calculatedHeight = Math.max(
-				Math.ceil((baseArea + areaRatio * liBodies.map((body) => body.area).reduce((a, b) => a + b, 0)) / containerWidth),
+				Math.ceil(
+					(baseArea +
+						areaRatio * liBodies.map((body) => body.area).reduce((a, b) => a + b, 0)) /
+						containerWidth
+				),
 				400
 			);
 			walls.update(containerWidth, calculatedHeight);
@@ -80,8 +86,7 @@
 		if (!$visible) {
 			visible.set(true);
 			Matter.Runner.run(runner, engine);
-		}
-		else {
+		} else {
 			engine.enabled = true;
 		}
 	}
@@ -97,7 +102,7 @@
 		// engine.gravity.scale = 0.001;
 		attractor.setAnchor();
 	}
-		
+
 	onMount(() => {
 		// renderCanvas = new RenderCanvas(canvas, engine);
 		// Matter.Render.run(renderCanvas.render);
@@ -105,10 +110,10 @@
 	});
 
 	onDestroy(() => {
-		Matter.Runner.stop(runner)
+		Matter.Runner.stop(runner);
 		Matter.World.clear(engine.world, false);
 		Matter.Engine.clear(engine);
-	})
+	});
 </script>
 
 <ul
@@ -132,6 +137,7 @@
 		padding: 0;
 		margin: 0 auto;
 		text-indent: 0;
+		list-style-type: none;
 		display: block;
 		width: 100%;
 		max-width: var(--width-lg);

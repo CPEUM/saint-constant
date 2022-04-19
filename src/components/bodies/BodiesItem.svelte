@@ -3,10 +3,10 @@
 	import { getContext, onMount } from 'svelte';
 	import Matter from '$utils/matter';
 
-	export let size: number = null;
-	export let width: number = null; // size || Math.round(Math.random() * 100 + 250);
-	export let height: number = null; // width;
-	export let radius: number = null;
+	export let size: number = undefined;
+	export let width: number = undefined; // size || Math.round(Math.random() * 100 + 250);
+	export let height: number = undefined; // width;
+	export let radius: number = undefined;
 
 	let node: HTMLElement;
 	const sizeMin = 150;
@@ -24,9 +24,9 @@
 	onMount(() => {
 		/* Setting sizes */
 		if (!size) size = sizeMin + Math.sqrt(node.textContent.length) * sizeTextFactor;
-		if (!width)	width = size;
+		if (!width) width = size;
 		if (!height) height = width;
-		if (!radius) radius = Math.round(Math.random() * .5 * width);
+		if (!radius) radius = Math.round(Math.random() * 0.5 * width);
 		/* Init body */
 		body = Matter.Bodies.rectangle(
 			Matter.Common.random(0, node.parentElement.clientWidth),
@@ -35,9 +35,9 @@
 			height,
 			{
 				angle,
-				friction: .1,
+				friction: 0.1,
 				frictionStatic: 12,
-				density: .0005,
+				density: 0.0005,
 				chamfer: { radius }
 			}
 		);
@@ -57,8 +57,8 @@
 	style:border-radius="{radius}px"
 	style:width="{width}px"
 	style:height="{height}px"
-	style:top="-{height * .5}px"
-	style:left="-{width * .5}px"
+	style:top="-{height * 0.5}px"
+	style:left="-{width * 0.5}px"
 	style:transform="translate({left}px, {top}px) rotate({angle}rad)"
 	style:--delay="{index * ctx.staggerDelay}ms"
 >
@@ -72,9 +72,10 @@
 		pointer-events: none;
 		user-select: none;
 		box-sizing: border-box;
-		display: flex;
+		display: inline-flex;
 		justify-content: center;
 		align-items: center;
+		text-indent: 0;
 		padding: 2em;
 		margin: 0;
 		text-align: center;
@@ -82,14 +83,14 @@
 		color: var(--dark3);
 		font-weight: 500;
 		background-color: var(--accent2);
-		box-shadow: 0 0 0 1px var(--accent3);
+		/* box-shadow: 0 0 0 1px var(--accent2); */
 		overflow: hidden;
-		transition: opacity .3s;
-		
+		transition: opacity 0.3s;
+
 		&::before {
 			content: '';
 			position: absolute;
-			opacity: .3;
+			opacity: 0.3;
 			z-index: 1;
 			top: 0;
 			left: 0;

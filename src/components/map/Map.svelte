@@ -18,7 +18,28 @@
 
 	const dispatch = createEventDispatcher<{ load: null; error: null }>();
 	let container: HTMLElement;
+
+	/**
+	 * Saving user-navigated view.
+	 */
 	let bearing = 0;
+	let pitch = 20;
+	let zoom = 14;
+	let center;
+
+	function goToFallback() {
+		map.flyTo({
+			center,
+			pitch,
+			zoom,
+			bearing
+		});
+	}
+
+	function resetBearing() {
+		bearing = 0;
+		map.flyTo({ bearing: 0 });
+	}
 
 	const displayFull = derived(mapDisplay, ($mapDisplay) => $mapDisplay.full);
 
@@ -27,7 +48,7 @@
 	 */
 	$: if ($mapLoaded && !$displayFull) {
 		if (!$mapFocus) {
-			map.fitBounds(bounds.fallback, { padding: 100 });
+			goToFallback();
 		} else if ($mapFocus.bounds) {
 			map.fitBounds($mapFocus.bounds);
 		} else if ($mapFocus.center) {
@@ -44,7 +65,7 @@
 			const filters = Object.entries($mapFocus.filter);
 			const filtered = propositionsFeatures.filter((f) => {
 				return filters.every(([k, v]) => f.properties[k] === v);
-			})
+			});
 			const bounds = new maplibregl.LngLatBounds(
 				bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature)))))
 			);
@@ -56,21 +77,18 @@
 	 * Temporarily reset view when opening full view map
 	 */
 	$: if ($mapLoaded && $displayFull) {
-		map.fitBounds(bounds.fallback);
+		goToFallback();
 	}
 
 	/**
 	 * Highlighting features
 	 */
-	function setHighlight(featureIds: (string|number)[], value: boolean) {
+	function setHighlight(featureIds: (string | number)[], value: boolean) {
 		for (const id of featureIds) {
-			map.setFeatureState(
-				{ source: 'propositions', id },
-				{ highlight: value }
-			)
+			map.setFeatureState({ source: 'propositions', id }, { highlight: value });
 		}
 	}
-	let highlightIds: (string|number)[];
+	let highlightIds: (string | number)[];
 	$: if ($mapLoaded) {
 		if ($mapHighlight) {
 			if (highlightIds) {
@@ -86,10 +104,9 @@
 				.filter((f) => {
 					return filters.every(([k, v]) => f.properties[k] === v);
 				})
-				.map(f => f.id);
+				.map((f) => f.id);
 			setHighlight(highlightIds, true);
-		}
-		else if (highlightIds) {
+		} else if (highlightIds) {
 			setHighlight(highlightIds, false);
 		}
 	}
@@ -103,8 +120,8 @@
 				padding: 100
 			},
 			bearing,
-			pitch: 20,
-			zoom: 14,
+			pitch,
+			zoom,
 			minZoom: 10,
 			maxZoom: 20
 		});
@@ -118,10 +135,33 @@
 			addPropositionsLayers(map);
 			mapLoaded.set(true);
 			dispatch('load');
+			bearing = map.getBearing();
+			pitch = map.getPitch();
+			zoom = map.getZoom();
+			center = map.getCenter();
 		});
 
 		map.on('rotate', (e) => {
-			bearing = map.getBearing();
+			if (e.originalEvent) {
+				bearing = map.getBearing();
+			}
+		});
+
+		map.on('pitchend', (e) => {
+			if (e.originalEvent) {
+				pitch = map.getPitch();
+			}
+		});
+
+		map.on('zoomend', (e) => {
+			if (e.originalEvent) {
+				zoom = map.getZoom();
+				center = map.getCenter();
+			}
+		});
+
+		map.on('dragend', (e) => {
+			center = map.getCenter();
 		});
 	});
 </script>
@@ -135,7 +175,7 @@
 	<div id="info">
 		<!-- Short description of current view (remove when user moves map) -->
 		<!-- Scale line -->
-		<FigureCompass on:click={() => map.flyTo({ bearing: 0 })} {bearing} />
+		<FigureCompass on:click={resetBearing} {bearing} />
 		<slot />
 	</div>
 </figure>
@@ -160,7 +200,7 @@
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		transition: all 0.4s var(--ease);
+		transition: all 0.4s var(--ease), z-index 0s;
 
 		&.full {
 			opacity: 1 !important;
@@ -170,12 +210,6 @@
 			left: 0 !important;
 			right: 0 !important;
 			border-radius: 0 !important;
-		}
-
-		&.mask:not(.full) {
-			opacity: 1;
-			border-radius: 0;
-			transition: all 0.6s ease-in-out;
 		}
 
 		&:global(.figure) {
@@ -197,13 +231,18 @@
 		}
 
 		&:global(.medium) {
-			--offset-inside: max(0px, calc(50vw - var(--width-lg) / 4));
+			/* --offset-inside: max(0px, calc(50vw - var(--width-lg) / 4));
 			--offset-outside: max(0px, calc(50vw - var(--width-lg) / 2));
-			opacity: 1;
-			border-radius: 2rem;
 			top: max(120px, calc(50vh - 500px));
-			bottom: max(120px, calc(50vh - 500px));
-			box-shadow: 0px 40px 80px -25px rgba(0, 0, 25, 0.1);
+			bottom: max(120px, calc(50vh - 500px)); */
+			--offset-inside: 50vw;
+			--offset-outside: 0;
+			top: 0;
+			bottom: 0;
+			opacity: 1;
+			border-radius: 0;
+			border-radius: 2rem;
+			/* box-shadow: 0px 40px 80px -25px rgba(0, 0, 25, 0.1); */
 		}
 
 		&:global(.left) {

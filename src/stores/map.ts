@@ -1,9 +1,10 @@
 import type { ExerciceRoute } from '$utils/routes';
 import maplibregl from 'maplibre-gl';
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
+import { route } from './route';
 
 interface MapFocusOptions {
-	filter?: Record<string, string|number>;
+	filter?: Record<string, string | number>;
 	center?: {
 		point: maplibregl.LngLat | maplibregl.LngLatLike;
 		zoom: number;
@@ -15,7 +16,6 @@ interface MapFocusOptions {
  */
 export const mapFocus = writable<MapFocusOptions>(null);
 
-
 interface MapHighlightOptions {
 	exercice?: ExerciceRoute['key'];
 	key?: string | number;
@@ -25,7 +25,7 @@ interface MapHighlightOptions {
  * Store to manage the map's current feature highlight triggered by intersection events.
  * Highlights resulting from mouseover should be handled directly on the map.
  */
-export const mapHighlight = (function() {
+export const mapHighlight = (function () {
 	const { subscribe, update } = writable<MapHighlightOptions>(null);
 	let previous;
 	return {
@@ -37,9 +37,8 @@ export const mapHighlight = (function() {
 			});
 		},
 		getPrevious: () => previous
-	}
+	};
 })();
-
 
 interface MapDisplay {
 	full: boolean;

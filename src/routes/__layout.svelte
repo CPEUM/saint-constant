@@ -1,8 +1,9 @@
 <script lang="ts" context="module">
 	export function load({ url }) {
+		const segments = getSegments(url.pathname);
 		return {
 			props: {
-				topRoute: 'key' + getSegments(url.pathname)[0]
+				topRoute: 'key' + segments[0]
 			}
 		};
 	}
@@ -28,21 +29,26 @@
 	export let topNavigating = true;
 	let mapLoaded = false;
 
-	beforeNavigate(({from, to}) => {
-		if (getSegments(from?.href)[0] !== getSegments(to?.href)?.[0]) topNavigating = true;
+	beforeNavigate(({ from, to }) => {
+		if (getSegments(from?.href)[0] !== getSegments(to?.href)?.[0]) {
+			topNavigating = true;
+		}
 	});
 
-	afterNavigate(({from, to}) => {
-		if (topNavigating) topNavigating = false;
-		if (browser) {
-			document.body.style.scrollBehavior = 'unset';
-			document.body.scrollTop = 0;
-			document.body.style.scrollBehavior = 'smooth';
+	afterNavigate(({ from, to }) => {
+		if (topNavigating) {
+			topNavigating = false;
 		}
 	});
 
 	function outroend() {
 		if (topNavigating) topNavigating = false;
+		if (browser) {
+			console.log('Should scroll to top');
+			document.body.style.scrollBehavior = 'unset';
+			document.body.scrollTop = 0;
+			document.body.style.scrollBehavior = 'smooth';
+		}
 	}
 </script>
 
@@ -69,10 +75,7 @@
 {#if !mapLoaded || topNavigating}
 	<Loading />
 {/if}
-<Map
-	on:load={() => (mapLoaded = true)}
-	on:error={() => (mapLoaded = true)}
-/>
+<Map on:load={() => (mapLoaded = true)} on:error={() => (mapLoaded = true)} />
 
 <style lang="postcss">
 	main {

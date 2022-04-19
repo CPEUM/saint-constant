@@ -1,3 +1,4 @@
 {
+	"editor.formatOnSave": true,
 	"svelte.plugin.css.globals": "src/styles/*.postcss"
 }

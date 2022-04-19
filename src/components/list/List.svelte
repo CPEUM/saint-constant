@@ -30,7 +30,7 @@
 <ul
 	{...$$restProps}
 	style:--staggerDelay="{staggerDelay}ms"
-	use:intersection={{rootMargin: '-30% 0px -30%'}}
+	use:intersection={{ rootMargin: '-30% 0px -30%' }}
 	on:enter|once={show}
 	{visible}
 >

@@ -31,16 +31,28 @@
 		<Loading style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;" />
 	{:then excerptComp}
 		<div class="shadow" transition:fade />
-		<article
-			transition:scale={{ start: 0.9, duration: 450, easing: expoOut }}
-			use:clickoutside
-			on:clickoutside={() => (open = false)}
-		>
-			<svelte:component this={excerptComp.default} />
-			<button in:fly={{y: 20, delay: 450}} on:introend={() => closeIcon = true}  class="close" on:click={() => (open = false)}>
-				<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid">
-					{#if closeIcon}	
-						<line in:draw={{}} x1="30" y1="30" x2="70" y2="70" vector-effect="non-scaling-stroke" />
+		<article>
+			<button
+				transition:fly={{ x: -30 }}
+				on:introend={() => (closeIcon = true)}
+				class="close"
+				on:click={() => (open = false)}
+			>
+				<svg
+					version="1.1"
+					viewBox="0 0 100 100"
+					shape-rendering="geometricPrecision"
+					preserveAspectRatio="xMidYMid"
+				>
+					{#if closeIcon}
+						<line
+							in:draw={{}}
+							x1="30"
+							y1="30"
+							x2="70"
+							y2="70"
+							vector-effect="non-scaling-stroke"
+						/>
 						<line
 							in:draw={{ delay: 150 }}
 							x1="30"
@@ -52,6 +64,14 @@
 					{/if}
 				</svg>
 			</button>
+			<div
+				class="content"
+				use:clickoutside
+				on:clickoutside={() => (open = false)}
+				transition:scale={{ start: 0.9, duration: 450, easing: expoOut }}
+			>
+				<svelte:component this={excerptComp.default} />
+			</div>
 		</article>
 	{:catch error}
 		<!-- catch error -->
@@ -96,16 +116,26 @@
 	article {
 		z-index: 10;
 		position: fixed;
-		top: 2rem;
-		right: 2rem;
-		bottom: 2rem;
-		left: 2rem;
-		padding: 4rem 0;
-		background-color: var(--light1);
-		border-radius: 2rem;
+		display: block;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 		overflow-x: hidden;
-		overflow-y: overlay;
+		overflow-y: scroll;
+		padding: 2rem;
+	}
+
+	.content {
+		display: block;
+		margin: 0 auto;
+		border-radius: 2rem;
+		background-color: var(--light1);
 		box-shadow: 0 20px 125px -25px rgba(0, 0, 30, 0.2);
+		padding: 4rem 6rem;
+		max-width: var(--width-lg);
+		height: auto;
+		flex: 1;
 	}
 
 	.close {
@@ -120,14 +150,14 @@
 		z-index: 20;
 		top: 2.5rem;
 		left: 2.5rem;
-		padding: .5rem;
+		padding: 0.5rem;
 		background-color: var(--light1);
-		box-shadow: 0 0 2px 0 rgba(0,0,20, .5);
-		transition: all .2s;
+		box-shadow: 0 0 2px 0 rgba(0, 0, 20, 0.5);
+		transition: all 0.2s;
 
 		&:hover {
 			background-color: white;
-			box-shadow: 0 15px 25px -10px rgba(0,0,20, .2);
+			box-shadow: 0 15px 25px -10px rgba(0, 0, 20, 0.2);
 		}
 
 		& svg {

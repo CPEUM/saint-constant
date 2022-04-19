@@ -11,7 +11,11 @@ export const route = derived(page, ($page) => {
 	);
 });
 
-export const exercice: Readable<ExerciceRoute> = derived(page, ($page) => {
-	const ex = exerciceRoutes.find((ex) => ex.path === $page.url.pathname);
-	return ex || get(exercice);
-}, exerciceRoutes[0]);
+export const exercice: Readable<ExerciceRoute> = derived(
+	page,
+	($page) => {
+		const ex = exerciceRoutes.find((ex) => ex.path === $page.url.pathname);
+		return ex || get(exercice);
+	},
+	exerciceRoutes[0]
+);

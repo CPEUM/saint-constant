@@ -171,7 +171,7 @@
 			max-width: 180px;
 			filter: saturate(0);
 			opacity: .7;
-			transition: all .2s ease-out;
+			transition: all .1s ease-out;
 
 			&:hover {
 				opacity: 1;

@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
-	export interface MapFigureContext {
-	};
+	export interface MapFigureContext {}
 </script>
 
 <script>
@@ -17,22 +16,19 @@
 	function hideMap() {
 		mapDisplay.setClass('');
 	}
-	
-	onMount(() => {
-	});
+
+	onMount(() => {});
 </script>
 
 <div
 	class="trigger"
-	use:intersection={{rootMargin: '-50% 0% -50%'}}
+	use:intersection={{ rootMargin: '-50% 0% -50%' }}
 	on:enter={showMap}
 	on:leave={hideMap}
 	{...$$restProps}
 >
-	<div
-		class="content"
-	>
-	<!-- style:padding-top={$mainScroll.direction === 'up' ? '6rem' : null} -->
+	<div class="content">
+		<!-- style:padding-top={$mainScroll.direction === 'up' ? '6rem' : null} -->
 		<slot />
 	</div>
 </div>
@@ -46,12 +42,12 @@
 		max-width: var(--width-lg);
 		margin: 0 auto;
 	}
-	
+
 	.content {
 		width: 100%;
 		position: sticky;
 		top: 0;
 		padding: 6rem 0;
-		transition: all .35s ease-in-out;
+		transition: all 0.35s ease-in-out;
 	}
 </style>

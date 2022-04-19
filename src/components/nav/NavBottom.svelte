@@ -5,7 +5,7 @@
 <nav>
 	{#if $route?.previous}
 		<a href={$route.previous().path}>
-			<p class="label">&#8592; Retourner</p>
+			<p class="label">&#8592; Revenir</p>
 			<p class="title">{$route.previous().title}</p>
 		</a>
 	{/if}
@@ -25,7 +25,7 @@
 		max-width: var(--width-lg);
 		margin-inline: auto;
 		margin-block: 10rem 0;
-		padding: 0 2rem;
+		padding: 1rem;
 		justify-content: flex-end;
 		align-items: flex-start;
 	}
@@ -40,11 +40,11 @@
 		text-decoration: none;
 		font-family: var(--font-main);
 		color: var(--dark1);
-		padding: 1rem;
-		border-radius: 1rem;
-		opacity: .5;
+		padding: 1rem 1.5rem;
+		border-radius: 1.5rem;
+		opacity: .8;
 		box-shadow: 0 0 0 0 transparent;
-		transition: all .25s ease-out;
+		transition: all .15s ease-out;
 
 		&:last-child {
 			text-align: right;
@@ -52,8 +52,9 @@
 
 		&:hover {
 			background-color: var(--light1);
+			color: var(--dark3);
 			opacity: 1;
-			box-shadow: 0 1em 3em -2em rgba(0,0,20, .25);
+			box-shadow: 0 1em 3em -2em rgba(0,0,20, .5);
 		}
 	}
 
