@@ -1,5 +1,5 @@
 import type { ExerciceRoute } from '$utils/routes';
-import maplibregl from 'maplibre-gl';
+import maplibregl, { LngLat, type LngLatLike } from 'maplibre-gl';
 import { derived, writable } from 'svelte/store';
 import { route } from './route';
 
@@ -76,5 +76,33 @@ export const mapDisplay = (function () {
 				return { ...state, class: '' };
 			});
 		}
+	};
+})();
+
+/**
+ * Currently active map tooltip data.
+ */
+type TooltipData = {
+	text: string;
+	coords: LngLat | LngLatLike;
+};
+export const mapTooltip = writable<TooltipData>(null);
+
+/**
+ * Features added to map.
+ */
+export const mapFeatures = (function () {
+	const { subscribe, set, update } = writable<GeoJSON.Feature[]>([]);
+	return {
+		subscribe,
+		add: (...features) =>
+			update((current) => {
+				current.push(...features);
+				return current;
+			}),
+		removeById: (...featureId) =>
+			update((current) => {
+				return current.filter((f) => [...featureId].includes(!f.id));
+			})
 	};
 })();

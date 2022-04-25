@@ -1,7 +1,6 @@
 import { check_outros, group_outros, transition_out } from 'svelte/internal';
 import HoverBubble from '$components/primitives/HoverBubble.svelte';
 
-
 // Workaround for https://github.com/sveltejs/svelte/issues/4056
 function outroAndDestroy(instance) {
 	if (instance.$$.fragment && instance.$$.fragment.o) {
@@ -13,38 +12,28 @@ function outroAndDestroy(instance) {
 	} else {
 		instance.$destroy();
 	}
-};
-
+}
 
 /**
- * @param {HTMLElement} element 
+ * @param {HTMLElement} element
  * @param {{size: number, color: string}} options
- * 
+ *
  */
 export function hoverbubble(element, options) {
-	let bubble;
-	const title = element.getAttribute('title');
+	const bubble = new HoverBubble({
+		target: element,
+		intro: true,
+		props: {
+			...options
+		}
+	});
 
 	function mouseenter(e) {
-		if (title) {
-			element.removeAttribute('title');
-		}
-		bubble = new HoverBubble({
-			target: element,
-			intro: true,
-			props: {
-				...options,
-				initX: e.clientX,
-				initY: e.clientY
-			}
-		})
+		bubble.$set({ active: true });
 	}
 
 	function mouseleave() {
-		if (title) {
-			element.setAttribute('title', title);
-		}
-		outroAndDestroy(bubble);
+		bubble.$set({ active: false });
 	}
 
 	element.addEventListener('mouseenter', mouseenter);
@@ -55,5 +44,5 @@ export function hoverbubble(element, options) {
 			element.removeEventListener('mouseover', mouseenter);
 			element.removeEventListener('mouseleave', mouseleave);
 		}
-	}
+	};
 }

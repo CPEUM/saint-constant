@@ -5,20 +5,17 @@
 	import { tooltip } from '$actions/tooltip';
 	import { base } from '$app/paths';
 	import logos from '$utils/logos';
+	import { hoverbubble } from '$actions/hoverBubble';
 
 	export let heading: boolean = true;
 	let hidden = true;
 	const ttipOpts: TooltipOptions = {
 		follow: true,
 		position: 'bottom'
-	}
+	};
 </script>
 
-<section
-	use:intersection
-	on:enter|once={() => hidden = false}
-	class:hidden
->
+<section use:intersection on:enter|once={() => (hidden = false)} class:hidden>
 	{#if heading}
 		<h2 use:revealText={revealFlyUp}>Partenaires</h2>
 	{/if}
@@ -29,7 +26,7 @@
 				rel="external"
 				target="_blank"
 				title={logo.alt}
-				use:tooltip={ttipOpts}
+				use:hoverbubble={{ color: 'var(--light3)', size: 250 }}
 			>
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
@@ -42,7 +39,7 @@
 				rel="external"
 				target="_blank"
 				title={logo.alt}
-				use:tooltip={ttipOpts}
+				use:hoverbubble={{ color: 'var(--light3)', size: 250 }}
 			>
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
@@ -60,7 +57,7 @@
 		max-width: var(--width-md);
 
 		&:hover a:not(:hover) {
-			opacity: .5;
+			opacity: 0.5;
 			/* filter: saturate(0); */
 		}
 	}
@@ -84,15 +81,15 @@
 		flex: 0;
 		padding: 3rem;
 		flex-basis: 33%;
-		opacity: .8;
-		transition: all .2s ease-out;
-		
+		opacity: 0.8;
+		transition: all 0.2s ease-out;
+
 		& img {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
 			position: relative;
-			transition: all .2s ease-out;
+			transition: all 0.2s ease-out;
 		}
 
 		&:hover {

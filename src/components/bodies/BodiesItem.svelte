@@ -82,10 +82,10 @@
 		position: absolute;
 		color: var(--dark3);
 		font-weight: 500;
-		background-color: var(--accent2);
-		/* box-shadow: 0 0 0 1px var(--accent2); */
+		/* background-color: var(--light3); */
+		box-shadow: 0 0 0 1px var(--accent2);
 		overflow: hidden;
-		transition: opacity 0.3s;
+		transition: opacity 1s;
 
 		&::before {
 			content: '';

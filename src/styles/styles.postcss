@@ -75,7 +75,15 @@ p {
 	margin-inline: auto;
 }
 
-.bg::before {
+.bgdiv {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.bg::before,
+.bgdiv::before {
 	content: '';
 	position: absolute;
 	left: 50%;
@@ -100,7 +108,7 @@ p {
 			max-width: var(--width-sm);
 			margin-left: 0;
 		}
-	
+
 		&.right {
 			max-width: var(--width-sm);
 			margin-right: 0;
@@ -127,6 +135,7 @@ p {
 }
 
 h2 {
+	position: relative;
 	font-family: var(--font-main);
 	font-size: var(--xxl);
 	font-weight: 500;
@@ -138,6 +147,7 @@ h2 {
 }
 
 h3 {
+	position: relative;
 	font-family: var(--font-main);
 	font-size: var(--xl);
 	font-weight: 500;
@@ -149,6 +159,7 @@ h3 {
 }
 
 h4 {
+	position: relative;
 	font-family: var(--font-main);
 	font-size: var(--lg);
 	color: var(--dark1);

@@ -22,8 +22,20 @@
 	}
 </script>
 
-<button class="open" on:click={toggle}>
-	<span>+&nbsp;<slot /></span>
+<button class="open" class:active={open} on:click={toggle}>
+	<svg
+		version="1.1"
+		viewBox="0 0 100 100"
+		shape-rendering="geometricPrecision"
+		preserveAspectRatio="xMidYMid"
+		class="open-icon"
+	>
+		<line x1="50" y1="20" x2="50" y2="80" vector-effect="non-scaling-stroke" />
+		<line x1="20" y1="50" x2="80" y2="50" vector-effect="non-scaling-stroke" />
+	</svg>
+	<span>
+		<slot />
+	</span>
 </button>
 
 {#if open}
@@ -43,6 +55,7 @@
 					viewBox="0 0 100 100"
 					shape-rendering="geometricPrecision"
 					preserveAspectRatio="xMidYMid"
+					class="close-icon"
 				>
 					{#if closeIcon}
 						<line
@@ -91,14 +104,37 @@
 		margin: 2rem auto;
 		font-size: var(--sm);
 		font-family: var(--font-main);
-		font-weight: 400;
+		font-weight: 500;
 		box-shadow: 0 0 2px 0 rgba(0, 0, 30, 0.4);
 		background-color: transparent;
 		transition: all 0.2s ease-out;
 
-		&:hover {
+		& span {
+			padding-left: 0.5em;
+		}
+
+		&:hover,
+		&.active {
 			background-color: white;
 			box-shadow: 0 1em 3em -1.5em rgba(0, 0, 30, 0.4);
+
+			& .open-icon {
+				transform: rotate(180deg);
+			}
+		}
+
+		& .open-icon {
+			width: 1.75em;
+			height: 1.75em;
+			padding: 0;
+			margin: 0;
+			transition: all 0.35s ease-in-out;
+
+			& line {
+				fill: none;
+				stroke: black;
+				stroke-width: 2px;
+			}
 		}
 	}
 
@@ -160,17 +196,17 @@
 			box-shadow: 0 15px 25px -10px rgba(0, 0, 20, 0.2);
 		}
 
-		& svg {
+		& .close-icon {
 			position: absolute;
 			width: 80%;
 			height: 80%;
 			top: 10%;
 			left: 10%;
-		}
 
-		& line {
-			stroke: var(--dark2);
-			stroke-width: 2px;
+			& line {
+				stroke: var(--dark2);
+				stroke-width: 2px;
+			}
 		}
 	}
 </style>

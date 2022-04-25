@@ -1,95 +1,95 @@
 {
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Sous-secteur 1",
-        "subtitle": "Parc Leblanc"
-      },
-      "geometry": {
-        "coordinates": [
-          -73.577935,
-          45.364794
-        ],
-        "type": "Point"
-      },
-      "id": "28af9ea1de30203839272ae65e4d7ebb"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Sous-secteur 4",
-        "subtitle": "Site des travaux publics"
-      },
-      "geometry": {
-        "coordinates": [
-          -73.565269,
-          45.363107
-        ],
-        "type": "Point"
-      },
-      "id": "4d2f8c2a0b57d9624c0110e67a19dcf5"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Sous-secteur 6",
-        "subtitle": "Parc des citoyens"
-      },
-      "geometry": {
-        "coordinates": [
-          -73.561163,
-          45.360027
-        ],
-        "type": "Point"
-      },
-      "id": "8bcddd51314e3ddd8bc5a2b2db540ae7"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Sous-secteur 5",
-        "subtitle": "Bassin de rétention de la rue Chantale"
-      },
-      "geometry": {
-        "coordinates": [
-          -73.569019,
-          45.360456
-        ],
-        "type": "Point"
-      },
-      "id": "f45ce4a9d28f95aa4de2c054fc4062ab"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Sous-secteur 3",
-        "subtitle": "Chandellerie"
-      },
-      "geometry": {
-        "coordinates": [
-          -73.569177,
-          45.365026
-        ],
-        "type": "Point"
-      },
-      "id": "fe051ada30cff4707e74f02f2c13eb95"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Sous-secteur 2",
-        "subtitle": "Noyau villageois"
-      },
-      "geometry": {
-        "coordinates": [
-          -73.569177,
-          45.364182
-        ],
-        "type": "Point"
-      },
-      "id": "ff78c37a65b42e9935929ea622e3c634"
-    }
-  ],
-  "type": "FeatureCollection"
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 1,
+				"name": "Parc Leblanc"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.577935,
+					45.364794
+				],
+				"type": "Point"
+			},
+			"id": "28af9ea1de30203839272ae65e4d7ebb"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 2,
+				"name": "Noyau villageois"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.569177,
+					45.364182
+				],
+				"type": "Point"
+			},
+			"id": "ff78c37a65b42e9935929ea622e3c634"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 3,
+				"name": "Chandellerie"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.569177,
+					45.365026
+				],
+				"type": "Point"
+			},
+			"id": "fe051ada30cff4707e74f02f2c13eb95"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 4,
+				"name": "Site des travaux publics"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.565269,
+					45.363107
+				],
+				"type": "Point"
+			},
+			"id": "4d2f8c2a0b57d9624c0110e67a19dcf5"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 5,
+				"name": "Bassin de rétention de la rue Chantale"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.569019,
+					45.360456
+				],
+				"type": "Point"
+			},
+			"id": "f45ce4a9d28f95aa4de2c054fc4062ab"
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 6,
+				"name": "Parc des citoyens"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.561163,
+					45.360027
+				],
+				"type": "Point"
+			},
+			"id": "8bcddd51314e3ddd8bc5a2b2db540ae7"
+		}
+	],
+	"type": "FeatureCollection"
 }

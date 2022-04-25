@@ -1,56 +1,102 @@
 <script lang="ts">
 	import type { SymbolShape, SymbolStrokeType } from '$components/primitives/Symbol.svelte';
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 	import Symbol from '$components/primitives/Symbol.svelte';
+	import { map } from '$components/map/Map.svelte';
+	import { LngLat, Marker, type LngLatLike } from 'maplibre-gl';
+	import { fly } from 'svelte/transition';
+	import type { Writable } from 'svelte/store';
+	import { expoOut } from 'svelte/easing';
+	import { mapFocus } from '$stores/map';
 
 	/* Symbol props */
 	export let label: string | number;
 	export let src: string = null;
-	export let color: string = 'var(--dark1)';
-	export let fill: string = 'var(--accent1);';
 	export let shape: SymbolShape = 'circle';
+	export let color: string = 'var(--accent3)';
+	export let fill: string = 'var(--light1)';
 	export let stroke: string = 'none';
+	export let colorHighlight: string = undefined;
+	export let fillHighlight: string = undefined;
+	export let strokeHighlight: string = undefined;
 	export let strokeWidth: number = 1;
 	export let strokeType: SymbolStrokeType = 'solid';
 	export let interactive = true;
 	export let highlight = false;
-
+	export let active = true;
 	export let key: string | number = label;
 	export let size: number = 50;
-	
 	/* If map marker */
-	export let lat: number = null;
-	export let lon: number = null;
-
+	export let lnglat: LngLat | LngLatLike = null;
+	export let zoom: number = 16;
 	/* else, if image marker */
 	export let x: number = null;
 	export let y: number = null;
 
-	const ctx = getContext('figure');
+	let el: HTMLElement;
+	const figCtx = getContext('figure') as any;
+	const figmapCtx = getContext('figuremap') as any;
+	const markerCtx = getContext('markers') as any;
+	const index = markerCtx ? markerCtx.getIndex() : 0;
+	const currentKey = getContext('currentKey') as Writable<string | number>;
 
-	// const index = ctx.getMarkerIndex();
+	const mapActive = figmapCtx ? (figmapCtx.active as Writable<boolean>) : null;
+
+	$: if (figmapCtx && lnglat && currentKey && $currentKey === key) {
+		mapFocus.set({ center: { point: lnglat, zoom } });
+	}
+
+	onMount(() => {
+		if (figmapCtx) {
+			new Marker({
+				element: el,
+				anchor: 'center'
+			})
+				.setLngLat(lnglat)
+				.addTo(map);
+		}
+	});
+
+	onDestroy(() => {
+		if (figmapCtx) {
+		}
+	});
 </script>
 
 <div
+	id="outer"
 	{...$$restProps}
+	bind:this={el}
+	style="{x ? `left: ${x}%;` : ''} {y ? `top: ${y}%;` : ''}"
+	class:highlight={highlight || key == $currentKey}
 >
-	<Symbol
-		{src}
-		{label}
-		{color}
-		{fill}
-		{shape}
-		{stroke}
-		{strokeWidth}
-		{strokeType}
-		{interactive}
-		{highlight}
-	/>
+	{#if (active && !mapActive) || (mapActive && $mapActive)}
+		<div
+			id="inner"
+			in:fly={{ y: 15, duration: 1000, easing: expoOut, delay: index * 150 + 500 }}
+		>
+			<Symbol
+				{src}
+				{label}
+				{color}
+				{fill}
+				{colorHighlight}
+				{fillHighlight}
+				{shape}
+				{stroke}
+				{strokeWidth}
+				{strokeType}
+				{interactive}
+				highlight={highlight || key == $currentKey}
+			/>
+		</div>
+	{/if}
 </div>
 
 <style>
-	div {
+	#outer {
 		user-select: none;
+		pointer-events: none;
 		position: absolute;
 		display: flex;
 		align-items: center;
@@ -61,4 +107,3 @@
 		margin: 0;
 	}
 </style>
-

@@ -9,16 +9,19 @@
 	const shapes = decorations.slice(0, 3).map((deco) => {
 		return {
 			...deco,
-			fillColor: getRandomThemeColor([2, 3], exerciceRoutes.map(r => r.key)),
+			fillColor: getRandomThemeColor(
+				[2, 3],
+				exerciceRoutes.map((r) => r.key)
+			),
 			strokeColor: getRandomThemeColor([2, 3])
-		}
+		};
 	});
 
 	const waveVb = { width: 1000, height: 1500 };
 	const waves = generateSvgPaths(2, { viewBox: waveVb, padding: 900 }).map((svgPath) => ({
 		viewBox: `0 0 ${waveVb.width} ${waveVb.height}`,
 		d: svgPath,
-		fill: getRandomThemeColor([2, 3]),
+		fill: getRandomThemeColor([2, 3])
 	}));
 
 	let mounted = false;
@@ -37,21 +40,27 @@
 
 <svelte:body on:scroll={scroll} />
 
-<header>
-	<svg
-		viewBox={waves[1].viewBox}
-		preserveAspectRatio="none"
-	>
-		<path
-			d={waves[0].d}
-			fill={waves[0].fill}
-		/>
-	</svg>
+<header style:--accent-color={getRandomThemeColor([2, 3], ['agroparc', 'poles', 'promenades'])}>
+	<!-- <svg viewBox={waves[1].viewBox} preserveAspectRatio="none">
+		<path d={waves[0].d} fill={waves[0].fill} />
+	</svg> -->
 	<svg viewBox={waves[1].viewBox} preserveAspectRatio="xMidYMax slice">
-		<clipPath id="wave-mask">
+		{#each shapes as shape}
 			<path
-				d={waves[1].d}
+				vector-effect="non-scaling-stroke"
+				d={shape.d}
+				fill={shape.fillColor}
+				stroke="var(--dark1)"
+				stroke-width="2"
+				stroke-linejoin="round"
+				stroke-linecap="round"
+				stroke-dasharray="20"
+				transform="rotate({Math.random() * 60 - 30})"
+				transform-origin="50% 50%"
 			/>
+		{/each}
+		<!-- <clipPath id="wave-mask">
+			<path d={waves[1].d} />
 		</clipPath>
 		<g clip-path="url(#wave-mask)">
 			{#each shapes as shape}
@@ -59,25 +68,26 @@
 					vector-effect="non-scaling-stroke"
 					d={shape.d}
 					fill={shape.fillColor}
-					stroke={shape.strokeColor}
-					stroke-width="50"
+					stroke="var(--dark2)"
+					stroke-width="2"
 					stroke-linejoin="round"
 					stroke-linecap="round"
-					stroke-dasharray="54% 20% 64% 90% 30% 130%"
-					stroke-dashoffset="{Math.random() * 300}%"
+					stroke-dasharray="20"
 				/>
 			{/each}
-		</g>
+		</g> -->
 	</svg>
 	<hgroup style:transform="translateY({y * 0.4}px)">
-		<h1 use:revealText={{
+		<h1
+			use:revealText={{
 				duration: 600,
 				staggerDelay: 15,
 				transformOrigin: '0% 20%',
 				rotateX: -80
 			}}
 		>
-			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBAINS <span class="left">DE LA VILLE DE SaINT-CONSTANT &#8595;</span>
+			&#8594;LA <span class="alt">CO-CREATION</span> DES PAYSaGES URBAINS
+			<span class="left">DE LA VILLE DE SaINT-CONSTANT &#8595;</span>
 		</h1>
 	</hgroup>
 </header>
@@ -106,6 +116,20 @@
 		transform: translateX(-50%);
 		overflow: visible;
 		z-index: -10;
+		background: linear-gradient(to bottom, var(--accent-color), transparent);
+	}
+
+	@keyframes dashanim {
+		0% {
+			stroke-dashoffset: 0%;
+		}
+		100% {
+			stroke-dashoffset: 100%;
+		}
+	}
+
+	path {
+		animation: dashanim 100s linear infinite;
 	}
 
 	hgroup {
@@ -122,7 +146,7 @@
 		position: relative;
 		display: inline-block;
 		font-size: clamp(56px, 7vw, 92px);
-		font-weight: 400;
+		font-weight: 700;
 		color: var(--dark2);
 		line-height: 1.1em;
 		padding: 0;

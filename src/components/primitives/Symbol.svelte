@@ -15,15 +15,18 @@
 	export let src: string = null;
 	/* Color of the text label, if any */
 	export let color: string = 'var(--dark1)';
+	export let colorHighlight: string = color;
 	export let label: string | number = null;
 	/* Fill color of the svg shape */
 	export let fill = 'none';
+	export let fillHighlight = fill;
 	/* Stroke color of the svg shape */
 	export let stroke = 'none';
+	export let strokeHighlight = stroke;
 	export let strokeWidth = 1;
+	export let strokeWidthHighlight = strokeWidth;
 	export let strokeType: SymbolStrokeType = 'solid';
 	/* Interactivity */
-	export let interactive = false;
 	export let highlight = false;
 
 	const size = 50;
@@ -36,23 +39,17 @@
 			: strokeType === 'dotted'
 			? `0, ${2 * strokeWidth}`
 			: null;
-	const style = {
-		fill,
-		stroke,
-		"stroke-width": strokeWidth,
-		"stroke-linecap": shape === 'dashed' ? 'butt' : 'round' as any,
-		"stroke-dasharray": dashArray || ''
-	}
+	let style;
+	$: style = {
+		'fill': highlight ? fillHighlight : fill,
+		'stroke': highlight ? strokeHighlight : stroke,
+		'stroke-width': highlight ? strokeWidthHighlight : strokeWidth,
+		'stroke-linecap': shape === 'dashed' ? 'butt' : ('round' as any),
+		'stroke-dasharray': dashArray || ''
+	};
 </script>
 
-<svg
-	width={size}
-	height={size}
-	viewBox="0 0 {size} {size}"
-	class:interactive
-	class:highlight
-	{...$$restProps}
->
+<svg width={size} height={size} viewBox="0 0 {size} {size}" {...$$restProps}>
 	{#if shape === 'square'}
 		<rect
 			rx={size / 20}
@@ -62,24 +59,22 @@
 			width={size - 2 * correctedPadding}
 			height={size - 2 * correctedPadding}
 			{...style}
+			class:highlight
 		/>
 	{:else if shape === 'circle'}
-		<circle
-			cx={size / 2}
-			cy={size / 2}
-			r={size / 2 - padding}
-			{...style}
-		/>
+		<circle cx={size / 2} cy={size / 2} r={size / 2 - padding} {...style} class:highlight />
 	{:else if shape === 'triangle'}
 		<polygon
 			points="{size / 2} {padding}, {padding} {size - correctedPadding}, {size -
 				padding} {size - correctedPadding}"
 			{...style}
+			class:highlight
 		/>
 	{:else if ['line', 'dotted', 'dashed'].indexOf(shape) > -1}
 		<path
 			d="M{0},{(2 * size) / 3} Q{size / 4},{padding} {size / 2},{size / 2} T{size},{size / 3}"
 			{...style}
+			class:highlight
 		/>
 	{:else if Boolean(src)}
 		<!-- To implement! -->
@@ -94,7 +89,7 @@
 			x="50%"
 			y="50%"
 			text-anchor="middle"
-			fill={color}
+			fill={highlight ? colorHighlight : color}
 		>
 			{label}
 		</text>
@@ -110,6 +105,10 @@
 		overflow: visible;
 		margin: 0;
 		padding: 0;
+
+		& * {
+			transition: all 0.2s;
+		}
 	}
 
 	.interactive {
@@ -117,8 +116,8 @@
 		transition: all 0.3s ease-out;
 	}
 
-	.interactive.highlight,
+	.highlight,
 	.interactive:hover {
-		color: red;
+		filter: drop-shadow(0px 6px 10px rgba(0, 0, 40, 0.2));
 	}
 </style>

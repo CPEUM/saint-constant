@@ -7,21 +7,20 @@
 
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
-	import { addCityLayer, addPropositionsLayers, bounds, propositionsFeatures } from '$utils/map';
-	import maplibregl from 'maplibre-gl';
+	import { mapDisplay, mapFeatures, mapFocus, mapHighlight, mapTooltip } from '$stores/map';
+	import { bounds } from '$utils/map';
+	import maplibregl, { LngLat, type LngLatLike } from 'maplibre-gl';
 	import bbox from '@turf/bbox';
 	import bboxPolygon from '@turf/bbox-polygon';
 	import combine from '@turf/combine';
 	import { featureCollection } from '@turf/helpers';
 	import FigureCompass from '$components/figure/FigureCompass.svelte';
+	import MapTooltip from './MapTooltip.svelte';
 
 	const dispatch = createEventDispatcher<{ load: null; error: null }>();
 	let container: HTMLElement;
 
-	/**
-	 * Saving user-navigated view.
-	 */
+	/* Saving user-navigated view. */
 	let bearing = 0;
 	let pitch = 20;
 	let zoom = 14;
@@ -43,46 +42,37 @@
 
 	const displayFull = derived(mapDisplay, ($mapDisplay) => $mapDisplay.full);
 
-	/**
-	 * Focusing the map dynamically
-	 */
+	/* Focusing the map dynamically */
 	$: if ($mapLoaded && !$displayFull) {
 		if (!$mapFocus) {
 			goToFallback();
 		} else if ($mapFocus.bounds) {
-			map.fitBounds($mapFocus.bounds);
+			map.fitBounds($mapFocus.bounds, { bearing: 0, pitch: 20 });
 		} else if ($mapFocus.center) {
 			map.flyTo({
 				center: $mapFocus.center.point,
-				zoom: $mapFocus.center.zoom
+				zoom: $mapFocus.center.zoom,
+				bearing: 0,
+				pitch: 20
 			});
 		} else if ($mapFocus.filter) {
-			// https://maplibre.org/maplibre-gl-js-docs/example/zoomto-linestring/
-			// const filtered: maplibregl.GeoJSONFeature[] = map.querySourceFeatures('propositions', {
-			// 	sourceLayer: 'propositions',
-			// 	filter: $mapFocus.filter
-			// });
 			const filters = Object.entries($mapFocus.filter);
-			const filtered = propositionsFeatures.filter((f) => {
+			const filtered = get(mapFeatures).filter((f) => {
 				return filters.every(([k, v]) => f.properties[k] === v);
 			});
 			const bounds = new maplibregl.LngLatBounds(
 				bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature)))))
 			);
-			map.fitBounds(bounds, { padding: 300, duration: 1200, maxZoom: 14.25 });
+			map.fitBounds(bounds, { padding: 200, maxZoom: 15 });
 		}
 	}
 
-	/**
-	 * Temporarily reset view when opening full view map
-	 */
+	/* Temporarily reset view when opening full view map */
 	$: if ($mapLoaded && $displayFull) {
 		goToFallback();
 	}
 
-	/**
-	 * Highlighting features
-	 */
+	/* Highlighting features */
 	function setHighlight(featureIds: (string | number)[], value: boolean) {
 		for (const id of featureIds) {
 			map.setFeatureState({ source: 'propositions', id }, { highlight: value });
@@ -94,17 +84,13 @@
 			if (highlightIds) {
 				setHighlight(highlightIds, false);
 			}
-			// const filter = ['all', ...Object.entries($mapHighlight).map(([k, v]) => (['==', k, v]))];
-			// highlightIds = map.querySourceFeatures('propositions', {
-			// 	sourceLayer: 'propositions',
-			// 	filter
-			// }).map(feature => feature.id);
 			const filters = Object.entries($mapHighlight);
-			highlightIds = propositionsFeatures
+			highlightIds = get(mapFeatures)
 				.filter((f) => {
 					return filters.every(([k, v]) => f.properties[k] === v);
 				})
 				.map((f) => f.id);
+			console.log(highlightIds);
 			setHighlight(highlightIds, true);
 		} else if (highlightIds) {
 			setHighlight(highlightIds, false);
@@ -131,8 +117,8 @@
 		});
 
 		map.once('load', () => {
-			addCityLayer(map);
-			addPropositionsLayers(map);
+			// addCityLayer(map);
+			// addPropositionsLayers(map);
 			mapLoaded.set(true);
 			dispatch('load');
 			bearing = map.getBearing();
@@ -171,6 +157,11 @@
 </svelte:head>
 
 <figure class:full={$mapDisplay.full} class={$mapDisplay.class}>
+	{#if $mapTooltip}
+		{#key $mapTooltip}
+			<MapTooltip {map} text={$mapTooltip.text} coords={$mapTooltip.coords} />
+		{/key}
+	{/if}
 	<div id="container" bind:this={container} />
 	<div id="info">
 		<!-- Short description of current view (remove when user moves map) -->
@@ -182,25 +173,25 @@
 
 <style lang="postcss">
 	figure {
-		--ease: cubic-bezier(0.3, 0, 0, 1);
+		--ease: cubic-bezier(0.4, 0, 0, 1);
 		pointer-events: auto;
 		position: fixed;
 		z-index: -20;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		top: 40%;
-		bottom: 40%;
-		left: 40%;
-		right: 40%;
-		opacity: 0;
-		border-radius: 500px;
+		right: 0;
+		left: 100%;
+		top: 0%;
+		bottom: 0%;
+		opacity: 1;
+		/* border-radius: 200px; */
 		width: auto;
 		height: auto;
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		transition: all 0.4s var(--ease), z-index 0s;
+		transition: all 0.4s var(--ease);
 
 		&.full {
 			opacity: 1 !important;
@@ -210,15 +201,18 @@
 			left: 0 !important;
 			right: 0 !important;
 			border-radius: 0 !important;
+			box-shadow: none;
+			transition: all 0.4s var(--ease), z-index 0s;
 		}
 
 		&:global(.figure) {
 			opacity: 1;
-			top: 0rem;
-			right: 0rem;
-			bottom: 0rem;
-			left: 0rem;
-			border-radius: 0;
+			top: 3.6rem;
+			right: 4rem;
+			bottom: 3.6rem;
+			left: 4rem;
+			border-radius: 1.5rem;
+			box-shadow: 0 2rem 5rem -3rem rgba(0, 0, 40, 0.2);
 		}
 
 		&:global(.half) {
@@ -231,18 +225,13 @@
 		}
 
 		&:global(.medium) {
-			/* --offset-inside: max(0px, calc(50vw - var(--width-lg) / 4));
-			--offset-outside: max(0px, calc(50vw - var(--width-lg) / 2));
-			top: max(120px, calc(50vh - 500px));
-			bottom: max(120px, calc(50vh - 500px)); */
 			--offset-inside: 50vw;
 			--offset-outside: 0;
 			top: 0;
 			bottom: 0;
 			opacity: 1;
 			border-radius: 0;
-			border-radius: 2rem;
-			/* box-shadow: 0px 40px 80px -25px rgba(0, 0, 25, 0.1); */
+			transition: all 0.5s var(--ease), z-index 0s;
 		}
 
 		&:global(.left) {

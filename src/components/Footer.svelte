@@ -6,33 +6,41 @@
 	import logos from '$utils/logos';
 	import { generateSvgPaths } from '$utils/generateSvgPaths';
 	import { getRandomThemeColor } from '$utils/themeColors';
+	import { hoverbubble } from '$actions/hoverBubble';
 
 	const extLinks = [
-		{title: 'CPEUM', href: 'https://paysage.umontreal.ca'},
-		{title: 'CUPUM', href: 'https://unesco-paysage.umontreal.ca'},
-		{title: 'Ville de Saint-Constant', href: 'https://saint-constant.ca'},
-		{title: 'MRC de Roussillon', href: 'https://roussillon.ca'},
-		{title: 'Ministère de l’Économie et de l’Innovation du Québec', href: 'https://www.economie.gouv.qc.ca/accueil/'}
+		{ title: 'CPEUM', href: 'https://paysage.umontreal.ca' },
+		{ title: 'CUPUM', href: 'https://unesco-paysage.umontreal.ca' },
+		{ title: 'Ville de Saint-Constant', href: 'https://saint-constant.ca' },
+		{ title: 'MRC de Roussillon', href: 'https://roussillon.ca' },
+		{
+			title: 'Ministère de l’Économie et de l’Innovation du Québec',
+			href: 'https://www.economie.gouv.qc.ca/accueil/'
+		}
 	];
 
 	let expand = false;
 
-	const color = 'rgba(0, 0, 0, 0.4)'
+	const color = 'rgba(0, 0, 0, 0.4)';
 
 	const hillsVb = { width: 1000, height: 800 };
-	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map((svgPath) => ({
-		viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
-		d: svgPath,
-		fill: getRandomThemeColor([3], ['light']),
-		// stroke: getRandomThemeColor([1, 2, 3])
-	}));
-	hills.push(
-		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 540 }).map((svgPath) => ({
+	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map(
+		(svgPath) => ({
 			viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
 			d: svgPath,
-			fill: 'var(--light2)',
-			// stroke: 'var(--light3)'
-		}))
+			fill: getRandomThemeColor([3], ['light'])
+			// stroke: getRandomThemeColor([1, 2, 3])
+		})
+	);
+	hills.push(
+		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 540 }).map(
+			(svgPath) => ({
+				viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
+				d: svgPath,
+				fill: 'var(--light2)'
+				// stroke: 'var(--light3)'
+			})
+		)
 	);
 </script>
 
@@ -52,37 +60,36 @@
 	{/each}
 </svg>
 <footer
-	use:intersection={{rootMargin: '0px 0px', threshold: 0.5}}
-	on:enter={() => expand = true}
-	on:leave={() => expand = false}
+	use:intersection={{ rootMargin: '0px 0px', threshold: 0.5 }}
+	on:enter={() => (expand = true)}
+	on:leave={() => (expand = false)}
 >
 	<!-- Content -->
 	<div id="content" class:expand style:color>
 		<section id="logos">
 			{#each [...logos.prime, ...logos.second] as logo}
-				<a
-					href={logo.href}
-					rel="external"
-					target="_blank"
-					title={logo.alt}
-				>
+				<a href={logo.href} rel="external" target="_blank" title={logo.alt}>
 					<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 				</a>
 			{/each}
-		<hr>
+			<hr />
 		</section>
 		<section id="links">
 			<ul>
 				{#each extLinks as l}
 					<li>
-						<Link style={'font-weight: 400'} href={l.href} rel="external" {color}>{l.title}</Link>
+						<Link style={'font-weight: 400'} href={l.href} rel="external" {color}
+							>{l.title}</Link
+						>
 					</li>
 				{/each}
 			</ul>
 			<ul>
 				{#each routes as route}
 					<li>
-						<Link style={'font-weight: 400'} href={route.path} {color}>{route.title}</Link>
+						<Link style={'font-weight: 400'} href={route.path} {color}
+							>{route.title}</Link
+						>
 					</li>
 				{/each}
 			</ul>
@@ -123,11 +130,10 @@
 		position: absolute;
 		bottom: 0;
 		width: 100%;
-		height: 2px;
-		border-radius: 1px;
+		height: 1px;
 		padding: 0;
 		margin: 0;
-		background-color: var(--light3);
+		background-color: rgba(50, 50, 100, 0.1);
 		border: none;
 	}
 
@@ -145,7 +151,7 @@
 		/* background-color: var(--light2); */
 		clip-path: inset(100% 0px 0px 0px);
 		transform: translateY(40px);
-		transition: all 1.2s cubic-bezier(.4, 0, .1, 1);
+		transition: all 1.2s cubic-bezier(0.4, 0, 0.1, 1);
 
 		&.expand {
 			transform: translateY(0px);
@@ -166,16 +172,16 @@
 		padding-block: 2rem;
 
 		& a {
+			position: relative;
 			flex: 1;
 			min-width: 120px;
 			max-width: 180px;
 			filter: saturate(0);
-			opacity: .7;
-			transition: all .1s ease-out;
+			opacity: 0.5;
+			transition: all 0.1s ease-out;
 
 			&:hover {
 				opacity: 1;
-				transform: scale(1.02);
 			}
 		}
 
