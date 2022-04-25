@@ -90,7 +90,7 @@
 					return filters.every(([k, v]) => f.properties[k] === v);
 				})
 				.map((f) => f.id);
-			console.log(highlightIds);
+			// console.log(highlightIds);
 			setHighlight(highlightIds, true);
 		} else if (highlightIds) {
 			setHighlight(highlightIds, false);

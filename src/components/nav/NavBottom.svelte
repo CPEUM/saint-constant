@@ -1,20 +1,24 @@
 <script lang="ts">
 	import { hoverbubble } from '$actions/hoverBubble';
 
-	import { route } from '$stores/route';
+	import { exercice, route } from '$stores/route';
+
+	let routeItem;
+
+	$: routeItem = $route?.exercices ? $exercice : $route || null;
 </script>
 
 <nav>
-	{#if $route?.previous}
-		<a href={$route.previous().path} id="prev" use:hoverbubble={{ size: 350 }}>
+	{#if routeItem?.previous || routeItem?.previous}
+		<a href={routeItem.previous().path} id="prev" use:hoverbubble={{ size: 350 }}>
 			<p class="label">&#8592; Revenir</p>
-			<p class="title">{$route.previous().title}</p>
+			<p class="title">{routeItem.previous().title}</p>
 		</a>
 	{/if}
-	{#if $route?.next}
-		<a href={$route.next().path} id="next" use:hoverbubble={{ size: 350 }}>
+	{#if routeItem?.next}
+		<a href={routeItem.next().path} id="next" use:hoverbubble={{ size: 350 }}>
 			<p class="label">Poursuivre &#8594;</p>
-			<p class="title">{$route.next().title}</p>
+			<p class="title">{routeItem.next().title}</p>
 		</a>
 	{/if}
 </nav>

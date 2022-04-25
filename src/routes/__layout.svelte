@@ -22,7 +22,7 @@
 	import { browser } from '$app/env';
 	import Loading from '$components/Loading.svelte';
 	import { mainScroll } from '$stores/scroll';
-	import { mapDisplay, mapTooltip } from '$stores/map';
+	import { mapDisplay, mapFocus, mapHighlight, mapTooltip } from '$stores/map';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import NavBottom from '$components/nav/NavBottom.svelte';
 	import MapFeature from '$components/map/MapFeature.svelte';
@@ -45,6 +45,9 @@
 	}
 
 	beforeNavigate(({ from, to }) => {
+		mapDisplay.setClass('');
+		mapHighlight.set(null);
+		mapFocus.set(null);
 		if (getSegments(from?.href)[0] !== getSegments(to?.href)?.[0]) {
 			topNavigating = true;
 		}
@@ -59,7 +62,6 @@
 	function outroend() {
 		if (topNavigating) topNavigating = false;
 		if (browser) {
-			console.log('Should scroll to top');
 			document.body.style.scrollBehavior = 'unset';
 			document.body.scrollTop = 0;
 			document.body.style.scrollBehavior = 'smooth';
