@@ -41,20 +41,18 @@
 <svelte:body on:scroll={scroll} />
 
 <header style:--accent-color={getRandomThemeColor([2, 3], ['agroparc', 'poles', 'promenades'])}>
-	<!-- <svg viewBox={waves[1].viewBox} preserveAspectRatio="none">
-		<path d={waves[0].d} fill={waves[0].fill} />
-	</svg> -->
 	<svg viewBox={waves[1].viewBox} preserveAspectRatio="xMidYMax slice">
+		<path d={waves[0].d} fill={waves[0].fill} />
 		{#each shapes as shape}
 			<path
 				vector-effect="non-scaling-stroke"
 				d={shape.d}
 				fill={shape.fillColor}
-				stroke="var(--dark1)"
+				stroke="var(--dark2)"
 				stroke-width="2"
 				stroke-linejoin="round"
 				stroke-linecap="round"
-				stroke-dasharray="20"
+				stroke-dasharray={Math.random() * 50 + 15}
 				transform="rotate({Math.random() * 60 - 30})"
 				transform-origin="50% 50%"
 			/>
@@ -129,7 +127,7 @@
 	}
 
 	path {
-		animation: dashanim 100s linear infinite;
+		animation: dashanim 200s linear infinite;
 	}
 
 	hgroup {

@@ -11,32 +11,41 @@
 	import type { ExerciceRoute } from '$utils/routes';
 	import { exerciceRoutes } from '$utils/routes';
 	import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
-	
+
 	let mounted = false;
 	let waves;
 
 	const viewBox = { width: 1500, height: 1200 };
 	function makeWaves(key: ExerciceRoute['key']) {
-		return generateSvgPaths(4, { viewBox, padding: 800 })
-			.map((svgPath) => {
-				return {
-					viewBox: `0 0 ${viewBox.width} ${viewBox.height}`,
-					d: svgPath,
-					fill: getRandomThemeColor([3, 2], [$exercice.key]),
-				}
-			});
+		return [
+			...generateSvgPaths(2, { viewBox, padding: 800 }),
+			...generateSvgPaths(1, { viewBox, padding: 200 })
+		].map((svgPath) => {
+			return {
+				viewBox: `0 0 ${viewBox.width} ${viewBox.height}`,
+				d: svgPath,
+				fill: getRandomThemeColor([3, 2], [$exercice.key]),
+				dashArray: [Math.random() * 500 + 50, Math.random() * 300 + 10]
+			};
+		});
 	}
 
-	$:	waves = makeWaves($exercice.key);
+	$: waves = makeWaves($exercice.key);
 
 	onMount(() => {
-		mounted = true
+		mounted = true;
 	});
 </script>
 
 <header style={getThemeColors($exercice.key)}>
 	{#if mounted}
-		<svg transition:fade|local height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
+		<svg
+			transition:fade|local
+			height={viewBox.height}
+			width={viewBox.width}
+			viewBox="0 0 {viewBox.width} {viewBox.height}"
+			preserveAspectRatio="xMidYMax slice"
+		>
 			{#key $exercice}
 				{#each waves as wave}
 					<path
@@ -44,12 +53,12 @@
 						vector-effect="non-scaling-stroke"
 						d={wave.d}
 						fill={wave.fill}
-						stroke={wave.strokeColor}
-						stroke-width="50"
+						stroke="var(--dark2)"
+						stroke-width="2"
 						stroke-linejoin="round"
 						stroke-linecap="round"
-						stroke-dasharray="54% 20% 64% 90% 30% 130%"
-						stroke-dashoffset="{Math.random() * 300}%"
+						stroke-dasharray={wave.dashArray}
+						stroke-dashoffset="{Math.random() * 100}%"
 					/>
 				{/each}
 			{/key}
@@ -57,10 +66,19 @@
 		</svg>
 		{#key $exercice}
 			<hgroup style:--scroll="{$mainScroll.y}px">
-				<span transition:text={{...revealFlyUp, granularity: 'char'}}>eXERCicE 0{exerciceRoutes.indexOf($exercice) + 1}</span>
+				<span transition:text={{ ...revealFlyUp, granularity: 'char' }}
+					>eXERCicE 0{exerciceRoutes.indexOf($exercice) + 1}</span
+				>
 				<h1
-					in:text={{y: '.5em', mask: true, maskPadding: '.1em', granularity: 'word', staggerDelay: 50, delay: 500}}
-					out:text={{y: '-.5em', mask: true, maskPadding: '.1em', delay: 0}}
+					in:text={{
+						y: '.5em',
+						mask: true,
+						maskPadding: '.1em',
+						granularity: 'word',
+						staggerDelay: 50,
+						delay: 500
+					}}
+					out:text={{ y: '-.5em', mask: true, maskPadding: '.1em', delay: 0 }}
 				>
 					{$exercice.heading}
 				</h1>
@@ -75,13 +93,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-bottom: 200px;
 	}
 
 	hgroup {
 		transform: translateY(calc(var(--scroll) * 0.3));
 		width: 100%;
 		max-width: var(--width-md);
-		position: absolute
+		position: absolute;
 	}
 
 	span {
@@ -120,15 +139,15 @@
 		position: absolute;
 		z-index: -30;
 		width: 100%;
-		height: 100vh;
+		height: calc(100vh + 200px);
 		transform: rotate(var(--angle));
 
 		text {
 			font-family: var(--font-misc);
-			opacity: .7;
+			opacity: 0.7;
 			stroke-linejoin: round;
 			stroke-linecap: round;
-			letter-spacing: -.25em;
+			letter-spacing: -0.25em;
 			/* stroke-dasharray: 100% 20%; */
 			stroke-dasharray: 30% 40%;
 			stroke-width: 3px;

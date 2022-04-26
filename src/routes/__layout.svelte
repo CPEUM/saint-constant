@@ -27,6 +27,8 @@
 	import NavBottom from '$components/nav/NavBottom.svelte';
 	import MapFeature from '$components/map/MapFeature.svelte';
 	import { getData } from '$utils/getData';
+	import MapImage from '$components/map/MapImage.svelte';
+	import { base } from '$app/paths';
 
 	export let topRoute = null;
 	export let topNavigating = true;
@@ -75,9 +77,8 @@
 		{#if mapLoaded && !topNavigating}
 			<article
 				in:fly={{ y: 40, duration: 1550, easing: expoOut }}
-				out:scale={{ opacity: 0, start: 0.98, duration: 350 }}
+				out:fade={{ duration: 350 }}
 				on:outroend={outroend}
-				style:transform-origin="center {$mainScroll.y}px"
 			>
 				<slot />
 				<div class="grain" />
@@ -129,6 +130,16 @@
 			on:leave={() => mapTooltip.set(null)}
 		/>
 	{/await}
+	<MapImage
+		id="noyau"
+		url={base + '/media/agroparc/plan_noyau_villageois-01.jpg'}
+		coordinates={[
+			[-73.57312202453613, 45.365895919964046],
+			[-73.55619192123413, 45.36184042166606],
+			[-73.56029033660889, 45.35407536661815],
+			[-73.57713460922241, 45.357965566229666]
+		]}
+	/>
 </Map>
 
 <style lang="postcss">

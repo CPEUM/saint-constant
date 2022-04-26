@@ -68,7 +68,7 @@
 		résultats de la démarche.
 	</ListItem>
 </List>
-<p class="bg" style="--bgtop: -40rem; --bgbottom: -4rem">
+<p class="bg" style="--bgtop: -1500px; --bgbottom: -350px">
 	<strong
 		>Le présent site vise à exposer les résultats de ce travail de co-construction.
 		Il&nbsp;présente ainsi les assises de la vision stratégique d’aménagement des paysages de la
