@@ -31,13 +31,13 @@
 		"@sveltejs/kit": "next",
 		"@types/geojson": "^7946.0.8",
 		"@types/matter-js": "^0.17.7",
-		"@types/node": "^17.0.25",
+		"@types/node": "^17.0.29",
 		"@types/overlayscrollbars": "^1.12.1",
 		"@types/svg-parser": "^2.0.3",
-		"@typescript-eslint/eslint-plugin": "^5.20.0",
-		"@typescript-eslint/parser": "^5.20.0",
+		"@typescript-eslint/eslint-plugin": "^5.21.0",
+		"@typescript-eslint/parser": "^5.21.0",
 		"autoprefixer": "^10.4.5",
-		"browserslist": "^4.20.2",
+		"browserslist": "^4.20.3",
 		"cssnano": "^5.1.7",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -65,7 +65,6 @@
 		"matter-attractors": "^0.1.6",
 		"matter-attractors-f": "^0.1.7",
 		"matter-js": "^0.18.0",
-		"overlayscrollbars": "^1.13.1",
 		"svg-parser": "^2.0.4"
 	}
 }

@@ -14,7 +14,6 @@
 	import { onDestroy, onMount, setContext } from 'svelte';
 	import { intersection } from '$actions/intersect';
 	import { writable } from 'svelte/store';
-	import { mainScroll } from '$stores/scroll';
 	import { Walls } from './Walls';
 	import { Poke } from './Poke';
 	import { RenderCanvas } from './RenderCanvas';

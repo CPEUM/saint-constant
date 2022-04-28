@@ -157,7 +157,7 @@
 
 	article {
 		/* position: relative; */
-		padding: 0 4rem;
+		padding: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
