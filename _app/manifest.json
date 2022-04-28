@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-527451db.js",
+    "file": "start-13f562bd.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -18,6 +18,7 @@
       "src/routes/conclusion.svelte",
       "src/routes/equipe-partenaires.svelte",
       "src/routes/ideation/agroparc.svelte",
+      "src/routes/ideation/agroparc_test.svelte",
       "src/routes/ideation/poles-mixite-densification.svelte",
       "src/routes/ideation/promenades-citoyennes.svelte",
       "src/routes/index.svelte",
@@ -26,32 +27,33 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-2d0d6d88.js",
+    "file": "pages/__layout.svelte-76dbf06d.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-caf3a8f3.js",
       "_themeColors-35fcc233.js",
-      "_Map-0d680b71.js",
-      "_maplibre-gl-98583deb.js",
+      "_Map-12c7cf07.js",
+      "_map-b06c0350.js",
       "_route-9b4eaf54.js",
       "_routes-10413546.js",
       "_index-9c7c5283.js",
-      "_scroll-c1ae908f.js",
+      "_scroll-3f6f3ac1.js",
       "_paths-396f020f.js",
       "_intersect-eda3c074.js",
       "_logos-1e83a7b1.js",
       "_generateSvgPaths-8c5d72ca.js",
       "_Loading-14e6c528.js",
       "_singletons-d1fb5791.js",
-      "_getData-ad2745ff.js",
+      "_MapFeature-302b24b5.js",
+      "_getData-93201163.js",
       "_index-0df86b8c.js",
-      "_Map.svelte_svelte_type_style_lang-b98937c8.js",
-      "__commonjsHelpers-7d66b65f.js"
+      "_Map.svelte_svelte_type_style_lang-a5e4d01b.js",
+      "_maplibre-gl-a3d9572c.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-bd52cd77.css"
+      "assets/pages/__layout.svelte-142245d4.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -64,7 +66,7 @@
     ]
   },
   "src/routes/ideation/__layout.svelte": {
-    "file": "pages/ideation/__layout.svelte-6b0d1253.js",
+    "file": "pages/ideation/__layout.svelte-c9a3732c.js",
     "src": "src/routes/ideation/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -72,7 +74,7 @@
       "_index-caf3a8f3.js",
       "_routes-10413546.js",
       "_route-9b4eaf54.js",
-      "_scroll-c1ae908f.js",
+      "_scroll-3f6f3ac1.js",
       "_text-fd1b3079.js",
       "_themeColors-35fcc233.js",
       "_index-9c7c5283.js",
@@ -80,7 +82,6 @@
       "_revealText-510b6fa3.js",
       "_paths-396f020f.js",
       "_index-0df86b8c.js",
-      "__commonjsHelpers-7d66b65f.js",
       "_intersect-eda3c074.js"
     ],
     "css": [
@@ -138,87 +139,123 @@
     ]
   },
   "src/routes/ideation/agroparc.svelte": {
-    "file": "pages/ideation/agroparc.svelte-da87b079.js",
+    "file": "pages/ideation/agroparc.svelte-2ac82769.js",
     "src": "src/routes/ideation/agroparc.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-caf3a8f3.js",
-      "_BodiesItem-acef3924.js",
-      "_preload-helper-a3450c27.js",
+      "_LegendItem-c778fb37.js",
+      "_Tandem.svelte_svelte_type_style_lang-ebe81d37.js",
+      "_BodiesItem-fedd305a.js",
       "_Loading-14e6c528.js",
-      "_index-9c7c5283.js",
       "_intersect-eda3c074.js",
       "_paths-396f020f.js",
-      "_FigureMarker-dbc021c5.js",
-      "_BarChart-77d09c96.js",
+      "_FigureMarker-6eb05e74.js",
+      "_BarChart-56145ff8.js",
       "_ListItem-d9f786a0.js",
       "_revealText-510b6fa3.js",
-      "_getData-ad2745ff.js",
-      "_maplibre-gl-98583deb.js",
+      "_getData-93201163.js",
+      "_maplibre-gl-a3d9572c.js",
       "_themeColors-35fcc233.js",
+      "_MapFeature-302b24b5.js",
+      "_map-b06c0350.js",
       "_index-0df86b8c.js",
-      "_scroll-c1ae908f.js",
-      "__commonjsHelpers-7d66b65f.js",
-      "_Map-0d680b71.js",
-      "_Map.svelte_svelte_type_style_lang-b98937c8.js"
-    ],
-    "dynamicImports": [
-      "src/components/excerpt/excerpt-articles/Agroparc1.svelte"
+      "_preload-helper-a3450c27.js",
+      "_index-9c7c5283.js",
+      "_Map-12c7cf07.js",
+      "_Map.svelte_svelte_type_style_lang-a5e4d01b.js"
     ],
     "css": [
-      "assets/pages/ideation/agroparc.svelte-fab29427.css",
-      "assets/Image.svelte_svelte_type_style_lang-3feede74.css"
+      "assets/Image.svelte_svelte_type_style_lang-3feede74.css",
+      "assets/FigureMarker.svelte_svelte_type_style_lang-dcac0a7a.css",
+      "assets/BarChart.svelte_svelte_type_style_lang-64016db0.css"
+    ]
+  },
+  "src/routes/ideation/agroparc_test.svelte": {
+    "file": "pages/ideation/agroparc_test.svelte-e33806ac.js",
+    "src": "src/routes/ideation/agroparc_test.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-caf3a8f3.js",
+      "_revealText-510b6fa3.js",
+      "_BodiesItem-fedd305a.js",
+      "_Tandem.svelte_svelte_type_style_lang-ebe81d37.js",
+      "_Loading-14e6c528.js",
+      "_maplibre-gl-a3d9572c.js",
+      "_Map.svelte_svelte_type_style_lang-a5e4d01b.js",
+      "_ListItem-d9f786a0.js",
+      "_getData-93201163.js",
+      "_scroll-3f6f3ac1.js",
+      "_intersect-eda3c074.js",
+      "_themeColors-35fcc233.js",
+      "_index-9c7c5283.js",
+      "_index-0df86b8c.js",
+      "_preload-helper-a3450c27.js",
+      "_paths-396f020f.js"
+    ],
+    "css": [
+      "assets/pages/ideation/agroparc_test.svelte-7edb50e6.css",
+      "assets/Image.svelte_svelte_type_style_lang-3feede74.css",
+      "assets/FigureMarker.svelte_svelte_type_style_lang-dcac0a7a.css",
+      "assets/BarChart.svelte_svelte_type_style_lang-64016db0.css"
     ]
   },
   "src/routes/ideation/poles-mixite-densification.svelte": {
-    "file": "pages/ideation/poles-mixite-densification.svelte-942521cc.js",
+    "file": "pages/ideation/poles-mixite-densification.svelte-5d380645.js",
     "src": "src/routes/ideation/poles-mixite-densification.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-caf3a8f3.js",
-      "_BodiesItem-acef3924.js",
-      "_FigureMarker-dbc021c5.js",
+      "_BodiesItem-fedd305a.js",
+      "_LegendItem-c778fb37.js",
+      "_FigureMarker-6eb05e74.js",
       "_ListItem-d9f786a0.js",
       "_TableCell-267dc61f.js",
-      "_intersect-eda3c074.js",
-      "_paths-396f020f.js",
-      "_revealText-510b6fa3.js",
-      "_maplibre-gl-98583deb.js",
-      "_index-0df86b8c.js",
-      "__commonjsHelpers-7d66b65f.js",
       "_themeColors-35fcc233.js",
       "_index-9c7c5283.js",
-      "_scroll-c1ae908f.js",
-      "_Map-0d680b71.js",
-      "_Map.svelte_svelte_type_style_lang-b98937c8.js"
+      "_intersect-eda3c074.js",
+      "_index-0df86b8c.js",
+      "_maplibre-gl-a3d9572c.js",
+      "_paths-396f020f.js",
+      "_revealText-510b6fa3.js",
+      "_map-b06c0350.js",
+      "_Map-12c7cf07.js",
+      "_Map.svelte_svelte_type_style_lang-a5e4d01b.js"
+    ],
+    "css": [
+      "assets/FigureMarker.svelte_svelte_type_style_lang-dcac0a7a.css"
     ]
   },
   "src/routes/ideation/promenades-citoyennes.svelte": {
-    "file": "pages/ideation/promenades-citoyennes.svelte-660f5f6b.js",
+    "file": "pages/ideation/promenades-citoyennes.svelte-5f05f79f.js",
     "src": "src/routes/ideation/promenades-citoyennes.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-caf3a8f3.js",
       "_revealText-510b6fa3.js",
-      "_BodiesItem-acef3924.js",
-      "_BarChart-77d09c96.js",
+      "_BodiesItem-fedd305a.js",
+      "_BarChart-56145ff8.js",
+      "_LegendItem-c778fb37.js",
       "_ListItem-d9f786a0.js",
       "_intersect-eda3c074.js",
-      "_paths-396f020f.js",
-      "_maplibre-gl-98583deb.js",
-      "_index-0df86b8c.js",
-      "__commonjsHelpers-7d66b65f.js",
       "_themeColors-35fcc233.js",
       "_index-9c7c5283.js",
-      "_scroll-c1ae908f.js",
-      "_Loading-14e6c528.js"
+      "_index-0df86b8c.js",
+      "_maplibre-gl-a3d9572c.js",
+      "_paths-396f020f.js",
+      "_Loading-14e6c528.js",
+      "_map-b06c0350.js"
+    ],
+    "css": [
+      "assets/BarChart.svelte_svelte_type_style_lang-64016db0.css"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-766f5f2f.js",
+    "file": "pages/index.svelte-98e72285.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -227,17 +264,17 @@
       "_logos-1e83a7b1.js",
       "_routes-10413546.js",
       "_intersect-eda3c074.js",
-      "_maplibre-gl-98583deb.js",
+      "_map-b06c0350.js",
       "_themeColors-35fcc233.js",
       "_revealText-510b6fa3.js",
-      "_Map.svelte_svelte_type_style_lang-b98937c8.js",
+      "_Map.svelte_svelte_type_style_lang-a5e4d01b.js",
       "_generateSvgPaths-8c5d72ca.js",
       "_Logos-b920102f.js",
       "_ListItem-d9f786a0.js",
+      "_maplibre-gl-a3d9572c.js",
       "_index-9c7c5283.js",
       "_index-0df86b8c.js",
-      "_paths-396f020f.js",
-      "__commonjsHelpers-7d66b65f.js"
+      "_paths-396f020f.js"
     ],
     "css": [
       "assets/pages/index.svelte-8180e4c8.css"
@@ -295,13 +332,14 @@
   "_themeColors-35fcc233.js": {
     "file": "chunks/themeColors-35fcc233.js"
   },
-  "_Map-0d680b71.js": {
-    "file": "chunks/Map-0d680b71.js",
+  "_Map-12c7cf07.js": {
+    "file": "chunks/Map-12c7cf07.js",
     "imports": [
       "_index-caf3a8f3.js",
       "_index-0df86b8c.js",
-      "_maplibre-gl-98583deb.js",
-      "_Map.svelte_svelte_type_style_lang-b98937c8.js",
+      "_map-b06c0350.js",
+      "_Map.svelte_svelte_type_style_lang-a5e4d01b.js",
+      "_maplibre-gl-a3d9572c.js",
       "_index-9c7c5283.js"
     ]
   },
@@ -330,38 +368,43 @@
       "assets/Loading-09601aef.css"
     ]
   },
-  "_scroll-c1ae908f.js": {
-    "file": "chunks/scroll-c1ae908f.js",
+  "_scroll-3f6f3ac1.js": {
+    "file": "chunks/scroll-3f6f3ac1.js",
     "imports": [
-      "__commonjsHelpers-7d66b65f.js",
-      "_index-0df86b8c.js",
-      "_index-caf3a8f3.js"
+      "_index-0df86b8c.js"
     ]
   },
-  "_maplibre-gl-98583deb.js": {
-    "file": "chunks/maplibre-gl-98583deb.js",
+  "_map-b06c0350.js": {
+    "file": "chunks/map-b06c0350.js",
     "imports": [
-      "_index-0df86b8c.js",
-      "__commonjsHelpers-7d66b65f.js"
+      "_index-0df86b8c.js"
     ]
   },
-  "_getData-ad2745ff.js": {
-    "file": "chunks/getData-ad2745ff.js",
+  "_MapFeature-302b24b5.js": {
+    "file": "chunks/MapFeature-302b24b5.js",
     "imports": [
       "_index-caf3a8f3.js",
-      "_Map-0d680b71.js",
-      "_maplibre-gl-98583deb.js",
+      "_Map-12c7cf07.js",
+      "_map-b06c0350.js"
+    ]
+  },
+  "_getData-93201163.js": {
+    "file": "chunks/getData-93201163.js",
+    "imports": [
       "_paths-396f020f.js"
     ]
   },
-  "_Map.svelte_svelte_type_style_lang-b98937c8.js": {
-    "file": "chunks/Map.svelte_svelte_type_style_lang-b98937c8.js",
+  "_Map.svelte_svelte_type_style_lang-a5e4d01b.js": {
+    "file": "chunks/Map.svelte_svelte_type_style_lang-a5e4d01b.js",
     "imports": [
-      "_maplibre-gl-98583deb.js"
+      "_maplibre-gl-a3d9572c.js"
     ],
     "css": [
       "assets/Map.svelte_svelte_type_style_lang-2ff56a67.css"
     ]
+  },
+  "_maplibre-gl-a3d9572c.js": {
+    "file": "chunks/maplibre-gl-a3d9572c.js"
   },
   "_routes-10413546.js": {
     "file": "chunks/routes-10413546.js",
@@ -385,9 +428,6 @@
   },
   "_generateSvgPaths-8c5d72ca.js": {
     "file": "chunks/generateSvgPaths-8c5d72ca.js"
-  },
-  "__commonjsHelpers-7d66b65f.js": {
-    "file": "chunks/_commonjsHelpers-7d66b65f.js"
   },
   "_text-fd1b3079.js": {
     "file": "chunks/text-fd1b3079.js",
@@ -425,48 +465,73 @@
       "assets/Logos-dd87196a.css"
     ]
   },
-  "_BodiesItem-acef3924.js": {
-    "file": "chunks/BodiesItem-acef3924.js",
+  "_LegendItem-c778fb37.js": {
+    "file": "chunks/LegendItem-c778fb37.js",
     "imports": [
       "_index-caf3a8f3.js",
       "_intersect-eda3c074.js",
       "_paths-396f020f.js",
       "_revealText-510b6fa3.js",
-      "_maplibre-gl-98583deb.js",
-      "_index-0df86b8c.js",
-      "_themeColors-35fcc233.js",
-      "_index-9c7c5283.js",
-      "_scroll-c1ae908f.js",
-      "__commonjsHelpers-7d66b65f.js"
-    ],
-    "css": [
-      "assets/BodiesItem-ef11d063.css"
+      "_BodiesItem-fedd305a.js",
+      "_map-b06c0350.js",
+      "_maplibre-gl-a3d9572c.js",
+      "_index-0df86b8c.js"
     ]
   },
-  "_FigureMarker-dbc021c5.js": {
-    "file": "chunks/FigureMarker-dbc021c5.js",
+  "_Tandem.svelte_svelte_type_style_lang-ebe81d37.js": {
+    "file": "chunks/Tandem.svelte_svelte_type_style_lang-ebe81d37.js",
     "imports": [
+      "_preload-helper-a3450c27.js",
       "_index-caf3a8f3.js",
-      "_BodiesItem-acef3924.js",
-      "_Map-0d680b71.js",
-      "_maplibre-gl-98583deb.js",
+      "_Loading-14e6c528.js",
       "_index-9c7c5283.js"
     ],
+    "dynamicImports": [
+      "src/components/excerpt/excerpt-articles/Agroparc1.svelte"
+    ],
     "css": [
-      "assets/FigureMarker-2d1fc79d.css"
+      "assets/Tandem.svelte_svelte_type_style_lang-979cefd7.css"
     ]
   },
-  "_BarChart-77d09c96.js": {
-    "file": "chunks/BarChart-77d09c96.js",
+  "_FigureMarker-6eb05e74.js": {
+    "file": "chunks/FigureMarker-6eb05e74.js",
+    "imports": [
+      "_index-caf3a8f3.js",
+      "_LegendItem-c778fb37.js",
+      "_Map-12c7cf07.js",
+      "_maplibre-gl-a3d9572c.js",
+      "_index-9c7c5283.js",
+      "_map-b06c0350.js"
+    ],
+    "css": [
+      "assets/FigureMarker.svelte_svelte_type_style_lang-dcac0a7a.css"
+    ]
+  },
+  "_BarChart-56145ff8.js": {
+    "file": "chunks/BarChart-56145ff8.js",
     "imports": [
       "_index-caf3a8f3.js",
       "_intersect-eda3c074.js",
       "_paths-396f020f.js",
-      "_BodiesItem-acef3924.js",
+      "_LegendItem-c778fb37.js",
       "_Loading-14e6c528.js"
     ],
     "css": [
-      "assets/BarChart-5582491a.css"
+      "assets/BarChart.svelte_svelte_type_style_lang-64016db0.css"
+    ]
+  },
+  "_BodiesItem-fedd305a.js": {
+    "file": "chunks/BodiesItem-fedd305a.js",
+    "imports": [
+      "_index-caf3a8f3.js",
+      "_themeColors-35fcc233.js",
+      "_index-9c7c5283.js",
+      "_intersect-eda3c074.js",
+      "_index-0df86b8c.js",
+      "_maplibre-gl-a3d9572c.js"
+    ],
+    "css": [
+      "assets/BodiesItem-ef11d063.css"
     ]
   },
   "_ListItem-d9f786a0.js": {
