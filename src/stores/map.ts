@@ -1,5 +1,5 @@
 import type { ExerciceRoute } from '$utils/routes';
-import maplibregl, { LngLat, type LngLatLike } from 'maplibre-gl';
+import maplibregl, { LngLat, type FilterExpression, type LngLatLike } from 'maplibre-gl';
 import { derived, writable } from 'svelte/store';
 import { route } from './route';
 
@@ -10,11 +10,18 @@ interface MapFocusOptions {
 		zoom: number;
 	};
 	bounds?: maplibregl.LngLatBounds | maplibregl.LngLatBoundsLike;
+	pitch?: number;
 }
 /**
  * Store to manage the maps's current viewport focus in terms of zoom and position.
  */
 export const mapFocus = writable<MapFocusOptions>(null);
+
+/**
+ * Store to manage the map's current feature highlight triggered by intersection events.
+ * Highlights resulting from mouseover should be handled directly on the map.
+ */
+export const mapFilter = writable<FilterExpression>(null);
 
 interface MapHighlightOptions {
 	exercice?: ExerciceRoute['key'];

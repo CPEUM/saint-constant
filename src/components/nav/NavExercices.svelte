@@ -4,17 +4,13 @@
 	import { getThemeColors } from '$utils/themeColors';
 	import { exerciceRoutes } from '$utils/routes';
 	import { fly } from 'svelte/transition';
+	import { mainScroll } from '$stores/scroll';
 </script>
 
 {#if $route?.exercices}
 	<nav transition:fly={{ y: -25 }} class:min={$mapDisplay.full}>
 		{#each exerciceRoutes as ex, i}
-			<a
-				href={ex.path}
-				sveltekit:prefetch
-				style={getThemeColors(ex.key)}
-				class:current={$exercice === ex}
-			>
+			<a href={ex.path} sveltekit:prefetch style={getThemeColors(ex.key)} class:current={$exercice === ex}>
 				<span class="number">0{i + 1}.</span>&nbsp;<span class="title">{ex.title}</span>
 			</a>
 		{/each}

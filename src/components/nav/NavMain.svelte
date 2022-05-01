@@ -5,7 +5,16 @@
 	import { routes } from '$utils/routes';
 	import { draw } from 'svelte/transition';
 
+	let mouseout;
 	const yLimit = 120;
+
+	function checkMouse(e: MouseEvent) {
+		if (e.clientY > 120) {
+			mouseout = true;
+		} else {
+			mouseout = false;
+		}
+	}
 
 	function generateColorString() {
 		return `hsl(${20 + Math.random() * 180}, 60%, 70%)`;
@@ -21,13 +30,15 @@
 				y1: ypad + Math.random() * (100 - 2 * ypad) + '%',
 				x2: xpad + Math.random() * (100 - 2 * xpad) + '%',
 				y2: ypad + Math.random() * (100 - 2 * ypad) + '%',
-				stroke: generateColorString(),
-			}
+				stroke: generateColorString()
+			};
 		});
 	}
 </script>
 
-<nav class:min={($mainScroll.direction == 'down' && $mainScroll.y > yLimit) || $mapDisplay.full}>
+<svelte:window on:mousemove={checkMouse} />
+
+<nav class:min={($mainScroll.y > yLimit && mouseout) || $mapDisplay.full}>
 	{#each routes as r, i}
 		<a
 			href={r.exercices ? $exercice.path : r.path}
@@ -40,11 +51,7 @@
 			<svg>
 				{#if r.title == $route?.title}
 					{#each generateLines() as line, i}
-						<line {...line}
-							in:draw={{speed: .25, delay: i * 20}}
-							out:draw={{speed: .5, delay: i * 20}}
-							vector-effect="non-scaling-stroke"
-						/>
+						<line {...line} in:draw={{ speed: 0.25, delay: i * 20 }} out:draw={{ speed: 0.5, delay: i * 20 }} vector-effect="non-scaling-stroke" />
 					{/each}
 				{/if}
 			</svg>
@@ -65,8 +72,8 @@
 		max-height: 80px;
 		margin-bottom: 1em;
 		transition-property: max-height, margin-bottom;
-		transition-duration: .5s;
-		transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+		transition-duration: 0.5s;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 		/* @media (max-width: 800px) {
 			flex-direction: column;
@@ -86,7 +93,7 @@
 	}
 
 	.grain {
-		opacity: .3;
+		opacity: 0.3;
 	}
 
 	a {
@@ -105,19 +112,16 @@
 		box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
 		color: var(--dark1);
 		font-weight: 500;
-		letter-spacing: .2px;
+		letter-spacing: 0.2px;
 		overflow: hidden;
-		transition: transform 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1),
-			opacity 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1),
-			box-shadow 0.3s ease-in-out,
-			background-color .5s ease;
+		transition: transform 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1), opacity 0.35s var(--delay) cubic-bezier(0.5, 0, 0.4, 1), box-shadow 0.3s ease-in-out, background-color 0.5s ease;
 
 		& .text {
 			position: relative;
 			z-index: 1;
 			transform: skewY(0deg) translateY(-0.05em);
 			opacity: 1;
-			transition: all .3s cubic-bezier(.5, 0, .3, 1);
+			transition: all 0.3s cubic-bezier(0.5, 0, 0.3, 1);
 		}
 
 		& .hover-text {
@@ -125,7 +129,7 @@
 			position: absolute;
 			transform: skewY(8deg) translateY(2em);
 			opacity: 0;
-			transition: all .3s cubic-bezier(.5, 0, .3, 1);
+			transition: all 0.3s cubic-bezier(0.5, 0, 0.3, 1);
 		}
 
 		&:hover {
@@ -150,11 +154,11 @@
 			pointer-events: none;
 			color: var(--dark1);
 			background-color: var(--activebg) !important;
-			box-shadow: 0 .8em 2em -0.5em rgba(0, 0, 0, 0.25);
+			box-shadow: 0 0.8em 2em -0.5em rgba(0, 0, 0, 0.25);
 		}
 
 		&.loading {
-			box-shadow: 0 .5em 1em -0.5em rgba(0, 0, 0, 0.2), 0 0 0 1em rgba(255,255,255,.5);
+			box-shadow: 0 0.5em 1em -0.5em rgba(0, 0, 0, 0.2), 0 0 0 1em rgba(255, 255, 255, 0.5);
 		}
 	}
 

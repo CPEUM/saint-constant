@@ -25,7 +25,7 @@
 	export let highlight = false;
 	export let active = true;
 	export let key: string | number = label;
-	export let size: number = 50;
+	export let size: number = 40;
 	/* If map marker */
 	export let lnglat: LngLat | LngLatLike = null;
 	export let zoom: number = 16;
@@ -33,6 +33,7 @@
 	export let x: number = null;
 	export let y: number = null;
 
+	let marker: Marker;
 	let el: HTMLElement;
 	const figCtx = getContext('figure') as any;
 	const figmapCtx = getContext('figuremap') as any;
@@ -46,9 +47,17 @@
 		mapFocus.set({ center: { point: lnglat, zoom } });
 	}
 
+	function setCurrent() {
+		currentKey.set(key);
+	}
+
+	function unsetCurrent() {
+		currentKey.set(null);
+	}
+
 	onMount(() => {
 		if (figmapCtx) {
-			new Marker({
+			marker = new Marker({
 				element: el,
 				anchor: 'center'
 			})
@@ -59,42 +68,23 @@
 
 	onDestroy(() => {
 		if (figmapCtx) {
+			if (marker && map) {
+				marker.remove();
+			}
 		}
 	});
 </script>
 
-<div
-	id="outer"
-	{...$$restProps}
-	bind:this={el}
-	style="{x ? `left: ${x}%;` : ''} {y ? `top: ${y}%;` : ''}"
-	class:highlight={highlight || key == $currentKey}
->
+<div class="outer" {...$$restProps} bind:this={el} style:font-size="{size}px" style="{x ? `left: ${x}%;` : ''} {y ? `top: ${y}%;` : ''}" class:highlight={highlight || key == $currentKey}>
 	{#if (active && !mapActive) || (mapActive && $mapActive)}
-		<div
-			id="inner"
-			in:fly={{ y: 15, duration: 1000, easing: expoOut, delay: index * 150 + 500 }}
-		>
-			<Symbol
-				{src}
-				{label}
-				{color}
-				{fill}
-				{colorHighlight}
-				{fillHighlight}
-				{shape}
-				{stroke}
-				{strokeWidth}
-				{strokeType}
-				{interactive}
-				highlight={highlight || key == $currentKey}
-			/>
+		<div class="inner" in:fly={{ y: 15, duration: 1000, easing: expoOut, delay: index * 150 + 500 }} on:mouseenter={setCurrent} on:mouseleave={unsetCurrent}>
+			<Symbol {src} {label} {color} {fill} {colorHighlight} {fillHighlight} {shape} {stroke} {strokeWidth} {strokeType} {interactive} highlight={highlight || key == $currentKey} />
 		</div>
 	{/if}
 </div>
 
 <style>
-	#outer {
+	.outer {
 		user-select: none;
 		pointer-events: none;
 		position: absolute;
@@ -102,8 +92,19 @@
 		align-items: center;
 		justify-content: center;
 		font-family: var(--font-main);
-		font-weight: 500;
 		padding: 0;
 		margin: 0;
+		width: 1em;
+		height: 1em;
+		line-height: 0;
+	}
+
+	.inner {
+		position: absolute;
+		pointer-events: all;
+	}
+
+	.highlight {
+		transform: scale(1.2);
 	}
 </style>

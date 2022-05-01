@@ -17,14 +17,11 @@
 
 	const viewBox = { width: 1500, height: 1200 };
 	function makeWaves(key: ExerciceRoute['key']) {
-		return [
-			...generateSvgPaths(2, { viewBox, padding: 800 }),
-			...generateSvgPaths(1, { viewBox, padding: 200 })
-		].map((svgPath) => {
+		return [...generateSvgPaths(2, { viewBox, padding: 800 }), ...generateSvgPaths(1, { viewBox, padding: 200 })].map((svgPath) => {
 			return {
 				viewBox: `0 0 ${viewBox.width} ${viewBox.height}`,
 				d: svgPath,
-				fill: getRandomThemeColor([3, 2], [$exercice.key]),
+				fill: getRandomThemeColor([1, 2], [$exercice.key]),
 				dashArray: [Math.random() * 500 + 50, Math.random() * 300 + 10]
 			};
 		});
@@ -39,36 +36,17 @@
 
 <header style={getThemeColors($exercice.key)}>
 	{#if mounted}
-		<svg
-			transition:fade|local
-			height={viewBox.height}
-			width={viewBox.width}
-			viewBox="0 0 {viewBox.width} {viewBox.height}"
-			preserveAspectRatio="xMidYMax slice"
-		>
+		<svg transition:fade|local height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
 			{#key $exercice}
 				{#each waves as wave}
-					<path
-						transition:fade
-						vector-effect="non-scaling-stroke"
-						d={wave.d}
-						fill={wave.fill}
-						stroke="var(--dark2)"
-						stroke-width="2"
-						stroke-linejoin="round"
-						stroke-linecap="round"
-						stroke-dasharray={wave.dashArray}
-						stroke-dashoffset="{Math.random() * 100}%"
-					/>
+					<path transition:fade vector-effect="non-scaling-stroke" d={wave.d} fill={wave.fill} stroke="var(--dark2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray={wave.dashArray} stroke-dashoffset="{Math.random() * 100}%" />
 				{/each}
 			{/key}
 			<!-- <text x="100" y="75" font-size="200" text-anchor="middle" dominant-baseline="baseline">{$exercice.title}</text> -->
 		</svg>
 		{#key $exercice}
 			<hgroup style:--scroll="{$mainScroll.y}px">
-				<span transition:text={{ ...revealFlyUp, granularity: 'char' }}
-					>eXERCicE 0{exerciceRoutes.indexOf($exercice) + 1}</span
-				>
+				<span transition:text={{ ...revealFlyUp, granularity: 'char' }}>eXERCicE 0{exerciceRoutes.indexOf($exercice) + 1}</span>
 				<h1
 					in:text={{
 						y: '.5em',

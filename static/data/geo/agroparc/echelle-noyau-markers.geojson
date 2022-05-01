@@ -1,0 +1,50 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "A",
+				"title": "Bassin de rétention",
+				"key": "agroparc-noyau-bassin"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5679829120636,
+					45.36092827140811
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "B",
+				"title": "Parc des citoyens",
+				"key": "agroparc-noyau-parc"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.56168508529663,
+					45.35914915917106
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "C",
+				"title": "Secteur Paroissial",
+				"key": "agroparc-noyau-paroisse"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.56889486312866,
+					45.36321992676169
+				]
+			}
+		}
+	]
+}

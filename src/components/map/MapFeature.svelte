@@ -9,8 +9,7 @@
 	export let data: FeatureCollection | Feature;
 	export let fillColor: string | DataDrivenPropertyValueSpecification<string> = 'none';
 	export let fillColorHover: string | DataDrivenPropertyValueSpecification<string> = fillColor;
-	export let fillColorHighlight: string | DataDrivenPropertyValueSpecification<string> =
-		fillColor;
+	export let fillColorHighlight: string | DataDrivenPropertyValueSpecification<string> = fillColor;
 	export let fillOpacity: number = 1;
 	export let fillOpacityHover: number = fillOpacity;
 	export let fillOpacityHighlight: number = fillOpacity;
@@ -19,14 +18,13 @@
 	export let strokeWidthHover: number = 12;
 	export let strokeWidthHighlight: number = 10;
 	export let strokeColor: string | DataDrivenPropertyValueSpecification<string> = 'none';
-	export let strokeColorHover: string | DataDrivenPropertyValueSpecification<string> =
-		strokeColor;
-	export let strokeColorHighlight: string | DataDrivenPropertyValueSpecification<string> =
-		strokeColor;
+	export let strokeColorHover: string | DataDrivenPropertyValueSpecification<string> = strokeColor;
+	export let strokeColorHighlight: string | DataDrivenPropertyValueSpecification<string> = strokeColor;
 	export let strokeOpacity: number = 1;
 	export let strokeOpacityHover: number = strokeOpacity;
 	export let strokeOpacityHighlight: number = strokeOpacity;
 	export let strokeDashArray: number[] = [1, 0];
+	export let radius: number = 10;
 	export let id: string;
 
 	const figureCtx = getContext('figuremap') as any;
@@ -96,38 +94,11 @@
 			id: LAYER_IDS.LINES,
 			type: 'line',
 			source: id,
-			filter: [
-				'any',
-				['==', ['geometry-type'], 'LineString'],
-				['==', ['geometry-type'], 'MultiLineString'],
-				['==', ['geometry-type'], 'Polygon'],
-				['==', ['geometry-type'], 'MultiPolygon']
-			],
+			filter: ['any', ['==', ['geometry-type'], 'LineString'], ['==', ['geometry-type'], 'MultiLineString'], ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
 			paint: {
-				'line-width': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					strokeWidthHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					strokeWidthHighlight,
-					strokeWidth
-				],
-				'line-color': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					strokeColorHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					strokeColorHighlight,
-					strokeColor
-				],
-				'line-opacity': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					strokeOpacityHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					strokeOpacityHighlight,
-					strokeOpacity
-				],
+				'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], strokeWidthHover, ['boolean', ['feature-state', 'highlight'], false], strokeWidthHighlight, strokeWidth],
+				'line-color': ['case', ['boolean', ['feature-state', 'hover'], false], strokeColorHover, ['boolean', ['feature-state', 'highlight'], false], strokeColorHighlight, strokeColor],
+				'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], strokeOpacityHover, ['boolean', ['feature-state', 'highlight'], false], strokeOpacityHighlight, strokeOpacity],
 				'line-dasharray': strokeDashArray
 			},
 			layout: {
@@ -150,39 +121,13 @@
 			id: LAYER_IDS.CIRCLES,
 			type: 'circle',
 			source: id,
-			filter: [
-				'any',
-				['==', ['geometry-type'], 'Point'],
-				['==', ['geometry-type'], 'MultiPoint']
-			],
+			filter: ['any', ['==', ['geometry-type'], 'Point'], ['==', ['geometry-type'], 'MultiPoint']],
 			paint: {
 				'circle-pitch-alignment': 'map',
 				'circle-pitch-scale': 'map',
-				'circle-radius': [
-					'interpolate',
-					['exponential', 2],
-					['zoom'],
-					10,
-					['/', ['get', 'radius'], 58.554],
-					20,
-					['/', ['get', 'radius'], 0.014]
-				],
-				'circle-color': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					fillColorHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					fillColorHighlight,
-					fillColor
-				],
-				'circle-opacity': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					fillOpacityHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					fillOpacityHighlight,
-					fillOpacity
-				],
+				'circle-radius': ['interpolate', ['exponential', 2], ['zoom'], 10, ['/', ['coalesce', ['get', 'radius'], radius], 58.554], 20, ['/', ['coalesce', ['get', 'radius'], radius], 0.014]],
+				'circle-color': ['case', ['boolean', ['feature-state', 'hover'], false], fillColorHover, ['boolean', ['feature-state', 'highlight'], false], fillColorHighlight, fillColor],
+				'circle-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], fillOpacityHover, ['boolean', ['feature-state', 'highlight'], false], fillOpacityHighlight, fillOpacity],
 				'circle-stroke-width': [
 					'case',
 					['boolean', ['feature-state', 'hover'], false],
@@ -226,28 +171,10 @@
 			id: LAYER_IDS.FILLS,
 			type: 'fill',
 			source: id,
-			filter: [
-				'any',
-				['==', ['geometry-type'], 'Polygon'],
-				['==', ['geometry-type'], 'MultiPolygon']
-			],
+			filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
 			paint: {
-				'fill-color': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					fillColorHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					fillColorHighlight,
-					fillColor
-				],
-				'fill-opacity': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					fillOpacityHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					fillOpacityHighlight,
-					fillOpacity
-				],
+				'fill-color': ['case', ['boolean', ['feature-state', 'hover'], false], fillColorHover, ['boolean', ['feature-state', 'highlight'], false], fillColorHighlight, fillColor],
+				'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], fillOpacityHover, ['boolean', ['feature-state', 'highlight'], false], fillOpacityHighlight, fillOpacity],
 				'fill-antialias': true
 			},
 			layout: {
@@ -270,7 +197,9 @@
 			map.removeSource(id);
 		}
 		for (const layerId of Object.values(LAYER_IDS)) {
-			map.removeLayer(layerId);
+			if (map.getLayer(layerId)) {
+				map.removeLayer(layerId);
+			}
 		}
 		if ((data as any).features) {
 			(data as FeatureCollection).features.forEach((f) => mapFeatures.removeById(f.id));

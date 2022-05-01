@@ -39,10 +39,7 @@
 	function propositionFeatureHover(e: maplibregl.MapLayerMouseEvent) {
 		mapTooltip.set({
 			text: `${e.features[0].properties.type} ${e.features[0].properties.key}: ${e.features[0].properties.title}`,
-			coords:
-				e.features[0].geometry.type.toLowerCase() === 'point'
-					? (e.features[0].geometry as any).coordinates
-					: e.lngLat
+			coords: e.features[0].geometry.type.toLowerCase() === 'point' ? (e.features[0].geometry as any).coordinates : e.lngLat
 		});
 	}
 
@@ -75,11 +72,7 @@
 <main>
 	{#key topRoute}
 		{#if mapLoaded && !topNavigating}
-			<article
-				in:fly={{ y: 40, duration: 1550, easing: expoOut }}
-				out:fade={{ duration: 350 }}
-				on:outroend={outroend}
-			>
+			<article in:fly={{ y: 40, duration: 1550, easing: expoOut }} out:fade={{ duration: 350 }} on:outroend={outroend}>
 				<slot />
 				<div class="grain" />
 			</article>
@@ -95,16 +88,7 @@
 {/if}
 <Map on:load={() => (mapLoaded = true)} on:error={() => (mapLoaded = true)}>
 	{#await municipalFeature then geojson}
-		<MapFeature
-			id="municipal"
-			data={geojson}
-			fillColor="white"
-			fillOpacity={0}
-			strokeColor={colors.accent3}
-			strokeWidth={4}
-			strokeOpacity={1}
-			strokeDashArray={[0, 1.5]}
-		/>
+		<MapFeature id="municipal" data={geojson} fillColor="white" fillOpacity={0} strokeColor={colors.accent3} strokeWidth={4} strokeOpacity={1} strokeDashArray={[0, 1.5]} />
 	{/await}
 	{#await propositionsFeatures then geojson}
 		<MapFeature
@@ -118,11 +102,7 @@
 			fillOpacityHighlight={0.65}
 			strokeColor={['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]]}
 			strokeColorHover={['get', ['concat', ['get', 'exercice'], '3'], ['literal', colors]]}
-			strokeColorHighlight={[
-				'get',
-				['concat', ['get', 'exercice'], '3'],
-				['literal', colors]
-			]}
+			strokeColorHighlight={['get', ['concat', ['get', 'exercice'], '3'], ['literal', colors]]}
 			strokeOpacity={0.5}
 			strokeOpacityHover={0.8}
 			strokeOpacityHighlight={0.65}
@@ -130,16 +110,6 @@
 			on:leave={() => mapTooltip.set(null)}
 		/>
 	{/await}
-	<MapImage
-		id="noyau"
-		url={base + '/media/agroparc/plan_noyau_villageois-01.jpg'}
-		coordinates={[
-			[-73.57312202453613, 45.365895919964046],
-			[-73.55619192123413, 45.36184042166606],
-			[-73.56029033660889, 45.35407536661815],
-			[-73.57713460922241, 45.357965566229666]
-		]}
-	/>
 </Map>
 
 <style lang="postcss">

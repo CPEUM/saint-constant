@@ -14,9 +14,7 @@
 </script>
 
 {#if mounted}
-	<header
-		in:fly={{ opacity: 0, y: -20, duration: 800, easing: expoOut, delay: 1000 }}
-	>
+	<header in:fly={{ opacity: 0, y: -20, duration: 800, easing: expoOut, delay: 1000 }}>
 		<div>
 			<section>
 				<NavMain />
@@ -41,7 +39,7 @@
 		justify-content: flex-start;
 		align-items: center;
 		padding-inline: 1em;
-		padding-block: 1em .5em;
+		padding-block: 1em 0.5em;
 		line-height: 1.5em;
 		top: 0rem;
 		margin: 0;

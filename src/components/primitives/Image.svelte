@@ -18,32 +18,25 @@
 		loaded = true;
 		dispatch('load');
 	}
-
 </script>
 
-<img
-	use:intersection={{rootMargin: '200px'}}
-	on:enter|once={loadsrc}
-	on:load={onload}
-	loading="lazy"
-	decoding="async"
-	src={base + appliedSrc}
-	{alt}
-	{...$$restProps}
-	class:hidden={!loaded}
-/>
+<img use:intersection={{ rootMargin: '200px' }} on:enter|once={loadsrc} on:load={onload} loading="lazy" decoding="async" src={base + appliedSrc} {alt} {...$$restProps} class:hidden={!loaded} />
 
 <style lang="postcss">
 	img {
 		position: relative;
-		width: 100%;
+		display: flex;
+		width: auto;
 		height: auto;
-		background-color: var(--light3);
 		min-height: 100px;
+		max-height: 90vh;
 		object-fit: contain;
 		/* box-shadow: 0 15px 60px -35px rgba(0,0,30,.2); */
-		border-radius: 4px;
-		transition: all .5s ease-out;
+		padding: 0;
+		margin: 0 auto;
+		border-radius: 12px;
+		overflow: hidden;
+		transition: all 0.5s ease-out;
 	}
 
 	.hidden {

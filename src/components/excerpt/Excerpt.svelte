@@ -42,10 +42,10 @@
 	{#await excerptPromise}
 		<Loading style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;" />
 	{:then excerptComp}
-		<div class="shadow" transition:fade />
+		<div class="shadow" transition:fade={{ duration: 150 }} />
 		<article>
 			<button
-				transition:fly={{ x: -30 }}
+				transition:fly={{ x: 20 }}
 				on:introend={() => (closeIcon = true)}
 				class="close"
 				on:click={() => (open = false)}
@@ -81,7 +81,7 @@
 				class="content"
 				use:clickoutside
 				on:clickoutside={() => (open = false)}
-				transition:scale={{ start: 0.9, duration: 450, easing: expoOut }}
+				transition:scale={{ start: 0.95, duration: 350, easing: expoOut }}
 			>
 				<svelte:component this={excerptComp.default} />
 			</div>
@@ -104,9 +104,11 @@
 		margin: 2rem auto;
 		font-size: var(--sm);
 		font-family: var(--font-main);
-		font-weight: 500;
-		box-shadow: 0 0 2px 0 rgba(0, 0, 30, 0.4);
-		background-color: transparent;
+		font-weight: 400;
+		box-shadow: 0 0 2px 0 rgba(0, 0, 30, 0);
+		background-color: var(--accent1);
+		color: var(--dark2);
+		letter-spacing: 0.2px;
 		transition: all 0.2s ease-out;
 
 		& span {
@@ -116,7 +118,8 @@
 		&:hover,
 		&.active {
 			background-color: white;
-			box-shadow: 0 1em 3em -1.5em rgba(0, 0, 30, 0.4);
+			color: var(--accent3);
+			box-shadow: 0 1em 3em -1.5em var(--accent3);
 
 			& .open-icon {
 				transform: rotate(180deg);
@@ -128,12 +131,12 @@
 			height: 1.75em;
 			padding: 0;
 			margin: 0;
-			transition: all 0.35s ease-in-out;
+			transition: transform 0.3s ease-in-out;
 
 			& line {
 				fill: none;
-				stroke: black;
-				stroke-width: 2px;
+				stroke: currentColor;
+				stroke-width: 1.5px;
 			}
 		}
 	}
@@ -145,7 +148,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: var(--light2);
+		background-color: var(--accent2);
 		opacity: 0.75;
 	}
 
@@ -167,7 +170,8 @@
 		margin: 0 auto;
 		border-radius: 2rem;
 		background-color: var(--light1);
-		box-shadow: 0 20px 125px -25px rgba(0, 0, 30, 0.2);
+		/* box-shadow: 0 20px 125px -25px rgba(0, 0, 30, 0.2); */
+		box-shadow: 0 0px 2px rgba(0, 0, 30, 0.2);
 		padding: 4rem 6rem;
 		max-width: var(--width-lg);
 		height: auto;
@@ -204,7 +208,7 @@
 			left: 10%;
 
 			& line {
-				stroke: var(--dark2);
+				stroke: currentColor;
 				stroke-width: 2px;
 			}
 		}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { SymbolShape } from '$components/primitives/Symbol.svelte';
 	import Symbol from '$components/primitives/Symbol.svelte';
+	import { LngLat, type LngLatLike } from 'maplibre-gl';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
@@ -10,6 +11,7 @@
 	export let highlight: boolean = false;
 	/* Symbol options */
 	export let shape: SymbolShape = 'circle';
+	export let symbolScale: number = 1;
 	export let color: string = 'var(--light1)';
 	export let fill: string = 'var(--accent2)';
 	export let stroke: string = null;
@@ -21,33 +23,33 @@
 	export let arrowEnd: boolean = false;
 	export let arrowStart: boolean = false;
 	export let src: string = null;
+	export let lnglat: LngLat | LngLatLike = undefined;
+	export let zoom: number = undefined;
 
 	const currentKey = getContext('currentKey') as Writable<string | number>;
+	const currentView = getContext('currentView') as Writable<{ lnglat: LngLat | LngLatLike; zoom?: number }>;
 
 	function setCurrent() {
-		if (currentKey) {
+		if (currentKey && key) {
 			currentKey.set(key);
+		} else if (currentView && lnglat) {
+			currentView.set({ lnglat, zoom });
 		}
 	}
 
 	function clearCurrent() {
-		if (currentKey) {
+		if (currentKey && key) {
 			currentKey.set(null);
+		} else if (currentView && lnglat) {
+			currentView.set(null);
 		}
 	}
 </script>
 
-<div
-	class:interactive
-	on:mouseover
-	on:mouseleave
-	on:mouseover={setCurrent}
-	on:mouseleave={clearCurrent}
-	on:focus
-	class:highlight={highlight || (currentKey && $currentKey === key)}
->
+<div class:interactive on:mouseover on:mouseleave on:mouseover={setCurrent} on:mouseleave={clearCurrent} on:focus class:highlight={highlight || (currentKey && $currentKey && $currentKey === key)}>
 	<dt>
 		<Symbol
+			style="transform: scale({symbolScale})"
 			{label}
 			{color}
 			{fill}
@@ -83,7 +85,7 @@
 		box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0);
 		transition: all 0.2s ease-out;
 
-		&:first-child {
+		/* &:first-child {
 			border-top-left-radius: var(--corner);
 			border-top-right-radius: var(--corner);
 		}
@@ -91,7 +93,7 @@
 		&:last-child {
 			border-bottom-left-radius: var(--corner);
 			border-bottom-right-radius: var(--corner);
-		}
+		} */
 	}
 
 	.interactive {
@@ -101,7 +103,7 @@
 	div.highlight {
 		opacity: 1;
 		background-color: white;
-		box-shadow: 0 0.5em 1em -0.5em rgba(0, 0, 0, 0.1);
+		box-shadow: 0 0 1em -0.5em rgba(0, 0, 0, 0.2);
 	}
 
 	dt {
@@ -119,6 +121,7 @@
 		flex: 1;
 		margin: 0;
 		padding: 0;
+		padding-right: 0.5em;
 		width: auto;
 		min-width: 50px;
 		color: var(--dark3);

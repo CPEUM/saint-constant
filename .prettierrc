@@ -6,11 +6,11 @@
 	"bracketSameLine": false,
 	"singleQuote": true,
 	"trailingComma": "none",
-	"printWidth": 100,
+	"printWidth": 200,
 	"arrowParens": "always",
 	"svelteIndentScriptAndStyle": true,
 	"svelteAllowShorthand": true,
-	"jsdocPrintWidth": 100,
+	"jsdocPrintWidth": 200,
 	"quoteProps": "consistent",
 	"breakBeforeElse": true
 }

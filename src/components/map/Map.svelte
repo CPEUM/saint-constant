@@ -7,7 +7,7 @@
 
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { mapDisplay, mapFeatures, mapFocus, mapHighlight, mapTooltip } from '$stores/map';
+	import { mapDisplay, mapFeatures, mapFilter, mapFocus, mapHighlight, mapTooltip } from '$stores/map';
 	import { bounds } from '$utils/map';
 	import maplibregl, { LngLat, type LngLatLike } from 'maplibre-gl';
 	import bbox from '@turf/bbox';
@@ -20,18 +20,20 @@
 	const dispatch = createEventDispatcher<{ load: null; error: null }>();
 	let container: HTMLElement;
 
-	/* Saving user-navigated view. */
 	let bearing = 0;
-	let pitch = 20;
-	let zoom = 14;
-	let center;
+
+	/* Saving user-navigated view. */
+	let userBearing = 0;
+	let userPitch = 20;
+	let userZoom = 14;
+	let userCenter;
 
 	function goToFallback() {
 		map.flyTo({
-			center,
-			pitch,
-			zoom,
-			bearing
+			center: userCenter,
+			pitch: userPitch,
+			zoom: userZoom,
+			bearing: userBearing
 		});
 	}
 
@@ -47,22 +49,21 @@
 		if (!$mapFocus) {
 			goToFallback();
 		} else if ($mapFocus.bounds) {
-			map.fitBounds($mapFocus.bounds, { bearing: 0, pitch: 20 });
+			map.fitBounds($mapFocus.bounds, { bearing: 0, pitch: $mapFocus.pitch !== undefined && $mapFocus.pitch !== null ? $mapFocus.pitch : 20, duration: 350 });
 		} else if ($mapFocus.center) {
 			map.flyTo({
 				center: $mapFocus.center.point,
 				zoom: $mapFocus.center.zoom,
 				bearing: 0,
-				pitch: 20
+				pitch: 20,
+				duration: 350
 			});
 		} else if ($mapFocus.filter) {
 			const filters = Object.entries($mapFocus.filter);
 			const filtered = get(mapFeatures).filter((f) => {
 				return filters.every(([k, v]) => f.properties[k] === v);
 			});
-			const bounds = new maplibregl.LngLatBounds(
-				bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature)))))
-			);
+			const bounds = new maplibregl.LngLatBounds(bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature))))));
 			map.fitBounds(bounds, { padding: 200, maxZoom: 15 });
 		}
 	}
@@ -106,8 +107,8 @@
 				padding: 100
 			},
 			bearing,
-			pitch,
-			zoom,
+			pitch: userPitch,
+			zoom: userZoom,
 			minZoom: 10,
 			maxZoom: 20
 		});
@@ -122,32 +123,33 @@
 			mapLoaded.set(true);
 			dispatch('load');
 			bearing = map.getBearing();
-			pitch = map.getPitch();
-			zoom = map.getZoom();
-			center = map.getCenter();
+			userPitch = map.getPitch();
+			userZoom = map.getZoom();
+			userCenter = map.getCenter();
 		});
 
 		map.on('rotate', (e) => {
+			bearing = map.getBearing();
 			if (e.originalEvent) {
-				bearing = map.getBearing();
+				userBearing = map.getBearing();
 			}
 		});
 
 		map.on('pitchend', (e) => {
 			if (e.originalEvent) {
-				pitch = map.getPitch();
+				userPitch = map.getPitch();
 			}
 		});
 
 		map.on('zoomend', (e) => {
 			if (e.originalEvent) {
-				zoom = map.getZoom();
-				center = map.getCenter();
+				userZoom = map.getZoom();
+				userCenter = map.getCenter();
 			}
 		});
 
 		map.on('dragend', (e) => {
-			center = map.getCenter();
+			userCenter = map.getCenter();
 		});
 	});
 </script>
@@ -173,19 +175,19 @@
 
 <style lang="postcss">
 	figure {
-		--ease: cubic-bezier(0.4, 0, 0, 1);
+		--ease: cubic-bezier(0.3, 0, 0.3, 1);
 		pointer-events: auto;
 		position: fixed;
 		z-index: -20;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		right: 0;
+		right: 0%;
 		left: 100%;
 		top: 0%;
 		bottom: 0%;
 		opacity: 1;
-		/* border-radius: 200px; */
+		/* border-radius: 100px; */
 		width: auto;
 		height: auto;
 		padding: 0;
@@ -207,12 +209,12 @@
 
 		&:global(.figure) {
 			opacity: 1;
-			top: 3.6rem;
-			right: 4rem;
-			bottom: 3.6rem;
-			left: 4rem;
-			border-radius: 1.5rem;
-			box-shadow: 0 2rem 5rem -3rem rgba(0, 0, 40, 0.2);
+			top: 2rem;
+			right: 2rem;
+			bottom: 2rem;
+			left: 2rem;
+			border-radius: 1rem;
+			/* box-shadow: 0 2rem 5rem -3rem rgba(0, 0, 40, 0.2); */
 		}
 
 		&:global(.half) {
