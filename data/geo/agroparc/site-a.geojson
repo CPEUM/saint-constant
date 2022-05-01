@@ -1,0 +1,118 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "A",
+				"title": "Jardins maraîchers"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.56797218322752,
+					45.35888
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "B",
+				"title": "Forêt nourricière"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5682,
+					45.3607
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "C",
+				"title": "Boisé restauré"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.57096,
+					45.36141827130863
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "D",
+				"title": "Labyrinthes de maïs"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5668,
+					45.3604
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "D",
+				"title": "Labyrinthes de maïs",
+				"nolegend": true
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5704,
+					45.3607
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "E",
+				"title": "Sentier multifonctionnel"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.56889486312866,
+					45.36027241874619
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "F",
+				"title": "Noue paysagère"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5668,
+					45.3593
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": "G",
+				"title": "Boisé tampon"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5675859451294,
+					45.35786002170776
+				]
+			}
+		}
+	]
+}
