@@ -41,15 +41,18 @@
 
 <style>
 	figure {
+		box-sizing: border-box;
+		left: 0;
 		position: relative;
 		display: grid;
-		grid-template-columns: 1fr auto 1fr;
+		grid-template-columns: 1fr minmax(var(--width-sm), auto) 1fr;
 		flex-direction: row;
 		justify-content: center;
 		width: 100%;
 		height: auto;
 		padding: 0;
 		margin-block: 4rem;
+		margin-inline: 0;
 	}
 
 	.image {

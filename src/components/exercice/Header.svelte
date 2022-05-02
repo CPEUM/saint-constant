@@ -39,7 +39,7 @@
 		<svg transition:fade|local height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
 			{#key $exercice}
 				{#each waves as wave}
-					<path transition:fade vector-effect="non-scaling-stroke" d={wave.d} fill={wave.fill} stroke="var(--dark2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray={wave.dashArray} stroke-dashoffset="{Math.random() * 100}%" />
+					<path transition:fade vector-effect="non-scaling-stroke" d={wave.d} fill={wave.fill} opacity={0.8} stroke-width={1} stroke="none" stroke-opacity={0.5} />
 				{/each}
 			{/key}
 			<!-- <text x="100" y="75" font-size="200" text-anchor="middle" dominant-baseline="baseline">{$exercice.title}</text> -->

@@ -3,7 +3,7 @@
 	import { createEventDispatcher, getContext, onDestroy, onMount } from 'svelte';
 	import { map, mapLoaded } from '$components/map/Map.svelte';
 	import type { DataDrivenPropertyValueSpecification, Feature } from 'maplibre-gl';
-	import type { FeatureCollection } from '@turf/helpers';
+	import { isNumber, type FeatureCollection } from '@turf/helpers';
 	import { mapFeatures } from '$stores/map';
 
 	export let data: FeatureCollection | Feature;
@@ -15,8 +15,8 @@
 	export let fillOpacityHighlight: number = fillOpacity;
 	// export let fillPattern: string;
 	export let strokeWidth: number = 6;
-	export let strokeWidthHover: number = 12;
-	export let strokeWidthHighlight: number = 10;
+	export let strokeWidthHover: number = strokeWidth;
+	export let strokeWidthHighlight: number = strokeWidth;
 	export let strokeColor: string | DataDrivenPropertyValueSpecification<string> = 'none';
 	export let strokeColorHover: string | DataDrivenPropertyValueSpecification<string> = strokeColor;
 	export let strokeColorHighlight: string | DataDrivenPropertyValueSpecification<string> = strokeColor;
@@ -69,18 +69,20 @@
 		dispatch('leave', e);
 	}
 
-	/* Generating id if not present */
+	/* Generating id if not present or invalid */
 	if ((data as any).features) {
 		(data as FeatureCollection).features.forEach((f, i) => {
-			if (!f.id) {
+			if (!isNumber(f.id)) {
 				f.id = Math.floor((i + Math.random()) * 1000);
 			}
+			f.properties.source = id;
 		});
 		mapFeatures.add(...(data as FeatureCollection).features);
 	} else {
-		if (!data['id']) {
-			data['id'] = Math.floor(Math.random() * 1000);
+		if (!(data as any).id || !isNumber((data as any).id)) {
+			(data as any).id = Math.floor(Math.random() * 1000);
 		}
+		(data as any).properties.source = id;
 		mapFeatures.add(data);
 	}
 

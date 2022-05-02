@@ -7,15 +7,17 @@
 
 	export let label: string | number = null;
 	export let key: string | number = null;
-	export let interactive: boolean = key !== null;
+	export let interactive: boolean = undefined;
 	export let highlight: boolean = false;
 	/* Symbol options */
 	export let shape: SymbolShape = 'circle';
 	export let symbolScale: number = 1;
 	export let color: string = 'var(--light1)';
+	export let opacity: number = 1;
 	export let fill: string = 'var(--accent2)';
 	export let stroke: string = null;
 	export let strokeWidth: number = 0;
+	export let strokeDashArray: string = undefined;
 	export let colorHighlight: string = undefined;
 	export let fillHighlight: string = undefined;
 	export let strokeHighlight: string = undefined;
@@ -25,6 +27,10 @@
 	export let src: string = null;
 	export let lnglat: LngLat | LngLatLike = undefined;
 	export let zoom: number = undefined;
+
+	$: if (key || lnglat) {
+		interactive = true;
+	}
 
 	const currentKey = getContext('currentKey') as Writable<string | number>;
 	const currentView = getContext('currentView') as Writable<{ lnglat: LngLat | LngLatLike; zoom?: number }>;
@@ -54,6 +60,7 @@
 			{color}
 			{fill}
 			{stroke}
+			{opacity}
 			{strokeWidth}
 			{colorHighlight}
 			{fillHighlight}
@@ -63,6 +70,7 @@
 			{shape}
 			{interactive}
 			{highlight}
+			{strokeDashArray}
 		/>
 	</dt>
 	<dd>
@@ -84,23 +92,14 @@
 		opacity: 0.9;
 		box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0);
 		transition: all 0.2s ease-out;
-
-		/* &:first-child {
-			border-top-left-radius: var(--corner);
-			border-top-right-radius: var(--corner);
-		}
-
-		&:last-child {
-			border-bottom-left-radius: var(--corner);
-			border-bottom-right-radius: var(--corner);
-		} */
 	}
 
 	.interactive {
 		cursor: pointer;
 	}
 
-	div.highlight {
+	div.highlight,
+	div.interactive:hover {
 		opacity: 1;
 		background-color: white;
 		box-shadow: 0 0 1em -0.5em rgba(0, 0, 0, 0.2);
@@ -108,7 +107,9 @@
 
 	dt {
 		position: relative;
-		display: inline-block;
+		display: inline-flex;
+		align-self: flex-start;
+		justify-content: flex-start;
 		margin: 0;
 		padding: 0;
 		width: 30px;

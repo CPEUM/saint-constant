@@ -28,16 +28,15 @@
 	function show() {
 		visible = true;
 	}
-	
+
 	async function fetchData() {
 		const r = await fetch(base + src);
 		if (r.ok) {
 			const data: BarChartData = await r.json();
-			max = Math.max(...data.columns.map(column => column.rows.reduce((sum, curr) => sum + curr, 0)));
-			center = Math.max(...data.columns.map(col => col.rows[0]));
+			max = Math.max(...data.columns.map((column) => column.rows.reduce((sum, curr) => sum + curr, 0)));
+			center = Math.max(...data.columns.map((col) => col.rows[0]));
 			return data;
-		}
-		else {
+		} else {
 			throw new Error(`Le chargement du fichier de données ${src} a encontré une erreur`);
 		}
 	}
@@ -53,25 +52,15 @@
 	}
 </script>
 
-<figure
-	use:intersection on:enter|once={show}
-	{visible}
->
+<figure use:intersection on:enter|once={show} {visible}>
 	{#await fetchPromise}
 		<Loading />
 	{:then json}
-		<div
-			class="bars"
-			style:--max={max}
-			style:--center={center}
-		>
+		<div class="bars" style:--max={max} style:--center={center}>
 			{#each json.columns as column, barIndex}
 				<div class="bar-wrapper">
 					<div class="col-title" class:centered>{column.title}</div>
-					<div
-						class="bar"
-						style="transition-delay: {barIndex * 150}ms"
-					>
+					<div class="bar" style="transition-delay: {barIndex * 150}ms">
 						{#each column.rows as segment, i}
 							{#if segment > 0 || centered}
 								<!-- svelte-ignore a11y-mouse-events-have-key-events -->
@@ -90,16 +79,11 @@
 				</div>
 			{/each}
 		</div>
-		<Legend size="small">
+		<Legend size="small" style="position:sticky; top: 10rem">
 			{#each json.groups as group}
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<!-- svelte-ignore a11y-mouse-events-have-key-events -->
-				<LegendItem
-					on:mouseover={() => (highlightKey = group.title)}
-					on:mouseleave={() => (highlightKey = null)}
-					highlight={highlightKey === group.title}
-					fill={group.color}
-				>
+				<LegendItem on:mouseover={() => (highlightKey = group.title)} on:mouseleave={() => (highlightKey = null)} highlight={highlightKey === group.title} fill={group.color}>
 					{group.title}
 				</LegendItem>
 			{/each}
@@ -157,7 +141,7 @@
 		transition: width 0.3s cubic-bezier(0.2, 0, 0.2, 1);
 	}
 
-	figure[visible=false] .bar {
+	figure[visible='false'] .bar {
 		width: 0%;
 	}
 

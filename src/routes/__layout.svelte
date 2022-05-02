@@ -29,6 +29,7 @@
 	import { getData } from '$utils/getData';
 	import MapImage from '$components/map/MapImage.svelte';
 	import { base } from '$app/paths';
+	import ExcerptOutlet from '$components/excerpt/ExcerptOutlet.svelte';
 
 	export let topRoute = null;
 	export let topNavigating = true;
@@ -86,6 +87,7 @@
 {#if !mapLoaded || topNavigating}
 	<Loading />
 {/if}
+<!-- <ExcerptOutlet /> -->
 <Map on:load={() => (mapLoaded = true)} on:error={() => (mapLoaded = true)}>
 	{#await municipalFeature then geojson}
 		<MapFeature id="municipal" data={geojson} fillColor="white" fillOpacity={0} strokeColor={colors.accent3} strokeWidth={4} strokeOpacity={1} strokeDashArray={[0, 1.5]} />
@@ -97,15 +99,18 @@
 			fillColor={['get', ['concat', ['get', 'exercice'], '1'], ['literal', colors]]}
 			fillColorHover={['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]]}
 			fillColorHighlight={['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]]}
-			fillOpacity={0.5}
+			fillOpacity={0}
 			fillOpacityHover={0.8}
 			fillOpacityHighlight={0.65}
 			strokeColor={['get', ['concat', ['get', 'exercice'], '2'], ['literal', colors]]}
 			strokeColorHover={['get', ['concat', ['get', 'exercice'], '3'], ['literal', colors]]}
 			strokeColorHighlight={['get', ['concat', ['get', 'exercice'], '3'], ['literal', colors]]}
 			strokeOpacity={0.5}
-			strokeOpacityHover={0.8}
+			strokeOpacityHover={0.85}
 			strokeOpacityHighlight={0.65}
+			strokeWidth={10}
+			strokeWidthHighlight={12}
+			strokeWidthHover={15}
 			on:hover={(e) => propositionFeatureHover(e.detail)}
 			on:leave={() => mapTooltip.set(null)}
 		/>

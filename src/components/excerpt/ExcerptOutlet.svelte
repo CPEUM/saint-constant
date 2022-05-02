@@ -1,44 +1,42 @@
+<script lang="ts" context="module">
+	export const currentExcerptName = writable<string>(null);
+</script>
+
 <script lang="ts">
 	import { clickoutside } from '$actions/clickoutside';
-
 	import Loading from '$components/Loading.svelte';
 	import { expoOut } from 'svelte/easing';
+	import { writable } from 'svelte/store';
 	import { draw, fade, fly, scale, slide } from 'svelte/transition';
 
-	export let name: string;
-	let excerptPromise;
-	let open = false;
+	let excerpt = null;
+	let isopen = false;
 	let closeIcon = false;
 
 	async function getExcerptComp() {
-		return import(`./excerpt-articles/${name}.svelte`);
+		excerpt = await import(`./excerpt-articles/${$currentExcerptName}.svelte`);
+		isopen = true;
 	}
 
-	function toggle() {
-		if (!excerptPromise) {
-			excerptPromise = getExcerptComp();
-		}
-		open = !open;
+	$: if ($currentExcerptName) {
+		getExcerptComp();
+	} else {
+		excerpt = null;
+		isopen = false;
+	}
+
+	function close() {
+		currentExcerptName.set(null);
 	}
 </script>
 
-<button class="open" class:active={open} on:click={toggle}>
-	<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid" class="open-icon">
-		<line x1="50" y1="20" x2="50" y2="80" vector-effect="non-scaling-stroke" />
-		<line x1="20" y1="50" x2="80" y2="50" vector-effect="non-scaling-stroke" />
-	</svg>
-	<span>
-		<slot />
-	</span>
-</button>
-
-{#if open}
-	{#await excerptPromise}
+{#if isopen}
+	{#await excerpt}
 		<Loading style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;" />
 	{:then excerptComp}
 		<div class="shadow" transition:fade={{ duration: 150 }} />
 		<article>
-			<button transition:fly={{ x: 20 }} on:introend={() => (closeIcon = true)} class="close" on:click={() => (open = false)}>
+			<button transition:fly={{ x: 20 }} on:introend={() => (closeIcon = true)} class="close" on:click={close}>
 				<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid" class="close-icon">
 					{#if closeIcon}
 						<line in:draw={{}} x1="30" y1="30" x2="70" y2="70" vector-effect="non-scaling-stroke" />
@@ -46,7 +44,7 @@
 					{/if}
 				</svg>
 			</button>
-			<div class="content" use:clickoutside on:clickoutside={() => (open = false)} transition:scale={{ start: 0.95, duration: 350, easing: expoOut }}>
+			<div class="content" use:clickoutside on:clickoutside={close} transition:scale={{ start: 0.95, duration: 350, easing: expoOut }}>
 				<svelte:component this={excerptComp.default} />
 			</div>
 		</article>
@@ -56,55 +54,6 @@
 {/if}
 
 <style lang="postcss">
-	.open {
-		cursor: pointer;
-		border: none;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding: 1.2em 1.5em;
-		border-radius: 2em;
-		margin: 2rem auto;
-		font-size: var(--sm);
-		font-family: var(--font-main);
-		font-weight: 400;
-		box-shadow: 0 0 2px 0 rgba(0, 0, 30, 0);
-		background-color: var(--accent1);
-		color: var(--dark2);
-		letter-spacing: 0.2px;
-		transition: all 0.2s ease-out;
-
-		& span {
-			padding-left: 0.5em;
-		}
-
-		&:hover,
-		&.active {
-			background-color: white;
-			color: var(--accent3);
-			box-shadow: 0 1em 3em -1.5em var(--accent3);
-
-			& .open-icon {
-				transform: rotate(180deg);
-			}
-		}
-
-		& .open-icon {
-			width: 1.75em;
-			height: 1.75em;
-			padding: 0;
-			margin: 0;
-			transition: transform 0.3s ease-in-out;
-
-			& line {
-				fill: none;
-				stroke: currentColor;
-				stroke-width: 1.5px;
-			}
-		}
-	}
-
 	.shadow {
 		z-index: 10;
 		position: fixed;
@@ -126,7 +75,7 @@
 		height: 100%;
 		overflow-x: hidden;
 		overflow-y: scroll;
-		padding: 2rem;
+		padding: 3rem;
 	}
 
 	.content {

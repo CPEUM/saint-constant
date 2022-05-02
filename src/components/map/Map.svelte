@@ -33,7 +33,8 @@
 			center: userCenter,
 			pitch: userPitch,
 			zoom: userZoom,
-			bearing: userBearing
+			bearing: userBearing,
+			duration: 750
 		});
 	}
 
@@ -49,14 +50,14 @@
 		if (!$mapFocus) {
 			goToFallback();
 		} else if ($mapFocus.bounds) {
-			map.fitBounds($mapFocus.bounds, { bearing: 0, pitch: $mapFocus.pitch !== undefined && $mapFocus.pitch !== null ? $mapFocus.pitch : 20, duration: 350 });
+			map.fitBounds($mapFocus.bounds, { bearing: 0, pitch: $mapFocus.pitch !== undefined && $mapFocus.pitch !== null ? $mapFocus.pitch : 20, duration: 750 });
 		} else if ($mapFocus.center) {
 			map.flyTo({
 				center: $mapFocus.center.point,
 				zoom: $mapFocus.center.zoom,
 				bearing: 0,
 				pitch: 20,
-				duration: 350
+				duration: 750
 			});
 		} else if ($mapFocus.filter) {
 			const filters = Object.entries($mapFocus.filter);
@@ -74,27 +75,26 @@
 	}
 
 	/* Highlighting features */
-	function setHighlight(featureIds: (string | number)[], value: boolean) {
-		for (const id of featureIds) {
-			map.setFeatureState({ source: 'propositions', id }, { highlight: value });
+	function setHighlight(featuresInfo: { source: string; id: number }[], value: boolean) {
+		for (const feature of featuresInfo) {
+			map.setFeatureState(feature, { highlight: value });
 		}
 	}
-	let highlightIds: (string | number)[];
+	let highlights: { source: string; id: number }[];
 	$: if ($mapLoaded) {
 		if ($mapHighlight) {
-			if (highlightIds) {
-				setHighlight(highlightIds, false);
+			if (highlights) {
+				setHighlight(highlights, false);
 			}
 			const filters = Object.entries($mapHighlight);
-			highlightIds = get(mapFeatures)
+			highlights = get(mapFeatures)
 				.filter((f) => {
 					return filters.every(([k, v]) => f.properties[k] === v);
 				})
-				.map((f) => f.id);
-			// console.log(highlightIds);
-			setHighlight(highlightIds, true);
-		} else if (highlightIds) {
-			setHighlight(highlightIds, false);
+				.map((f) => ({ id: f.id as number, source: f.properties.source }));
+			setHighlight(highlights, true);
+		} else if (highlights) {
+			setHighlight(highlights, false);
 		}
 	}
 
@@ -183,10 +183,10 @@
 		justify-content: center;
 		align-items: center;
 		right: 0%;
-		left: 100%;
+		left: 0%;
 		top: 0%;
 		bottom: 0%;
-		opacity: 1;
+		opacity: 0;
 		/* border-radius: 100px; */
 		width: auto;
 		height: auto;
@@ -208,13 +208,15 @@
 		}
 
 		&:global(.figure) {
+			/* z-index: 0; */
+			pointer-events: none;
 			opacity: 1;
-			top: 2rem;
-			right: 2rem;
-			bottom: 2rem;
-			left: 2rem;
+			top: 4rem;
+			right: 4rem;
+			bottom: 4rem;
+			left: 4rem;
 			border-radius: 1rem;
-			/* box-shadow: 0 2rem 5rem -3rem rgba(0, 0, 40, 0.2); */
+			box-shadow: 0 3rem 5rem -5rem rgba(0, 0, 40, 0.25);
 		}
 
 		&:global(.half) {

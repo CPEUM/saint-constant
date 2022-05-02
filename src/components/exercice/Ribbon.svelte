@@ -35,7 +35,7 @@
 	});
 </script>
 
-<section style:height="{transposedHeight}px" style:--w="{containerWidth}px" bind:this={container} bind:offsetWidth={containerWidth}>
+<section style:height="{transposedHeight}px" style:--ribbonw="{containerWidth}px" bind:this={container} bind:offsetWidth={containerWidth}>
 	<div class="scroller" bind:this={ribbon} bind:offsetWidth={ribbonWidth} bind:offsetHeight={ribbonHeight} style:transform="translateX({-progress}px)">
 		<slot />
 	</div>
@@ -57,6 +57,7 @@
 		top: 0;
 		display: inline-flex;
 		align-items: flex-start;
+		justify-content: flex-start;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		height: 100vh;

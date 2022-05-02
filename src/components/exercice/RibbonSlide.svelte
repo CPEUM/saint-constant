@@ -2,22 +2,21 @@
 	import { getContext, onDestroy, onMount } from 'svelte';
 	import { ribbonContextKey } from './Ribbon.svelte';
 
-	const ctx = getContext<any>(ribbonContextKey);
-	let index;
+	export let width: string = 'var(--ribbonw)';
+	// const ctx = getContext<any>(ribbonContextKey);
+	// let index;
 
-	onMount(() => {
-		index = ctx.count() - 1;
-	});
+	// onMount(() => {
+	// 	index = ctx.count() - 1;
+	// });
 
-	onDestroy(() => {
-		ctx?.remove();
-	});
+	// onDestroy(() => {
+	// 	ctx?.remove();
+	// });
 </script>
 
-<div id="slide">
-	<div id="slide-content" {...$$restProps}>
-		<slot />
-	</div>
+<div id="slide" style:width {...$$restProps}>
+	<slot />
 </div>
 
 <style>
@@ -26,19 +25,12 @@
 		top: 0;
 		flex-shrink: 0;
 		margin: 0;
-		display: inline-block;
 		height: 100%;
-		padding: 0;
-	}
-
-	#slide-content {
-		position: relative;
-		display: flex;
+		display: inline-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		padding: 0 100px;
-		width: 100%;
-		height: 100%;
+		max-width: var(--ribbonw);
 	}
 </style>

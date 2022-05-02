@@ -20,13 +20,23 @@
 	}
 </script>
 
-<img use:intersection={{ rootMargin: '200px' }} on:enter|once={loadsrc} on:load={onload} loading="lazy" decoding="async" src={base + appliedSrc} {alt} {...$$restProps} class:hidden={!loaded} />
+<img
+	use:intersection={{ rootMargin: '200px 200px 200px 200px' }}
+	on:enter|once={loadsrc}
+	on:load={onload}
+	loading="lazy"
+	decoding="async"
+	src={base + appliedSrc}
+	{alt}
+	{...$$restProps}
+	class:hidden={!loaded}
+/>
 
 <style lang="postcss">
 	img {
 		position: relative;
 		display: flex;
-		width: auto;
+		width: 100%;
 		height: auto;
 		min-height: 100px;
 		max-height: 90vh;

@@ -123,7 +123,7 @@ p {
 }
 
 .grain {
-	/* user-select: none;
+	user-select: none;
 	pointer-events: none;
 	position: absolute;
 	width: 100%;
@@ -132,7 +132,7 @@ p {
 	background-repeat: repeat;
 	background-size: 1200px;
 	top: 0;
-	left: 0; */
+	left: 0;
 }
 
 h2 {
@@ -167,6 +167,20 @@ h4 {
 	font-weight: 550;
 	line-height: 1.2;
 	margin-block: 3rem 1em;
+	margin-inline: auto;
+	padding-inline: 0;
+	padding-block: 0;
+	max-width: var(--width-sm);
+}
+
+h5 {
+	position: relative;
+	font-family: var(--font-main);
+	font-size: var(--md);
+	color: var(--dark1);
+	font-weight: 600;
+	line-height: 1.2;
+	margin-block: 3rem;
 	margin-inline: auto;
 	padding-inline: 0;
 	padding-block: 0;

@@ -17,65 +17,59 @@
 </script>
 
 <header>
-	<hgroup use:parallax={{ factor: 0.7 }}>
+	<hgroup use:parallax={{ factor: 0.6 }}>
 		<span>{label}</span>
 		<h3 use:revealText={revealFlyUp}>{title}</h3>
 	</hgroup>
-	<div class="image" style:background-image={src ? `url(${base + src})` : ''} />
+	{#if src}
+		<div use:parallax={{ factor: 0.8 }} class="image" style:background-image={src ? `url(${base + src})` : ''} />
+	{/if}
 </header>
 
 <style lang="postcss">
-	section {
-		margin: 0 auto;
-		max-width: var(--width-lg);
-		position: relative;
-		width: 100%;
-		padding-inline: 0;
-		padding-block: 2rem 8rem;
-	}
-
 	header {
 		position: relative;
 		display: flex;
+		gap: 0;
 		flex-direction: row;
 		align-items: stretch;
 		justify-content: center;
-		margin: 0;
-		margin-bottom: 6rem;
+		margin: 4rem 0 8rem 0;
 		padding: 0;
-		min-height: 100vh;
-		width: 100%;
-		/* width: 100vw;
-		left: calc(50% - 100vw / 2); */
-		overflow: hidden;
+		height: 100vh;
+		width: var(--ribbonw, 100%);
 		background-color: transparent;
 		border-radius: 2rem;
 		background-color: var(--accent2);
 
-		/* &::after {
-			z-index: 0;
+		&::after {
 			content: '';
 			position: absolute;
-			width: 100%;
-			height: 100%;
 			top: 0;
 			left: 0;
 			background-image: url(/grain.svg);
+			background-size: 800px;
 			background-repeat: repeat;
-			background-size: 900px;
-			opacity: 0.2;
-		} */
+			width: 100%;
+			height: 100%;
+			opacity: 0.3;
+		}
 	}
 
 	.image {
-		/* z-index: -1; */
-		display: block;
+		z-index: 1;
+		opacity: 0.9;
+		display: inline-block;
 		position: relative;
-		flex: 1;
+		flex: 0;
+		right: -0.25rem;
+		top: 15%;
+		height: 70%;
 		width: 50%;
-		height: auto;
-		min-height: 100%;
+		min-width: 800px;
 		overflow: hidden;
+		border-radius: 1rem;
+		box-shadow: -2rem 3rem 6rem -3rem var(--accent3);
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
@@ -83,16 +77,15 @@
 
 	hgroup {
 		flex: 1;
-		z-index: 0;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
 		min-height: 100%;
-		padding: 2rem 3rem;
-		min-width: var(--width-sm);
-		width: 100%;
-		overflow: hidden;
+		padding-block: 0;
+		padding-inline: 3rem 1rem;
+		max-width: var(--width-sm);
 	}
 
 	span {
@@ -108,7 +101,7 @@
 
 	h3 {
 		z-index: 1;
-		color: var(--dark2);
+		color: var(--dark3);
 		margin: 0;
 		padding: 0;
 		font-weight: 500;

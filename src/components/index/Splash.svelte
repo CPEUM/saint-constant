@@ -21,7 +21,10 @@
 	const waves = generateSvgPaths(2, { viewBox: waveVb, padding: 900 }).map((svgPath) => ({
 		viewBox: `0 0 ${waveVb.width} ${waveVb.height}`,
 		d: svgPath,
-		fill: getRandomThemeColor([2, 3])
+		fill: getRandomThemeColor(
+			[2, 3],
+			exerciceRoutes.map((r) => r.key)
+		)
 	}));
 
 	let mounted = false;
@@ -40,24 +43,24 @@
 
 <svelte:body on:scroll={scroll} />
 
-<header style:--accent-color={getRandomThemeColor([2, 3], ['agroparc', 'poles', 'promenades'])}>
+<header style:--accent-color={getRandomThemeColor([1, 2], ['agroparc', 'poles', 'promenades'])}>
 	<svg viewBox={waves[1].viewBox} preserveAspectRatio="xMidYMax slice">
-		<path d={waves[0].d} fill={waves[0].fill} />
-		{#each shapes as shape}
+		<path d={waves[0].d} fill={waves[0].fill} opacity={0.8} />
+		<!-- {#each shapes as shape}
 			<path
 				vector-effect="non-scaling-stroke"
 				d={shape.d}
 				fill={shape.fillColor}
 				stroke="var(--dark2)"
-				stroke-width="2"
+				stroke-width="0"
 				stroke-linejoin="round"
 				stroke-linecap="round"
 				stroke-dasharray={Math.random() * 50 + 15}
 				transform="rotate({Math.random() * 60 - 30})"
 				transform-origin="50% 50%"
 			/>
-		{/each}
-		<!-- <clipPath id="wave-mask">
+		{/each} -->
+		<clipPath id="wave-mask">
 			<path d={waves[1].d} />
 		</clipPath>
 		<g clip-path="url(#wave-mask)">
@@ -66,14 +69,15 @@
 					vector-effect="non-scaling-stroke"
 					d={shape.d}
 					fill={shape.fillColor}
+					opacity={0.9}
 					stroke="var(--dark2)"
-					stroke-width="2"
+					stroke-width="0"
 					stroke-linejoin="round"
 					stroke-linecap="round"
 					stroke-dasharray="20"
 				/>
 			{/each}
-		</g> -->
+		</g>
 	</svg>
 	<hgroup style:transform="translateY({y * 0.4}px)">
 		<h1
@@ -127,7 +131,7 @@
 	}
 
 	path {
-		animation: dashanim 200s linear infinite;
+		/* animation: dashanim 200s linear infinite; */
 	}
 
 	hgroup {

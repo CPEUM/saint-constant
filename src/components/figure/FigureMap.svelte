@@ -56,8 +56,10 @@
 	}
 
 	$: if ($mapDisplay.full && inview) {
+		// map.scrollZoom.enable();
 		active.set(false);
 	} else if (!$mapDisplay.full && inview) {
+		// map.scrollZoom.disable();
 		active.set(true);
 	}
 
@@ -81,7 +83,7 @@
 	});
 </script>
 
-<div class="trigger" use:intersection={{ rootMargin: '-50% 0% -50%' }} on:enter={showMap} on:leave={hideMap} {...$$restProps}>
+<div class="trigger" use:intersection={{ rootMargin: '-50% -50% -50% -50%' }} on:enter={showMap} on:leave={hideMap} {...$$restProps}>
 	<div class="content" bind:clientHeight={h} style:--h="{h}px">
 		<slot />
 	</div>
@@ -93,14 +95,15 @@
 		height: 100%;
 		min-height: 150vh;
 		width: 100%;
-		max-width: var(--width-lg);
-		padding: 1rem;
+		/* max-width: var(--width-lg); */
+		padding: 3rem;
 		margin: 0 auto;
 	}
 
 	.content {
 		position: sticky;
 		top: calc(50vh - 0.5 * var(--h));
+		/* left: 2rem; */
 		width: 100%;
 		transition: all 0.35s ease-in-out;
 	}

@@ -19,16 +19,17 @@
 		padding: 0;
 		margin: 0;
 		border-radius: 1rem;
-		background-color: var(--light1);
+		background-color: transparent;
 		width: auto;
-		max-width: var(--width-sm);
+		max-width: 350px;
 		height: auto;
 		box-shadow: 0 0 1px 0 rgba(0, 0, 30, 0);
 		overflow: hidden;
-		transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-out;
 	}
 
 	dl:hover {
+		background-color: var(--light1);
 		opacity: 1;
 		box-shadow: 0 24px 50px -24px rgba(0, 0, 30, 0.25);
 	}
