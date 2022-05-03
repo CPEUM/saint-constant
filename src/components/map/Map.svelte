@@ -183,17 +183,17 @@
 		justify-content: center;
 		align-items: center;
 		right: 0%;
-		left: 0%;
+		left: 100%;
 		top: 0%;
 		bottom: 0%;
-		opacity: 0;
+		opacity: 1;
 		/* border-radius: 100px; */
 		width: auto;
 		height: auto;
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		transition: all 0.4s var(--ease);
+		transition: all 0.4s var(--ease), z-index 0s 0.4s;
 
 		&.full {
 			opacity: 1 !important;
@@ -209,7 +209,7 @@
 
 		&:global(.figure) {
 			/* z-index: 0; */
-			pointer-events: none;
+			/* pointer-events: none; */
 			opacity: 1;
 			top: 4rem;
 			right: 4rem;

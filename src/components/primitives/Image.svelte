@@ -36,11 +36,11 @@
 	img {
 		position: relative;
 		display: flex;
-		width: 100%;
+		/* width: 100%; */
 		height: auto;
 		min-height: 100px;
 		max-height: 90vh;
-		object-fit: contain;
+		object-fit: cover;
 		/* box-shadow: 0 15px 60px -35px rgba(0,0,30,.2); */
 		padding: 0;
 		margin: 0 auto;

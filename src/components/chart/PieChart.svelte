@@ -35,9 +35,16 @@
 	}
 </script>
 
-<svg>
-	<circle />
-</svg>
+<figure>
+	<svg {...$$restProps}>
+		<circle />
+	</svg>
+</figure>
 
-<style>
+<style lang="postcss">
+	figure {
+	}
+
+	svg {
+	}
 </style>

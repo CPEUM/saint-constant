@@ -29,7 +29,6 @@
 	import { getData } from '$utils/getData';
 	import MapImage from '$components/map/MapImage.svelte';
 	import { base } from '$app/paths';
-	import ExcerptOutlet from '$components/excerpt/ExcerptOutlet.svelte';
 
 	export let topRoute = null;
 	export let topNavigating = true;
@@ -87,7 +86,6 @@
 {#if !mapLoaded || topNavigating}
 	<Loading />
 {/if}
-<!-- <ExcerptOutlet /> -->
 <Map on:load={() => (mapLoaded = true)} on:error={() => (mapLoaded = true)}>
 	{#await municipalFeature then geojson}
 		<MapFeature id="municipal" data={geojson} fillColor="white" fillOpacity={0} strokeColor={colors.accent3} strokeWidth={4} strokeOpacity={1} strokeDashArray={[0, 1.5]} />
