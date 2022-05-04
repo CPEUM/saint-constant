@@ -56,15 +56,18 @@
 		if (topNavigating) {
 			topNavigating = false;
 		}
+		document.body.style.scrollBehavior = 'unset';
+		document.body.scrollTop = 0;
+		document.body.style.scrollBehavior = 'smooth';
 	});
 
 	function outroend() {
 		if (topNavigating) topNavigating = false;
-		if (browser) {
-			document.body.style.scrollBehavior = 'unset';
-			document.body.scrollTop = 0;
-			document.body.style.scrollBehavior = 'smooth';
-		}
+		// if (browser) {
+		// 	document.body.style.scrollBehavior = 'unset';
+		// 	document.body.scrollTop = 0;
+		// 	document.body.style.scrollBehavior = 'smooth';
+		// }
 	}
 </script>
 
@@ -124,7 +127,7 @@
 
 	.grain {
 		/* See global styles for rest */
-		opacity: 0.35;
+		opacity: 0.2;
 		z-index: -1;
 	}
 

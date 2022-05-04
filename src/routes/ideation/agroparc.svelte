@@ -347,7 +347,7 @@
 					<FigureMarker fill={colors.agroparc2} fillHighlight={colors.agroparc3} color={colors.light1} key="g" x={29} y={57} label="G" />
 				</svelte:fragment>
 				<svelte:fragment slot="legend">
-					<LegendItem shape="line">Accès à l'agroparc</LegendItem>
+					<LegendItem shape="line" fill="none" stroke={colors.agroparc3} strokeWidth={2}>Accès à l'agroparc</LegendItem>
 					<LegendItem key="a" label="A">Forêt nourricière</LegendItem>
 					<LegendItem key="b" label="B">Kiosque</LegendItem>
 					<LegendItem key="c" label="C">Sentier multifonctionnel</LegendItem>

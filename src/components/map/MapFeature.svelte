@@ -72,16 +72,12 @@
 	/* Generating id if not present or invalid */
 	if ((data as any).features) {
 		(data as FeatureCollection).features.forEach((f, i) => {
-			if (!isNumber(f.id)) {
-				f.id = Math.floor((i + Math.random()) * 1000);
-			}
+			f.id = Math.floor((i + Math.random()) * 1000);
 			f.properties.source = id;
 		});
 		mapFeatures.add(...(data as FeatureCollection).features);
 	} else {
-		if (!(data as any).id || !isNumber((data as any).id)) {
-			(data as any).id = Math.floor(Math.random() * 1000);
-		}
+		(data as any).id = Math.floor(Math.random() * 1000);
 		(data as any).properties.source = id;
 		mapFeatures.add(data);
 	}

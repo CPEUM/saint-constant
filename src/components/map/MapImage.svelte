@@ -10,7 +10,7 @@
 
 	const figureCtx = getContext('figuremap') as any;
 	const figureActive = figureCtx ? (figureCtx.active as Writable<boolean>) : null;
-	const LAYER_ID = id + '-layer';
+	const LAYER_ID = id + '-raster-layer';
 
 	$: if ($mapLoaded) {
 		console.log('adding image overlay');

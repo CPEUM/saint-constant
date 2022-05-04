@@ -1,0 +1,140 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 1,
+				"title": "Smart Centres Saint-Constant",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.58728408813477,
+					45.39085570644308
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 2,
+				"title": "Voie de la Desserte",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.5710620880127,
+					45.387660986419405
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 3,
+				"title": "Rue Saint-Pierre (intersection Route 132)",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.55797290802002,
+					45.38518947535892
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 4,
+				"title": "Gare Saint-Constant",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.56874465942383,
+					45.37409648531429
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 5,
+				"title": "Noyau villageois (chandellerie)",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.56947422027588,
+					45.364810461924286
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 6,
+				"title": "Montée Saint-Régis (1)",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.59093189239502,
+					45.37102141264139
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 7,
+				"title": "Montée Saint-Régis (2)",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.60157489776611,
+					45.374397954027714
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 8,
+				"title": "Gare Sainte-Catherine",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.59951496124268,
+					45.38099971587045
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"label": 9,
+				"title": "Chemin Sainte-Catherine",
+				"radius": 20
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-73.58518123626709,
+					45.38431537850841
+				]
+			}
+		}
+	]
+}

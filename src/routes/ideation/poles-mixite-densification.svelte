@@ -15,6 +15,14 @@
 	import ListItem from '$components/list/ListItem.svelte';
 	import Table from '$components/table/Table.svelte';
 	import TableCell from '$components/table/TableCell.svelte';
+	import { getData } from '$utils/getData';
+	import colors from '$styles/colors.json';
+	import PieChart from '$components/chart/PieChart.svelte';
+	import MapImage from '$components/map/MapImage.svelte';
+	import { base } from '$app/paths';
+
+	const identifiedSectors = getData('/data/geo/poles/identified-sectors.geojson');
+	const preferencesData = getData('/data/charts/poles/preferences.json');
 </script>
 
 <Exercice key="poles">
@@ -60,22 +68,37 @@
 		<p><strong>Dans un tel contexte, il est donc primordial de penser des modèles de densification qui s’insèrent harmonieusement dans le paysage urbain de Saint-Constant.</strong></p>
 	</Interest>
 	<Preferences>
-		<p>Issus de la démarche de caractérisation des paysages, les neuf secteurs de densification identifiés sont&nbsp;:</p>
-		<!-- À compléter -->
-		<FigureMap>
-			<Legend>
-				<LegendItem label="1">Smart Centres Saint-Constant</LegendItem>
-				<LegendItem label="2">Voie de la Desserte</LegendItem>
-				<LegendItem label="3">Rue Saint-Pierre (intersection Route 132)</LegendItem>
-				<LegendItem label="4">Gare Saint-Constant</LegendItem>
-				<LegendItem label="5">Noyau villageois (chandellerie)</LegendItem>
-				<LegendItem label="6">Montée Saint-Régis (1)</LegendItem>
-				<LegendItem label="7">Montée Saint-Régis (2)</LegendItem>
-				<LegendItem label="8">Gare Sainte-Catherine</LegendItem>
-				<LegendItem label="9">Chemin Sainte-Catherine</LegendItem>
-			</Legend>
+		<p class="bg" style="--bgtop: -1000px; padding-bottom: 40px;">Issus de la démarche de caractérisation des paysages, les neuf secteurs de densification identifiés sont&nbsp;:</p>
+		<FigureMap
+			bounds={[
+				[-73.6168, 45.3994],
+				[-73.5395, 45.3546]
+			]}
+		>
+			{#await identifiedSectors then geojson}
+				{#each geojson.features as feature}
+					<FigureMarker
+						zoom={14}
+						key={feature.properties.label + '-secteur'}
+						lnglat={feature.geometry.coordinates}
+						label={feature.properties.label}
+						fill={colors.poles2}
+						fillHighlight={colors.poles3}
+						color={colors.light1}
+					/>
+				{/each}
+				<Legend>
+					{#each geojson.features as feature}
+						<LegendItem key={feature.properties.label + '-secteur'} label={feature.properties.label} fill={colors.poles2} fillHighlight={colors.poles3} color={colors.light1}
+							>{feature.properties.title}</LegendItem
+						>
+					{/each}
+				</Legend>
+			{/await}
 		</FigureMap>
-		<p>Afin d’identifier les préoccupations et aspirations des participants présent au rendez-vous citoyen envers la densité urbaine, deux types de paramètres ont été ciblés&nbsp;:</p>
+		<p class="bg" style="--bgbottom: -800px; padding-top: 40px;">
+			Afin d’identifier les préoccupations et aspirations des participants présent au rendez-vous citoyen envers la densité urbaine, deux types de paramètres ont été ciblés&nbsp;:
+		</p>
 		<List>
 			<ListItem>La composition architecturale et urbaine des bâtiments;</ListItem>
 			<ListItem>La localisation des projets (selon les neuf secteurs de densification identifiés).</ListItem>
@@ -93,34 +116,32 @@
 		</List>
 		<h4>Exemples de projets de densification</h4>
 		<!-- figures des exemples -->
-		<h4>Résultats des préférences énoncées par les participants du rendez-vous citoyen</h4>
-		<FigureMap>
-			<!-- Piechart here -->
-			<Legend>
-				<LegendItem label="1">Smart Centres Saint-Constant</LegendItem>
-				<LegendItem label="2">Voie de la Desserte</LegendItem>
-				<LegendItem label="3">Rue Saint-Pierre (intersection Route 132)</LegendItem>
-				<LegendItem label="4">Gare Saint-Constant</LegendItem>
-				<LegendItem label="5">Noyau villageois (chandellerie)</LegendItem>
-				<LegendItem label="6">Montée Saint-Régis (1)</LegendItem>
-				<LegendItem label="7">Montée Saint-Régis (2)</LegendItem>
-				<LegendItem label="8">Gare Sainte-Catherine</LegendItem>
-				<LegendItem label="9">Chemin Sainte-Catherine</LegendItem>
-			</Legend>
-			<List>
-				<ListItem>Les immeubles de plus grandes hauteurs (ex.: A et B) présentent un faible intérêt, n’appartenant pas à l’identité de Saint-Constant selon les participants</ListItem>
-				<ListItem
-					>Les immeubles de moyenne densité (ex.: C et D) présentent un certain intérêt. L’exemple C est préféré dans les secteurs en transformation (montée Saint-Régis, rue Bélanger et la
-					rue Marois). L’exemple D est privilégié en bordure de la rue Saint-Régis et à l’intersection du chemin Sainte-Catherine et du boulevard Montchamp</ListItem
-				>
-				<ListItem
-					>Les immeubles de plus faible densité (ex.: E et F) sont fortement appréciés. L’exemple E séduit pour son apparence abordable, il est préféré pour les sites de la gare
-					Saint-Constant, la montée Saint-Régis et le site de la Chandellerie. L’exemple F est affectionné pour son caractère moderne, il est proposé pour la montée de Lasaline, la rue
-					Saint-Pierre et le chemin Sainte-Catherine.</ListItem
-				>
-			</List>
+		<h4 style="--bgtop: -800px; padding-bottom: 20px;">Résultats des préférences énoncées par les participants du rendez-vous citoyen</h4>
+		<FigureMap
+			bounds={[
+				[-73.6168, 45.3994],
+				[-73.5395, 45.3546]
+			]}
+		>
+			{#await preferencesData then res}
+				{#each res.charts as chart}
+					<PieChart data={chart.data} lnglat={chart.coordinates} columns={res.groups} mapKey={chart.id} />
+				{/each}
+			{/await}
 		</FigureMap>
-		<p>
+		<List>
+			<ListItem>Les immeubles de plus grandes hauteurs (ex.: A et B) présentent un faible intérêt, n’appartenant pas à l’identité de Saint-Constant selon les participants</ListItem>
+			<ListItem
+				>Les immeubles de moyenne densité (ex.: C et D) présentent un certain intérêt. L’exemple C est préféré dans les secteurs en transformation (montée Saint-Régis, rue Bélanger et la rue
+				Marois). L’exemple D est privilégié en bordure de la rue Saint-Régis et à l’intersection du chemin Sainte-Catherine et du boulevard Montchamp</ListItem
+			>
+			<ListItem
+				>Les immeubles de plus faible densité (ex.: E et F) sont fortement appréciés. L’exemple E séduit pour son apparence abordable, il est préféré pour les sites de la gare Saint-Constant,
+				la montée Saint-Régis et le site de la Chandellerie. L’exemple F est affectionné pour son caractère moderne, il est proposé pour la montée de Lasaline, la rue Saint-Pierre et le chemin
+				Sainte-Catherine.</ListItem
+			>
+		</List>
+		<p class="bg" style="--bgbottom: -800px; padding-top: 40px;">
 			La hauteur des bâtiments demeure un élément d’appréciation négatif des projets de densification. Aussi, la présence de la végétation ainsi que de l’activité commerciale contribuent à
 			apaiser la perception négative des projets. Nonobstant ces commentaires généraux, il est à noter que certaines tables de discussion ont été en défaveur de tous les exemples présentés.
 		</p>
@@ -130,6 +151,43 @@
 			À la suite des analyses précédemment présentées, un plan stratégique de densification pour les secteurs urbains identifiés a été établi. Chacun des secteurs sont à vocation mixte pour
 			permettre de développer une vie de quartier singulière tout en respectant le caractère paysager déjà présent.
 		</p>
+		<FigureMap
+			bounds={[
+				[-73.6168, 45.4024],
+				[-73.5449, 45.3537]
+			]}
+			pitch={0}
+		>
+			<MapImage
+				id="poles-sommaire"
+				url={base + '/media/poles/poles-carte-sommaire.png'}
+				coordinates={[
+					[-73.6123, 45.4],
+					[-73.5494, 45.4],
+					[-73.5494, 45.3561],
+					[-73.6123, 45.3561]
+				]}
+			/>
+			<Legend>
+				<LegendItem color={colors.light1} shape="square" fill="#8a9fb5">Sites potentiels à densifier</LegendItem>
+				<LegendItem color={colors.light1} shape="square" fill="#b6d4d9">Faible densité</LegendItem>
+				<LegendItem color={colors.light1} shape="square" fill="#6e8ba1">Moyenne densité</LegendItem>
+				<LegendItem color={colors.light1} shape="square" fill="#394a5b">Haute densité</LegendItem>
+				<LegendItem color={colors.light1} shape="circle" symbolScale={0.5} fill="#cf9a83">Places ajoutées</LegendItem>
+				<LegendItem color={colors.light1} fill="none" shape="line" stroke="#cf9a83" strokeWidth={1}>Chemins piétons publics ajoutés</LegendItem>
+				<LegendItem color={colors.light1} fill="none" shape="line" stroke="#9c1a36" strokeWidth={2}>Voie commerciale de desserte locale</LegendItem>
+				<LegendItem color={colors.light1} fill="none" shape="line" stroke="#73adad" strokeWidth={4}>Voie de type promenade</LegendItem>
+				<LegendItem color={colors.light1} fill="none" shape="line" stroke="#73adad" strokeWidth={2}>Voies principales locales</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5674, 45.3655]} label="A">Noyau villageois (Chandellerie)</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5799, 45.3683]} label="B">Montée Saint-Régis</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5995, 45.3752]} label="C">Rue Sainte-Catherine / Montée Saint-Régis</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5996, 45.3824]} label="D">Gare Sainte-Catherine</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.586, 45.3852]} label="E">Rue Sainte-Catherine / Meunier</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5744, 45.3884]} label="F">La route 132</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5588, 45.3823]} label="G">La rue Saint-Pierre</LegendItem>
+				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5698, 45.376]} label="H">Gare Saint-Constant</LegendItem>
+			</Legend>
+		</FigureMap>
 		<Proposition label="Secteur A" title="Le site de la chandellerie" key="a">
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">

@@ -6,11 +6,12 @@
 	import { intersection } from '$actions/intersect';
 	import { map } from '$components/map/Map.svelte';
 	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
+	import { bounds as boundsPresets } from '$utils/map';
 	import { LngLat, LngLatBounds, type LngLatBoundsLike, type LngLatLike } from 'maplibre-gl';
 	import { onMount, setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
-	export let bounds: LngLatBounds | LngLatBoundsLike = null;
+	export let bounds: LngLatBounds | LngLatBoundsLike = boundsPresets.fallback;
 	export let pitch: number = undefined;
 
 	let nMarkers = 0;

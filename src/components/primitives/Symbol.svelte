@@ -80,10 +80,14 @@
 
 	div {
 		position: relative;
-		width: 100%;
-		height: 100%;
+		top: 12.5%;
+		left: 12.5%;
+		width: 85%;
+		height: 85%;
 		margin: 0;
 		padding: 0;
+		border-radius: 4px;
+		background-size: cover;
 		/* border-radius: 6px; */
 		box-shadow: inset 0 0 0 2px var(--light2);
 	}

@@ -21,7 +21,7 @@
 			return {
 				viewBox: `0 0 ${viewBox.width} ${viewBox.height}`,
 				d: svgPath,
-				fill: getRandomThemeColor([1, 2], [$exercice.key]),
+				fill: getRandomThemeColor([1, 2, 3], [$exercice.key]),
 				dashArray: [Math.random() * 500 + 50, Math.random() * 300 + 10]
 			};
 		});

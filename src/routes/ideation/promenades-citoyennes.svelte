@@ -29,7 +29,7 @@
 </script>
 
 <Exercice key="promenades">
-	<!-- <Concept heading="Le concept de promenades citoyennes">
+	<Concept heading="Le concept de promenades citoyennes">
 		<p>Les promenades citoyennes consistent en l'aménagement de parcours piétons et cyclables à travers le territoire. Ces parcours ont plusieurs objectifs&nbsp;:</p>
 		<Bodies>
 			<BodiesItem>Inciter les déplacements de mobilités douces et actives</BodiesItem>
@@ -52,7 +52,7 @@
 			<ListItem>Présence de pôles sociaux et communautaires (parcs, écoles, centres communautaires) pouvant être reliés</ListItem>
 		</List>
 		<Excerpt name="Promenades1">Pour les curieux&nbsp;: Références de parcours de déplacements actifs</Excerpt>
-	</Interest> -->
+	</Interest>
 	<Preferences>
 		<p>
 			Lors du rendez-vous citoyen du 13 février 2020, citoyens, élus et professionnels municipaux se sont réunis pour exprimer leurs volontés envers le développement des promenades citoyennes.
@@ -89,7 +89,7 @@
 			pitch={0}
 		>
 			<MapImage
-				id="p-comments"
+				id="promenades-comments"
 				url={base + '/media/promenades/parcours-comments.png'}
 				coordinates={[
 					[-73.6141, 45.3963],
@@ -98,11 +98,11 @@
 					[-73.614, 45.3579]
 				]}
 			/>
-			<Legend>
+			<!-- <Legend>
 				<LegendItem />
-			</Legend>
+			</Legend> -->
 		</FigureMap>
-		<h4 class="bg" style="position: relative; padding-top: 80px; --bgbottom: -800px;">Parcours possédant déjà des aménagements de pistes cyclables&nbsp;:</h4>
+		<h4 class="bg" style="position: relative; padding-top: 80px; --bgbottom: -1200px;">Parcours possédant déjà des aménagements de pistes cyclables&nbsp;:</h4>
 		<Bodies>
 			<BodiesItem>Montée Saint-Régis</BodiesItem>
 			<BodiesItem>Chemin Sainte-Catherine</BodiesItem>
@@ -185,7 +185,7 @@
 			pitch={0}
 		>
 			<MapImage
-				id="p-overview"
+				id="promenades-overview"
 				url={base + '/media/promenades/overview.jpg'}
 				coordinates={[
 					[-73.6123, 45.4],

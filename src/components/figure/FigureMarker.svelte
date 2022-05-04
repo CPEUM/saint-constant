@@ -66,13 +66,7 @@
 		}
 	});
 
-	onDestroy(() => {
-		if (figmapCtx) {
-			if (marker && map) {
-				marker.remove();
-			}
-		}
-	});
+	onDestroy(() => {});
 </script>
 
 <div class="outer" {...$$restProps} bind:this={el} style:font-size="{size}px" style="{x ? `left: ${x}%;` : ''} {y ? `top: ${y}%;` : ''}" class:highlight={highlight || key == $currentKey}>

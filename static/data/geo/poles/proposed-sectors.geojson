@@ -1,0 +1,147 @@
+{
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "A",
+				"title": "Le site de la chandellerie",
+				"type": "secteur",
+				"radius": 20
+			},
+			"geometry": {
+				"coordinates": [
+					-73.568637,
+					45.364697
+				],
+				"type": "Point"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "B",
+				"title": "La monté Saint-Régis",
+				"type": "secteur",
+				"radius": 20
+			},
+			"geometry": {
+				"coordinates": [
+					-73.577998,
+					45.367403
+				],
+				"type": "Point"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "C",
+				"title": "L'intersection de la rue Sainte-Catherine et de la montée Saint-Régis",
+				"type": "secteur",
+				"radius": 20
+			},
+			"geometry": {
+				"coordinates": [
+					-73.601617,
+					45.374586
+				],
+				"type": "Point"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "D",
+				"title": "Le site entre la gare Sainte-Catherine et le lac des fées",
+				"type": "secteur",
+				"radius": 30
+			},
+			"geometry": {
+				"coordinates": [
+					-73.599396,
+					45.38106
+				],
+				"type": "Point"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "E",
+				"title": "La rue Sainte-Catherine à l'intersection de la rue Meunier",
+				"type": "secteur",
+				"radius": 25
+			},
+			"geometry": {
+				"coordinates": [
+					-73.589086,
+					45.385257
+				],
+				"type": "Point"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "F",
+				"radius": 20,
+				"title": "Requalification de la 132",
+				"type": "secteur"
+			},
+			"geometry": {
+				"coordinates": [
+					[
+						-73.588432,
+						45.394588
+					],
+					[
+						-73.58193,
+						45.392927
+					],
+					[
+						-73.575557,
+						45.390652
+					],
+					[
+						-73.571072,
+						45.3887
+					]
+				],
+				"type": "MultiPoint"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "G",
+				"radius": 20,
+				"title": "La rue Saint-Pierre",
+				"type": "secteur"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.560537,
+					45.381958
+				],
+				"type": "Point"
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"key": "H",
+				"radius": 50,
+				"title": "Le site de la gare Saint-Constant",
+				"type": "secteur"
+			},
+			"geometry": {
+				"coordinates": [
+					-73.569444,
+					45.374505
+				],
+				"type": "Point"
+			}
+		}
+	],
+	"type": "FeatureCollection"
+}

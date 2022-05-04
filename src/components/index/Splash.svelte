@@ -70,7 +70,7 @@
 					d={shape.d}
 					fill={shape.fillColor}
 					opacity={0.9}
-					stroke="var(--dark2)"
+					stroke="none"
 					stroke-width="0"
 					stroke-linejoin="round"
 					stroke-linecap="round"
