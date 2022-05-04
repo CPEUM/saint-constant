@@ -134,14 +134,11 @@
 					{data}
 					fillColor="none"
 					strokeColor={colors.promenades3}
-					strokeColorHover={colors.promenades3}
 					strokeColorHighlight={colors.promenades3}
 					strokeOpacity={0.5}
-					strokeOpacityHover={1}
 					strokeOpacityHighlight={1}
 					strokeWidth={10}
-					strokeWidthHighlight={12}
-					strokeWidthHover={15}
+					strokeWidthHighlight={14}
 				/>
 				<Legend>
 					{#each data.features as feature}

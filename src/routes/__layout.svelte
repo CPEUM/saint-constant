@@ -114,6 +114,7 @@
 			strokeWidthHover={15}
 			on:hover={(e) => propositionFeatureHover(e.detail)}
 			on:leave={() => mapTooltip.set(null)}
+			initialState="visible"
 		/>
 	{/await}
 </Map>

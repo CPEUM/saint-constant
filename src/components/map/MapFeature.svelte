@@ -26,6 +26,7 @@
 	export let strokeDashArray: number[] = [1, 0];
 	export let radius: number = 10;
 	export let id: string;
+	export let initialState: 'visible' | 'none' = 'none';
 
 	const figureCtx = getContext('figuremap') as any;
 	const currentKey = getContext('currentKey') as any;
@@ -100,7 +101,7 @@
 				'line-dasharray': strokeDashArray
 			},
 			layout: {
-				'visibility': 'visible',
+				'visibility': initialState,
 				'line-cap': 'round',
 				'line-join': 'round'
 			}
@@ -152,7 +153,7 @@
 				]
 			},
 			layout: {
-				visibility: 'visible'
+				visibility: initialState
 			}
 		});
 		map.on('mouseenter', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
@@ -176,7 +177,7 @@
 				'fill-antialias': true
 			},
 			layout: {
-				visibility: 'visible'
+				visibility: initialState
 			}
 		});
 		map.on('mouseenter', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {

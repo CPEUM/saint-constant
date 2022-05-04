@@ -114,9 +114,9 @@
 			<ListItem>La dimension de la cour avant et le rapport à la rue;</ListItem>
 			<ListItem>La présence d’arbres en cours avant.</ListItem>
 		</List>
-		<h4>Exemples de projets de densification</h4>
-		<!-- figures des exemples -->
-		<h4 style="--bgtop: -800px; padding-bottom: 20px;">Résultats des préférences énoncées par les participants du rendez-vous citoyen</h4>
+		<p>Les exemples étaient les suivants&nbsp:</p>
+		<!-- Ajouter exemples ici -->
+		<h4 class="bg" style="position: relative; --bgtop: -800px; padding-bottom: 60px;">Résultats des préférences énoncées par les participants du rendez-vous citoyen</h4>
 		<FigureMap
 			bounds={[
 				[-73.6168, 45.3994],
@@ -129,7 +129,7 @@
 				{/each}
 			{/await}
 		</FigureMap>
-		<List>
+		<List class="bg" style="position: relative; --bgbottom: -400px; padding-top: 60px">
 			<ListItem>Les immeubles de plus grandes hauteurs (ex.: A et B) présentent un faible intérêt, n’appartenant pas à l’identité de Saint-Constant selon les participants</ListItem>
 			<ListItem
 				>Les immeubles de moyenne densité (ex.: C et D) présentent un certain intérêt. L’exemple C est préféré dans les secteurs en transformation (montée Saint-Régis, rue Bélanger et la rue
@@ -141,13 +141,13 @@
 				Sainte-Catherine.</ListItem
 			>
 		</List>
-		<p class="bg" style="--bgbottom: -800px; padding-top: 40px;">
+		<p>
 			La hauteur des bâtiments demeure un élément d’appréciation négatif des projets de densification. Aussi, la présence de la végétation ainsi que de l’activité commerciale contribuent à
 			apaiser la perception négative des projets. Nonobstant ces commentaires généraux, il est à noter que certaines tables de discussion ont été en défaveur de tous les exemples présentés.
 		</p>
 	</Preferences>
 	<Propositions>
-		<p>
+		<p class="bg" style="--bgtop: -400px; padding-bottom: 40px;">
 			À la suite des analyses précédemment présentées, un plan stratégique de densification pour les secteurs urbains identifiés a été établi. Chacun des secteurs sont à vocation mixte pour
 			permettre de développer une vie de quartier singulière tout en respectant le caractère paysager déjà présent.
 		</p>
