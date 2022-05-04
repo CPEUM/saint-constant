@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-86dca0d5.js",
+    "file": "start-0f48ab4e.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -26,14 +26,14 @@
     ]
   },
   "src/routes/__layout.svelte": {
-    "file": "pages/__layout.svelte-aaa11fce.js",
+    "file": "pages/__layout.svelte-42f9b119.js",
     "src": "src/routes/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-8814b013.js",
       "_themeColors-35fcc233.js",
-      "_Map-861cc6bb.js",
+      "_getData-ef8f77e9.js",
       "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
       "_route-00f26e6a.js",
       "_routes-10413546.js",
@@ -44,12 +44,12 @@
       "_Link-3680a59c.js",
       "_logos-2bf878da.js",
       "_generateSvgPaths-8c5d72ca.js",
-      "_getData-bc4ff00b.js",
+      "_MapFeature-2e793c0e.js",
       "_singletons-d1fb5791.js",
       "_index-ff6a0fc0.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-a64e1156.css"
+      "assets/pages/__layout.svelte-ae690fbb.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -62,7 +62,7 @@
     ]
   },
   "src/routes/ideation/__layout.svelte": {
-    "file": "pages/ideation/__layout.svelte-d1ebefb7.js",
+    "file": "pages/ideation/__layout.svelte-5356bf92.js",
     "src": "src/routes/ideation/__layout.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -136,32 +136,26 @@
     ]
   },
   "src/routes/ideation/agroparc.svelte": {
-    "file": "pages/ideation/agroparc.svelte-d02b32be.js",
+    "file": "pages/ideation/agroparc.svelte-4e8623cb.js",
     "src": "src/routes/ideation/agroparc.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-8814b013.js",
-      "_Interest-fc932fdf.js",
-      "_BodiesItem-c7e6e33a.js",
-      "_preload-helper-a3450c27.js",
-      "_getData-bc4ff00b.js",
-      "_index-b9ab12a0.js",
-      "_BarChart-390e40c9.js",
+      "_BodiesItem-16204298.js",
+      "_BarChart-bf5136de.js",
+      "_MapFeature-2e793c0e.js",
       "_index-ff6a0fc0.js",
-      "_Map-861cc6bb.js",
+      "_getData-ef8f77e9.js",
       "_ListItem-34dc1373.js",
       "_revealText-510b6fa3.js",
       "_paths-396f020f.js",
       "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
       "_themeColors-35fcc233.js",
       "_intersect-eda3c074.js",
-      "_scroll-15239bd9.js"
-    ],
-    "dynamicImports": [
-      "src/components/excerpt/excerpt-articles/Agroparc1.svelte",
-      "src/components/excerpt/excerpt-articles/Agroparc2.svelte",
-      "src/components/excerpt/excerpt-articles/Promenades1.svelte"
+      "_scroll-15239bd9.js",
+      "_index-b9ab12a0.js",
+      "_preload-helper-a3450c27.js"
     ],
     "css": [
       "assets/pages/ideation/agroparc.svelte-134ce958.css",
@@ -169,32 +163,32 @@
     ]
   },
   "src/routes/ideation/poles-mixite-densification.svelte": {
-    "file": "pages/ideation/poles-mixite-densification.svelte-ec843348.js",
+    "file": "pages/ideation/poles-mixite-densification.svelte-a5684e1e.js",
     "src": "src/routes/ideation/poles-mixite-densification.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-8814b013.js",
-      "_BodiesItem-c7e6e33a.js",
-      "_Interest-fc932fdf.js",
-      "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
+      "_BodiesItem-16204298.js",
       "_ListItem-34dc1373.js",
       "_TableCell-ffe914ac.js",
+      "_getData-ef8f77e9.js",
+      "_themeColors-35fcc233.js",
+      "_PieChart-69a8f341.js",
+      "_paths-396f020f.js",
       "_intersect-eda3c074.js",
       "_revealText-510b6fa3.js",
-      "_paths-396f020f.js",
       "_scroll-15239bd9.js",
       "_index-ff6a0fc0.js",
-      "_Map-861cc6bb.js",
-      "_index-b9ab12a0.js",
-      "_themeColors-35fcc233.js"
+      "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
+      "_index-b9ab12a0.js"
     ],
     "css": [
       "assets/Image.svelte_svelte_type_style_lang-2f8baf26.css"
     ]
   },
   "src/routes/ideation/promenades-citoyennes.svelte": {
-    "file": "pages/ideation/promenades-citoyennes.svelte-01d25aa5.js",
+    "file": "pages/ideation/promenades-citoyennes.svelte-893a4cda.js",
     "src": "src/routes/ideation/promenades-citoyennes.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -202,24 +196,25 @@
       "_index-8814b013.js",
       "_revealText-510b6fa3.js",
       "_paths-396f020f.js",
-      "_BodiesItem-c7e6e33a.js",
-      "_BarChart-390e40c9.js",
-      "_getData-bc4ff00b.js",
+      "_BodiesItem-16204298.js",
+      "_BarChart-bf5136de.js",
       "_ListItem-34dc1373.js",
+      "_MapFeature-2e793c0e.js",
       "_themeColors-35fcc233.js",
+      "_getData-ef8f77e9.js",
       "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
       "_intersect-eda3c074.js",
       "_scroll-15239bd9.js",
       "_index-ff6a0fc0.js",
-      "_Map-861cc6bb.js",
-      "_index-b9ab12a0.js"
+      "_index-b9ab12a0.js",
+      "_preload-helper-a3450c27.js"
     ],
     "css": [
       "assets/Image.svelte_svelte_type_style_lang-2f8baf26.css"
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-059b6470.js",
+    "file": "pages/index.svelte-8c2c25c6.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -266,12 +261,18 @@
     ]
   },
   "src/routes/test.svelte": {
-    "file": "pages/test.svelte-3df3f87e.js",
+    "file": "pages/test.svelte-71c5c772.js",
     "src": "src/routes/test.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-8814b013.js"
+      "_index-8814b013.js",
+      "_PieChart-69a8f341.js",
+      "_getData-ef8f77e9.js",
+      "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
+      "_index-ff6a0fc0.js",
+      "_index-b9ab12a0.js",
+      "_paths-396f020f.js"
     ]
   },
   "_index-8814b013.js": {
@@ -295,13 +296,14 @@
   "_themeColors-35fcc233.js": {
     "file": "chunks/themeColors-35fcc233.js"
   },
-  "_Map-861cc6bb.js": {
-    "file": "chunks/Map-861cc6bb.js",
+  "_getData-ef8f77e9.js": {
+    "file": "chunks/getData-ef8f77e9.js",
     "imports": [
       "_index-8814b013.js",
       "_index-ff6a0fc0.js",
       "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
-      "_index-b9ab12a0.js"
+      "_index-b9ab12a0.js",
+      "_paths-396f020f.js"
     ]
   },
   "_index-b9ab12a0.js": {
@@ -319,17 +321,16 @@
       "_routes-10413546.js"
     ]
   },
-  "_getData-bc4ff00b.js": {
-    "file": "chunks/getData-bc4ff00b.js",
+  "_MapFeature-2e793c0e.js": {
+    "file": "chunks/MapFeature-2e793c0e.js",
     "imports": [
       "_index-8814b013.js",
       "_index-b9ab12a0.js",
-      "_Map-861cc6bb.js",
-      "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
-      "_paths-396f020f.js"
+      "_getData-ef8f77e9.js",
+      "_Map.svelte_svelte_type_style_lang-ad9468b4.js"
     ],
     "css": [
-      "assets/getData-b80cf092.css"
+      "assets/MapFeature-5e980a9b.css"
     ]
   },
   "_scroll-15239bd9.js": {
@@ -413,43 +414,40 @@
       "assets/Logos-dd87196a.css"
     ]
   },
-  "_Interest-fc932fdf.js": {
-    "file": "chunks/Interest-fc932fdf.js",
+  "_BodiesItem-16204298.js": {
+    "file": "chunks/BodiesItem-16204298.js",
     "imports": [
       "_index-8814b013.js",
-      "_BodiesItem-c7e6e33a.js"
-    ]
-  },
-  "_BodiesItem-c7e6e33a.js": {
-    "file": "chunks/BodiesItem-c7e6e33a.js",
-    "imports": [
-      "_index-8814b013.js",
+      "_getData-ef8f77e9.js",
       "_intersect-eda3c074.js",
       "_revealText-510b6fa3.js",
       "_paths-396f020f.js",
       "_scroll-15239bd9.js",
-      "_Map-861cc6bb.js",
       "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
       "_index-ff6a0fc0.js",
-      "_themeColors-35fcc233.js",
-      "_index-b9ab12a0.js"
+      "_index-b9ab12a0.js",
+      "_themeColors-35fcc233.js"
     ],
     "css": [
-      "assets/BodiesItem-96ae41f1.css",
+      "assets/BodiesItem-f39b9794.css",
       "assets/Image.svelte_svelte_type_style_lang-2f8baf26.css"
     ]
   },
-  "_BarChart-390e40c9.js": {
-    "file": "chunks/BarChart-390e40c9.js",
+  "_BarChart-bf5136de.js": {
+    "file": "chunks/BarChart-bf5136de.js",
     "imports": [
       "_index-8814b013.js",
-      "_Map-861cc6bb.js",
       "_intersect-eda3c074.js",
       "_paths-396f020f.js",
-      "_BodiesItem-c7e6e33a.js",
-      "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
+      "_preload-helper-a3450c27.js",
+      "_MapFeature-2e793c0e.js",
       "_index-b9ab12a0.js",
-      "_getData-bc4ff00b.js"
+      "_BodiesItem-16204298.js"
+    ],
+    "dynamicImports": [
+      "src/components/excerpt/excerpt-articles/Agroparc1.svelte",
+      "src/components/excerpt/excerpt-articles/Agroparc2.svelte",
+      "src/components/excerpt/excerpt-articles/Promenades1.svelte"
     ],
     "css": [
       "assets/BarChart-8f21cad2.css",
@@ -474,6 +472,18 @@
     ],
     "css": [
       "assets/TableCell-c49663d6.css"
+    ]
+  },
+  "_PieChart-69a8f341.js": {
+    "file": "chunks/PieChart-69a8f341.js",
+    "imports": [
+      "_index-8814b013.js",
+      "_getData-ef8f77e9.js",
+      "_Map.svelte_svelte_type_style_lang-ad9468b4.js",
+      "_index-b9ab12a0.js"
+    ],
+    "css": [
+      "assets/PieChart-db91f36a.css"
     ]
   },
   "src/components/excerpt/excerpt-articles/Agroparc1.svelte": {

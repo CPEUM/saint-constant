@@ -1,0 +1,333 @@
+{
+	"groups": {
+		"A": {
+			"label": "Exemple A",
+			"title": "Immeuble d'appartements avec commerces au rez-de-chaussée",
+			"color": "#0e5272"
+		},
+		"B": {
+			"label": "Exemple B",
+			"title": "Immeuble d'appartements sans commerces",
+			"color": "#0b3e66"
+		},
+		"C": {
+			"label": "Exemple C",
+			"title": "Immeuble avec accès direct au logement",
+			"color": "#367bb3"
+		},
+		"D": {
+			"label": "Exemple D",
+			"title": "Immeuble d'appartements avec commerces au rez-de-chaussée",
+			"color": "#338eb7"
+		},
+		"E": {
+			"label": "Exemple E",
+			"title": "Maisons en rangée avec cours avant végétalisée",
+			"color": "#8cd3d6"
+		},
+		"F": {
+			"label": "Exemple F",
+			"title": "Maisons en rangée avec volume désarticulé et toit-terrasse",
+			"color": "#b1e1f7"
+		}
+	},
+	"charts": [
+		{
+			"id": 1,
+			"coordinates": [
+				-73.58728408813477,
+				45.39085570644308
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 1
+				},
+				{
+					"key": "B",
+					"value": 3
+				},
+				{
+					"key": "C",
+					"value": 2
+				},
+				{
+					"key": "D",
+					"value": 2
+				},
+				{
+					"key": "E",
+					"value": 0
+				},
+				{
+					"key": "F",
+					"value": 1
+				}
+			]
+		},
+		{
+			"id": 2,
+			"coordinates": [
+				-73.5710620880127,
+				45.387660986419405
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 6
+				},
+				{
+					"key": "B",
+					"value": 1
+				},
+				{
+					"key": "C",
+					"value": 4
+				},
+				{
+					"key": "D",
+					"value": 2
+				},
+				{
+					"key": "E",
+					"value": 1
+				},
+				{
+					"key": "F",
+					"value": 0
+				}
+			]
+		},
+		{
+			"id": 3,
+			"coordinates": [
+				-73.55797290802002,
+				45.38518947535892
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 1
+				},
+				{
+					"key": "B",
+					"value": 3
+				},
+				{
+					"key": "C",
+					"value": 8
+				},
+				{
+					"key": "D",
+					"value": 5
+				},
+				{
+					"key": "E",
+					"value": 0
+				},
+				{
+					"key": "F",
+					"value": 1
+				}
+			]
+		},
+		{
+			"id": 4,
+			"coordinates": [
+				-73.56874465942383,
+				45.37409648531429
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 2
+				},
+				{
+					"key": "B",
+					"value": 4
+				},
+				{
+					"key": "C",
+					"value": 8
+				},
+				{
+					"key": "D",
+					"value": 6
+				},
+				{
+					"key": "E",
+					"value": 1
+				},
+				{
+					"key": "F",
+					"value": 2
+				}
+			]
+		},
+		{
+			"id": 5,
+			"coordinates": [
+				-73.56947422027588,
+				45.364810461924286
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 0
+				},
+				{
+					"key": "B",
+					"value": 0
+				},
+				{
+					"key": "C",
+					"value": 8
+				},
+				{
+					"key": "D",
+					"value": 5
+				},
+				{
+					"key": "E",
+					"value": 5
+				},
+				{
+					"key": "F",
+					"value": 6
+				}
+			]
+		},
+		{
+			"id": 6,
+			"coordinates": [
+				-73.59093189239502,
+				45.37102141264139
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 0
+				},
+				{
+					"key": "B",
+					"value": 3
+				},
+				{
+					"key": "C",
+					"value": 6
+				},
+				{
+					"key": "D",
+					"value": 9
+				},
+				{
+					"key": "E",
+					"value": 1
+				},
+				{
+					"key": "F",
+					"value": 5
+				}
+			]
+		},
+		{
+			"id": 7,
+			"coordinates": [
+				-73.60157489776611,
+				45.374397954027714
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 5
+				},
+				{
+					"key": "B",
+					"value": 3
+				},
+				{
+					"key": "C",
+					"value": 6
+				},
+				{
+					"key": "D",
+					"value": 7
+				},
+				{
+					"key": "E",
+					"value": 1
+				},
+				{
+					"key": "F",
+					"value": 4
+				}
+			]
+		},
+		{
+			"id": 8,
+			"coordinates": [
+				-73.59951496124268,
+				45.38099971587045
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 3
+				},
+				{
+					"key": "B",
+					"value": 3
+				},
+				{
+					"key": "C",
+					"value": 3
+				},
+				{
+					"key": "D",
+					"value": 1
+				},
+				{
+					"key": "E",
+					"value": 0
+				},
+				{
+					"key": "F",
+					"value": 3
+				}
+			]
+		},
+		{
+			"id": 9,
+			"coordinates": [
+				-73.58518123626709,
+				45.38431537850841
+			],
+			"data": [
+				{
+					"key": "A",
+					"value": 0
+				},
+				{
+					"key": "B",
+					"value": 0
+				},
+				{
+					"key": "C",
+					"value": 3
+				},
+				{
+					"key": "D",
+					"value": 4
+				},
+				{
+					"key": "E",
+					"value": 3
+				},
+				{
+					"key": "F",
+					"value": 4
+				}
+			]
+		}
+	]
+}
