@@ -91,7 +91,17 @@
 {/if}
 <Map on:load={() => (mapLoaded = true)} on:error={() => (mapLoaded = true)}>
 	{#await municipalFeature then geojson}
-		<MapFeature id="municipal" data={geojson} fillColor="white" fillOpacity={0} strokeColor={colors.accent3} strokeWidth={4} strokeOpacity={1} strokeDashArray={[0, 1.5]} />
+		<MapFeature
+			id="municipal"
+			data={geojson}
+			fillColor="white"
+			fillOpacity={0}
+			strokeColor={colors.accent3}
+			strokeWidth={2}
+			strokeOpacity={1}
+			strokeDashArray={[1, 2]}
+			initialVisibility="visible"
+		/>
 	{/await}
 	{#await propositionsFeatures then geojson}
 		<MapFeature
@@ -114,7 +124,7 @@
 			strokeWidthHover={15}
 			on:hover={(e) => propositionFeatureHover(e.detail)}
 			on:leave={() => mapTooltip.set(null)}
-			initialState="visible"
+			initialVisibility="visible"
 		/>
 	{/await}
 </Map>
