@@ -26,7 +26,7 @@
 	export let strokeDashArray: number[] = [1, 0];
 	export let radius: number = 10;
 	export let id: string;
-	export let initialState: 'visible' | 'none' = 'none';
+	export let initialVisibility: 'visible' | 'none' = 'none';
 
 	const figureCtx = getContext('figuremap') as any;
 	const currentKey = getContext('currentKey') as any;
@@ -39,7 +39,7 @@
 	let featureHoverId = null;
 	const dispatch = createEventDispatcher();
 
-	$: if (figureActive && $mapLoaded) {
+	$: if ($mapLoaded && figureActive) {
 		const vis = $figureActive ? 'visible' : 'none';
 		for (const layerId of Object.values(LAYER_IDS)) {
 			map.setLayoutProperty(layerId, 'visibility', vis);
@@ -83,112 +83,136 @@
 		mapFeatures.add(data);
 	}
 
-	$: if ($mapLoaded && !map.getSource(id)) {
-		map.addSource(id, {
-			type: 'geojson',
-			data
-		});
+	$: if ($mapLoaded) {
+		/** Feature's source */
+		if (!map.getSource(id)) {
+			map.addSource(id, {
+				type: 'geojson',
+				data
+			});
+		}
 		/* Lines layer */
-		map.addLayer({
-			id: LAYER_IDS.LINES,
-			type: 'line',
-			source: id,
-			filter: ['any', ['==', ['geometry-type'], 'LineString'], ['==', ['geometry-type'], 'MultiLineString'], ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
-			paint: {
-				'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], strokeWidthHover, ['boolean', ['feature-state', 'highlight'], false], strokeWidthHighlight, strokeWidth],
-				'line-color': ['case', ['boolean', ['feature-state', 'hover'], false], strokeColorHover, ['boolean', ['feature-state', 'highlight'], false], strokeColorHighlight, strokeColor],
-				'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], strokeOpacityHover, ['boolean', ['feature-state', 'highlight'], false], strokeOpacityHighlight, strokeOpacity],
-				'line-dasharray': strokeDashArray
-			},
-			layout: {
-				'visibility': initialState,
-				'line-cap': 'round',
-				'line-join': 'round'
-			}
-		});
-		map.on('mouseenter', LAYER_IDS.LINES, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseEnter(e);
-		});
-		map.on('mousemove', LAYER_IDS.LINES, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseMove(e);
-		});
-		map.on('mouseleave', LAYER_IDS.LINES, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseLeave(e);
-		});
+		if (!map.getLayer(LAYER_IDS.LINES)) {
+			map.addLayer({
+				id: LAYER_IDS.LINES,
+				type: 'line',
+				source: id,
+				filter: ['any', ['==', ['geometry-type'], 'LineString'], ['==', ['geometry-type'], 'MultiLineString'], ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
+				paint: {
+					'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], strokeWidthHover, ['boolean', ['feature-state', 'highlight'], false], strokeWidthHighlight, strokeWidth],
+					'line-color': ['case', ['boolean', ['feature-state', 'hover'], false], strokeColorHover, ['boolean', ['feature-state', 'highlight'], false], strokeColorHighlight, strokeColor],
+					'line-opacity': [
+						'case',
+						['boolean', ['feature-state', 'hover'], false],
+						strokeOpacityHover,
+						['boolean', ['feature-state', 'highlight'], false],
+						strokeOpacityHighlight,
+						strokeOpacity
+					],
+					'line-dasharray': strokeDashArray
+				},
+				layout: {
+					'visibility': initialVisibility,
+					'line-cap': 'round',
+					'line-join': 'round'
+				}
+			});
+			map.on('mouseenter', LAYER_IDS.LINES, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseEnter(e);
+			});
+			map.on('mousemove', LAYER_IDS.LINES, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseMove(e);
+			});
+			map.on('mouseleave', LAYER_IDS.LINES, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseLeave(e);
+			});
+		}
 		/* Points layer */
-		map.addLayer({
-			id: LAYER_IDS.CIRCLES,
-			type: 'circle',
-			source: id,
-			filter: ['any', ['==', ['geometry-type'], 'Point'], ['==', ['geometry-type'], 'MultiPoint']],
-			paint: {
-				'circle-pitch-alignment': 'map',
-				'circle-pitch-scale': 'map',
-				'circle-radius': ['interpolate', ['exponential', 2], ['zoom'], 10, ['/', ['coalesce', ['get', 'radius'], radius], 58.554], 20, ['/', ['coalesce', ['get', 'radius'], radius], 0.014]],
-				'circle-color': ['case', ['boolean', ['feature-state', 'hover'], false], fillColorHover, ['boolean', ['feature-state', 'highlight'], false], fillColorHighlight, fillColor],
-				'circle-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], fillOpacityHover, ['boolean', ['feature-state', 'highlight'], false], fillOpacityHighlight, fillOpacity],
-				'circle-stroke-width': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					strokeWidthHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					strokeWidthHighlight,
-					strokeWidth
-				],
-				'circle-stroke-color': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					strokeColorHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					strokeColorHighlight,
-					strokeColor
-				],
-				'circle-stroke-opacity': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false],
-					strokeOpacityHover,
-					['boolean', ['feature-state', 'highlight'], false],
-					strokeOpacityHighlight,
-					strokeOpacity
-				]
-			},
-			layout: {
-				visibility: initialState
-			}
-		});
-		map.on('mouseenter', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseEnter(e);
-		});
-		map.on('mousemove', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseMove(e);
-		});
-		map.on('mouseleave', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseLeave(e);
-		});
+		if (!map.getLayer(LAYER_IDS.CIRCLES)) {
+			map.addLayer({
+				id: LAYER_IDS.CIRCLES,
+				type: 'circle',
+				source: id,
+				filter: ['any', ['==', ['geometry-type'], 'Point'], ['==', ['geometry-type'], 'MultiPoint']],
+				paint: {
+					'circle-pitch-alignment': 'map',
+					'circle-pitch-scale': 'map',
+					'circle-radius': [
+						'interpolate',
+						['exponential', 2],
+						['zoom'],
+						10,
+						['/', ['coalesce', ['get', 'radius'], radius], 58.554],
+						20,
+						['/', ['coalesce', ['get', 'radius'], radius], 0.014]
+					],
+					'circle-color': ['case', ['boolean', ['feature-state', 'hover'], false], fillColorHover, ['boolean', ['feature-state', 'highlight'], false], fillColorHighlight, fillColor],
+					'circle-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], fillOpacityHover, ['boolean', ['feature-state', 'highlight'], false], fillOpacityHighlight, fillOpacity],
+					'circle-stroke-width': [
+						'case',
+						['boolean', ['feature-state', 'hover'], false],
+						strokeWidthHover,
+						['boolean', ['feature-state', 'highlight'], false],
+						strokeWidthHighlight,
+						strokeWidth
+					],
+					'circle-stroke-color': [
+						'case',
+						['boolean', ['feature-state', 'hover'], false],
+						strokeColorHover,
+						['boolean', ['feature-state', 'highlight'], false],
+						strokeColorHighlight,
+						strokeColor
+					],
+					'circle-stroke-opacity': [
+						'case',
+						['boolean', ['feature-state', 'hover'], false],
+						strokeOpacityHover,
+						['boolean', ['feature-state', 'highlight'], false],
+						strokeOpacityHighlight,
+						strokeOpacity
+					]
+				},
+				layout: {
+					visibility: initialVisibility
+				}
+			});
+			map.on('mouseenter', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseEnter(e);
+			});
+			map.on('mousemove', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseMove(e);
+			});
+			map.on('mouseleave', LAYER_IDS.CIRCLES, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseLeave(e);
+			});
+		}
 		/* Fill layer */
-		map.addLayer({
-			id: LAYER_IDS.FILLS,
-			type: 'fill',
-			source: id,
-			filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
-			paint: {
-				'fill-color': ['case', ['boolean', ['feature-state', 'hover'], false], fillColorHover, ['boolean', ['feature-state', 'highlight'], false], fillColorHighlight, fillColor],
-				'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], fillOpacityHover, ['boolean', ['feature-state', 'highlight'], false], fillOpacityHighlight, fillOpacity],
-				'fill-antialias': true
-			},
-			layout: {
-				visibility: initialState
-			}
-		});
-		map.on('mouseenter', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseEnter(e);
-		});
-		map.on('mousemove', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseMove(e);
-		});
-		map.on('mouseleave', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {
-			handleMouseLeave(e);
-		});
+		if (!map.getLayer(LAYER_IDS.FILLS)) {
+			map.addLayer({
+				id: LAYER_IDS.FILLS,
+				type: 'fill',
+				source: id,
+				filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
+				paint: {
+					'fill-color': ['case', ['boolean', ['feature-state', 'hover'], false], fillColorHover, ['boolean', ['feature-state', 'highlight'], false], fillColorHighlight, fillColor],
+					'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], fillOpacityHover, ['boolean', ['feature-state', 'highlight'], false], fillOpacityHighlight, fillOpacity],
+					'fill-antialias': true
+				},
+				layout: {
+					visibility: initialVisibility
+				}
+			});
+			map.on('mouseenter', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseEnter(e);
+			});
+			map.on('mousemove', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseMove(e);
+			});
+			map.on('mouseleave', LAYER_IDS.FILLS, function (e: maplibregl.MapLayerMouseEvent) {
+				handleMouseLeave(e);
+			});
+		}
 	}
 
 	onDestroy(() => {

@@ -65,7 +65,7 @@
 				return filters.every(([k, v]) => f.properties[k] === v);
 			});
 			const bounds = new maplibregl.LngLatBounds(bbox(featureCollection(filtered.map((feature) => bboxPolygon(bbox(feature))))));
-			map.fitBounds(bounds, { padding: 200, maxZoom: 15 });
+			map.fitBounds(bounds, { padding: 300, maxZoom: 15 });
 		}
 	}
 
@@ -182,12 +182,12 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		right: 0%;
-		left: 100%;
+		right: 20%;
+		left: 20%;
 		top: 0%;
 		bottom: 0%;
-		opacity: 1;
-		/* border-radius: 100px; */
+		opacity: 0;
+		border-radius: 50px;
 		width: auto;
 		height: auto;
 		padding: 0;
@@ -208,14 +208,12 @@
 		}
 
 		&:global(.figure) {
-			/* z-index: 0; */
-			/* pointer-events: none; */
 			opacity: 1;
 			top: 4rem;
-			right: 4rem;
 			bottom: 4rem;
-			left: 4rem;
-			border-radius: 1rem;
+			left: calc(50% - var(--width-lg) * 0.5);
+			right: calc(50% - var(--width-lg) * 0.5);
+			border-radius: 2rem;
 			box-shadow: 0 3rem 5rem -5rem rgba(0, 0, 40, 0.25);
 		}
 
