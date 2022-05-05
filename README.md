@@ -39,9 +39,7 @@ pnpm preview
 
 La version de travail est présentement déployée sur la page _GitHub Pages_ du dépôt.
 
-Si le site n'est pas hébergé à la racine du domaine, (comme c'est le cas avec _GitHub Pages_) assurez vous de faire un `build` en précisant adéquatement la racine (`base`) visée du site en déclarant la variable d'environnement `PUBLIC_BASE_PATH`.
-
-Par exemple, le résultat du [pipeline](/.github/workflows/deploy.yml) de `build` pour la diffusion sur _GitHub Pages_ ressemble à ceci:
+Si le site n'est pas hébergé à la racine du domaine, (comme c'est le cas avec _GitHub Pages_) assurez vous de faire un `build` en précisant adéquatement la racine (`base`) visée du site en déclarant la variable d'environnement `PUBLIC_BASE_PATH`. Par exemple, le résultat du [pipeline](/.github/workflows/deploy.yml) de `build` pour la diffusion sur _GitHub Pages_, où le site final est déployé à l'adresse `https://[domaine]/saint-constant/` plutôt que `https://[domaine]/`, ressemble à ceci:
 
 ```sh
 PUBLIC_BASE_PATH=/saint-constant

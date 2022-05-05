@@ -11,6 +11,7 @@
 	import type { ExerciceRoute } from '$utils/routes';
 	import { exerciceRoutes } from '$utils/routes';
 	import { revealFlyDown, revealFlyUp, revealText } from '$actions/revealText';
+	import colors from '$styles/colors.json';
 
 	let mounted = false;
 	let waves;
@@ -38,8 +39,17 @@
 	{#if mounted}
 		<svg transition:fade|local height={viewBox.height} width={viewBox.width} viewBox="0 0 {viewBox.width} {viewBox.height}" preserveAspectRatio="xMidYMax slice">
 			{#key $exercice}
-				{#each waves as wave}
-					<path transition:fade vector-effect="non-scaling-stroke" d={wave.d} fill={wave.fill} opacity={0.8} stroke-width={1} stroke="none" stroke-opacity={0.5} />
+				{#each waves as wave, i}
+					<path
+						transition:fade
+						vector-effect="non-scaling-stroke"
+						d={wave.d}
+						fill={colors[$exercice.key + Math.min(i + 1, 3)]}
+						opacity={0.8}
+						stroke-width={1}
+						stroke="none"
+						stroke-opacity={0.5}
+					/>
 				{/each}
 			{/key}
 			<!-- <text x="100" y="75" font-size="200" text-anchor="middle" dominant-baseline="baseline">{$exercice.title}</text> -->
