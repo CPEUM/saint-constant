@@ -29,6 +29,7 @@
 	import { getData } from '$utils/getData';
 	import MapImage from '$components/map/MapImage.svelte';
 	import { base } from '$app/paths';
+import { route } from '$stores/route';
 
 	export let topRoute = null;
 	export let topNavigating = true;
@@ -70,6 +71,10 @@
 		// }
 	}
 </script>
+
+<svelte:head>
+	<title>Paysage Saint-Constant: {$route.title}</title>
+</svelte:head>
 
 <Nav />
 <main>
