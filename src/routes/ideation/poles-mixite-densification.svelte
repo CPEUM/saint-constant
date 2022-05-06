@@ -268,7 +268,7 @@
 		</FigureMap>
 		<Proposition label="Secteur A" title="Le site de la chandellerie" key="a" src={base + '/media/poles/persp-chandellerie.jpg'}>
 			<Image
-				src={base + '/media/poles/axo_densité_secteurA.jpg'}
+				src={base + '/media/poles/axo_poles_secteurA.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site de la chandellerie au coeur du noyau villegeois et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -353,7 +353,7 @@
 		</Proposition>
 		<Proposition label="Secteur B" title="La montée Saint-Régis" key="b" src={base + '/media/poles/persp-ecole.jpg'}>
 			<Image
-				src={base + '/media/poles/axo_densité_secteurB.jpg'}
+				src={base + '/media/poles/axo_poles_secteurB.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site face à la montée Saint-Régis et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -430,7 +430,7 @@
 		</Proposition>
 		<Proposition label="Secteur C" title="L’intersection de la rue Sainte-Catherine et de la montée Saint-Régis" key="c" src={base + '/media/poles/persp-serres.jpg'}>
 			<Image
-				src={base + '/media/poles/axo_densité_secteurC.jpg'}
+				src={base + '/media/poles/axo_poles_secteurC.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -511,7 +511,7 @@
 		</Proposition>
 		<Proposition label="Secteur D" title="Le site entre la gare Sainte-Catherine et le lac des fées" key="d">
 			<Image
-				src={base + '/media/poles/axo_densité_secteurD.jpg'}
+				src={base + '/media/poles/axo_poles_secteurD.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -594,7 +594,7 @@
 		</Proposition>
 		<Proposition label="Secteur E" title="La rue Sainte-Catherine à l’intersection de la rue Meunier" key="e">
 			<Image
-				src={base + '/media/poles/axo_densité_secteurE.jpg'}
+				src={base + '/media/poles/axo_poles_secteurE.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -662,10 +662,10 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur F" title="Requalification de la 132" key="f">
-			<Image src={base + '/media/poles/axo_densité_secteurF_132_ensemble.jpg'} style="max-width: var(--width-md);" alt="Proposition visant à requalifier le secteur de la route 132" />
+			<Image src={base + '/media/poles/axo_poles_secteurF_132_ensemble.jpg'} style="max-width: var(--width-md);" alt="Proposition visant à requalifier le secteur de la route 132" />
 			<br />
 			<Figure
-				src={base + '/media/poles/axo_densité_secteurF_132_partie1.jpg'}
+				src={base + '/media/poles/axo_poles_secteurF_132_partie1.jpg'}
 				description="Proposition d'aménagement du site de le route 132 (Partie 1) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -675,7 +675,7 @@
 				</svelte:fragment>
 			</Figure>
 			<Figure
-				src={base + '/media/poles/axo_densité_secteurF_132_partie2.jpg'}
+				src={base + '/media/poles/axo_poles_secteurF_132_partie2.jpg'}
 				description="Proposition d'aménagement du site de le route 132 (Partie 2) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -684,7 +684,7 @@
 				</svelte:fragment>
 			</Figure>
 			<Figure
-				src={base + '/media/poles/axo_densité_secteurF_132_partie3.jpg'}
+				src={base + '/media/poles/axo_poles_secteurF_132_partie3.jpg'}
 				description="Proposition d'aménagement du site de le route 132 (Partie 3) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -694,7 +694,7 @@
 				</svelte:fragment>
 			</Figure>
 			<Figure
-				src={base + '/media/poles/axo_densité_secteurF_132_partie4.jpg'}
+				src={base + '/media/poles/axo_poles_secteurF_132_partie4.jpg'}
 				description="Proposition d'aménagement du site de le route 132 (Partie 4) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -758,7 +758,7 @@
 		</Proposition>
 		<Proposition label="Secteur G" title="la rue Saint-Pierre" key="g">
 			<Image
-				src={base + '/media/poles/axo_densité_secteurG.jpg'}
+				src={base + '/media/poles/axo_poles_secteurG.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site le long de la rue Saint-Pierre et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -843,7 +843,7 @@
 		</Proposition>
 		<Proposition label="Secteur H" title="Le site de la gare Saint-Constant" key="h">
 			<Image
-				src={base + '/media/poles/axo_densité_secteurH.jpg'}
+				src={base + '/media/poles/axo_poles_secteurH.jpg'}
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site le long de la rue Saint-Pierre et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
