@@ -214,7 +214,7 @@
 				<LegendItem key="p-d" label="D" fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1}>Corridor découverte</LegendItem>
 			</svelte:fragment>
 		</FigureMap>
-		<Proposition label="Parcours A" title="Le corridor des pollinisateurs (est-ouest)" key="A" src="/media/promenades/perspective-corridor-pollinisateurs.jpg">
+		<Proposition label="Parcours A" title="Le corridor des pollinisateurs (est-ouest)" key="a" src="/media/promenades/perspective-corridor-pollinisateurs.jpg">
 			<p>Le corridor des pollinisateurs se situe au nord et longe les rues du Maçon et de Lausanne.</p>
 			<h4>Contexte actuel</h4>
 			<List>
@@ -268,7 +268,7 @@
 				<b>la voie publique</b> suffisamment large pour accueillir une voie cyclable supplémentaire. Une séparation claire est faite entre piétons, cyclistes et voitures.
 			</p>
 		</Proposition>
-		<Proposition label="Parcours B" title="Le corridor nourricier (est-ouest)" key="B" src="/media/promenades/perspective-corridor-nourricier.jpg">
+		<Proposition label="Parcours B" title="Le corridor nourricier (est-ouest)" key="b" src="/media/promenades/perspective-corridor-nourricier.jpg">
 			<p>Le corridor nourricier proposé longe la voie ferrée.</p>
 			<h4>Contexte actuel</h4>
 			<p>Centre du territoire urbanisé qui présente une diversité de milieux et d’identités végétales.</p>
@@ -322,7 +322,7 @@
 				collectifs ou communautaires sont proposés.
 			</p>
 		</Proposition>
-		<Proposition label="Parcours C" title="Le corridor riverain (nord-sud)" key="C" src="/media/promenades/perspective-corridor-riverain.jpg">
+		<Proposition label="Parcours C" title="Le corridor riverain (nord-sud)" key="c" src="/media/promenades/perspective-corridor-riverain.jpg">
 			<p>Le tracé ici proposé est parallèle à la rivière Saint-Pierre.</p>
 			<h4>Contexte actuel</h4>
 			<p>Ce corridor est caractérisé par la proximité et l’imbrication entre le milieu urbanisé et le milieu riverain qui sont en contraste.</p>
@@ -380,7 +380,7 @@
 				</ListItem>
 			</List>
 		</Proposition>
-		<Proposition label="Parcours D" title="Le corridor découverte (est-ouest)" key="D" src="">
+		<Proposition label="Parcours D" title="Le corridor découverte (est-ouest)" key="d" src="">
 			<p>Ce corridor-ci se situe au sud, traversant une diversité de milieux naturels et agricoles.</p>
 			<h4>Contexte actuel</h4>
 			<p>Il est caractérisé par sa grande diversité paysagère et ses expériences variées&nbsp;:</p>

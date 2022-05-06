@@ -16,7 +16,7 @@
 	import Nav from '$components/nav/Nav.svelte';
 	import Footer from '$components/Footer.svelte';
 	import { fade, fly, scale } from 'svelte/transition';
-	import { navigating } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import { getSegments } from '$utils/path';
 	import { expoIn, expoOut } from 'svelte/easing';
 	import { browser } from '$app/env';
@@ -30,10 +30,13 @@
 	import MapImage from '$components/map/MapImage.svelte';
 	import { base } from '$app/paths';
 import { route } from '$stores/route';
+import { getOffset } from '$utils/element';
+import { onMount } from 'svelte';
 
 	export let topRoute = null;
 	export let topNavigating = true;
 	let mapLoaded = false;
+	let mounted = false;
 
 	const municipalFeature = getData('/data/geo/saint-constant.geojson');
 	const propositionsFeatures = getData('/data/geo/propositions.geojson');
@@ -42,6 +45,24 @@ import { route } from '$stores/route';
 			text: `${e.features[0].properties.type} ${e.features[0].properties.key}: ${e.features[0].properties.title}`,
 			coords: e.features[0].geometry.type.toLowerCase() === 'point' ? (e.features[0].geometry as any).coordinates : e.lngLat
 		});
+	}
+
+	/**
+	 * Scroll to hash, if found in markup.
+	 */
+	function scrollToHash() {
+		if ($page.url.hash) {
+			const anchor = document.getElementById($page.url.hash.replace('#', ''));
+			if (anchor) {
+				document.body.style.scrollBehavior = 'unset';
+				anchor.scrollIntoView();
+				// document.body.scrollTop = getOffset(document.body, anchor).top;
+				return document.body.style.scrollBehavior = 'smooth';
+			}
+		}
+		document.body.style.scrollBehavior = 'unset';
+		document.body.scrollTop = 0;
+		return document.body.style.scrollBehavior = 'smooth';
 	}
 
 	beforeNavigate(({ from, to }) => {
@@ -57,23 +78,23 @@ import { route } from '$stores/route';
 		if (topNavigating) {
 			topNavigating = false;
 		}
-		document.body.style.scrollBehavior = 'unset';
-		document.body.scrollTop = 0;
-		document.body.style.scrollBehavior = 'smooth';
+		scrollToHash();
 	});
 
 	function outroend() {
+		mounted = true;
 		if (topNavigating) topNavigating = false;
-		// if (browser) {
-		// 	document.body.style.scrollBehavior = 'unset';
-		// 	document.body.scrollTop = 0;
-		// 	document.body.style.scrollBehavior = 'smooth';
-		// }
+	}
+
+	$: if (mapLoaded && mounted) {
+		if (browser) {
+			setTimeout(() => scrollToHash(), 1000);
+		}
 	}
 </script>
 
 <svelte:head>
-	<title>Paysage Saint-Constant: {$route.title}</title>
+	<title>Paysage Saint-Constant{route && $route? ':' + $route.title : ''}</title>
 </svelte:head>
 
 <Nav />

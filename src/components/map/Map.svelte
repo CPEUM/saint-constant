@@ -16,6 +16,9 @@
 	import { featureCollection } from '@turf/helpers';
 	import FigureCompass from '$components/figure/FigureCompass.svelte';
 	import MapTooltip from './MapTooltip.svelte';
+import { goto } from '$app/navigation';
+import { base } from '$app/paths';
+import { browser } from '$app/env';
 
 	const dispatch = createEventDispatcher<{ load: null; error: null }>();
 	let container: HTMLElement;
@@ -151,6 +154,15 @@
 		map.on('dragend', (e) => {
 			userCenter = map.getCenter();
 		});
+
+		map.on('click', async (e) => {
+			const clicked = map.queryRenderedFeatures(e.point)[0];
+			const url = clicked.properties.url;
+			if (url) {
+				await goto(base + url);
+				mapDisplay.setFull(false);
+			}
+		})
 	});
 </script>
 

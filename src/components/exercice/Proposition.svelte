@@ -21,7 +21,7 @@
 	function clearFocus() {}
 </script>
 
-<section use:intersection on:enter={setFocus} on:leave={clearFocus}>
+<section use:intersection on:enter={setFocus} on:leave={clearFocus} id={key}>
 	<PropositionHeader {label} {title} {src} />
 	<slot />
 </section>
