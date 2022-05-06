@@ -19,7 +19,7 @@
 	promouvoir les relations villes-campagnes, on y retrouve également des espaces de conditionnement et de vente des produits, d’autocueillette ainsi que de restauration. Il est à noter que
 	l’aménagement du parc fertile de Bernex a été conçu dans le cadre d’un concours international d’urbanisme remporté par Verzone Woods Architectes.
 </p>
-<Image src={base + '/media/agroparc/extrait-1.jpg'} alt="Image récupérée à https://www.vwa.ch/projet/parc-agro-urbain/" />
+<Image src="/media/agroparc/extrait-1.jpg" alt="Image récupérée à https://www.vwa.ch/projet/parc-agro-urbain/" />
 <h2>Le Parc Agricole du Baix Llobregat – Catalogne, Espagne</h2>
 <p>
 	Le projet de l'agroparc du Baix Llobregat est né de la mobilisation des agriculteurs afin de préserver leur espace de production dans le contexte d’étalement urbain de la région de Barcelone

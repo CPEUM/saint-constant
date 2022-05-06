@@ -3,6 +3,9 @@
 	import { base } from '$app/paths';
 	import { createEventDispatcher } from 'svelte';
 
+	/**
+	 * Unbased source path.
+	 */
 	export let src: string;
 	export let alt: string;
 

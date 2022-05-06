@@ -14,4 +14,4 @@
 	qui relient les grands espaces verts de la ville (<i>City of Toronto</i>, 2018). Ainsi articulée, la structure des parcs devient l’armature à la fois d’un réseau récréatif et de mobilité active.
 	La présence de la végétation représente ainsi un élément essentiel de l’expérience quotidienne de la ville.
 </p>
-<Image style="max-width: var(--width-sm)" src={base + '/media/promenades/extrait-1.jpg'} alt="Image récupérée à https://www.csla-aapc.ca/awards-atlas/tocore-downtown-parks-and-public-realm-plan" />
+<Image style="max-width: var(--width-sm)" src="/media/promenades/extrait-1.jpg" alt="Image récupérée à https://www.csla-aapc.ca/awards-atlas/tocore-downtown-parks-and-public-realm-plan" />

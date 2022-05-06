@@ -128,19 +128,19 @@
 			<b>Exemple A</b>&nbsp;: Esplanade Cartier, Montréal, arrondissement Ville-Marie (NOS architectes) : immeuble d’appartements implanté directement sur la rue avec commerces au
 			rez-dechaussée. La répartition des hauteurs présente une grande variété (3 à 12 étages).
 		</p>
-		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleA.jpg'} alt="Esplanade Cartier (NOS Architectes)" />
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src="/media/poles/Discussion3_exempleA.jpg" alt="Esplanade Cartier (NOS Architectes)" />
 		<br />
 		<p>
 			<b>Exemple B</b>&nbsp;: Coopérative des Bassins du Havre, Montréal, arrondissement Le Sud-Ouest (Atelier Raouf Boutros) : immeubles d’appartements implantés en bordure d’un parc public. Le
 			bâtiment est composé en un seul volume de 8 étages. Aucun commerce n’est présent au rez-de-chaussée.
 		</p>
-		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleB.jpg'} alt="Coopérative des Bassins du Havre (Atelier Raouf Boutros)" />
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src="/media/poles/Discussion3_exempleB.jpg" alt="Coopérative des Bassins du Havre (Atelier Raouf Boutros)" />
 		<br />
 		<p>
 			<b>Exemple C</b>&nbsp;: Écopropriété Habitus, Québec (Tergos Architecture + Construction) : immeuble de type “plex” dans lequel les logements ont un accès direct vers l’extérieur. Le
 			troisième et dernier niveau présente des portions en retrait de la façade principale. L’implantation possède une faible marge avant végétalisée.
 		</p>
-		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleC.jpg'} alt="Écopropriété Habitus (Tergos Architecture + Construction)" />
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src="/media/poles/Discussion3_exempleC.jpg" alt="Écopropriété Habitus (Tergos Architecture + Construction)" />
 		<br />
 		<p>
 			<b>Exemple D</b>&nbsp;: Place Simon-Valois (Schème Consultants et Atelier Urban Soland), Montréal, arrondissement Mercier – Hochelaga-Maisonneuve : immeuble d’appartements de trois niveaux
@@ -148,7 +148,7 @@
 		</p>
 		<Image
 			style="width: 100%; height: auto; max-width: var(--width-sm)"
-			src={base + '/media/poles/Discussion3_exempleD.jpg'}
+			src="/media/poles/Discussion3_exempleD.jpg"
 			alt="Place Simon-Valois (Shème Consultants et Atelier Urban Soland)"
 		/>
 		<br />
@@ -156,13 +156,13 @@
 			<b>Exemple E</b>&nbsp;: Cohabitat, Québec (Tergos Architecture + Construction) : ensemble résidentiel mixte comprenant dans la portion illustrée des maisons en rangée. La composition
 			volumétrique rectangulaire de deux niveaux est simple et uniforme. Une grande cour avant végétalisée est aménagée.
 		</p>
-		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleE.jpg'} alt="Cohabitat (Tergos Architecture + Construction)" />
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src="/media/poles/Discussion3_exempleE.jpg" alt="Cohabitat (Tergos Architecture + Construction)" />
 		<br />
 		<p>
 			<b>Exemple F</b>&nbsp;: 3-33 du Canal, Montréal, arrondissement Lachine (Calce Architecture Workshop) : ensemble résidentiel composé de maisons en rangée. Dans la portion illustrée, la
 			composition volumétrique est articulée en plusieurs éléments et présente des toits-terrasses. Les bâtiments sont implantés avec une faible marge de recul avant végétalisée.
 		</p>
-		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleF.jpg'} alt="3-33 du Canal (Calce Architecture Workshop)" />
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src="/media/poles/Discussion3_exempleF.jpg" alt="3-33 du Canal (Calce Architecture Workshop)" />
 		<h4 class="bg" style="position: relative; --bgtop: -800px; padding-bottom: 60px;">Résultats des préférences énoncées par les participants du rendez-vous citoyen</h4>
 		<FigureMap
 			bounds={[
@@ -266,9 +266,9 @@
 				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5698, 45.376]} label="H">Gare Saint-Constant</LegendItem>
 			</svelte:fragment>
 		</FigureMap>
-		<Proposition label="Secteur A" title="Le site de la chandellerie" key="a" src={base + '/media/poles/persp-chandellerie.jpg'}>
+		<Proposition label="Secteur A" title="Le site de la chandellerie" key="a" src="/media/poles/persp-chandellerie.jpg">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurA.jpg'}
+				src="/media/poles/axo_poles_secteurA.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site de la chandellerie au coeur du noyau villegeois et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -351,9 +351,9 @@
 				>
 			</List>
 		</Proposition>
-		<Proposition label="Secteur B" title="La montée Saint-Régis" key="b" src={base + '/media/poles/persp-ecole.jpg'}>
+		<Proposition label="Secteur B" title="La montée Saint-Régis" key="b" src="/media/poles/persp-ecole.jpg">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurB.jpg'}
+				src="/media/poles/axo_poles_secteurB.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site face à la montée Saint-Régis et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -428,9 +428,9 @@
 				<ListItem>Aménager des aires de stationnement subdivisées en plusieurs lots réparties sur le site afin de réduire leur perception sur le plan visuel.</ListItem>
 			</List>
 		</Proposition>
-		<Proposition label="Secteur C" title="L’intersection de la rue Sainte-Catherine et de la montée Saint-Régis" key="c" src={base + '/media/poles/persp-serres.jpg'}>
+		<Proposition label="Secteur C" title="L’intersection de la rue Sainte-Catherine et de la montée Saint-Régis" key="c" src="/media/poles/persp-serres.jpg">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurC.jpg'}
+				src="/media/poles/axo_poles_secteurC.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -511,7 +511,7 @@
 		</Proposition>
 		<Proposition label="Secteur D" title="Le site entre la gare Sainte-Catherine et le lac des fées" key="d">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurD.jpg'}
+				src="/media/poles/axo_poles_secteurD.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -594,7 +594,7 @@
 		</Proposition>
 		<Proposition label="Secteur E" title="La rue Sainte-Catherine à l’intersection de la rue Meunier" key="e">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurE.jpg'}
+				src="/media/poles/axo_poles_secteurE.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -662,10 +662,10 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur F" title="Requalification de la 132" key="f">
-			<Image src={base + '/media/poles/axo_poles_secteurF_132_ensemble.jpg'} style="max-width: var(--width-md);" alt="Proposition visant à requalifier le secteur de la route 132" />
+			<Image src="/media/poles/axo_poles_secteurF_132_ensemble.jpg" style="max-width: var(--width-md);" alt="Proposition visant à requalifier le secteur de la route 132" />
 			<br />
 			<Figure
-				src={base + '/media/poles/axo_poles_secteurF_132_partie1.jpg'}
+				src="/media/poles/axo_poles_secteurF_132_partie1.jpg"
 				description="Proposition d'aménagement du site de le route 132 (Partie 1) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -675,7 +675,7 @@
 				</svelte:fragment>
 			</Figure>
 			<Figure
-				src={base + '/media/poles/axo_poles_secteurF_132_partie2.jpg'}
+				src="/media/poles/axo_poles_secteurF_132_partie2.jpg"
 				description="Proposition d'aménagement du site de le route 132 (Partie 2) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -684,7 +684,7 @@
 				</svelte:fragment>
 			</Figure>
 			<Figure
-				src={base + '/media/poles/axo_poles_secteurF_132_partie3.jpg'}
+				src="/media/poles/axo_poles_secteurF_132_partie3.jpg"
 				description="Proposition d'aménagement du site de le route 132 (Partie 3) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -694,7 +694,7 @@
 				</svelte:fragment>
 			</Figure>
 			<Figure
-				src={base + '/media/poles/axo_poles_secteurF_132_partie4.jpg'}
+				src="/media/poles/axo_poles_secteurF_132_partie4.jpg"
 				description="Proposition d'aménagement du site de le route 132 (Partie 4) et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			>
 				<svelte:fragment slot="legend">
@@ -758,7 +758,7 @@
 		</Proposition>
 		<Proposition label="Secteur G" title="la rue Saint-Pierre" key="g">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurG.jpg'}
+				src="/media/poles/axo_poles_secteurG.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site le long de la rue Saint-Pierre et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
@@ -843,7 +843,7 @@
 		</Proposition>
 		<Proposition label="Secteur H" title="Le site de la gare Saint-Constant" key="h">
 			<Image
-				src={base + '/media/poles/axo_poles_secteurH.jpg'}
+				src="/media/poles/axo_poles_secteurH.jpg"
 				style="max-width: var(--width-md);"
 				alt="Proposition d'aménagement du site le long de la rue Saint-Pierre et tableau explicatif des superficies planifiées selon les différentes fonctions"
 			/>
