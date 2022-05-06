@@ -31,10 +31,9 @@
 	div {
 		position: relative;
 		display: flex;
+		width: auto;
 		max-width: 100%;
-		height: auto;
-		min-height: 100px;
-		max-height: 90vh;
+		width: auto;
 		padding: 0;
 		margin: 0 auto;
 		border-radius: 12px;
@@ -45,6 +44,8 @@
 	img {
 		position: relative;
 		object-fit: cover;
+		min-height: 100px;
+		max-height: 90vh;
 		width: 100%;
 		height: 100%;
 		margin: 0;

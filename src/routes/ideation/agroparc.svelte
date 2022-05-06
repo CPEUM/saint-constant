@@ -323,7 +323,7 @@
 			<div style="position:relative; padding-top: 100px;" class="bg" style:--bgbottom="-800px">
 				<Excerpt name="Agroparc2">Pour les curieux&nbsp;: Agriculture bio-intensive</Excerpt>
 			</div>
-			<Image src="/media/agroparc/3-1-8.jpg" alt="Perspective de l'agroparc proposé" />
+			<Image style="max-width: var(--width-lg);" src="/media/agroparc/3-1-8.jpg" alt="Perspective de l'agroparc proposé" />
 			<p>
 				Le secteur du bassin de rétention est actuellement une friche agricole à proximité du noyau villageois, d’un quartier résidentiel et bordé au sud par l’autoroute 30. Ce lieu a le
 				potentiel de pouvoir se transformer en un lieu aux activités hybrides. Le projet propose d’aménager&nbsp;:
