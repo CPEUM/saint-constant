@@ -21,7 +21,6 @@
 	import { revealFlyUp, revealText } from '$actions/revealText';
 	import { base } from '$app/paths';
 	import { getData } from '$utils/getData';
-	import Loading from '$components/Loading.svelte';
 	import { GeoJSONFeature } from 'maplibre-gl';
 	import colors from '$styles/colors.json';
 	import bbox from '@turf/bbox';
@@ -29,7 +28,6 @@
 	import MapImage from '$components/map/MapImage.svelte';
 
 	const sousSecteurs = getData('/data/geo/agroparc/sous-secteurs.geojson');
-	const echelleMunicipale = getData('/data/geo/agroparc/echelle-municipale.geojson');
 	const echelleNoyauMisc = getData('/data/geo/agroparc/echelle-noyau-misc.geojson');
 	const echelleNoyauMarkers = getData('/data/geo/agroparc/echelle-noyau-markers.geojson');
 	const siteA = getData('/data/geo/agroparc/site-a.geojson');
@@ -117,12 +115,14 @@
 						fillHighlight={colors.agroparc3}
 					/>
 				{/each}
-				<Legend>
+			{/await}
+			<svelte:fragment slot="legend">
+				{#await sousSecteurs then data}
 					{#each data.features as feature}
 						<LegendItem label={feature.properties.label} key="sous-secteur-{feature.properties.label}">Sous-secteur: {feature.properties.name}</LegendItem>
 					{/each}
-				</Legend>
-			{/await}
+				{/await}
+			</svelte:fragment>
 		</FigureMap>
 		<h4 class="bg" style:padding-top="50px" style:--bgbottom="-1000px">
 			Sous-secteurs ciblés pour le développement de l’agroparc et activités préférées tels que dégagés lors du rendez-vous citoyen
@@ -187,7 +187,7 @@
 				de conservation, commerciales et de production) à la suite des consultations entreprises lors du rendez-vous citoyens.</ListItem
 			>
 		</List>
-		<div class="bgdiv" style:--bgtop="-1000px" style:padding-bottom="100px" />
+		<div class="bgdiv" style="--bgtop: -1000px; padding-bottom: 60px;" />
 		<FigureMap
 			pitch={0}
 			bounds={[
@@ -197,7 +197,7 @@
 		>
 			<MapImage
 				id="agroparc-3-1-4"
-				url={base + '/media/agroparc/3-1-4-md.png'}
+				url={base + '/media/agroparc/3-1-4-md.jpg'}
 				coordinates={[
 					[-73.6122, 45.4],
 					[-73.5495, 45.4],
@@ -205,23 +205,23 @@
 					[-73.6122, 45.356]
 				]}
 			/>
-			<Legend size="small">
+			<svelte:fragment slot="legend">
 				<LegendItem src={base + '/media/agroparc/legend-striped-red.png'}>Production agricole</LegendItem>
 				<LegendItem shape="square" fill="#d29f47">Lieu de conservation</LegendItem>
 				<LegendItem shape="square" fill="#d7794e">Lieu multifonctionnel</LegendItem>
 				<LegendItem shape="square" fill="#e1b7ab">Agro-tourisme</LegendItem>
 				<LegendItem shape="circle" symbolScale={0.5} fill="#b71313">Pôle d'accueil</LegendItem>
-				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.568, 45.366]} label="A" fill="#d5e4e8">Noyau villageois</LegendItem>
+				<!-- <LegendItem shape="circle" zoom={14.5} lnglat={[-73.568, 45.366]} label="A" fill="#d5e4e8">Noyau villageois</LegendItem>
 				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.58, 45.368]} label="B" fill="#d5e4e8">Montée Saint-Régis</LegendItem>
 				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.599, 45.375]} label="C" fill="#d5e4e8">Rue Sainte-Catherine / Montée Saint-Régis</LegendItem>
 				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.6, 45.382]} label="D" fill="#d5e4e8">Gare Sainte-Catherine</LegendItem>
 				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.586, 45.385]} label="E" fill="#d5e4e8">Rue Sainte-Catherine / Meunier</LegendItem>
 				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.575, 45.389]} label="F" fill="#d5e4e8">La route 132</LegendItem>
 				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.559, 45.382]} label="G" fill="#d5e4e8">La rue Saint-Pierre</LegendItem>
-				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.57, 45.376]} label="H" fill="#d5e4e8">Gare Saint-Constant</LegendItem>
-			</Legend>
+				<LegendItem shape="circle" zoom={14.5} lnglat={[-73.57, 45.376]} label="H" fill="#d5e4e8">Gare Saint-Constant</LegendItem> -->
+			</svelte:fragment>
 		</FigureMap>
-		<div class="text-wrap bg" style:--bgbottom="-1000px">
+		<div class="text-wrap bg" style="--bgbottom:-1000px; padding-top: 40px;">
 			<h3 use:revealText={revealFlyUp}>À l’échelle du noyau villageois</h3>
 		</div>
 		<p>
@@ -251,7 +251,7 @@
 				]}
 			/>
 			{#await echelleNoyauMisc then data}
-				<MapFeature id="agroparc-noyau-misc" {data} strokeColor={colors.agroparc3} strokeOpacity={1} strokeWidth={3} />
+				<MapFeature id="agroparc-noyau-misc" {data} strokeColor={colors.dark1} strokeOpacity={1} strokeWidth={1} />
 			{/await}
 			{#await echelleNoyauMarkers then points}
 				{#each points.features as feature}
@@ -265,14 +265,16 @@
 						fillHighlight={colors.agroparc3}
 					/>
 				{/each}
-				<Legend>
+			{/await}
+			<svelte:fragment slot="legend">
+				{#await echelleNoyauMarkers then points}
 					{#each points.features as feature}
 						<LegendItem label={feature.properties.label} key="agroparc-marker-{feature.properties.label}">
 							{feature.properties.title}
 						</LegendItem>
 					{/each}
-				</Legend>
-			{/await}
+				{/await}
+			</svelte:fragment>
 		</FigureMap>
 		<Proposition label="Site A" title="Le secteur agricole du bassin de rétention de la rue Chantal" key="a" src="/media/agroparc/3-1-6.jpg">
 			<FigureMap
@@ -293,7 +295,7 @@
 					]}
 				/>
 				{#await echelleNoyauMisc then data}
-					<MapFeature id="agroparc-noyau-misc" {data} strokeColor={colors.agroparc3} strokeOpacity={1} strokeWidth={3} />
+					<MapFeature id="agroparcnoyaumisc" {data} strokeColor={colors.dark1} strokeOpacity={1} strokeWidth={1} />
 				{/await}
 				{#await siteA then points}
 					{#each points.features as feature}
@@ -307,14 +309,16 @@
 							fillHighlight={colors.agroparc3}
 						/>
 					{/each}
-					<Legend>
+				{/await}
+				<svelte:fragment slot="legend">
+					{#await siteA then points}
 						{#each points.features.filter((f) => !f.properties.nolegend) as feature}
 							<LegendItem label={feature.properties.label} key="site-a-{feature.properties.label}">
 								{feature.properties.title}
 							</LegendItem>
 						{/each}
-					</Legend>
-				{/await}
+					{/await}
+				</svelte:fragment>
 			</FigureMap>
 			<div style="position:relative; padding-top: 100px;" class="bg" style:--bgbottom="-800px">
 				<Excerpt name="Agroparc2">Pour les curieux&nbsp;: Agriculture bio-intensive</Excerpt>
@@ -348,13 +352,13 @@
 				</svelte:fragment>
 				<svelte:fragment slot="legend">
 					<LegendItem shape="line" fill="none" stroke={colors.agroparc3} strokeWidth={2}>Accès à l'agroparc</LegendItem>
-					<LegendItem key="a" label="A">Forêt nourricière</LegendItem>
-					<LegendItem key="b" label="B">Kiosque</LegendItem>
-					<LegendItem key="c" label="C">Sentier multifonctionnel</LegendItem>
-					<LegendItem key="d" label="D">Noue paysagère</LegendItem>
-					<LegendItem key="e" label="E">Agriculture bio-intensive</LegendItem>
-					<LegendItem key="f" label="F">Haie brise-vent</LegendItem>
-					<LegendItem key="g" label="G">Boisé tampon</LegendItem>
+					<LegendItem key="a" label="A" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Forêt nourricière</LegendItem>
+					<LegendItem key="b" label="B" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Kiosque</LegendItem>
+					<LegendItem key="c" label="C" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Sentier multifonctionnel</LegendItem>
+					<LegendItem key="d" label="D" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Noue paysagère</LegendItem>
+					<LegendItem key="e" label="E" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Agriculture bio-intensive</LegendItem>
+					<LegendItem key="f" label="F" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Haie brise-vent</LegendItem>
+					<LegendItem key="g" label="G" fill={colors.agroparc2} fillHighlight={colors.agroparc3}>Boisé tampon</LegendItem>
 				</svelte:fragment>
 			</Figure>
 			<h4>Des activités récréatives</h4>

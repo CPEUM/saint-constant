@@ -20,28 +20,21 @@
 	}
 </script>
 
-<img
-	use:intersection={{ rootMargin: '200px 200px 200px 200px' }}
-	on:enter|once={loadsrc}
-	on:load={onload}
-	loading="lazy"
-	decoding="async"
-	src={base + appliedSrc}
-	{alt}
-	{...$$restProps}
-	class:hidden={!loaded}
-/>
+<div use:intersection={{ rootMargin: '200px 200px 200px 200px' }} on:enter|once={loadsrc} class:hidden={!loaded} {...$$restProps}>
+	<img on:load={onload} loading="lazy" decoding="async" src={base + appliedSrc} {alt} />
+	<span>
+		{alt}
+	</span>
+</div>
 
 <style lang="postcss">
-	img {
+	div {
 		position: relative;
 		display: flex;
-		/* width: 100%; */
+		max-width: 100%;
 		height: auto;
 		min-height: 100px;
 		max-height: 90vh;
-		object-fit: cover;
-		/* box-shadow: 0 15px 60px -35px rgba(0,0,30,.2); */
 		padding: 0;
 		margin: 0 auto;
 		border-radius: 12px;
@@ -49,8 +42,37 @@
 		transition: all 0.5s ease-out;
 	}
 
+	img {
+		position: relative;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
 	.hidden {
 		opacity: 0;
 		transform: scale(0.9);
+	}
+
+	span {
+		display: block;
+		position: absolute;
+		font-size: 14px;
+		color: var(--dark1);
+		background-color: var(--light2);
+		margin: 12px;
+		border-radius: 12px;
+		padding: 1em;
+		opacity: 0;
+		bottom: 0;
+		transform: translateY(10px) scale(0.98) skewY(1deg);
+		transition: all 0.2s ease-out;
+	}
+
+	div:hover span {
+		opacity: 0.75;
+		transform: translateY(0) scale(1);
 	}
 </style>

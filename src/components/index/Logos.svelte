@@ -21,26 +21,14 @@
 	{/if}
 	<div>
 		{#each logos.prime as logo}
-			<a
-				href={logo.href}
-				rel="external"
-				target="_blank"
-				title={logo.alt}
-				use:hoverbubble={{ color: 'var(--light3)', size: 250 }}
-			>
+			<a href={logo.href} rel="external" target="_blank" title={logo.alt} use:hoverbubble={{ color: 'var(--light3)', size: 250 }}>
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
 		{/each}
 	</div>
 	<div>
 		{#each logos.second as logo}
-			<a
-				href={logo.href}
-				rel="external"
-				target="_blank"
-				title={logo.alt}
-				use:hoverbubble={{ color: 'var(--light3)', size: 250 }}
-			>
+			<a href={logo.href} rel="external" target="_blank" title={logo.alt} use:hoverbubble={{ color: 'var(--light3)', size: 250 }}>
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
 		{/each}

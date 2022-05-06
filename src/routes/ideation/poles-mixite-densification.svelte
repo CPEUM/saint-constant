@@ -20,9 +20,16 @@
 	import PieChart from '$components/chart/PieChart.svelte';
 	import MapImage from '$components/map/MapImage.svelte';
 	import { base } from '$app/paths';
+	import Image from '$components/primitives/Image.svelte';
+	import Figure from '$components/figure/Figure.svelte';
 
 	const identifiedSectors = getData('/data/geo/poles/identified-sectors.geojson');
 	const preferencesData = getData('/data/charts/poles/preferences.json');
+	const chartLegend = [
+		{ title: 'Projets immobiliers de haute densité', keys: ['A', 'B'] },
+		{ title: 'Projets immobiliers à moyenne densité', keys: ['C', 'D'] },
+		{ title: 'Projets immobiliers à basse densité', keys: ['E', 'F'] }
+	];
 </script>
 
 <Exercice key="poles">
@@ -71,8 +78,8 @@
 		<p class="bg" style="--bgtop: -1000px; padding-bottom: 40px;">Issus de la démarche de caractérisation des paysages, les neuf secteurs de densification identifiés sont&nbsp;:</p>
 		<FigureMap
 			bounds={[
-				[-73.6168, 45.3994],
-				[-73.5395, 45.3546]
+				[-73.619, 45.3994],
+				[-73.55, 45.3546]
 			]}
 		>
 			{#await identifiedSectors then geojson}
@@ -87,14 +94,16 @@
 						color={colors.light1}
 					/>
 				{/each}
-				<Legend>
+			{/await}
+			<svelte:fragment slot="legend">
+				{#await identifiedSectors then geojson}
 					{#each geojson.features as feature}
 						<LegendItem key={feature.properties.label + '-secteur'} label={feature.properties.label} fill={colors.poles2} fillHighlight={colors.poles3} color={colors.light1}
 							>{feature.properties.title}</LegendItem
 						>
 					{/each}
-				</Legend>
-			{/await}
+				{/await}
+			</svelte:fragment>
 		</FigureMap>
 		<p class="bg" style="--bgbottom: -800px; padding-top: 40px;">
 			Afin d’identifier les préoccupations et aspirations des participants présent au rendez-vous citoyen envers la densité urbaine, deux types de paramètres ont été ciblés&nbsp;:
@@ -115,19 +124,88 @@
 			<ListItem>La présence d’arbres en cours avant.</ListItem>
 		</List>
 		<p>Les exemples étaient les suivants&nbsp:</p>
-		<!-- Ajouter exemples ici -->
+		<p>
+			<b>Exemple A</b>&nbsp;: Esplanade Cartier, Montréal, arrondissement Ville-Marie (NOS architectes) : immeuble d’appartements implanté directement sur la rue avec commerces au
+			rez-dechaussée. La répartition des hauteurs présente une grande variété (3 à 12 étages).
+		</p>
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleA.jpg'} alt="Esplanade Cartier (NOS Architectes)" />
+		<br />
+		<p>
+			<b>Exemple B</b>&nbsp;: Coopérative des Bassins du Havre, Montréal, arrondissement Le Sud-Ouest (Atelier Raouf Boutros) : immeubles d’appartements implantés en bordure d’un parc public. Le
+			bâtiment est composé en un seul volume de 8 étages. Aucun commerce n’est présent au rez-de-chaussée.
+		</p>
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleB.jpg'} alt="Coopérative des Bassins du Havre (Atelier Raouf Boutros)" />
+		<br />
+		<p>
+			<b>Exemple C</b>&nbsp;: Écopropriété Habitus, Québec (Tergos Architecture + Construction) : immeuble de type “plex” dans lequel les logements ont un accès direct vers l’extérieur. Le
+			troisième et dernier niveau présente des portions en retrait de la façade principale. L’implantation possède une faible marge avant végétalisée.
+		</p>
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleC.jpg'} alt="Écopropriété Habitus (Tergos Architecture + Construction)" />
+		<br />
+		<p>
+			<b>Exemple D</b>&nbsp;: Place Simon-Valois (Schème Consultants et Atelier Urban Soland), Montréal, arrondissement Mercier – Hochelaga-Maisonneuve : immeuble d’appartements de trois niveaux
+			avec commerces au rez-de-chaussée. Les volumes rectangulaires sont de formes simples et uniformes. L’implantation des façades est directement juxtaposée à un espace public.
+		</p>
+		<Image
+			style="width: 100%; height: auto; max-width: var(--width-sm)"
+			src={base + '/media/poles/Discussion3_exempleD.jpg'}
+			alt="Place Simon-Valois (Shème Consultants et Atelier Urban Soland)"
+		/>
+		<br />
+		<p>
+			<b>Exemple E</b>&nbsp;: Cohabitat, Québec (Tergos Architecture + Construction) : ensemble résidentiel mixte comprenant dans la portion illustrée des maisons en rangée. La composition
+			volumétrique rectangulaire de deux niveaux est simple et uniforme. Une grande cour avant végétalisée est aménagée.
+		</p>
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleE.jpg'} alt="Cohabitat (Tergos Architecture + Construction)" />
+		<br />
+		<p>
+			<b>Exemple F</b>&nbsp;: 3-33 du Canal, Montréal, arrondissement Lachine (Calce Architecture Workshop) : ensemble résidentiel composé de maisons en rangée. Dans la portion illustrée, la
+			composition volumétrique est articulée en plusieurs éléments et présente des toits-terrasses. Les bâtiments sont implantés avec une faible marge de recul avant végétalisée.
+		</p>
+		<Image style="width: 100%; height: auto; max-width: var(--width-sm)" src={base + '/media/poles/Discussion3_exempleF.jpg'} alt="3-33 du Canal (Calce Architecture Workshop)" />
 		<h4 class="bg" style="position: relative; --bgtop: -800px; padding-bottom: 60px;">Résultats des préférences énoncées par les participants du rendez-vous citoyen</h4>
 		<FigureMap
 			bounds={[
-				[-73.6168, 45.3994],
-				[-73.5395, 45.3546]
+				[-73.62, 45.3994],
+				[-73.56, 45.3546]
 			]}
 		>
 			{#await preferencesData then res}
 				{#each res.charts as chart}
-					<PieChart data={chart.data} lnglat={chart.coordinates} columns={res.groups} mapKey={chart.id} />
+					<PieChart data={chart.data} lnglat={chart.coordinates} columns={res.groups} mapKey={chart.id + '-secteur'} />
 				{/each}
 			{/await}
+			{#await identifiedSectors then geojson}
+				{#each geojson.features as feature}
+					<FigureMarker
+						zoom={14}
+						key={feature.properties.label + '-secteur'}
+						lnglat={feature.geometry.coordinates}
+						label={feature.properties.label}
+						fill="none"
+						fillHighlight={colors.poles3}
+						color={colors.light1}
+					/>
+				{/each}
+			{/await}
+			<svelte:fragment slot="legend">
+				{#await preferencesData then res}
+					{#each chartLegend as group}
+						<LegendItem fill="none"><b>{group.title}</b></LegendItem>
+						{#each group.keys as k}
+							<LegendItem shape="square" fill={res.groups[k].color} dataKey={k}><em>{res.groups[k].label}</em>&nbsp;:{res.groups[k].title}</LegendItem>
+						{/each}
+					{/each}
+				{/await}
+				<LegendItem fill="none"><b>Pôles de densité</b></LegendItem>
+				{#await identifiedSectors then geojson}
+					{#each geojson.features as feature}
+						<LegendItem key={feature.properties.label + '-secteur'} label={feature.properties.label} fill={colors.poles2} fillHighlight={colors.poles3} color={colors.light1}
+							>{feature.properties.title}</LegendItem
+						>
+					{/each}
+				{/await}
+			</svelte:fragment>
 		</FigureMap>
 		<List class="bg" style="position: relative; --bgbottom: -400px; padding-top: 60px">
 			<ListItem>Les immeubles de plus grandes hauteurs (ex.: A et B) présentent un faible intérêt, n’appartenant pas à l’identité de Saint-Constant selon les participants</ListItem>
@@ -160,7 +238,7 @@
 		>
 			<MapImage
 				id="poles-sommaire"
-				url={base + '/media/poles/poles-carte-sommaire.png'}
+				url={base + '/media/poles/poles-carte-sommaire.jpg'}
 				coordinates={[
 					[-73.6123, 45.4],
 					[-73.5494, 45.4],
@@ -168,7 +246,7 @@
 					[-73.6123, 45.3561]
 				]}
 			/>
-			<Legend>
+			<svelte:fragment slot="legend">
 				<LegendItem color={colors.light1} shape="square" fill="#8a9fb5">Sites potentiels à densifier</LegendItem>
 				<LegendItem color={colors.light1} shape="square" fill="#b6d4d9">Faible densité</LegendItem>
 				<LegendItem color={colors.light1} shape="square" fill="#6e8ba1">Moyenne densité</LegendItem>
@@ -186,9 +264,40 @@
 				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5744, 45.3884]} label="F">La route 132</LegendItem>
 				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5588, 45.3823]} label="G">La rue Saint-Pierre</LegendItem>
 				<LegendItem color={colors.light1} fill="#c9dfe3" zoom={15} lnglat={[-73.5698, 45.376]} label="H">Gare Saint-Constant</LegendItem>
-			</Legend>
+			</svelte:fragment>
 		</FigureMap>
-		<Proposition label="Secteur A" title="Le site de la chandellerie" key="a">
+		<Proposition label="Secteur A" title="Le site de la chandellerie" key="a" src={base + '/media/poles/persp-chandellerie.jpg'}>
+			<Image
+				src={base + '/media/poles/axo_densité_secteurA.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site de la chandellerie au coeur du noyau villegeois et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>900 m<sup>2</sup></TableCell>
+				<TableCell>12%</TableCell>
+				<TableCell>1 commercial, 2 résidentiels</TableCell>
+				<TableCell>1800 m<sup>2</sup></TableCell>
+				<TableCell>21</TableCell>
+				<TableCell type="heading">C</TableCell>
+				<TableCell>1350 m<sup>2</sup></TableCell>
+				<TableCell>17%</TableCell>
+				<TableCell>3 résidentiels</TableCell>
+				<TableCell>4000 m<sup>2</sup></TableCell>
+				<TableCell>47</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -242,7 +351,38 @@
 				>
 			</List>
 		</Proposition>
-		<Proposition label="Secteur B" title="La montée Saint-Régis" key="b">
+		<Proposition label="Secteur B" title="La montée Saint-Régis" key="b" src={base + '/media/poles/persp-ecole.jpg'}>
+			<Image
+				src={base + '/media/poles/axo_densité_secteurB.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site face à la montée Saint-Régis et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>750 m<sup>2</sup></TableCell>
+				<TableCell>13%</TableCell>
+				<TableCell>1 commercial, 2 résidentiels</TableCell>
+				<TableCell>1500 m<sup>2</sup></TableCell>
+				<TableCell>18</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>720 m<sup>2</sup></TableCell>
+				<TableCell>12%</TableCell>
+				<TableCell>3 résidentiels</TableCell>
+				<TableCell>2000 m<sup>2</sup></TableCell>
+				<TableCell>24</TableCell>
+				<TableCell type="heading">C</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -288,7 +428,38 @@
 				<ListItem>Aménager des aires de stationnement subdivisées en plusieurs lots réparties sur le site afin de réduire leur perception sur le plan visuel.</ListItem>
 			</List>
 		</Proposition>
-		<Proposition label="Secteur C" title="L’intersection de la rue Sainte-Catherine et de la montée Saint-Régis" key="c">
+		<Proposition label="Secteur C" title="L’intersection de la rue Sainte-Catherine et de la montée Saint-Régis" key="c" src={base + '/media/poles/persp-serres.jpg'}>
+			<Image
+				src={base + '/media/poles/axo_densité_secteurC.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>1125 m<sup>2</sup></TableCell>
+				<TableCell>10%</TableCell>
+				<TableCell>3 résidentiels</TableCell>
+				<TableCell>3375 m<sup>2</sup></TableCell>
+				<TableCell>40</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>860 m<sup>2</sup></TableCell>
+				<TableCell>7%</TableCell>
+				<TableCell>1 commercial, 2 résidentiels</TableCell>
+				<TableCell>2400 m<sup>2</sup></TableCell>
+				<TableCell>28</TableCell>
+				<TableCell type="heading">C</TableCell>
+				<TableCell>975 m<sup>2</sup></TableCell>
+				<TableCell>8%</TableCell>
+				<TableCell>1 commercial, 2 résidentiels</TableCell>
+				<TableCell>1520 m<sup>2</sup></TableCell>
+				<TableCell>18</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -339,6 +510,37 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur D" title="Le site entre la gare Sainte-Catherine et le lac des fées" key="d">
+			<Image
+				src={base + '/media/poles/axo_densité_secteurD.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>825 m<sup>2</sup></TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>750 m<sup>2</sup></TableCell>
+				<TableCell>10%</TableCell>
+				<TableCell>4 résidentiels</TableCell>
+				<TableCell>3000 m<sup>2</sup></TableCell>
+				<TableCell>35</TableCell>
+				<TableCell type="heading">C</TableCell>
+				<TableCell>825 m<sup>2</sup></TableCell>
+				<TableCell>11%</TableCell>
+				<TableCell>1 commercial, 3 résidentiels</TableCell>
+				<TableCell>2475 m<sup>2</sup></TableCell>
+				<TableCell>29</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -391,6 +593,31 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur E" title="La rue Sainte-Catherine à l’intersection de la rue Meunier" key="e">
+			<Image
+				src={base + '/media/poles/axo_densité_secteurE.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>2200 m<sup>2</sup></TableCell>
+				<TableCell>31%</TableCell>
+				<TableCell>1 commercial, 3 résidentiels</TableCell>
+				<TableCell>682 m<sup>2</sup></TableCell>
+				<TableCell>24</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>900 m<sup>2</sup></TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -435,6 +662,47 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur F" title="Requalification de la 132" key="f">
+			<Image src={base + '/media/poles/axo_densité_secteurF_132_ensemble.jpg'} style="max-width: var(--width-md);" alt="Proposition visant à requalifier le secteur de la route 132" />
+			<br />
+			<Figure
+				src={base + '/media/poles/axo_densité_secteurF_132_partie1.jpg'}
+				description="Proposition d'aménagement du site de le route 132 (Partie 1) et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			>
+				<svelte:fragment slot="legend">
+					<LegendItem label="A">4 étages résidentiels</LegendItem>
+					<LegendItem label="B">3 étages résidentiels</LegendItem>
+					<LegendItem label="C">2 étages résidentiels</LegendItem>
+				</svelte:fragment>
+			</Figure>
+			<Figure
+				src={base + '/media/poles/axo_densité_secteurF_132_partie2.jpg'}
+				description="Proposition d'aménagement du site de le route 132 (Partie 2) et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			>
+				<svelte:fragment slot="legend">
+					<LegendItem label="A">4-7 étages commercials</LegendItem>
+					<LegendItem label="B">3-4 étages commercials</LegendItem>
+				</svelte:fragment>
+			</Figure>
+			<Figure
+				src={base + '/media/poles/axo_densité_secteurF_132_partie3.jpg'}
+				description="Proposition d'aménagement du site de le route 132 (Partie 3) et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			>
+				<svelte:fragment slot="legend">
+					<LegendItem label="A">3-4 étages commercials</LegendItem>
+					<LegendItem label="B">4-7 étages commercials</LegendItem>
+					<LegendItem label="C">3-4 étages commercials</LegendItem>
+				</svelte:fragment>
+			</Figure>
+			<Figure
+				src={base + '/media/poles/axo_densité_secteurF_132_partie4.jpg'}
+				description="Proposition d'aménagement du site de le route 132 (Partie 4) et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			>
+				<svelte:fragment slot="legend">
+					<LegendItem label="A">4-5 étages commercials</LegendItem>
+					<LegendItem label="B">3-4 étages résidentiels</LegendItem>
+					<LegendItem label="C">2 étages résidentiels</LegendItem>
+				</svelte:fragment>
+			</Figure>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -489,6 +757,37 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur G" title="la rue Saint-Pierre" key="g">
+			<Image
+				src={base + '/media/poles/axo_densité_secteurG.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site le long de la rue Saint-Pierre et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>1300 m<sup>2</sup></TableCell>
+				<TableCell>24%</TableCell>
+				<TableCell>0-1 commercial, 2-3 résidentiels</TableCell>
+				<TableCell>3100 m<sup>2</sup></TableCell>
+				<TableCell>36</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>1200 m<sup>2</sup></TableCell>
+				<TableCell>30%</TableCell>
+				<TableCell>3 résidentiels</TableCell>
+				<TableCell>3600 m<sup>2</sup></TableCell>
+				<TableCell>42</TableCell>
+				<TableCell type="heading">C</TableCell>
+				<TableCell>780 m<sup>2</sup></TableCell>
+				<TableCell>24%</TableCell>
+				<TableCell>1 commercial, 2 résidentiels</TableCell>
+				<TableCell>1800 m<sup>2</sup></TableCell>
+				<TableCell>21</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />
@@ -543,6 +842,31 @@
 			</List>
 		</Proposition>
 		<Proposition label="Secteur H" title="Le site de la gare Saint-Constant" key="h">
+			<Image
+				src={base + '/media/poles/axo_densité_secteurH.jpg'}
+				style="max-width: var(--width-md);"
+				alt="Proposition d'aménagement du site le long de la rue Saint-Pierre et tableau explicatif des superficies planifiées selon les différentes fonctions"
+			/>
+			<Table cols="6" style="max-width: var(--width-md)">
+				<TableCell type="spacer" />
+				<TableCell type="heading">Emprise au sol (m<sup>2</sup>)</TableCell>
+				<TableCell type="heading">Emprise au sol (%)</TableCell>
+				<TableCell type="heading">Nombre d'étages</TableCell>
+				<TableCell type="heading">Superficie de plancher (résidentiel)</TableCell>
+				<TableCell type="heading">Nombre approximatif de logements</TableCell>
+				<TableCell type="heading">A</TableCell>
+				<TableCell>675 m<sup>2</sup></TableCell>
+				<TableCell>8%</TableCell>
+				<TableCell>1 commercial, 2-3 résidentiels</TableCell>
+				<TableCell>1700 m<sup>2</sup></TableCell>
+				<TableCell>20</TableCell>
+				<TableCell type="heading">B</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+				<TableCell>N/A</TableCell>
+			</Table>
 			<h4>Contexte, forces et faiblesses</h4>
 			<Table cols="3" style="max-width: var(--width-md)">
 				<TableCell type="spacer" />

@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	export interface TableContext {
-		setCellIndex: () => number,
+		setCellIndex: () => number;
 	}
 </script>
 
@@ -12,28 +12,24 @@
 	export let caption: string = null;
 	export let colsWidth: Record<number, string> = {};
 
-	const templateCols = Array(parseInt(cols + '')).fill('auto').map((col, i) => colsWidth[i + 1] || col).join(' ');
+	const templateCols = Array(parseInt(cols + ''))
+		.fill('auto')
+		.map((col, i) => colsWidth[i + 1] || col)
+		.join(' ');
 
 	let visible = false;
 	let cells = 0;
 
 	setContext<TableContext>('table', {
 		setCellIndex: () => cells++
-	})
+	});
 
 	function show() {
 		visible = true;
 	}
 </script>
 
-<table
-	style:--cols={cols}
-	use:intersection
-	on:enter|once={show}
-	{visible}
-	style:grid-template-columns={templateCols}
-	{...$$restProps}
->
+<table style:--cols={cols} use:intersection={{ rootMargin: '-25% 0% -25%' }} on:enter|once={show} {visible} style:grid-template-columns={templateCols} {...$$restProps}>
 	<slot />
 </table>
 {#if caption}
@@ -57,10 +53,10 @@
 		border-spacing: 0;
 		border-radius: 1em;
 		overflow: hidden;
-		box-shadow: 0 .5em 4em -2em rgba(0, 0, 40, .25);
-		transition: all .35s ease-out;
+		box-shadow: 0 0.5em 4em -2em rgba(0, 0, 40, 0.25);
+		transition: all 0.35s ease-out;
 
-		&[visible=false] {
+		&[visible='false'] {
 			opacity: 0;
 			box-shadow: 0 0 0 0 transparent;
 		}
@@ -75,7 +71,7 @@
 			background-image: url(/grain.svg);
 			background-repeat: repeat;
 			background-size: 900px;
-			opacity: .3;
+			opacity: 0.3;
 		}
 	}
 

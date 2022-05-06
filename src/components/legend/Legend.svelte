@@ -14,17 +14,21 @@
 <style>
 	dl {
 		display: inline-flex;
+		position: relative;
 		flex-direction: column;
 		gap: 0;
 		padding: 0;
 		margin: 0;
 		border-radius: 1rem;
-		background-color: transparent;
+		background-color: rgba(250, 250, 255, 0.3);
+		backdrop-filter: blur(6px);
 		width: auto;
 		max-width: 350px;
 		height: auto;
+		max-height: calc(80vh);
+		overflow-y: auto;
+		overflow-x: hidden;
 		box-shadow: 0 0 1px 0 rgba(0, 0, 30, 0);
-		overflow: hidden;
 		transition: all 0.2s ease-out;
 	}
 

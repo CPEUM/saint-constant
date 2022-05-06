@@ -99,7 +99,18 @@
 				source: id,
 				filter: ['any', ['==', ['geometry-type'], 'LineString'], ['==', ['geometry-type'], 'MultiLineString'], ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
 				paint: {
-					'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], strokeWidthHover, ['boolean', ['feature-state', 'highlight'], false], strokeWidthHighlight, strokeWidth],
+					'line-width': [
+						// Declare a variable depending on geom type
+						'let',
+						'widthfactor',
+						['case', ['any', ['==', ['geometry-type'], 'LineString'], ['==', ['geometry-type'], 'MultiLineString']], 2, 1],
+						// Style lines accordingly
+						[
+							'*',
+							['var', 'widthfactor'],
+							['case', ['boolean', ['feature-state', 'hover'], false], strokeWidthHover, ['boolean', ['feature-state', 'highlight'], false], strokeWidthHighlight, strokeWidth]
+						]
+					],
 					'line-color': ['case', ['boolean', ['feature-state', 'hover'], false], strokeColorHover, ['boolean', ['feature-state', 'highlight'], false], strokeColorHighlight, strokeColor],
 					'line-opacity': [
 						'case',
@@ -187,7 +198,7 @@
 				handleMouseLeave(e);
 			});
 		}
-		/* Fill layer */
+		/* Fills layer */
 		if (!map.getLayer(LAYER_IDS.FILLS)) {
 			map.addLayer({
 				id: LAYER_IDS.FILLS,

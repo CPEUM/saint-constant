@@ -25,10 +25,6 @@
 	export let columns: PieChartColumns;
 	export let size: number = 100;
 	/**
-	 * Piechart's current sector highlight key.
-	 */
-	export let sliceKey = undefined;
-	/**
 	 * Contextual map's feature key.
 	 */
 	export let mapKey = undefined;
@@ -37,13 +33,14 @@
 	/**
 	 * Contexts
 	 */
-	const currentDataKey = getContext('currentKey') as any;
+	const currentDataKey = getContext('currentDataKey') as Writable<string | number>;
 	const currentMapKey = getContext('currentKey') as Writable<string | number>;
 	const figCtx = getContext('figure') as any;
 	const figmapCtx = getContext('figuremap') as any;
 	const markerCtx = getContext('markers') as any;
 	const index = markerCtx ? markerCtx.getIndex() : 0;
 	const mapActive = figmapCtx ? (figmapCtx.active as Writable<boolean>) : null;
+	let currentchart = false;
 
 	$: if (figmapCtx && lnglat && currentMapKey && $currentMapKey === mapKey) {
 		mapFocus.set({ center: { point: lnglat, zoom } });
@@ -61,21 +58,23 @@
 		return { ...datum, offset };
 	});
 
-	function setMapCurrent() {
-		currentMapKey.set(mapKey);
-	}
+	$: currentchart = currentMapKey && mapKey && $currentMapKey === mapKey;
 
-	function unsetMapCurrent() {
-		currentMapKey.set(null);
-	}
+	// function setMapCurrent() {
+	// 	currentMapKey.set(mapKey);
+	// }
 
-	function setDataCurrent() {
-		currentDataKey.set(sliceKey);
-	}
+	// function unsetMapCurrent() {
+	// 	currentMapKey.set(null);
+	// }
 
-	function unsetDataCurrent() {
-		currentDataKey.set(null);
-	}
+	// function setDataCurrent() {
+	// 	currentDataKey.set(sliceKey);
+	// }
+
+	// function unsetDataCurrent() {
+	// 	currentDataKey.set(null);
+	// }
 
 	onMount(() => {
 		if (figmapCtx && lnglat) {
@@ -93,7 +92,7 @@
 
 <div class="outer" bind:this={el}>
 	{#if !mapActive || (mapActive && $mapActive)}
-		<figure class:current-chart={currentMapKey && mapKey && $currentMapKey === mapKey} in:scale={{ start: 0.4, opacity: 0, delay: index * 50 }} style:font-size="{size}px">
+		<figure class:currentchart in:scale={{ start: 0.4, opacity: 0, delay: index * 50 }} style:font-size="{size}px">
 			<svg width="100" height="100" viewBox="0 0 100 100">
 				{#each offsetData as datum}
 					<circle
@@ -105,7 +104,7 @@
 						stroke-dasharray="{(datum.value / total) * circonf} {circonf}"
 						fill="none"
 						transform-origin="50% 50%"
-						transform="rotate({(datum.offset / total) * 360}) {$currentDataKey === sliceKey ? 'scale(1.2)' : ''}"
+						transform="rotate({(datum.offset / total) * 360}) {currentDataKey && $currentDataKey === datum.key ? 'scale(1.2)' : ''}"
 					/>
 				{/each}
 			</svg>
@@ -129,9 +128,15 @@
 		height: 1em;
 		position: relative;
 		overflow: visible;
+		transform: scale(1);
+		transition: transform 0.5s ease-in-out;
 	}
 
 	circle {
 		transition: all 0.3s;
+	}
+
+	.currentchart svg {
+		transform: scale(1.5);
 	}
 </style>

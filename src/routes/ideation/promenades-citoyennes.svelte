@@ -83,8 +83,8 @@
 		</div>
 		<FigureMap
 			bounds={[
-				[-73.6141, 45.397],
-				[-73.5512, 45.3545]
+				[-73.62, 45.398],
+				[-73.555, 45.3538]
 			]}
 			pitch={0}
 		>
@@ -98,9 +98,15 @@
 					[-73.614, 45.3579]
 				]}
 			/>
-			<!-- <Legend>
-				<LegendItem />
-			</Legend> -->
+			<svelte:fragment slot="legend">
+				<LegendItem fill="none" shape="line" stroke="#d265d7" strokeWidth={1} strokeDashArray="2 3">Parcours faiblement suggérés</LegendItem>
+				<LegendItem fill="none" shape="line" stroke="#d265d7" strokeWidth={1}>Parcours moyennement suggérés</LegendItem>
+				<LegendItem fill="none" shape="line" stroke="#d265d7" strokeWidth={3}>Parcours fortement suggérés</LegendItem>
+				<LegendItem fill="none" shape="line" stroke="#d265d7" strokeWidth={5}>Parcours très fortement suggérés</LegendItem>
+				<LegendItem shape="square" fill="#d265d7" opacity={0.35}>Zones d'interventions proposées</LegendItem>
+				<LegendItem src={base + '/media/promenades/legend-arrow-thin.png'}>Liens de transports actifs proposés</LegendItem>
+				<LegendItem src={base + '/media/promenades/legend-arrow-thick.png'}>Passerelles proposées</LegendItem>
+			</svelte:fragment>
 		</FigureMap>
 		<h4 class="bg" style="position: relative; padding-top: 80px; --bgbottom: -1200px;">Parcours possédant déjà des aménagements de pistes cyclables&nbsp;:</h4>
 		<Bodies>
@@ -140,7 +146,9 @@
 					strokeWidth={10}
 					strokeWidthHighlight={14}
 				/>
-				<Legend>
+			{/await}
+			<svelte:fragment slot="legend">
+				{#await preferenceCorridors then data}
 					{#each data.features as feature}
 						<LegendItem
 							shape="line"
@@ -155,8 +163,8 @@
 							{feature.properties.title}
 						</LegendItem>
 					{/each}
-				</Legend>
-			{/await}
+				{/await}
+			</svelte:fragment>
 		</FigureMap>
 		<p class="bg" style="--bgbottom: -600px; padding-top: 40px;">
 			Par la suite, des analyses complémentaires ont été effectuées pour concevoir des propositions adaptées aux milieux et révéler l’identité de chacun dans les projets d’aménagement. Les
@@ -195,7 +203,7 @@
 			<FigureMarker zoom={14} label="B" key="p-b" lnglat={[-73.5773, 45.3767]} fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1} />
 			<FigureMarker zoom={14} label="C" key="p-c" lnglat={[-73.565, 45.3744]} fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1} />
 			<FigureMarker zoom={14} label="D" key="p-d" lnglat={[-73.584, 45.3678]} fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1} />
-			<Legend>
+			<svelte:fragment slot="legend">
 				<LegendItem shape="line" fill="none" strokeWidth={1.5} stroke="#7ac5b0">Pistes cyclables existantes</LegendItem>
 				<LegendItem shape="line" fill="none" strokeWidth={9} opacity={0.25} stroke="#3c7639">Corridor de biodiversité</LegendItem>
 				<LegendItem shape="line" fill="none" strokeWidth={2.5} strokeDashArray="4 6" stroke="#3c7639">Corridor de mobilité</LegendItem>
@@ -204,7 +212,7 @@
 				<LegendItem key="p-b" label="B" fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1}>Corridor nourricier</LegendItem>
 				<LegendItem key="p-c" label="C" fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1}>Corridor riverain</LegendItem>
 				<LegendItem key="p-d" label="D" fill={colors.promenades2} fillHighlight={colors.promenades3} color={colors.light1}>Corridor découverte</LegendItem>
-			</Legend>
+			</svelte:fragment>
 		</FigureMap>
 		<Proposition label="Parcours A" title="Le corridor des pollinisateurs (est-ouest)" key="A" src="/media/promenades/perspective-corridor-pollinisateurs.jpg">
 			<p>Le corridor des pollinisateurs se situe au nord et longe les rues du Maçon et de Lausanne.</p>

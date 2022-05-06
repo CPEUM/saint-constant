@@ -8,7 +8,18 @@
 </script>
 
 <RouteHeader>Équipe et partenaires du projet</RouteHeader>
-<p>Ce travail a été réalisé par la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> en collaboration avec la <Link href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain de l'Université de Montréal (CUPUM)</Link> ainsi qu’en vertu du soutien financier du <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et de la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>. Ce projet a été rendu possible également grâce au soutien partenarial de la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>.</p>
+<p>
+	Ce travail a été réalisé par la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> en collaboration avec la <Link
+		href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain de l'Université de Montréal (CUPUM)</Link
+	> ainsi qu’en vertu du soutien financier du <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et de la <Link
+		href="https://saint-constant.ca/">Ville de Saint-Constant</Link
+	>. Ce projet a été rendu possible également grâce au soutien partenarial de la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>.
+</p>
+<p>
+	La production du site web a bénéficié du soutien du regroupement stratégique <Link href="http://www.vrm.ca/">Villes Régions Monde (VRM)</Link> et de <Link
+		href="https://observatoire-ivanhoe-cambridge.umontreal.ca/">l’Observatoire Ivanhoé Cambridge du développement urbain et immobilier</Link
+	>.
+</p>
 <Logos heading={false} />
 <section class="group">
 	<h3 use:revealText={revealFlyUp}>Équipe de recherche</h3>
@@ -38,14 +49,6 @@
 				<p class="name">Apolline Sénéchal</p>
 				<p class="title">Conseillère de recherche, CPEUM</p>
 			</li>
-			<li>
-				<p class="name">Estelle Benoit</p>
-				<p class="title">Conseillère de recherche, CPEUM</p>
-			</li>
-			<li>
-				<p class="name">Emmanuel Beaudry Marchand</p>
-				<p class="title">Conseiller de recherche, CPEUM</p>
-			</li>
 		</ul>
 	</section>
 	<section class="subgroup">
@@ -70,6 +73,15 @@
 			<li>
 				<p class="name">Iona Sobral</p>
 				<p class="title">Auxiliaire de recherche, CPEUM</p>
+			</li>
+		</ul>
+	</section>
+	<section class="subgroup">
+		<h4>Conception graphique et développement web</h4>
+		<ul>
+			<li>
+				<p class="name">Emmanuel Beaudry Marchand</p>
+				<p class="title">Conseiller de recherche, CPEUM</p>
 			</li>
 		</ul>
 	</section>
@@ -151,7 +163,7 @@
 			}
 
 			&.title {
-				opacity: .7;
+				opacity: 0.7;
 				font-weight: 400;
 				/* text-transform: uppercase; */
 				font-size: var(--sm);
@@ -159,7 +171,7 @@
 			}
 
 			&.role {
-				opacity: .7;
+				opacity: 0.7;
 				font-weight: 400;
 				/* text-transform: uppercase; */
 				font-size: var(--sm);

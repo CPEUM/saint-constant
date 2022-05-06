@@ -13,6 +13,7 @@
 	let loaded = false;
 	let nMarkers = 0;
 	let currentKey = writable(null);
+	let legendh;
 
 	setContext('currentKey', currentKey);
 	setContext('markers', {
@@ -32,11 +33,13 @@
 			<Loading />
 		{/if}
 	</div>
-	<div class="legend">
-		<Legend style="position: sticky; top: 150px;">
-			<slot name="legend" />
-		</Legend>
-	</div>
+	{#if $$slots.legend}
+		<div class="legend" bind:clientHeight={legendh} style:--h="{legendh}px">
+			<Legend>
+				<slot name="legend" />
+			</Legend>
+		</div>
+	{/if}
 </figure>
 
 <style>
@@ -56,13 +59,18 @@
 	}
 
 	.image {
-		position: relative;
+		position: sticky;
+		top: 0;
 		width: auto;
 		grid-column-start: 2;
 		grid-column-end: 3;
+		max-width: var(--width-md);
 	}
 
 	.legend {
+		position: sticky;
+		top: calc(50vh - 0.5 * var(--h));
+		align-self: baseline;
 		padding: 2rem;
 		grid-column-start: 3;
 		grid-column-end: 4;

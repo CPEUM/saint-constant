@@ -4,7 +4,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "A",
+				"label": "1",
 				"title": "Jardins maraîchers"
 			},
 			"geometry": {
@@ -18,7 +18,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "B",
+				"label": "2",
 				"title": "Forêt nourricière"
 			},
 			"geometry": {
@@ -32,7 +32,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "C",
+				"label": "3",
 				"title": "Boisé restauré"
 			},
 			"geometry": {
@@ -46,7 +46,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "D",
+				"label": "4",
 				"title": "Labyrinthes de maïs"
 			},
 			"geometry": {
@@ -60,7 +60,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "D",
+				"label": "4",
 				"title": "Labyrinthes de maïs",
 				"nolegend": true
 			},
@@ -75,7 +75,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "E",
+				"label": "5",
 				"title": "Sentier multifonctionnel"
 			},
 			"geometry": {
@@ -89,7 +89,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "F",
+				"label": "6",
 				"title": "Noue paysagère"
 			},
 			"geometry": {
@@ -103,7 +103,7 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"label": "G",
+				"label": "7",
 				"title": "Boisé tampon"
 			},
 			"geometry": {

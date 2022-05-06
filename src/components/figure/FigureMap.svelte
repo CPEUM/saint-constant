@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import { intersection } from '$actions/intersect';
+	import Legend from '$components/legend/Legend.svelte';
 	import { map } from '$components/map/Map.svelte';
 	import { mapDisplay, mapFocus, mapHighlight } from '$stores/map';
 	import { bounds as boundsPresets } from '$utils/map';
@@ -18,12 +19,23 @@
 	let active = writable(false);
 	let inview = false;
 	let currentKey = writable(null);
+	let currentDataKey = writable(null);
 	let currentView = writable<{ lnglat: LngLat | LngLatLike; zoom?: number }>(null);
 	let h = 0;
 	/**
 	 * Keep in sync with layer ids generated for the propositions layers.
 	 */
 	const hiddenLayerIds = ['-lines', '-circles', '-fills'].map((suffix) => 'propositions' + suffix);
+
+	setContext('figuremap', {
+		active
+	});
+	setContext('currentKey', currentKey);
+	setContext('currentDataKey', currentDataKey);
+	setContext('currentView', currentView);
+	setContext('markers', {
+		getIndex: () => nMarkers++
+	});
 
 	$: if ($currentKey) {
 		mapHighlight.set({ key: $currentKey });
@@ -73,25 +85,21 @@
 			map.setLayoutProperty(layerId, 'visibility', 'visible');
 		}
 	}
-
-	setContext('figuremap', {
-		active
-	});
-	setContext('currentKey', currentKey);
-	setContext('currentView', currentView);
-	setContext('markers', {
-		getIndex: () => nMarkers++
-	});
 </script>
 
-<div class="trigger" use:intersection={{ rootMargin: '-50% -50% -50% -50%' }} on:enter={showMap} on:leave={hideMap} {...$$restProps}>
-	<div class="content" bind:clientHeight={h} style:--h="{h}px">
-		<slot />
-	</div>
+<div id="trigger" use:intersection={{ rootMargin: '-50% -50% -50% -50%' }} on:enter={showMap} on:leave={hideMap} {...$$restProps}>
+	<slot />
+	{#if $$slots.legend}
+		<div id="legend-wrapper" bind:clientHeight={h} style:--h="{h}px">
+			<Legend>
+				<slot name="legend" />
+			</Legend>
+		</div>
+	{/if}
 </div>
 
 <style>
-	.trigger {
+	#trigger {
 		position: relative;
 		height: 100%;
 		min-height: 150vh;
@@ -101,11 +109,14 @@
 		margin: 0 auto;
 	}
 
-	.content {
+	#legend-wrapper {
 		position: sticky;
 		top: calc(50vh - 0.5 * var(--h));
 		/* left: 2rem; */
 		width: 100%;
+		max-width: 1600px;
+		margin: 0 auto;
+		padding: 2rem;
 		transition: all 0.35s ease-in-out;
 	}
 </style>

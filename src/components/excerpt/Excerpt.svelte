@@ -38,7 +38,7 @@
 	{:then excerptComp}
 		<div class="shadow" transition:fade={{ duration: 150 }} />
 		<article>
-			<button transition:fly={{ x: 20 }} on:introend={() => (closeIcon = true)} class="close" on:click={() => (open = false)}>
+			<button transition:fly={{ y: -30, easing: expoOut, duration: 500 }} on:introend={() => (closeIcon = true)} class="close" on:click={() => (open = false)}>
 				<svg version="1.1" viewBox="0 0 100 100" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid" class="close-icon">
 					{#if closeIcon}
 						<line in:draw={{}} x1="30" y1="30" x2="70" y2="70" vector-effect="non-scaling-stroke" />

@@ -12,7 +12,7 @@
 
 	const springOptions = {
 		stiffness: 0.15,
-		damping: 0.5
+		damping: 0.8
 	};
 
 	const x = spring(initX, springOptions);

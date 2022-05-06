@@ -69,9 +69,15 @@
 	onDestroy(() => {});
 </script>
 
-<div class="outer" {...$$restProps} bind:this={el} style:font-size="{size}px" style="{x ? `left: ${x}%;` : ''} {y ? `top: ${y}%;` : ''}" class:highlight={highlight || key == $currentKey}>
+<div class="outer" {...$$restProps} bind:this={el} style:font-size="{size}px" style="{x ? `transform: translate(-50%, -50%); left: ${x}%;` : ''} {y ? `top: ${y}%;` : ''}">
 	{#if (active && !mapActive) || (mapActive && $mapActive)}
-		<div class="inner" in:fly={{ y: 15, duration: 1000, easing: expoOut, delay: index * 150 + 500 }} on:mouseenter={setCurrent} on:mouseleave={unsetCurrent}>
+		<div
+			class="inner"
+			in:fly={{ y: 15, duration: 1000, easing: expoOut, delay: index * 150 + 500 }}
+			on:mouseenter={setCurrent}
+			on:mouseleave={unsetCurrent}
+			class:highlight={highlight || key == $currentKey}
+		>
 			<Symbol {src} {label} {color} {fill} {colorHighlight} {fillHighlight} {shape} {stroke} {strokeWidth} {strokeType} {interactive} highlight={highlight || key == $currentKey} />
 		</div>
 	{/if}
@@ -79,6 +85,7 @@
 
 <style>
 	.outer {
+		z-index: 1;
 		user-select: none;
 		pointer-events: none;
 		position: absolute;
@@ -96,9 +103,10 @@
 	.inner {
 		position: absolute;
 		pointer-events: all;
+		transition: transform 0.25s ease-out;
 	}
 
 	.highlight {
-		transform: scale(1.2);
+		transform: scale(1.5);
 	}
 </style>

@@ -119,9 +119,9 @@
 			strokeOpacity={0.5}
 			strokeOpacityHover={0.85}
 			strokeOpacityHighlight={0.65}
-			strokeWidth={10}
-			strokeWidthHighlight={12}
-			strokeWidthHover={15}
+			strokeWidth={6}
+			strokeWidthHighlight={8}
+			strokeWidthHover={10}
 			on:hover={(e) => propositionFeatureHover(e.detail)}
 			on:leave={() => mapTooltip.set(null)}
 			initialVisibility="visible"

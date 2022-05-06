@@ -14,9 +14,11 @@
 	export let label: string;
 	export let title: string;
 	export let src: string = '';
+
+	const angle = (Math.random() * 4 - 2).toFixed(1);
 </script>
 
-<header>
+<header style:transform="rotate({angle}deg)">
 	<hgroup use:parallax={{ factor: 0.6 }}>
 		<span>{label}</span>
 		<h3 use:revealText={revealFlyUp}>{title}</h3>
@@ -34,12 +36,13 @@
 		flex-direction: row;
 		align-items: stretch;
 		justify-content: center;
-		margin: 4rem 0 8rem 0;
+		margin: 4rem auto 8rem auto;
+		max-width: var(--width-lg);
 		padding: 0;
 		height: 100vh;
 		width: var(--ribbonw, 100%);
-		background-color: transparent;
-		border-radius: 2rem;
+		border-radius: 2.5rem;
+		box-shadow: 0 2rem 5rem -3rem rgba(0, 0, 30, 0.25);
 		background-color: var(--accent2);
 
 		&::after {
@@ -68,8 +71,8 @@
 		width: 50%;
 		min-width: 800px;
 		overflow: hidden;
-		border-radius: 1rem;
-		box-shadow: -2rem 3rem 6rem -3rem var(--accent3);
+		border-radius: 2rem;
+		box-shadow: -2rem 3rem 5rem -3rem rgba(0, 0, 30, 0.5);
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;

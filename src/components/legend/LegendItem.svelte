@@ -5,8 +5,9 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
-	export let label: string | number = null;
-	export let key: string | number = null;
+	export let label: string | number = undefined;
+	export let key: string | number = undefined;
+	export let dataKey: string | number = undefined;
 	export let interactive: boolean = undefined;
 	export let highlight: boolean = false;
 	/* Symbol options */
@@ -24,15 +25,16 @@
 	export let strokeWidthHighlight: number = undefined;
 	export let arrowEnd: boolean = false;
 	export let arrowStart: boolean = false;
-	export let src: string = null;
+	export let src: string = undefined;
 	export let lnglat: LngLat | LngLatLike = undefined;
 	export let zoom: number = undefined;
 
-	$: if (key || lnglat) {
+	$: if (key || lnglat || dataKey) {
 		interactive = true;
 	}
 
 	const currentKey = getContext('currentKey') as Writable<string | number>;
+	const currentDataKey = getContext('currentDataKey') as Writable<string | number>;
 	const currentView = getContext('currentView') as Writable<{ lnglat: LngLat | LngLatLike; zoom?: number }>;
 
 	function setCurrent() {
@@ -40,6 +42,8 @@
 			currentKey.set(key);
 		} else if (currentView && lnglat) {
 			currentView.set({ lnglat, zoom });
+		} else if (currentDataKey && dataKey) {
+			currentDataKey.set(dataKey);
 		}
 	}
 
@@ -48,6 +52,8 @@
 			currentKey.set(null);
 		} else if (currentView && lnglat) {
 			currentView.set(null);
+		} else if (currentDataKey && dataKey) {
+			currentDataKey.set(null);
 		}
 	}
 </script>
@@ -88,10 +94,17 @@
 		align-items: center;
 		width: auto;
 		gap: 0.5em;
-		padding: 0.5em;
+		padding: 0.4em 0.5em;
 		opacity: 0.9;
 		box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0);
 		transition: all 0.2s ease-out;
+
+		&:first-child {
+			padding-top: 0.65em;
+		}
+		&:last-child {
+			padding-bottom: 0.65em;
+		}
 	}
 
 	.interactive {

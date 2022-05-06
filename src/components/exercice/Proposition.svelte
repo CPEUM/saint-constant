@@ -29,7 +29,6 @@
 <style lang="postcss">
 	section {
 		margin: 0 auto;
-		max-width: var(--width-lg);
 		position: relative;
 		width: 100%;
 		padding-inline: 0;
