@@ -1,1 +1,0 @@
-import{r as s}from"./index-0353028f.js";const l={y:0,delta:0,direction:null},d=s(l,function(c){let o=l;function r(t){const n=t.target.scrollTop-o.y,e={y:t.target.scrollTop,delta:n,direction:o.delta>0&&n>0?"down":"up"};c(e),o=e}{const t=document.body;return t.addEventListener("scroll",r),function(){t.removeEventListener("scroll",r)}}});export{d as m};
