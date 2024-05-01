@@ -28,7 +28,7 @@
 	</div>
 	<div>
 		{#each logos.second as logo}
-			<a href={logo.href} rel="external" target="_blank" title={logo.alt} use:hoverbubble={{ color: 'var(--light3)', size: 250 }}>
+			<a href={logo.href} rel="external" target="_blank" title={logo.alt} use:hoverbubble={{ color: 'var(--light3)', size: 250 }} class="secondary">
 				<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 			</a>
 		{/each}
@@ -67,10 +67,15 @@
 		position: relative;
 		display: inline-block;
 		flex: 0;
-		padding: 3rem;
+		padding: 2rem;
 		flex-basis: 33%;
 		opacity: 0.8;
+		aspect-ratio: 1.125;
 		transition: all 0.2s ease-out;
+
+		&.secondary {
+			aspect-ratio: 1.75;
+		}
 
 		& img {
 			width: 100%;

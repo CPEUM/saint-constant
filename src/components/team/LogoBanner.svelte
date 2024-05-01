@@ -11,19 +11,9 @@
 	}
 </script>
 
-<section
-	use:intersection
-	on:enter|once={show}
-	visible={visible}
->
+<section use:intersection on:enter|once={show} {visible}>
 	{#each [...logos.prime, ...logos.second] as logo}
-		<a
-			href={logo.href}
-			rel="external"
-			target="_blank"
-			title={logo.alt}
-			use:tooltip={{follow: true, position: 'bottom'}}
-		>
+		<a href={logo.href} rel="external" target="_blank" title={logo.alt} use:tooltip={{ follow: true, position: 'bottom' }}>
 			<img src="{base}/media/logos/{logo.filename}" alt="Logo: {logo.alt}" />
 		</a>
 	{/each}
@@ -40,22 +30,22 @@
 		width: 100%;
 		max-width: var(--width-md);
 	}
-	
+
 	a {
 		position: relative;
 		display: block;
 		margin: 2rem auto;
 		flex: 1 0 50%;
 		padding: 2rem;
-		opacity: .8;
-		transition: all .2s ease-out;
+		opacity: 0.8;
+		transition: all 0.2s ease-out;
 
 		& img {
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
 			position: relative;
-			transition: all .2s cubic-bezier(.1, 0, .2, 1);
+			transition: all 0.2s cubic-bezier(0.1, 0, 0.2, 1);
 		}
 
 		&:hover {
@@ -95,11 +85,11 @@
 	} */
 
 	.dim {
-		opacity: .5;
+		opacity: 0.5;
 		filter: saturate(0);
 
 		&:hover {
-			opacity: .8;
+			opacity: 0.8;
 			filter: saturate(1);
 		}
 	}

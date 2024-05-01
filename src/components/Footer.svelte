@@ -10,11 +10,10 @@
 
 	const extLinks = [
 		{ title: 'CPEUM', href: 'https://paysage.umontreal.ca' },
-		{ title: 'CUPUM', href: 'https://unesco-paysage.umontreal.ca' },
 		{ title: 'Ville de Saint-Constant', href: 'https://saint-constant.ca' },
 		{ title: 'MRC de Roussillon', href: 'https://roussillon.ca' },
 		{
-			title: 'Ministère de l’Économie et de l’Innovation du Québec',
+			title: 'Ministère de l’Économie, de l’Innovation et de l’Énergie',
 			href: 'https://www.economie.gouv.qc.ca/accueil/'
 		}
 	];
@@ -24,23 +23,19 @@
 	const color = 'rgba(0, 0, 0, 0.4)';
 
 	const hillsVb = { width: 1000, height: 800 };
-	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map(
-		(svgPath) => ({
+	const hills = generateSvgPaths(3, { direction: 'up', viewBox: hillsVb, padding: 600 }).map((svgPath) => ({
+		viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
+		d: svgPath,
+		fill: getRandomThemeColor([3], ['light'])
+		// stroke: getRandomThemeColor([1, 2, 3])
+	}));
+	hills.push(
+		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 540 }).map((svgPath) => ({
 			viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
 			d: svgPath,
-			fill: getRandomThemeColor([3], ['light'])
-			// stroke: getRandomThemeColor([1, 2, 3])
-		})
-	);
-	hills.push(
-		...generateSvgPaths(1, { direction: 'up', viewBox: hillsVb, padding: 540 }).map(
-			(svgPath) => ({
-				viewBox: `0 0 ${hillsVb.width} ${hillsVb.height}`,
-				d: svgPath,
-				fill: 'var(--light2)'
-				// stroke: 'var(--light3)'
-			})
-		)
+			fill: 'var(--light2)'
+			// stroke: 'var(--light3)'
+		}))
 	);
 </script>
 
@@ -59,11 +54,7 @@
 		/>
 	{/each}
 </svg>
-<footer
-	use:intersection={{ rootMargin: '0px 0px', threshold: 0.5 }}
-	on:enter={() => (expand = true)}
-	on:leave={() => (expand = false)}
->
+<footer use:intersection={{ rootMargin: '0px 0px', threshold: 0.5 }} on:enter={() => (expand = true)} on:leave={() => (expand = false)}>
 	<!-- Content -->
 	<div id="content" class:expand style:color>
 		<section id="logos">
@@ -78,24 +69,20 @@
 			<ul>
 				{#each extLinks as l}
 					<li>
-						<Link style={'font-weight: 400'} href={l.href} rel="external" {color}
-							>{l.title}</Link
-						>
+						<Link style={'font-weight: 400'} href={l.href} rel="external" {color}>{l.title}</Link>
 					</li>
 				{/each}
 			</ul>
 			<ul>
 				{#each routes as route}
 					<li>
-						<Link style={'font-weight: 400'} href={route.path} {color}
-							>{route.title}</Link
-						>
+						<Link style={'font-weight: 400'} href={route.path} {color}>{route.title}</Link>
 					</li>
 				{/each}
 			</ul>
 			<div>
 				<p>&copy;</p>
-				<p>Chaire en paysage urbain de l'Université de Montréal</p>
+				<p>Chaire en paysage et environnement de l'Université de Montréal</p>
 				<p>2022</p>
 			</div>
 		</section>
@@ -182,6 +169,10 @@
 
 			&:hover {
 				opacity: 1;
+			}
+
+			img {
+				max-width: 100%;
 			}
 		}
 

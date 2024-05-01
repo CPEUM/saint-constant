@@ -9,11 +9,11 @@
 
 <RouteHeader>Équipe et partenaires du projet</RouteHeader>
 <p>
-	Ce travail a été réalisé par la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> en collaboration avec la <Link
-		href="https://unesco-paysage.umontreal.ca">Chaire UNESCO en paysage urbain de l'Université de Montréal (CUPUM)</Link
-	> ainsi qu’en vertu du soutien financier du <Link rel="external" href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie et de l’Innovation du Québec</Link> et de la <Link
-		href="https://saint-constant.ca/">Ville de Saint-Constant</Link
-	>. Ce projet a été rendu possible également grâce au soutien partenarial de la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>.
+	Le travail a été réalisé par la <Link href="https://paysage.umontreal.ca">Chaire en paysage et environnement de l’Université de Montréal (CPEUM)</Link> en vertu du soutien financier du <Link
+		rel="external"
+		href="https://www.economie.gouv.qc.ca/accueil/">ministère de l’Économie, de l’Innovation et de l’Énergie</Link
+	> (anciennement le ministère de l’Économie et de l’Innovation) et de la <Link href="https://saint-constant.ca/">Ville de Saint-Constant</Link>. Ce projet a été rendu possible également grâce au
+	soutien partenarial de la <Link href="https://roussillon.ca/">MRC de Roussillon</Link>.
 </p>
 <p>
 	La production du site web a bénéficié du soutien du regroupement stratégique <Link href="http://www.vrm.ca/">Villes Régions Monde (VRM)</Link> et de <Link
@@ -33,8 +33,8 @@
 			</li>
 			<li>
 				<p class="name">Philippe Poullaouec-Gonidec</p>
-				<p class="title">Professeur émérite et chercheur associé, CUPUM</p>
-				<p class="role">Chercheur aviseur</p>
+				<p class="title">Professeur émérite et chercheur associé, CPEUM</p>
+				<p class="role">Co-chercheur</p>
 			</li>
 		</ul>
 	</section>

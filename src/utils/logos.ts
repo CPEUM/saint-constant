@@ -23,7 +23,7 @@ export default {
 			href: 'http://www.vrm.ca/'
 		},
 		{
-			filename: 'ivanhoe-cambridge-couleur.svg',
+			filename: 'ivanhoe-cambridge-couleur.png',
 			alt: 'Observatoire Ivanhoé Cambridge du développement urbain et immobilier',
 			href: 'https://observatoire-ivanhoe-cambridge.umontreal.ca/'
 		}

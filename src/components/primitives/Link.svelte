@@ -9,20 +9,14 @@
 	let external = $$restProps.rel === 'external' || !!href.match(/^(https:|http:|www\.)\S*/) || undefined;
 </script>
 
-<a
-	sveltekit:prefetch={external ? undefined : true}
-	{href}
-	{...$$restProps}
-	style:--color={color}
-	style:--hover-color={hoverColor}
->
+<a sveltekit:prefetch={external ? undefined : true} {href} {...$$restProps} style:--color={color} style:--hover-color={hoverColor}>
 	<span class="link-text">
 		<slot></slot>
-	</span>&emsp;
+	</span>&nbsp;
 	{#if external}
 		<span class="ext">
-			<svg xmlns="http://www.w3.org/2000/svg" width=100 height=100 viewBox="0 0 100 100">
-				<line x1=5 y1=95 x2=90 y2=10 />
+			<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+				<line x1="5" y1="95" x2="90" y2="10" />
 				<path d="M 30,5 L 95,5 95,70" />
 			</svg>
 		</span>
@@ -39,10 +33,11 @@
 		z-index: 1;
 		text-decoration: none;
 		border-radius: 1.5em;
-		transition: all .15s ease-out;
+		transition: all 0.15s ease-out;
 		white-space: nowrap;
 		vertical-align: bottom;
-		padding-inline: .2em;
+		box-decoration-break: clone;
+		padding-inline: 0.2em;
 		--bg-color: rgba(0, 0, 0, 0.05);
 
 		&:hover {
@@ -69,15 +64,15 @@
 
 	.ext {
 		position: relative;
-		top: .22em;
+		top: 0.22em;
 		left: 0;
 		display: inline-block;
 		width: 1.2em;
 		height: 1.2em;
-		padding: .25em;
-		border-radius: .25em;
-		opacity: .5;
-		transition: all .5s;
+		padding: 0.25em;
+		border-radius: 0.25em;
+		opacity: 0.5;
+		transition: all 0.5s;
 	}
 
 	svg {
@@ -101,7 +96,7 @@
 		stroke-linejoin: round;
 		fill: none;
 		stroke: var(--color);
-		transition: all .8s cubic-bezier(.2, 0, .2, 1);
+		transition: all 0.8s cubic-bezier(0.2, 0, 0.2, 1);
 		stroke-dasharray: 200 100;
 		stroke-dashoffset: 0;
 	}
